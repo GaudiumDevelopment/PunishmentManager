@@ -16,7 +16,7 @@ public final class PunishmentManager extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        Log.debug("Thank you for using PunishmentManager! Bye!");
+        Log.debug("Thank you for using PunishmentManager!" + "/n" + "Bye!");
     }
 
     public void loadConfig() {
