@@ -8,6 +8,7 @@ public final class PunishmentManager extends JavaPlugin {
 
     private static boolean debugMode;
     private static FileConfiguration config;
+    private static PunishmentManager plugin;
 
     @Override
     public void onEnable() {
@@ -16,7 +17,7 @@ public final class PunishmentManager extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        Log.debug("Thank you for using PunishmentManager!" + "/n" + "Bye!");
+        Log.debug("On disable has been called!");
     }
 
     public void loadConfig() {
@@ -29,6 +30,9 @@ public final class PunishmentManager extends JavaPlugin {
     }
     public static FileConfiguration giveConfig() {
         return config;
+    }
+    public static PunishmentManager getPlugin() {
+        return plugin;
     }
 
 }
