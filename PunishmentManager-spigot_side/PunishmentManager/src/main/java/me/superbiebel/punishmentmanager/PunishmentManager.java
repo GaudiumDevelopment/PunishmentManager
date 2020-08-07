@@ -12,18 +12,22 @@ public final class PunishmentManager extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        Log.info("PunishmentManager is starting up!");
         loadConfig();
     }
 
     @Override
     public void onDisable() {
+
         Log.debug("On disable has been called!");
     }
 
     public void loadConfig() {
+        Log.info("loading config");
         this.saveDefaultConfig();
         this.config= this.getConfig();
-        this.config.getBoolean("debug");
+        this.debugMode = this.config.getBoolean("debug");
+        Log.debug("Debug mode has been enabled! Extensive logging will be enabled!");
     }
     public static boolean getDebugMode() {
         return debugMode;
