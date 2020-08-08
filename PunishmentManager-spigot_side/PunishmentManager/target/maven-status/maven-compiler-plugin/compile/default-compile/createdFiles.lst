@@ -1,3 +1,8 @@
+me/superbiebel/punishmentmanager/menusystem/PlayerMenuUtility.class
 me/superbiebel/punishmentmanager/PunishmentManager.class
+me/superbiebel/punishmentmanager/listeners/MenuListener.class
+me/superbiebel/punishmentmanager/menusystem/menu/ActionsList.class
+me/superbiebel/punishmentmanager/commands/PunishCommand.class
 me/superbiebel/punishmentmanager/Utils/Log.class
+me/superbiebel/punishmentmanager/menusystem/Menu.class
 me/superbiebel/punishmentmanager/MySQL/Startup.class

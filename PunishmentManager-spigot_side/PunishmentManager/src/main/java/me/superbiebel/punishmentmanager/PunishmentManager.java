@@ -28,6 +28,9 @@ public final class PunishmentManager extends JavaPlugin {
 
         Log.debug("The plugin has been disabled");
     }
+
+
+
     //Provide a player and return a menu system for that player
     //create one if they don't already have one
     public static PlayerMenuUtility getPlayerMenuUtility(Player p) {
@@ -56,6 +59,8 @@ public final class PunishmentManager extends JavaPlugin {
     }
     public static void loadCommands() {
         Log.debug("Loading events");
+        Log.debug("loading the /punish command...");
+
     }
 
     public static boolean getDebugMode() {

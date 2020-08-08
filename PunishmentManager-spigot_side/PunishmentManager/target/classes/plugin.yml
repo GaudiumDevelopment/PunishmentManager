@@ -1,5 +1,5 @@
 name: PunishmentManager
-version: 1.0-SNAPSHOT
+version: 0.0.1-DEV
 main: me.superbiebel.punishmentmanager.PunishmentManager
 api-version: 1.16
 prefix: PunishmentManager

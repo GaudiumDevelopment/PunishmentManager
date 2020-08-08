@@ -1,6 +1,12 @@
+#Thank you for using PunishmentManager, I hope you enjoy using the plugin.
+#every string where there is a (*) needs to be contained in a single '
+
 debug: true
+
+# !!!!!IF THIS OPTION IS NOT ENABLED NOTHING WILL BE SAVED!!!!!
 MySQL: false
-  host: 'localhost'
-  username: 'PunishmentManager'
-  password: 'PunishmentManagerIsTheBest'
+  host: 'localhost'             # (*)
+  port: 3306
+  username: 'PunishmentManager'         # (*)
+  password: 'PunishmentManagerIsTheBest'          # (*)
   useSSL: false
