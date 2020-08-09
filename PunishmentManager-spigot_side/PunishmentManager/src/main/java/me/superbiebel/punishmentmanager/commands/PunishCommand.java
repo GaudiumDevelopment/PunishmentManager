@@ -1,6 +1,6 @@
 package me.superbiebel.punishmentmanager.commands;
 
-import me.superbiebel.punishmentmanager.menusystem.menu.ActionslistMenuWithHelper;
+import me.superbiebel.punishmentmanager.menusystem.menu.ActionsListGUI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,7 +15,7 @@ public class PunishCommand implements CommandExecutor {
             }else{
                 Player p = (Player) sender;
                // new ActionsListMenu(PunishmentManager.getPlayerMenuUtility(p)).open();
-                new ActionslistMenuWithHelper(p,1,"test").open();
+                new ActionsListGUI(p,1,"test").open();
 
             }
         }
