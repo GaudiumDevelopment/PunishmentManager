@@ -1,6 +1,7 @@
 package me.superbiebel.punishmentmanager;
 
 import me.superbiebel.punishmentmanager.Utils.Log;
+import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.menusystem.PlayerMenuUtility;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -57,10 +58,10 @@ public final class PunishmentManager extends JavaPlugin {
     public static void loadEvents() {
         Log.debug("Loading events");
     }
-    public static void loadCommands() {
-        Log.debug("Loading events");
+    public void loadCommands() {
+        Log.debug("Loading commands");
         Log.debug("loading the /punish command...");
-
+        this.getCommand("punish").setExecutor(new PunishCommand());
     }
 
     public static boolean getDebugMode() {

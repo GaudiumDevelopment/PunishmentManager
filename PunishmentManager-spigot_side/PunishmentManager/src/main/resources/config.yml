@@ -5,8 +5,9 @@ debug: true
 
 # !!!!!IF THIS OPTION IS NOT ENABLED NOTHING WILL BE SAVED!!!!!
 MySQL: false
-  host: 'localhost'             # (*)
-  port: 3306
-  username: 'PunishmentManager'         # (*)
-  password: 'PunishmentManagerIsTheBest'          # (*)
-  useSSL: false
+  host:'localhost'
+  port:3306
+  username:'PunishmentManager'
+  password:'PunishmentManagerIsTheBest
+  useSSL:false
+

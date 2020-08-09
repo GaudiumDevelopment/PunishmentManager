@@ -4,3 +4,7 @@ main: me.superbiebel.punishmentmanager.PunishmentManager
 api-version: 1.16
 prefix: PunishmentManager
 authors: [Superbiebel]
+depend: [helper]
+commands:
+  punish:
+    description: a test description
