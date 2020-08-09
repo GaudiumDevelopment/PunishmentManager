@@ -16,9 +16,12 @@ public class ActionsListGUI extends Gui{
 
     @Override
     public void redraw() {
-        ItemStack itemStack = new ItemStack(Material.ACACIA_BOAT, 1);
-        getSlot(0).setItem(itemStack);
-        getSlot(0).bind(ClickType.LEFT, e->e.getWhoClicked().sendMessage("test"));
+
+        Material type;
+        ItemStack newOffense = new ItemStack(Material.IRON_AXE, 1);
+        ItemStack history = new ItemStack(Material.BOOK, 1);
+        getSlot(11).setItem(newOffense);
+        getSlot(15).setItem(history);
 
         }
 

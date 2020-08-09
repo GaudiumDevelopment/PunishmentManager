@@ -1,8 +1,7 @@
 /Users/jorenbielen/coding/PunishmentManager/PunishmentManager-spigot_side/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/commands/PunishCommand.java
 /Users/jorenbielen/coding/PunishmentManager/PunishmentManager-spigot_side/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/menusystem/PlayerMenuUtility.java
-/Users/jorenbielen/coding/PunishmentManager/PunishmentManager-spigot_side/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/menusystem/menu/ActionsListMenu.java
 /Users/jorenbielen/coding/PunishmentManager/PunishmentManager-spigot_side/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/menusystem/Menu.java
-/Users/jorenbielen/coding/PunishmentManager/PunishmentManager-spigot_side/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/menusystem/menu/ActionslistMenuWithHelper.java
+/Users/jorenbielen/coding/PunishmentManager/PunishmentManager-spigot_side/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/menusystem/menu/ActionsListGUI.java
 /Users/jorenbielen/coding/PunishmentManager/PunishmentManager-spigot_side/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/listeners/MenuListener.java
 /Users/jorenbielen/coding/PunishmentManager/PunishmentManager-spigot_side/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/PunishmentManager.java
 /Users/jorenbielen/coding/PunishmentManager/PunishmentManager-spigot_side/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/Utils/Log.java
