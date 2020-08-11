@@ -15,6 +15,7 @@ public final class PunishmentManager extends JavaPlugin {
     private static FileConfiguration config;
     private static PunishmentManager plugin;
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
+    private static String prefix;
 
     @Override
     public void onEnable() {

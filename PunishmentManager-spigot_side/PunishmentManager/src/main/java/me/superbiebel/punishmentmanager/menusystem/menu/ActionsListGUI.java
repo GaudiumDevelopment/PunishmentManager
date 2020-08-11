@@ -1,10 +1,17 @@
 package me.superbiebel.punishmentmanager.menusystem.menu;
 
 import me.lucko.helper.menu.Gui;
+import me.lucko.helper.menu.paginated.PageInfo;
+import me.lucko.helper.menu.paginated.PaginatedGui;
+import me.lucko.helper.menu.paginated.PaginatedGuiBuilder;
+import me.superbiebel.punishmentmanager.Utils.ColorUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActionsListGUI extends Gui{
     public ActionsListGUI(Player player, int lines, String title) {
@@ -16,12 +23,23 @@ public class ActionsListGUI extends Gui{
 
     @Override
     public void redraw() {
-
-        Material type;
+        List historyitemlist = new ArrayList();
         ItemStack newOffense = new ItemStack(Material.IRON_AXE, 1);
+        ItemMeta newOffenseMeta = newOffense.getItemMeta();
+        newOffenseMeta.setDisplayName(ColorUtils.translateColorCodes("&4&lNew Offense"));
+        newOffense.setItemMeta(newOffenseMeta);
+        getSlot(11).setItem(newOffense).bind(e->{
+            e.setCancelled(true);
+
+        } );
+
         ItemStack history = new ItemStack(Material.BOOK, 1);
-        getSlot(11).setItem(newOffense);
-        getSlot(15).setItem(history);
+        ItemMeta historyMeta = history.getItemMeta();
+        historyMeta.setDisplayName(ColorUtils.translateColorCodes("&4&lNew Offense"));
+        getSlot(15).setItem(history).bind(e->{
+            e.setCancelled(true);
+
+        } );
 
         }
 
