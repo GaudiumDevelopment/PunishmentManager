@@ -1,5 +1,8 @@
 package me.superbiebel.punishmentmanager;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.Utils.Log;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.menusystem.PlayerMenuUtility;
@@ -9,25 +12,23 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 
-public final class PunishmentManager extends JavaPlugin {
+public final class PunishmentManager extends ExtendedJavaPlugin {
 
     private static boolean debugMode;
     private static FileConfiguration config;
     private static PunishmentManager plugin;
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
     private static String prefix;
+    private static HikariDataSource ds;
+    private static HikariConfig Config;
 
     @Override
-    public void onEnable() {
-        Log.info("PunishmentManager is starting up!");
-        loadConfig();
-        loadEvents();
-        loadCommands();
+    public void enable() {
+
     }
 
     @Override
-    public void onDisable() {
-
+    public void disable() {
         Log.debug("The plugin has been disabled");
     }
 

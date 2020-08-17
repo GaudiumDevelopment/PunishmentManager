@@ -1,10 +1,10 @@
 name: PunishmentManager
 version: 0.0.1-DEV
 main: me.superbiebel.punishmentmanager.PunishmentManager
-api-version: 1.16
+api-version: 1.13
 prefix: PunishmentManager
 authors: [Superbiebel]
-depend: [helper]
+depend:
 commands:
   punish:
     description: a test description
