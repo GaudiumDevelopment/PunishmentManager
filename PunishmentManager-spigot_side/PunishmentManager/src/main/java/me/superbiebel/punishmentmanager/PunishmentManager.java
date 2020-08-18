@@ -3,6 +3,7 @@ package me.superbiebel.punishmentmanager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
+import me.superbiebel.punishmentmanager.MySQL.MySQLStartup;
 import me.superbiebel.punishmentmanager.Utils.Log;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.menusystem.PlayerMenuUtility;
@@ -18,13 +19,15 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
     private static String prefix;
     private static HikariDataSource ds;
-    private static HikariConfig Config;
+
 
     @Override
     public void enable() {
         loadConfig();
         loadEvents();
         loadCommands();
+        MySQLStartup.configureConnection("localhost", "plugintest", "joren", "3306", "minecraft", "false");
+        MySQLStartup.initializeTables();
         Log.debug("everything has been enabled");
     }
 
@@ -54,6 +57,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         Log.debug("Loading commands");
         Log.debug("loading the /punish command...");
         this.getCommand("punish").setExecutor(new PunishCommand());
+        Log.debug("/punish loaded");
     }
 
 
