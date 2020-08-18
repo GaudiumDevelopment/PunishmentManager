@@ -8,8 +8,6 @@ import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.menusystem.PlayerMenuUtility;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
-
 import java.util.HashMap;
 
 public final class PunishmentManager extends ExtendedJavaPlugin {
@@ -24,13 +22,42 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
 
     @Override
     public void enable() {
-
+        loadConfig();
+        loadEvents();
+        loadCommands();
+        Log.debug("everything has been enabled");
     }
 
     @Override
     public void disable() {
         Log.debug("The plugin has been disabled");
     }
+
+
+    public void loadConfig() {
+        Log.info("loading config");
+        this.saveDefaultConfig();
+        this.config= this.getConfig();
+        this.debugMode = this.config.getBoolean("debug");
+        Log.debug("Debug mode has been enabled! Extensive logging will be enabled!");}
+
+
+
+
+    public static void loadEvents() {
+        Log.debug("Loading events");
+    }
+
+
+
+    public void loadCommands() {
+        Log.debug("Loading commands");
+        Log.debug("loading the /punish command...");
+        this.getCommand("punish").setExecutor(new PunishCommand());
+    }
+
+
+
 
 
 
@@ -48,22 +75,6 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         } else {
             return playerMenuUtilityMap.get(p); //Return the object by using the provided player
         }
-    }
-
-    public void loadConfig() {
-        Log.info("loading config");
-        this.saveDefaultConfig();
-        this.config= this.getConfig();
-        this.debugMode = this.config.getBoolean("debug");
-        Log.debug("Debug mode has been enabled! Extensive logging will be enabled!");}
-
-    public static void loadEvents() {
-        Log.debug("Loading events");
-    }
-    public void loadCommands() {
-        Log.debug("Loading commands");
-        Log.debug("loading the /punish command...");
-        this.getCommand("punish").setExecutor(new PunishCommand());
     }
 
     public static boolean getDebugMode() {

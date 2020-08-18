@@ -25,6 +25,7 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+
                 </configuration>
             </plugin>
                 <plugin>
@@ -38,10 +39,8 @@
                                 <goal>shade</goal>
                             </goals>
                             <configuration>
+
                                 <filters>
-                                    <filter>
-                                        <artifact>com.zaxxer:HikariCP</artifact>
-                                    </filter>
                                     <filter>
                                         <artifact>*:*</artifact>
                                         <excludes>
