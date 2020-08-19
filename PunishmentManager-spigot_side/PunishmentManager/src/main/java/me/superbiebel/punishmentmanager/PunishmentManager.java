@@ -44,14 +44,9 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         this.debugMode = this.config.getBoolean("debug");
         Log.debug("Debug mode has been enabled! Extensive logging will be enabled!");}
 
-
-
-
     public static void loadEvents() {
         Log.debug("Loading events");
     }
-
-
 
     public void loadCommands() {
         Log.debug("Loading commands");
@@ -59,10 +54,6 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         this.getCommand("punish").setExecutor(new PunishCommand());
         Log.debug("/punish loaded");
     }
-
-
-
-
 
 
     //Provide a player and return a menu system for that player
