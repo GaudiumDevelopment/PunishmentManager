@@ -1,14 +1,14 @@
 package me.superbiebel.punishmentmanager;
 
-import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
-import me.superbiebel.punishmentmanager.MySQL.MySQLStartup;
+import me.superbiebel.punishmentmanager.MySQL.MySQL;
 import me.superbiebel.punishmentmanager.Utils.Log;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.menusystem.PlayerMenuUtility;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+
 import java.util.HashMap;
 
 public final class PunishmentManager extends ExtendedJavaPlugin {
@@ -26,8 +26,8 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         loadConfig();
         loadEvents();
         loadCommands();
-        MySQLStartup.configureConnection("localhost", "plugintest", "joren", "3306", "minecraft", "false");
-        MySQLStartup.initializeTables();
+        MySQL.configureConnection(config.getString("MySQL.host"), config.getString("MySQL.username"), config.getString("MySQL.password"), config.getString("MySQL.port"), config.getString("MySQL.db"), config.getString("MySQL.useSSL"));
+        MySQL.initializeTables();
         Log.debug("everything has been enabled");
     }
 

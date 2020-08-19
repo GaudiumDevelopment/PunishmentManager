@@ -5,9 +5,9 @@ debug: true
 
 # !!!!!IF THIS OPTION IS NOT ENABLED NOTHING WILL BE SAVED!!!!!
 MySQL:
-  host: localhost
-  port: 3306
-  username: plugintest
-  password: joren
   db: minecraft
+  host: localhost
+  password: joren
+  port: 3306
   useSSL: false
+  username: plugintest
