@@ -5,6 +5,7 @@ debug: true
 
 # !!!!!IF THIS OPTION IS NOT ENABLED NOTHING WILL BE SAVED!!!!!
 MySQL:
+  enabled: true
   db: minecraft
   host: localhost
   password: joren

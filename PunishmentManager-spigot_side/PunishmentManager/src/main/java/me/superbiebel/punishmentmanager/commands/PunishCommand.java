@@ -1,9 +1,6 @@
 package me.superbiebel.punishmentmanager.commands;
 
-import me.lucko.helper.menu.paginated.PaginatedGui;
-import me.lucko.helper.menu.paginated.PaginatedGuiBuilder;
 import me.superbiebel.punishmentmanager.menusystem.menu.ActionsListGUI;
-import me.superbiebel.punishmentmanager.menusystem.menu.HistoryGUI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,9 +23,6 @@ public class PunishCommand implements CommandExecutor {
 
             }
         }
-
-
-
         return true;
     }
 }

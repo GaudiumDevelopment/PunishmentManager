@@ -7,4 +7,6 @@ authors: [Superbiebel]
 depend:
 commands:
   punish:
-    description: a test description
+    description: open a gui to punish players
+  pmanager:
+    description: control the inner workings of PunishmentManager

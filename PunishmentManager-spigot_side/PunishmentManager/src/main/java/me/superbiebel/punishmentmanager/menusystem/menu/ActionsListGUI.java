@@ -23,20 +23,19 @@ public class ActionsListGUI extends Gui{
 
     @Override
     public void redraw() {
-        List historyitemlist = new ArrayList();
         ItemStack newOffense = new ItemStack(Material.IRON_AXE, 1);
         ItemMeta newOffenseMeta = newOffense.getItemMeta();
         newOffenseMeta.setDisplayName(ColorUtils.translateColorCodes("&4&lNew Offense"));
         newOffense.setItemMeta(newOffenseMeta);
-        getSlot(11).setItem(newOffense).bind(e->{
+        getSlot(4).setItem(newOffense).bind(e->{
             e.setCancelled(true);
 
         } );
 
         ItemStack history = new ItemStack(Material.BOOK, 1);
         ItemMeta historyMeta = history.getItemMeta();
-        historyMeta.setDisplayName(ColorUtils.translateColorCodes("&4&lNew Offense"));
-        getSlot(15).setItem(history).bind(e->{
+        historyMeta.setDisplayName(ColorUtils.translateColorCodes("&4&lhistory"));
+        getSlot(7).setItem(history).bind(e->{
             e.setCancelled(true);
 
         } );

@@ -5,6 +5,7 @@ import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.MySQL.MySQL;
 import me.superbiebel.punishmentmanager.Utils.Log;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
+import me.superbiebel.punishmentmanager.commands.SystemCommand;
 import me.superbiebel.punishmentmanager.menusystem.PlayerMenuUtility;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -23,18 +24,32 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
 
     @Override
     public void enable() {
+        plugin = this;
         loadConfig();
         loadEvents();
         loadCommands();
-        MySQL.configureConnection(config.getString("MySQL.host"), config.getString("MySQL.username"), config.getString("MySQL.password"), config.getString("MySQL.port"), config.getString("MySQL.db"), config.getString("MySQL.useSSL"));
-        MySQL.initializeTables();
+        if (config.getBoolean("MySQL.enabled")){
+        MySQL.configureConnection(
+                config.getString("MySQL.host"),
+                config.getString("MySQL.username"),
+                config.getString("MySQL.password"),
+                config.getString("MySQL.port"),
+                config.getString("MySQL.db"),
+                config.getString("MySQL.useSSL"));
+
+        MySQL.initializeTables();} else {
+            for (int i = 0; i <= 5; i++ ){
+            Log.fatalError("MYSQL HAS NOT BEEN ENABLED! NOTHING CAN BE SAVED OR ACCESSED! PLEASE FILL IN THE DETAILS OF THE MYSQL DATABASE BEFORE DOING ANYTHING ELSE!");}
+        }
         Log.debug("everything has been enabled");
     }
 
     @Override
     public void disable() {
+
         Log.debug("The plugin has been disabled");
     }
+
 
 
     public void loadConfig() {
@@ -43,6 +58,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         this.config= this.getConfig();
         this.debugMode = this.config.getBoolean("debug");
         Log.debug("Debug mode has been enabled! Extensive logging will be enabled!");}
+
 
     public static void loadEvents() {
         Log.debug("Loading events");
@@ -53,6 +69,9 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         Log.debug("loading the /punish command...");
         this.getCommand("punish").setExecutor(new PunishCommand());
         Log.debug("/punish loaded");
+        Log.debug("loading /pmanager");
+        this.getCommand("pmanager").setExecutor(new SystemCommand());
+        Log.debug("/pmanager is loaded");
     }
 
 
@@ -71,7 +90,6 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
             return playerMenuUtilityMap.get(p); //Return the object by using the provided player
         }
     }
-
     public static boolean getDebugMode() {
         return debugMode;
     }
@@ -81,5 +99,6 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     public static PunishmentManager getPlugin() {
         return plugin;
     }
+
 
 }
