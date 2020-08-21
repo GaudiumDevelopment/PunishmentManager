@@ -4,9 +4,8 @@ import org.bukkit.entity.Player;
 
 public class PlayerMenuUtility {
 
-    private Player victim;
+    private Player criminal;
     private Player owner;
-    //store the player that will be killed so we can access him in the next menu
 
     public PlayerMenuUtility(Player p) {
         this.owner = p;
@@ -15,8 +14,7 @@ public class PlayerMenuUtility {
     public Player getOwner() {
         return owner;
     }
-    public Player getVictim() {return victim;}
-
-    public void setVictim(Player victim) {this.victim = victim;}
+    public Player getCriminal() {return criminal;}
+    public void setCriminal(Player criminal) {this.criminal = criminal;}
 }
 

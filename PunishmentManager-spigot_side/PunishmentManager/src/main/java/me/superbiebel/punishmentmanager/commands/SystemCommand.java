@@ -1,7 +1,6 @@
 package me.superbiebel.punishmentmanager.commands;
 
 import me.superbiebel.punishmentmanager.PunishmentManager;
-import me.superbiebel.punishmentmanager.Utils.Log;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,11 +18,10 @@ public class SystemCommand implements CommandExecutor {
         } else if (args[0].equalsIgnoreCase("reloadconfig")) {
             sender.sendMessage("Reloading config");
             PunishmentManager.getPlugin().reloadConfig();
+            sender.sendMessage("Config reloaded");
         } else {
             sender.sendMessage("Argument not recognised");
         }
-
-
         return true;
     }
 }

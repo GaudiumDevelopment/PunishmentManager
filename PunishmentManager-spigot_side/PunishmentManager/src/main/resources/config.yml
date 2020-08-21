@@ -2,7 +2,9 @@
 #every string where there is a (*) needs to be contained in a single '
 
 debug: true
-
+server: survival
+servergroup:
+  - global
 # !!!!!IF THIS OPTION IS NOT ENABLED NOTHING WILL BE SAVED!!!!!
 MySQL:
   enabled: true
@@ -12,3 +14,4 @@ MySQL:
   port: 3306
   useSSL: false
   username: plugintest
+
