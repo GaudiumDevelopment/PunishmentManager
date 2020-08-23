@@ -3,22 +3,18 @@ package me.superbiebel.punishmentmanager.menusystem.menu;
 import me.lucko.helper.item.ItemStackBuilder;
 import me.lucko.helper.menu.Gui;
 import me.lucko.helper.menu.Item;
-import me.lucko.helper.menu.paginated.PageInfo;
-import me.lucko.helper.menu.paginated.PaginatedGui;
 import me.lucko.helper.menu.paginated.PaginatedGuiBuilder;
 import me.lucko.helper.promise.Promise;
 import me.superbiebel.punishmentmanager.PunishmentManager;
-import me.superbiebel.punishmentmanager.Utils.ColorUtils;
+import me.superbiebel.punishmentmanager.utils.ColorUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 
 public class ActionsListGUI extends Gui{
