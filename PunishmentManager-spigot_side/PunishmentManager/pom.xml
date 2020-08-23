@@ -6,7 +6,7 @@
 
     <groupId>me.superbiebel</groupId>
     <artifactId>PunishmentManager</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-DEV</version>
     <packaging>jar</packaging>
 
     <name>PunishmentManager</name>
@@ -40,9 +40,6 @@
                             <configuration>
                                 <filters>
                                     <filter>
-                                        <artifact>com.zaxxer:HikariCP</artifact>
-                                    </filter>
-                                    <filter>
                                         <artifact>*:*</artifact>
                                         <excludes>
                                             <exclude>META-INF/*.SF</exclude>
@@ -52,7 +49,6 @@
                                         </excludes>
                                     </filter>
                                 </filters>
-                                <outputDirectory>/Users/jorenbielen/Desktop/servers/testing network/lobby/plugins</outputDirectory>
                                 <createDependencyReducedPom>false</createDependencyReducedPom>
                             </configuration>
                         </execution>
