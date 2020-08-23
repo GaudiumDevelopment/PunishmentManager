@@ -3,13 +3,16 @@ package me.superbiebel.punishmentmanager;
 import com.zaxxer.hikari.HikariDataSource;
 import me.lucko.helper.Schedulers;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
-import me.superbiebel.punishmentmanager.MySQL.MySQL;
-import me.superbiebel.punishmentmanager.Utils.Log;
+import me.lucko.helper.promise.Promise;
+import me.superbiebel.punishmentmanager.mysql.MySQL;
+import me.superbiebel.punishmentmanager.utils.Log;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
 import me.superbiebel.punishmentmanager.menusystem.PlayerMenuUtility;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,8 +26,9 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     private static FileConfiguration config;
     private static PunishmentManager plugin;
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
-    private static String prefix;
     private static HikariDataSource ds;
+
+
 
     private static ResultSet OffenseListGuiData;
 
@@ -47,7 +51,8 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
             for (int i = 0; i <= 5; i++ ){
             Log.fatalError("MYSQL HAS NOT BEEN ENABLED! NOTHING CAN BE SAVED OR ACCESSED! PLEASE FILL IN THE DETAILS OF THE MYSQL DATABASE BEFORE DOING ANYTHING ELSE!");}
         }
-        Log.debug("everything has been enabled");
+
+        Log.debug("Everything has been enabled");
     }
 
     @Override
@@ -56,17 +61,28 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         Log.debug("The plugin has been disabled");
     }
 
-    public static void getGuiData() {
-        Schedulers.async().run(()->{
-            try {
-                Connection con = MySQL.getDataSource().getConnection();
-                PreparedStatement pstmt = con.prepareStatement("");
-                OffenseListGuiData = pstmt.executeQuery();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+    public static void getAllData(String caller) {
+        if (!caller.equalsIgnoreCase("system")) {
+            if (!caller.equalsIgnoreCase("console")) {
+                Player callerPlayer = Bukkit.getPlayer(caller);
+                Promise<Void> fetchAllDataPromise = Promise.start().thenRunSync(()-> callerPlayer.sendMessage("Syncing...")).thenRunAsync(()->{
+                    try {
+                        Connection con = MySQL.getDataSource().getConnection();
+                        Log.debug("Fetching OffenseListGui...");
+                        PreparedStatement OffenseListGuiDataStmt = con.prepareStatement("");
+                        OffenseListGuiData = OffenseListGuiDataStmt.executeQuery();
+                        Log.debug("OffenseListGui data fetched...");
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+
+                }).thenRunSync(()->{
+                    callerPlayer.sendMessage("Sync complete!");
+                });
             }
 
-        });
+        }
+
     }
 
 

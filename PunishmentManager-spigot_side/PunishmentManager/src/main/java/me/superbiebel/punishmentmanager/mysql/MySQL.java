@@ -1,9 +1,9 @@
-package me.superbiebel.punishmentmanager.MySQL;
+package me.superbiebel.punishmentmanager.mysql;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import me.lucko.helper.promise.Promise;
-import me.superbiebel.punishmentmanager.Utils.Log;
+import me.superbiebel.punishmentmanager.utils.Log;
 
 import java.sql.Connection;
 import java.sql.SQLException;

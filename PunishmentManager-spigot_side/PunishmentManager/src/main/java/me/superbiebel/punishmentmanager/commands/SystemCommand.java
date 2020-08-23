@@ -19,6 +19,10 @@ public class SystemCommand implements CommandExecutor {
             sender.sendMessage("Reloading config");
             PunishmentManager.getPlugin().reloadConfig();
             sender.sendMessage("Config reloaded");
+        } else if(args[0].equalsIgnoreCase("sync")) {
+            sender.sendMessage("Syncing....");
+            PunishmentManager.getAllData(sender.getName());
+            sender.sendMessage("Sync complete");
         } else {
             sender.sendMessage("Argument not recognised");
         }

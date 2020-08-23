@@ -1,4 +1,4 @@
-package me.superbiebel.punishmentmanager.Utils;
+package me.superbiebel.punishmentmanager.utils;
 
 import org.bukkit.ChatColor;
 
