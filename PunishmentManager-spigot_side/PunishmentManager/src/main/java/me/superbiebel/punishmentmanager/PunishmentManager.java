@@ -1,6 +1,7 @@
 package me.superbiebel.punishmentmanager;
 
 import com.zaxxer.hikari.HikariDataSource;
+import me.lucko.helper.Schedulers;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.MySQL.MySQL;
 import me.superbiebel.punishmentmanager.Utils.Log;
@@ -10,6 +11,10 @@ import me.superbiebel.punishmentmanager.menusystem.PlayerMenuUtility;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 public final class PunishmentManager extends ExtendedJavaPlugin {
@@ -21,6 +26,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     private static String prefix;
     private static HikariDataSource ds;
 
+    private static ResultSet OffenseListGuiData;
 
     @Override
     public void enable() {
@@ -50,6 +56,18 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         Log.debug("The plugin has been disabled");
     }
 
+    public static void getGuiData() {
+        Schedulers.async().run(()->{
+            try {
+                Connection con = MySQL.getDataSource().getConnection();
+                PreparedStatement pstmt = con.prepareStatement("");
+                OffenseListGuiData = pstmt.executeQuery();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+        });
+    }
 
 
     public void loadConfig() {
@@ -75,6 +93,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     }
 
 
+
     //Provide a player and return a menu system for that player
     //create one if they don't already have one
     public static PlayerMenuUtility getPlayerMenuUtility(Player p) {
@@ -90,6 +109,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
             return playerMenuUtilityMap.get(p); //Return the object by using the provided player
         }
     }
+
     public static boolean getDebugMode() {
         return debugMode;
     }
@@ -98,6 +118,9 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     }
     public static PunishmentManager getPlugin() {
         return plugin;
+    }
+    public static ResultSet getOffenseListGuiData() {
+        return OffenseListGuiData;
     }
 
 

@@ -47,6 +47,7 @@ public class MySQL {
             stmt.addBatch(createPlayer_historyTable);
             stmt.addBatch(createPunishment_templatesTable);
             stmt.addBatch(createPunishment_usedTable);
+            stmt.addBatch(createOffenseLoreTable);
             int[] res = stmt.executeBatch();
             con.commit();
             con.setAutoCommit(true);
@@ -69,5 +70,5 @@ public class MySQL {
     private static final String createPlayer_historyTable = "CREATE TABLE IF NOT EXISTS minecraft.player_history ( history_id           int  NOT NULL    , uuid_victim          varchar(50)  NOT NULL    , uuid_executor        varchar(50)  NOT NULL    , formatted_reason     varchar(200)      , calculated_ban_duration bigint      , calculated_jail_duration bigint      , calculated_mute_duration bigint      , jail_id              int      , time_done_mute       bigint UNSIGNED     , time_done_jail       bigint      , status               varchar(200)  NOT NULL );";
     private static final String createPunishment_templatesTable = "CREATE TABLE IF NOT EXISTS minecraft.punishment_templates ( `punishment_id`      int  NOT NULL    , threshold            int  NOT NULL    , `category_id`        int  NOT NULL    , `mute_calculation`   varchar(200)      , `ban-_alculation`    varchar(200)      , `jail_calculation`   varchar(200)      , server               varchar(200) );";
     private static final String createPunishment_usedTable = "CREATE TABLE IF NOT EXISTS minecraft.punishment_used ( history_id           int      , punishment_id        int );";
-
+    private static final String createOffenseLoreTable = "CREATE TABLE IF NOT EXISTS minecraft.offense_lore ( offense_id int      , lore                 varchar(200) )";
 }
