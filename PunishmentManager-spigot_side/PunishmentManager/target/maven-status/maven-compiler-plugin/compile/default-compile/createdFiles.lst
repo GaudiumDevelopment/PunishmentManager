@@ -1,13 +1,13 @@
 me/superbiebel/punishmentmanager/menusystem/menu/ExecuteOffenseGUI.class
 me/superbiebel/punishmentmanager/listeners/MenuListener.class
-me/superbiebel/punishmentmanager/Utils/ColorUtils.class
+me/superbiebel/punishmentmanager/mysql/MySQL.class
 me/superbiebel/punishmentmanager/commands/PunishCommand.class
-me/superbiebel/punishmentmanager/MySQL/MySQL.class
 me/superbiebel/punishmentmanager/commands/SystemCommand.class
 me/superbiebel/punishmentmanager/menusystem/menu/ActionsListGUI.class
+me/superbiebel/punishmentmanager/utils/ColorUtils.class
 me/superbiebel/punishmentmanager/menusystem/PlayerMenuUtility.class
 me/superbiebel/punishmentmanager/menusystem/menu/OffenseListGUI.class
 me/superbiebel/punishmentmanager/PunishmentManager.class
 me/superbiebel/punishmentmanager/menusystem/menu/HistoryGUI.class
-me/superbiebel/punishmentmanager/Utils/Log.class
+me/superbiebel/punishmentmanager/utils/Log.class
 me/superbiebel/punishmentmanager/menusystem/Menu.class

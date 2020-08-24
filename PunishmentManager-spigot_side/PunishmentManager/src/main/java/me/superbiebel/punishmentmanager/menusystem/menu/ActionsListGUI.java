@@ -5,14 +5,18 @@ import me.lucko.helper.menu.Gui;
 import me.lucko.helper.menu.Item;
 import me.lucko.helper.menu.paginated.PaginatedGuiBuilder;
 import me.lucko.helper.promise.Promise;
+
 import me.superbiebel.punishmentmanager.PunishmentManager;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,24 +39,45 @@ public class ActionsListGUI extends Gui{
         newOffense.setItemMeta(newOffenseMeta);
         getSlot(3).setItem(newOffense).bind(e->{
             if (getPlayer().hasPermission("punishmentmanager.offense.offenselist")) {
-                Promise<Void> placeItems = Promise.start().thenRunAsync(()->{
+
+
+
+
+
+
                 PaginatedGuiBuilder model = PaginatedGuiBuilder.create();
-                model.title("test");
+                model.title("Punish " + PunishmentManager.getPlayerMenuUtility(getPlayer()).getCriminal().getName());
                 model.previousPageSlot(48);
                 model.nextPageSlot(50);
                 Player p = getPlayer();
                 OffenseListGUI pgui = new OffenseListGUI(OffenseListGUI -> {
                     List<Item> items = new ArrayList<>();
-                    for(int i=0;i<=100;i++){
-                    Item someItem = ItemStackBuilder.of(Material.STONE).name("meow").buildItem().build();
-                    items.add(someItem);}
-
+                    int resultSetSize = 0;
+                    //ResultSet offenseListGuiItems = null;
+                    /*try {
+                       offenseListGuiItems = PunishmentManager.getOffenseListGuiData();
+                       offenseListGuiItems.last();
+                       resultSetSize = offenseListGuiItems.getRow();
+                       offenseListGuiItems.first();
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }*/
+                    for(int i = 0; i<resultSetSize; i++){
+                        Item someItem = null;
+                      //  try {
+                            someItem = ItemStackBuilder.of(Material.ACACIA_BOAT).name("test offense")
+                                   // of(Material.matchMaterial(offenseListGuiItems.getString("offense_icon")))
+                                   /* .name(offenseListGuiItems.getString("offense_icon"))*/.buildItem().bind(event->{
+                                        ExecuteOffenseGUI executeOffenseGUI = new ExecuteOffenseGUI((Player) e.getWhoClicked(), 6, "Punish " + PunishmentManager.getPlayerMenuUtility(getPlayer()).getCriminal().getName());
+                                        executeOffenseGUI.open();
+                                    },ClickType.LEFT).build();
+                     //  } catch (SQLException throwables) {
+                     //       throwables.printStackTrace();
+                        //}
+                        items.add(someItem);}
                     return items;
                 }, p,model);
-
-                });
-
-
+                pgui.open();
 
 
 

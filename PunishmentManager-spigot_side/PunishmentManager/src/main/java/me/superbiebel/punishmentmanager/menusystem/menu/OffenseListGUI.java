@@ -17,9 +17,13 @@ public class OffenseListGUI extends PaginatedGui{
     public OffenseListGUI(Function<PaginatedGui, List<Item>> content, Player player, PaginatedGuiBuilder model) {
         super(content, player, model);
     }
-    public static ResultSet getOffenseListGuiData() throws SQLException {
+    public static ResultSet getOffenseListGuiData() {
+        ResultSet OffenseListResultSet = null;
+        try{
         PreparedStatement pst = MySQL.getDataSource().getConnection().prepareStatement("");
-        ResultSet OffenseListResultSet = pst.executeQuery();
+        OffenseListResultSet = pst.executeQuery();} catch (Exception e) {
+            e.printStackTrace();
+        }
         return OffenseListResultSet;
     }
 }

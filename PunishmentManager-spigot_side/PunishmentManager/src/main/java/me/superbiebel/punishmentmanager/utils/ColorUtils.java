@@ -1,7 +1,7 @@
 package me.superbiebel.punishmentmanager.utils;
 
 import org.bukkit.ChatColor;
-
+//Kody simpsons color translator
 
 public class ColorUtils {
 
