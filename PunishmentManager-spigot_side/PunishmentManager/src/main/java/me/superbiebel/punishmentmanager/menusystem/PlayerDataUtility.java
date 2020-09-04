@@ -2,12 +2,12 @@ package me.superbiebel.punishmentmanager.menusystem;
 
 import org.bukkit.entity.Player;
 
-public class PlayerMenuUtility {
+public class PlayerDataUtility {
 
     private Player criminal;
     private Player owner;
 
-    public PlayerMenuUtility(Player p) {
+    public PlayerDataUtility(Player p) {
         this.owner = p;
     }
 

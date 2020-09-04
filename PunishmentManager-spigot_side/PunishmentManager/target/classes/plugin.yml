@@ -4,7 +4,6 @@ main: me.superbiebel.punishmentmanager.PunishmentManager
 api-version: 1.13
 prefix: PunishmentManager
 authors: [Superbiebel]
-depend:
 commands:
   punish:
     description: open a gui to punish players

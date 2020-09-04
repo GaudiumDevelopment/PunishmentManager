@@ -8,10 +8,10 @@ public class Log {
 
 
     private static final String namePrefix = ColorUtils.translateColorCodes("&r&4&lPunishment&b&lManager&6&c");
-    private static final String debugPrefix = ColorUtils.translateColorCodes("&r&4&lPunishment&b&lManager&6&c &f[&8DEBUG&f] &f&l>>");
-    private static final String infoPrefix = ColorUtils.translateColorCodes("&r&4&lPunishment&b&lManager&6&c &f[INFO&f] &l>>");
-    private static final String warningPrefix = ColorUtils.translateColorCodes("&r&4&lPunishment&b&lManager&6&c &e[&6WARNING&e] &l>>");
-    private static final String fatalErrorPrefix = ColorUtils.translateColorCodes("&r&4&lPunishment&b&lManager&6&c &c[&4ERROR&c] &4&l>>");
+    private static final String debugPrefix = ColorUtils.translateColorCodes("&r&4&lPunishment&b&lManager&6&c &f[&8DEBUG&f] &f&l>> ");
+    private static final String infoPrefix = ColorUtils.translateColorCodes("&r&4&lPunishment&b&lManager&6&c &f[INFO&f] &l>> ");
+    private static final String warningPrefix = ColorUtils.translateColorCodes("&r&4&lPunishment&b&lManager&6&c &e[&6WARNING&e] &l>> ");
+    private static final String fatalErrorPrefix = ColorUtils.translateColorCodes("&r&4&lPunishment&b&lManager&6&c &c[&4ERROR&c] &4&l>> ");
 
 
     public static void debug(String msg) {
@@ -31,8 +31,9 @@ public class Log {
             if (player.hasPermission("punishmentmanager.log.info")) {
                 player.sendMessage(infoPrefix + msg);
             }
-            Bukkit.getServer().getLogger().info(infoPrefix + msg);
+
         }
+        Bukkit.getServer().getLogger().info(infoPrefix + msg);
     }
 
     public static void warning(String msg) {

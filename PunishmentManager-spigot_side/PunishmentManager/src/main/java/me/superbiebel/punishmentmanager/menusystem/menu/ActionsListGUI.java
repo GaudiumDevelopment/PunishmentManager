@@ -53,27 +53,30 @@ public class ActionsListGUI extends Gui{
                 OffenseListGUI pgui = new OffenseListGUI(OffenseListGUI -> {
                     List<Item> items = new ArrayList<>();
                     int resultSetSize = 0;
-                    //ResultSet offenseListGuiItems = null;
-                    /*try {
+                    ResultSet offenseListGuiItems = null;
+                   try {
                        offenseListGuiItems = PunishmentManager.getOffenseListGuiData();
                        offenseListGuiItems.last();
                        resultSetSize = offenseListGuiItems.getRow();
                        offenseListGuiItems.first();
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
-                    }*/
-                    for(int i = 0; i<resultSetSize; i++){
+                    }
+                    for(int i = 1; i<=resultSetSize; i++){
                         Item someItem = null;
-                      //  try {
-                            someItem = ItemStackBuilder.of(Material.ACACIA_BOAT).name("test offense")
-                                   // of(Material.matchMaterial(offenseListGuiItems.getString("offense_icon")))
-                                   /* .name(offenseListGuiItems.getString("offense_icon"))*/.buildItem().bind(event->{
+                        try {
+                            offenseListGuiItems.getString(i);
+                            someItem = ItemStackBuilder.
+                                   of(Material.matchMaterial(offenseListGuiItems.getString("offense_icon")))
+                                    .name(offenseListGuiItems.getString("offense_icon")).buildItem().bind(event->{
+
                                         ExecuteOffenseGUI executeOffenseGUI = new ExecuteOffenseGUI((Player) e.getWhoClicked(), 6, "Punish " + PunishmentManager.getPlayerMenuUtility(getPlayer()).getCriminal().getName());
                                         executeOffenseGUI.open();
+
                                     },ClickType.LEFT).build();
-                     //  } catch (SQLException throwables) {
-                     //       throwables.printStackTrace();
-                        //}
+                       } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
                         items.add(someItem);}
                     return items;
                 }, p,model);

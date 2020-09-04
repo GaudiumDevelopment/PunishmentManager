@@ -1,23 +1,23 @@
 package me.superbiebel.punishmentmanager;
 
-import com.zaxxer.hikari.HikariDataSource;
-import me.lucko.helper.Schedulers;
+import me.lucko.helper.Events;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
-import me.lucko.helper.promise.Promise;
+import me.lucko.helper.terminable.Terminable;
+import me.superbiebel.punishmentmanager.listeners.JoinListener;
+import me.superbiebel.punishmentmanager.listeners.LeaveListener;
 import me.superbiebel.punishmentmanager.mysql.MySQL;
 import me.superbiebel.punishmentmanager.utils.Log;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
-import me.superbiebel.punishmentmanager.menusystem.PlayerMenuUtility;
+import me.superbiebel.punishmentmanager.menusystem.PlayerDataUtility;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 
 public final class PunishmentManager extends ExtendedJavaPlugin {
@@ -25,17 +25,22 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     private static boolean debugMode;
     private static FileConfiguration config;
     private static PunishmentManager plugin;
-    private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
-    private static HikariDataSource ds;
+    private static final HashMap<Player, PlayerDataUtility> playerDataUtilityMap = new HashMap<>();
+    //private static Terminable joinHandler = (Terminable) Events.subscribe(PlayerJoinEvent.class);
+   // private static Terminable leaveHandler = (Terminable) Events.subscribe(PlayerQuitEvent.class);
+    //private static Terminable kickHandler = (Terminable) Events.subscribe(PlayerQuitEvent.class);
 
 
-
+    //get the data for all the processes and the gui
     private static ResultSet OffenseListGuiData;
 
     @Override
     public void enable() {
         plugin = this;
         loadConfig();
+        if (!config.getBoolean("MySQL.enabled")){
+            Bukkit.getPluginManager().disablePlugin(this);
+        } else {
         loadEvents();
         loadCommands();
         if (config.getBoolean("MySQL.enabled")){
@@ -47,43 +52,20 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
                 config.getString("MySQL.db"),
                 config.getString("MySQL.useSSL"));
 
-        MySQL.initializeTables();} else {
+        MySQL.initializeTables(config.getString("MySQL.db"));
+        } else {
             for (int i = 0; i <= 5; i++ ){
             Log.fatalError("MYSQL HAS NOT BEEN ENABLED! NOTHING CAN BE SAVED OR ACCESSED! PLEASE FILL IN THE DETAILS OF THE MYSQL DATABASE BEFORE DOING ANYTHING ELSE!");}
         }
 
         Log.debug("Everything has been enabled");
-    }
+    }}
 
     @Override
     public void disable() {
-
         Log.debug("The plugin has been disabled");
     }
 
-    public static void getAllData(String caller) {
-        if (!caller.equalsIgnoreCase("system")) {
-            if (!caller.equalsIgnoreCase("console")) {
-                Player callerPlayer = Bukkit.getPlayer(caller);
-                Promise<Void> fetchAllDataPromise = Promise.start().thenRunSync(()-> callerPlayer.sendMessage("Syncing...")).thenRunAsync(()->{
-                    try {
-                        Connection con = MySQL.getDataSource().getConnection();
-                        Log.debug("Fetching OffenseListGui...");
-                        PreparedStatement OffenseListGuiDataStmt = con.prepareStatement("");
-                        OffenseListGuiData = OffenseListGuiDataStmt.executeQuery();
-                        Log.debug("OffenseListGui data fetched...");
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
-
-                }).thenRunSync(()->{
-                    callerPlayer.sendMessage("Sync complete!");
-                });
-            }
-
-        }
-
-    }
 
 
     public void loadConfig() {
@@ -91,11 +73,21 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         this.saveDefaultConfig();
         this.config= this.getConfig();
         this.debugMode = this.config.getBoolean("debug");
-        Log.debug("Debug mode has been enabled! Extensive logging will be enabled!");}
+        Log.debug("Debug mode has been enabled! There <ill be extensive logging!");}
 
 
     public static void loadEvents() {
-        Log.debug("Loading events");
+        Log.debug("Loading events...");
+        Events.subscribe(PlayerJoinEvent.class).handler(joinEvent -> {
+            new JoinListener(joinEvent);
+        } ).bindWith(getPlugin());
+        Events.subscribe(PlayerQuitEvent.class).handler(quitEvent -> {
+            new LeaveListener().handleQuit(quitEvent);
+        } ).bindWith(getPlugin());
+        Events.subscribe(PlayerKickEvent.class).handler(kickEvent -> {
+            new LeaveListener().handleKick(kickEvent);
+        } ).bindWith(getPlugin());
+        Log.debug("Events Loaded!");
     }
 
     public void loadCommands() {
@@ -109,20 +101,20 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     }
 
 
-
+    //Originally from the video of Kody Simpson and repurposed from playerMenuUtility to PlayerDataUtility
     //Provide a player and return a menu system for that player
     //create one if they don't already have one
-    public static PlayerMenuUtility getPlayerMenuUtility(Player p) {
-        PlayerMenuUtility playerMenuUtility;
-        if (!(playerMenuUtilityMap.containsKey(p))) { //See if the player has a playermenuutility "saved" for them
+    public static PlayerDataUtility getPlayerMenuUtility(Player p) {
+        PlayerDataUtility playerDataUtility;
+        if (!(playerDataUtilityMap.containsKey(p))) { //See if the player has a playermenuutility "saved" for them
 
             //This player doesn't. Make one for them add add it to the hashmap
-            playerMenuUtility = new PlayerMenuUtility(p);
-            playerMenuUtilityMap.put(p, playerMenuUtility);
+            playerDataUtility = new PlayerDataUtility(p);
+            playerDataUtilityMap.put(p, playerDataUtility);
 
-            return playerMenuUtility;
+            return playerDataUtility;
         } else {
-            return playerMenuUtilityMap.get(p); //Return the object by using the provided player
+            return playerDataUtilityMap.get(p); //Return the object by using the provided player
         }
     }
 
