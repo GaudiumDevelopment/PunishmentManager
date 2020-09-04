@@ -8,7 +8,7 @@ servergroup:
 # !!!!!IF THIS OPTION IS NOT ENABLED NOTHING WILL BE SAVED!!!!!
 MySQL:
   enabled: true
-  db: minecraft
+  db: 'minecraft'
   host: localhost
   password: joren
   port: 3306
