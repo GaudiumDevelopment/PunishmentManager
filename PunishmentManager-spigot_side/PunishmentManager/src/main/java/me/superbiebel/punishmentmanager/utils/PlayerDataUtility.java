@@ -1,4 +1,4 @@
-package me.superbiebel.punishmentmanager.menusystem;
+package me.superbiebel.punishmentmanager.utils;
 
 import org.bukkit.entity.Player;
 

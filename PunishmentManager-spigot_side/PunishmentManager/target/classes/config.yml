@@ -9,9 +9,15 @@ servergroup:
 MySQL:
   enabled: true
   db: 'minecraft'
-  host: localhost
-  password: joren
+  host: 'localhost'
+  username: 'plugintest'
+  password: 'joren'
   port: 3306
   useSSL: false
-  username: plugintest
+  #extra options for hikari for the people who know how to use it!
+  #I am not responsible for any corruptions or issues that might arise when using this the wrong way!
+  #if you use this you acknowledge that issues that have to do with database corruptions or mysql problems will be of a lower priority and that you can receive less support then normal.
+  cachePrepStmts: true
+  prepStmtCacheSize: 250
+  prepStmtCacheSqlLimit: 2048
 

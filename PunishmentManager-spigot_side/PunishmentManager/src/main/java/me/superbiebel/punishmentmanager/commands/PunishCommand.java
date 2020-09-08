@@ -16,7 +16,7 @@ public class PunishCommand implements CommandExecutor {
                 sender.sendMessage("No player provided!");
             }else {
                 Player p = (Player) sender;
-                PunishmentManager.getPlayerMenuUtility(p).setCriminal(Bukkit.getPlayer(args[0]));
+                PunishmentManager.getPlayerDataUtility(p).setCriminal(Bukkit.getPlayer(args[0]));
                 new ActionsListGUI(p,1,"test").open();
 
             }

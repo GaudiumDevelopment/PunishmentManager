@@ -2,14 +2,13 @@ package me.superbiebel.punishmentmanager;
 
 import me.lucko.helper.Events;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
-import me.lucko.helper.terminable.Terminable;
 import me.superbiebel.punishmentmanager.listeners.JoinListener;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
 import me.superbiebel.punishmentmanager.mysql.MySQL;
 import me.superbiebel.punishmentmanager.utils.Log;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
-import me.superbiebel.punishmentmanager.menusystem.PlayerDataUtility;
+import me.superbiebel.punishmentmanager.utils.PlayerDataUtility;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -27,17 +26,19 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     private static PunishmentManager plugin;
     private static final HashMap<Player, PlayerDataUtility> playerDataUtilityMap = new HashMap<>();
     //private static Terminable joinHandler = (Terminable) Events.subscribe(PlayerJoinEvent.class);
-   // private static Terminable leaveHandler = (Terminable) Events.subscribe(PlayerQuitEvent.class);
+    //private static Terminable leaveHandler = (Terminable) Events.subscribe(PlayerQuitEvent.class);
     //private static Terminable kickHandler = (Terminable) Events.subscribe(PlayerQuitEvent.class);
 
-
-    //get the data for all the processes and the gui
-    private static ResultSet OffenseListGuiData;
 
     @Override
     public void enable() {
         plugin = this;
         loadConfig();
+        if (!config.getString("config_version:").equalsIgnoreCase("indev")) {
+            Log.fatalError("The config version doesn't correspond with the version that is needed for this plugin version!");
+            Log.fatalError("Please delete your config so we can generate a new one on startup!");
+            Bukkit.getPluginManager().disablePlugin(plugin);
+        }
         if (!config.getBoolean("MySQL.enabled")){
             Bukkit.getPluginManager().disablePlugin(this);
         } else {
@@ -104,7 +105,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     //Originally from the video of Kody Simpson and repurposed from playerMenuUtility to PlayerDataUtility
     //Provide a player and return a menu system for that player
     //create one if they don't already have one
-    public static PlayerDataUtility getPlayerMenuUtility(Player p) {
+    public static PlayerDataUtility getPlayerDataUtility(Player p) {
         PlayerDataUtility playerDataUtility;
         if (!(playerDataUtilityMap.containsKey(p))) { //See if the player has a playermenuutility "saved" for them
 
@@ -126,9 +127,6 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     }
     public static PunishmentManager getPlugin() {
         return plugin;
-    }
-    public static ResultSet getOffenseListGuiData() {
-        return OffenseListGuiData;
     }
 
 

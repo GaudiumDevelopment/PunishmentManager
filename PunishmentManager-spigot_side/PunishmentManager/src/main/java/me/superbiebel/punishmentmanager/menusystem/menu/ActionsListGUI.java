@@ -4,11 +4,9 @@ import me.lucko.helper.item.ItemStackBuilder;
 import me.lucko.helper.menu.Gui;
 import me.lucko.helper.menu.Item;
 import me.lucko.helper.menu.paginated.PaginatedGuiBuilder;
-import me.lucko.helper.promise.Promise;
 
 import me.superbiebel.punishmentmanager.PunishmentManager;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -46,7 +44,7 @@ public class ActionsListGUI extends Gui{
 
 
                 PaginatedGuiBuilder model = PaginatedGuiBuilder.create();
-                model.title("Punish " + PunishmentManager.getPlayerMenuUtility(getPlayer()).getCriminal().getName());
+                model.title("Punish " + PunishmentManager.getPlayerDataUtility(getPlayer()).getCriminal().getName());
                 model.previousPageSlot(48);
                 model.nextPageSlot(50);
                 Player p = getPlayer();
@@ -70,7 +68,7 @@ public class ActionsListGUI extends Gui{
                                    of(Material.matchMaterial(offenseListGuiItems.getString("offense_icon")))
                                     .name(offenseListGuiItems.getString("offense_icon")).buildItem().bind(event->{
 
-                                        ExecuteOffenseGUI executeOffenseGUI = new ExecuteOffenseGUI((Player) e.getWhoClicked(), 6, "Punish " + PunishmentManager.getPlayerMenuUtility(getPlayer()).getCriminal().getName());
+                                        ExecuteOffenseGUI executeOffenseGUI = new ExecuteOffenseGUI((Player) e.getWhoClicked(), 6, "Punish " + PunishmentManager.getPlayerDataUtility(getPlayer()).getCriminal().getName());
                                         executeOffenseGUI.open();
 
                                     },ClickType.LEFT).build();
@@ -100,7 +98,7 @@ public class ActionsListGUI extends Gui{
         getSlot(5).setItem(history).bind(e->{
             e.setCancelled(true);
             if (getPlayer().hasPermission("punishmentmanager.history")) {
-                new HistoryGUI(getPlayer(),6, "History of "+ PunishmentManager.getPlayerMenuUtility(getPlayer()).getCriminal().getName()).open();
+                new HistoryGUI(getPlayer(),6, "History of "+ PunishmentManager.getPlayerDataUtility(getPlayer()).getCriminal().getName()).open();
             } else {
                 getPlayer().sendMessage("You do not have permission to do that!");
             }
