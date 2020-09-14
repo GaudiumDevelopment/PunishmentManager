@@ -53,7 +53,7 @@ public class ActionsListGUI extends Gui{
                     int resultSetSize = 0;
                     ResultSet offenseListGuiItems = null;
                    try {
-                       offenseListGuiItems = PunishmentManager.getOffenseListGuiData();
+                      // offenseListGuiItems = PunishmentManager.getOffenseListGuiData();
                        offenseListGuiItems.last();
                        resultSetSize = offenseListGuiItems.getRow();
                        offenseListGuiItems.first();

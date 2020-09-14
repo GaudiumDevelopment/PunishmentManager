@@ -21,3 +21,8 @@ MySQL:
   prepStmtCacheSize: 250
   prepStmtCacheSqlLimit: 2048
 
+#This is the end of the config, no really! It is!
+#-------------------------------------------------
+#DO NOT TOUCH!!! TOUCHING = BREAKING THE WHOLE PLUGIN!!!!
+config_version: indev
+

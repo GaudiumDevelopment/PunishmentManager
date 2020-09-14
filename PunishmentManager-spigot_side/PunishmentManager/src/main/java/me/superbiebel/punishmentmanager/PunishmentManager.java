@@ -2,21 +2,21 @@ package me.superbiebel.punishmentmanager;
 
 import me.lucko.helper.Events;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
+import me.superbiebel.punishmentmanager.commands.PunishCommand;
+import me.superbiebel.punishmentmanager.commands.SystemCommand;
 import me.superbiebel.punishmentmanager.listeners.JoinListener;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
 import me.superbiebel.punishmentmanager.mysql.MySQL;
 import me.superbiebel.punishmentmanager.utils.Log;
-import me.superbiebel.punishmentmanager.commands.PunishCommand;
-import me.superbiebel.punishmentmanager.commands.SystemCommand;
 import me.superbiebel.punishmentmanager.utils.PlayerDataUtility;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.sql.ResultSet;
 import java.util.HashMap;
 
 public final class PunishmentManager extends ExtendedJavaPlugin {
@@ -25,16 +25,13 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     private static FileConfiguration config;
     private static PunishmentManager plugin;
     private static final HashMap<Player, PlayerDataUtility> playerDataUtilityMap = new HashMap<>();
-    //private static Terminable joinHandler = (Terminable) Events.subscribe(PlayerJoinEvent.class);
-    //private static Terminable leaveHandler = (Terminable) Events.subscribe(PlayerQuitEvent.class);
-    //private static Terminable kickHandler = (Terminable) Events.subscribe(PlayerQuitEvent.class);
 
 
     @Override
     public void enable() {
         plugin = this;
         loadConfig();
-        if (!config.getString("config_version:").equalsIgnoreCase("indev")) {
+        if (!this.config.getString("config_version").equalsIgnoreCase("indev")) {
             Log.fatalError("The config version doesn't correspond with the version that is needed for this plugin version!");
             Log.fatalError("Please delete your config so we can generate a new one on startup!");
             Bukkit.getPluginManager().disablePlugin(plugin);
@@ -79,9 +76,11 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
 
     public static void loadEvents() {
         Log.debug("Loading events...");
-        Events.subscribe(PlayerJoinEvent.class).handler(joinEvent -> {
+        Events.subscribe(AsyncPlayerPreLoginEvent.class).handler(joinEvent -> {
             new JoinListener(joinEvent);
+
         } ).bindWith(getPlugin());
+
         Events.subscribe(PlayerQuitEvent.class).handler(quitEvent -> {
             new LeaveListener().handleQuit(quitEvent);
         } ).bindWith(getPlugin());
@@ -107,8 +106,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     //create one if they don't already have one
     public static PlayerDataUtility getPlayerDataUtility(Player p) {
         PlayerDataUtility playerDataUtility;
-        if (!(playerDataUtilityMap.containsKey(p))) { //See if the player has a playermenuutility "saved" for them
-
+        if (!(playerDataUtilityMap.containsKey(p))) { //See if the player has a playerdatautility "saved" for them
             //This player doesn't. Make one for them add add it to the hashmap
             playerDataUtility = new PlayerDataUtility(p);
             playerDataUtilityMap.put(p, playerDataUtility);

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: me.lucko:shadow-bukkit:1.6">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/me/lucko/shadow-bukkit/1.6/shadow-bukkit-1.6.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/me/lucko/shadow-bukkit/1.6/shadow-bukkit-1.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/me/lucko/shadow-bukkit/1.6/shadow-bukkit-1.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

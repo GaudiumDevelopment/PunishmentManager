@@ -1,22 +1,38 @@
 package me.superbiebel.punishmentmanager.listeners;
 
 import me.superbiebel.punishmentmanager.mysql.MySQL;
+import me.superbiebel.punishmentmanager.utils.Log;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class JoinListener {
 
-    public JoinListener(PlayerJoinEvent e) {
+    public JoinListener(AsyncPlayerPreLoginEvent e) {
         handleJoin(e);
     }
 
-    public void handleJoin(PlayerJoinEvent e) {
+    public void handleJoin(AsyncPlayerPreLoginEvent e) {
+        Connection con = null;
         try {
-            PreparedStatement stmt = MySQL.getDataSource().getConnection().prepareStatement(""); //TODO fill in the sql statement
+            con = MySQL.getDataSource().getConnection();
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO player_joins (uuid, join_date, result) VALUES (?,?,?);");
+            stmt.setString(1,e.getUniqueId().toString());
+            stmt.setLong(2,System.currentTimeMillis());
+            stmt.setString(3, e.getLoginResult().name());
+            Log.debug(e.getUniqueId().toString());
+            stmt.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
     }
 }
