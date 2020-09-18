@@ -14,6 +14,7 @@ import java.util.Arrays;
 /*
     Defines the behavior and attributes of all menus in our plugin
  */
+@Deprecated
 public abstract class Menu implements InventoryHolder {
 
     //Protected values that can be accessed in the menus

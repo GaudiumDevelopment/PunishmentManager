@@ -13,7 +13,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -21,6 +20,8 @@ import java.util.HashMap;
 
 public final class PunishmentManager extends ExtendedJavaPlugin {
 
+    private static final String configVersion = "indev";
+    private static final String Version = "indev";
     private static boolean debugMode;
     private static FileConfiguration config;
     private static PunishmentManager plugin;
@@ -31,47 +32,80 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     public void enable() {
         plugin = this;
         loadConfig();
-        if (!this.config.getString("config_version").equalsIgnoreCase("indev")) {
-            Log.fatalError("The config version doesn't correspond with the version that is needed for this plugin version!");
-            Log.fatalError("Please delete your config so we can generate a new one on startup!");
+        if (checkConfigVersion() && this.config.getBoolean("MySQL.enabled")) {
+            setDebugMode();
+            loadEvents();
+            loadCommands();
+            initMySQL();
+            Log.debug("Everything has been enabled");
+        } else if (!this.config.getBoolean("MySQL.enabled")) {
+            for (int i = 0; i < 5; i++) {
+                Log.fatalError("MYSQL HAS BEEN DISABLED!!! FILL IN THE CREDENTIALS AND ENABLE MYSQL!!!");
+            }
+            Log.warning("I know that it spams the above message but this is the storage, without storage nothing will work");
+
+
             Bukkit.getPluginManager().disablePlugin(plugin);
-        }
-        if (!config.getBoolean("MySQL.enabled")){
-            Bukkit.getPluginManager().disablePlugin(this);
         } else {
-        loadEvents();
-        loadCommands();
-        if (config.getBoolean("MySQL.enabled")){
-        MySQL.configureConnection(
-                config.getString("MySQL.host"),
-                config.getString("MySQL.username"),
-                config.getString("MySQL.password"),
-                config.getString("MySQL.port"),
-                config.getString("MySQL.db"),
-                config.getString("MySQL.useSSL"));
-
-        MySQL.initializeTables(config.getString("MySQL.db"));
-        } else {
-            for (int i = 0; i <= 5; i++ ){
-            Log.fatalError("MYSQL HAS NOT BEEN ENABLED! NOTHING CAN BE SAVED OR ACCESSED! PLEASE FILL IN THE DETAILS OF THE MYSQL DATABASE BEFORE DOING ANYTHING ELSE!");}
+            Log.warning("Something went wrong");
         }
-
-        Log.debug("Everything has been enabled");
-    }}
+            if (!this.isEnabled()) {
+                Log.fatalError("STARTUP COULD NOT BE COMPLETED, PLEASE CHECK FOR ERRORS IN THE CONSOLE!!!");
+        }
+    }
 
     @Override
     public void disable() {
+        if (!(MySQL.getDataSource() == null)) {
+            MySQL.getDataSource().close();
+        }
         Log.debug("The plugin has been disabled");
     }
 
 
 
     public void loadConfig() {
-        Log.info("loading config");
+        Log.info("loading config...");
         this.saveDefaultConfig();
         this.config= this.getConfig();
+    }
+
+    public void setDebugMode() {
         this.debugMode = this.config.getBoolean("debug");
-        Log.debug("Debug mode has been enabled! There <ill be extensive logging!");}
+        Log.debug("Debug mode has been enabled! There will be extensive logging!");
+    }
+
+
+    public boolean checkConfigVersion() {
+        Log.debug("Checking config version...");
+        boolean status;
+        if (!this.config.getString("config_version").equals(configVersion)) {
+            Log.fatalError("The config version doesn't correspond with the version that is needed for this plugin version!");
+            Log.fatalError("Please back up and then delete your config so we can generate a new one on startup!");
+            Bukkit.getPluginManager().disablePlugin(this);
+            status = false;
+        } else {
+            status = true;
+        }
+        Log.debug("Config version is: " + this.config.getString("config_version"));
+        return status;
+    }
+
+
+    public void initMySQL() {
+        Log.debug("Checking Mysql config version...");
+        boolean status;
+            status = true;
+            MySQL.configureConnection(
+                this.config.getString("MySQL.host"),
+                this.config.getString("MySQL.username"),
+                this.config.getString("MySQL.password"),
+                this.config.getString("MySQL.port"),
+                this.config.getString("MySQL.db"),
+                this.config.getString("MySQL.useSSL"));
+            MySQL.initializeTables(this.config.getString("MySQL.db"));
+        }
+
 
 
     public static void loadEvents() {
@@ -90,6 +124,8 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         Log.debug("Events Loaded!");
     }
 
+
+
     public void loadCommands() {
         Log.debug("Loading commands");
         Log.debug("loading the /punish command...");
@@ -101,8 +137,10 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     }
 
 
+
+
     //Originally from the video of Kody Simpson and repurposed from playerMenuUtility to PlayerDataUtility
-    //Provide a player and return a menu system for that player
+    //Provide a player and return a data system for that player
     //create one if they don't already have one
     public static PlayerDataUtility getPlayerDataUtility(Player p) {
         PlayerDataUtility playerDataUtility;
