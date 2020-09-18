@@ -4,7 +4,6 @@ import me.lucko.helper.Schedulers;
 import me.superbiebel.punishmentmanager.mysql.MySQL;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
-import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -23,7 +22,7 @@ public class JoinListener {
             String uuid = e.getUniqueId().toString();
             String loginResult = e.getLoginResult().name();
             Long currentTime = System.currentTimeMillis();
-            String ip = e.getAddress().toString();
+            String ip = e.getAddress().toString().replaceAll("/","");
         try {
             con = MySQL.getDataSource().getConnection();
 
