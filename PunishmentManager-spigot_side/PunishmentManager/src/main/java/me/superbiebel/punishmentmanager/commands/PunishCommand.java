@@ -1,7 +1,9 @@
 package me.superbiebel.punishmentmanager.commands;
 
-import me.superbiebel.punishmentmanager.PunishmentManager;
+import me.lucko.helper.metadata.Metadata;
+import me.lucko.helper.metadata.MetadataMap;
 import me.superbiebel.punishmentmanager.menusystem.menu.ActionsListGUI;
+import me.superbiebel.punishmentmanager.utils.DataUtility;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,9 +18,9 @@ public class PunishCommand implements CommandExecutor {
                 sender.sendMessage("No player provided!");
             }else {
                 Player p = (Player) sender;
-                PunishmentManager.getPlayerDataUtility(p).setCriminal(Bukkit.getPlayer(args[0]));
+                MetadataMap metadata = Metadata.provideForPlayer(p);
+                metadata.put(DataUtility.getCriminalKey(), Bukkit.getPlayerExact(args[0]));
                 new ActionsListGUI(p,1,"test").open();
-
             }
         }
         return true;

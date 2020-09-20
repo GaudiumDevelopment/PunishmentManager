@@ -32,13 +32,13 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     public void enable() {
         plugin = this;
         loadConfig();
-        if (checkConfigVersion() && this.config.getBoolean("MySQL.enabled")) {
+        if (checkConfigVersion() && config.getBoolean("MySQL.enabled")) {
             setDebugMode();
             loadEvents();
             loadCommands();
             initMySQL();
             Log.debug("Everything has been enabled");
-        } else if (!this.config.getBoolean("MySQL.enabled")) {
+        } else if (!config.getBoolean("MySQL.enabled")) {
             for (int i = 0; i < 5; i++) {
                 Log.fatalError("MYSQL HAS BEEN DISABLED!!! FILL IN THE CREDENTIALS AND ENABLE MYSQL!!!");
             }
@@ -67,11 +67,11 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     public void loadConfig() {
         Log.info("loading config...");
         this.saveDefaultConfig();
-        this.config= this.getConfig();
+        config= this.getConfig();
     }
 
     public void setDebugMode() {
-        this.debugMode = this.config.getBoolean("debug");
+        debugMode = config.getBoolean("debug");
         Log.debug("Debug mode has been enabled! There will be extensive logging!");
     }
 
@@ -79,7 +79,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     public boolean checkConfigVersion() {
         Log.debug("Checking config version...");
         boolean status;
-        if (!this.config.getString("config_version").equals(configVersion)) {
+        if (!config.getString("config_version").equals(configVersion)) {
             Log.fatalError("The config version doesn't correspond with the version that is needed for this plugin version!");
             Log.fatalError("Please back up and then delete your config so we can generate a new one on startup!");
             Bukkit.getPluginManager().disablePlugin(this);
@@ -87,40 +87,31 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         } else {
             status = true;
         }
-        Log.debug("Config version is: " + this.config.getString("config_version"));
+        Log.debug("Config version is: " + config.getString("config_version"));
         return status;
     }
 
 
     public void initMySQL() {
         Log.debug("Checking Mysql config version...");
-        boolean status;
-            status = true;
             MySQL.configureConnection(
-                this.config.getString("MySQL.host"),
-                this.config.getString("MySQL.username"),
-                this.config.getString("MySQL.password"),
-                this.config.getString("MySQL.port"),
-                this.config.getString("MySQL.db"),
-                this.config.getString("MySQL.useSSL"));
-            MySQL.initializeTables(this.config.getString("MySQL.db"));
+                config.getString("MySQL.host"),
+                config.getString("MySQL.username"),
+                config.getString("MySQL.password"),
+                config.getString("MySQL.port"),
+                config.getString("MySQL.db"),
+                config.getString("MySQL.useSSL"));
+            MySQL.initializeTables(config.getString("MySQL.db"));
         }
 
 
 
     public static void loadEvents() {
         Log.debug("Loading events...");
-        Events.subscribe(AsyncPlayerPreLoginEvent.class).handler(joinEvent -> {
-            new JoinListener(joinEvent);
+        Events.subscribe(AsyncPlayerPreLoginEvent.class).handler(JoinListener::new).bindWith(getPlugin());
 
-        } ).bindWith(getPlugin());
-
-        Events.subscribe(PlayerQuitEvent.class).handler(quitEvent -> {
-            new LeaveListener().handleQuit(quitEvent);
-        } ).bindWith(getPlugin());
-        Events.subscribe(PlayerKickEvent.class).handler(kickEvent -> {
-            new LeaveListener().handleKick(kickEvent);
-        } ).bindWith(getPlugin());
+        Events.subscribe(PlayerQuitEvent.class).handler(new LeaveListener()::handleQuit).bindWith(getPlugin());
+        Events.subscribe(PlayerKickEvent.class).handler(new LeaveListener()::handleKick).bindWith(getPlugin());
         Log.debug("Events Loaded!");
     }
 
@@ -142,6 +133,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     //Originally from the video of Kody Simpson and repurposed from playerMenuUtility to PlayerDataUtility
     //Provide a player and return a data system for that player
     //create one if they don't already have one
+    @Deprecated()
     public static PlayerDataUtility getPlayerDataUtility(Player p) {
         PlayerDataUtility playerDataUtility;
         if (!(playerDataUtilityMap.containsKey(p))) { //See if the player has a playerdatautility "saved" for them

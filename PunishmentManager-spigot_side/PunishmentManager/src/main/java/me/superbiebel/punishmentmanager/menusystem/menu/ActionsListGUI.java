@@ -1,22 +1,15 @@
 package me.superbiebel.punishmentmanager.menusystem.menu;
 
-import me.lucko.helper.item.ItemStackBuilder;
 import me.lucko.helper.menu.Gui;
-import me.lucko.helper.menu.Item;
 import me.lucko.helper.menu.paginated.PaginatedGuiBuilder;
-
-import me.superbiebel.punishmentmanager.PunishmentManager;
+import me.lucko.helper.metadata.Metadata;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
+import me.superbiebel.punishmentmanager.utils.DataUtility;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class ActionsListGUI extends Gui{
@@ -33,33 +26,43 @@ public class ActionsListGUI extends Gui{
     public void redraw() {
         ItemStack newOffense = new ItemStack(Material.IRON_AXE, 1);
         ItemMeta newOffenseMeta = newOffense.getItemMeta();
-        newOffenseMeta.setDisplayName(ColorUtils.translateColorCodes("&4&lNew Offense"));
+        newOffenseMeta.setDisplayName(ColorUtils.colorize("&4&lNew Offense"));
         newOffense.setItemMeta(newOffenseMeta);
+        Player p = getPlayer();
         getSlot(3).setItem(newOffense).bind(e->{
             if (getPlayer().hasPermission("punishmentmanager.offense.offenselist")) {
 
-
-
-
-
-
                 PaginatedGuiBuilder model = PaginatedGuiBuilder.create();
-                model.title("Punish " + PunishmentManager.getPlayerDataUtility(getPlayer()).getCriminal().getName());
-                model.previousPageSlot(48);
-                model.nextPageSlot(50);
-                Player p = getPlayer();
-                OffenseListGUI pgui = new OffenseListGUI(OffenseListGUI -> {
+                model.title("Punish " + Metadata.provideForPlayer(p).get(DataUtility.getCriminalKey()).get().getName()).previousPageSlot(48).nextPageSlot(50).build(p,gui-> null).open();
+
+
+
+
+
+
+
+
+
+
+                /*OffenseListGUI pgui = new OffenseListGUI(OffenseListGUI -> {
                     List<Item> items = new ArrayList<>();
+                    return items;
+                }
+                    /*List<Item> items = new ArrayList<>();
                     int resultSetSize = 0;
                     ResultSet offenseListGuiItems = null;
                    try {
-                      // offenseListGuiItems = PunishmentManager.getOffenseListGuiData();
+                       offenseListGuiItems = FetchData.FetchOffenseListGuiData();
                        offenseListGuiItems.last();
                        resultSetSize = offenseListGuiItems.getRow();
                        offenseListGuiItems.first();
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
-                    }
+                    } catch (InterruptedException interruptedException) {
+                       interruptedException.printStackTrace();
+                   } catch (ExecutionException executionException) {
+                       executionException.printStackTrace();
+                   }
                     for(int i = 1; i<=resultSetSize; i++){
                         Item someItem = null;
                         try {
@@ -68,7 +71,7 @@ public class ActionsListGUI extends Gui{
                                    of(Material.matchMaterial(offenseListGuiItems.getString("offense_icon")))
                                     .name(offenseListGuiItems.getString("offense_icon")).buildItem().bind(event->{
 
-                                        ExecuteOffenseGUI executeOffenseGUI = new ExecuteOffenseGUI((Player) e.getWhoClicked(), 6, "Punish " + PunishmentManager.getPlayerDataUtility(getPlayer()).getCriminal().getName());
+                                        ExecuteOffenseGUI executeOffenseGUI = new ExecuteOffenseGUI((Player) e.getWhoClicked(), 6, "Punish " + Metadata.provideForPlayer(p).get(DataUtility.getCriminalKey()).get().getName());
                                         executeOffenseGUI.open();
 
                                     },ClickType.LEFT).build();
@@ -78,7 +81,7 @@ public class ActionsListGUI extends Gui{
                         items.add(someItem);}
                     return items;
                 }, p,model);
-                pgui.open();
+                pgui.open();*/
 
 
 
@@ -93,12 +96,12 @@ public class ActionsListGUI extends Gui{
 
         ItemStack history = new ItemStack(Material.BOOK, 1);
         ItemMeta historyMeta = history.getItemMeta();
-        historyMeta.setDisplayName(ColorUtils.translateColorCodes("&4&lHistory"));
+        historyMeta.setDisplayName(ColorUtils.colorize("&4&lHistory"));
         history.setItemMeta(historyMeta);
         getSlot(5).setItem(history).bind(e->{
             e.setCancelled(true);
             if (getPlayer().hasPermission("punishmentmanager.history")) {
-                new HistoryGUI(getPlayer(),6, "History of "+ PunishmentManager.getPlayerDataUtility(getPlayer()).getCriminal().getName()).open();
+                new HistoryGUI(getPlayer(),6, "History of "+ Metadata.provideForPlayer(p).get(DataUtility.getCriminalKey()).get().getName()).open();
             } else {
                 getPlayer().sendMessage("You do not have permission to do that!");
             }

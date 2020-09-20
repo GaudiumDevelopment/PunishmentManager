@@ -4,6 +4,7 @@ import me.superbiebel.punishmentmanager.PunishmentManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class SystemCommand implements CommandExecutor {
     @Override
@@ -22,7 +23,7 @@ public class SystemCommand implements CommandExecutor {
         } else if(args[0].equalsIgnoreCase("sync")) {
             sender.sendMessage("Syncing....");
             sender.sendMessage("Sync complete");
-        } else {
+        } else{
             sender.sendMessage("Argument not recognised");
         }
         return true;

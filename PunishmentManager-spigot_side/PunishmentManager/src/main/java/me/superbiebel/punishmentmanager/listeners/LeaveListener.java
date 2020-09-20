@@ -1,6 +1,5 @@
 package me.superbiebel.punishmentmanager.listeners;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 

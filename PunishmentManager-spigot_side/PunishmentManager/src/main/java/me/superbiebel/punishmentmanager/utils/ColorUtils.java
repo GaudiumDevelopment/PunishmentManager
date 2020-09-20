@@ -13,7 +13,7 @@ public class ColorUtils {
      * @param text The string of text to apply color/effects to
      * @return Returns a string of text with color/effects applied
      */
-    public static String translateColorCodes(String text){
+    public static String colorize(String text){
 
         String[] texts = text.split(String.format(WITH_DELIMITER, "&"));
 
@@ -36,7 +36,7 @@ public class ColorUtils {
         return finalText.toString();
     }
 
-    public static TextComponent translateColorCodesToTextComponent(String text){
+    public static TextComponent colorizeTextComp(String text){
 
         String[] texts = text.split(String.format(WITH_DELIMITER, "&"));
 

@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.InventoryHolder;
-@Deprecated
+@Deprecated(forRemoval = true)
 public class MenuListener implements Listener {
 
     @EventHandler

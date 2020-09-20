@@ -1,7 +1,7 @@
 package me.superbiebel.punishmentmanager.utils;
 
 import org.bukkit.entity.Player;
-
+@Deprecated(forRemoval = true)
 public class PlayerDataUtility {
 
     private Player criminal;
