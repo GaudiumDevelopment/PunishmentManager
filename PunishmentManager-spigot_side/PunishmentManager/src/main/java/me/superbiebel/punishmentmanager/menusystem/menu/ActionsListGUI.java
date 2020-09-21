@@ -4,6 +4,7 @@ import me.lucko.helper.menu.Gui;
 import me.lucko.helper.menu.Item;
 import me.lucko.helper.menu.paginated.PaginatedGuiBuilder;
 import me.lucko.helper.metadata.Metadata;
+import me.superbiebel.punishmentmanager.PunishmentManager;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
 import me.superbiebel.punishmentmanager.utils.DataUtility;
 import org.bukkit.Material;
@@ -41,15 +42,6 @@ public class ActionsListGUI extends Gui{
                     List<Item> items = new ArrayList<>();
                     return items;
                 }).open();
-
-
-
-
-
-
-
-
-
 
                 /*OffenseListGUI pgui = new OffenseListGUI(OffenseListGUI -> {
                     List<Item> items = new ArrayList<>();
@@ -97,7 +89,7 @@ public class ActionsListGUI extends Gui{
 
 
             } else {
-                getPlayer().sendMessage("You do not have permission to do that!");
+                getPlayer().sendMessage(ColorUtils.colorize(PunishmentManager.giveConfig().getString("messages.noPermissionMessage")));
             }
         }, ClickType.LEFT  );
 
@@ -110,7 +102,7 @@ public class ActionsListGUI extends Gui{
             if (getPlayer().hasPermission("punishmentmanager.history")) {
                 new HistoryGUI(getPlayer(),6, "History of "+ Metadata.provideForPlayer(p).get(DataUtility.getCriminalKey()).get().getName()).open();
             } else {
-                getPlayer().sendMessage("You do not have permission to do that!");
+                getPlayer().sendMessage(ColorUtils.colorize(PunishmentManager.giveConfig().getString("messages.noPermissionMessage")));
             }
         }, ClickType.LEFT );
 
