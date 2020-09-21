@@ -12,5 +12,6 @@ me/superbiebel/punishmentmanager/menusystem/menu/HistoryGUI.class
 me/superbiebel/punishmentmanager/utils/Log.class
 me/superbiebel/punishmentmanager/utils/PlayerDataUtility.class
 me/superbiebel/punishmentmanager/listeners/LeaveListener.class
+me/superbiebel/punishmentmanager/utils/DataUtility.class
 me/superbiebel/punishmentmanager/listeners/JoinListener.class
 me/superbiebel/punishmentmanager/menusystem/Menu.class

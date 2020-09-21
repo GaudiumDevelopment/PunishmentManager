@@ -14,9 +14,6 @@ public class OffenseListGUI extends PaginatedGui{
         super(content, player, model);
     }
 
-    @Override
-    public void redraw() {
-        super.redraw();
-    }
+
 }
 

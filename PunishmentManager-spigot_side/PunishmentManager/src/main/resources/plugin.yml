@@ -7,5 +7,6 @@ authors: [Superbiebel]
 commands:
   punish:
     description: open a gui to punish players
+    permission: punishmentmanager.
   pmanager:
     description: control the inner workings of PunishmentManager

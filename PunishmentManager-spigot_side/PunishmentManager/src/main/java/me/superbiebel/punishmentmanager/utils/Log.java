@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 public class Log {
 
 
+
+
     private static final String namePrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c");
     private static final String debugPrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &f[&8DEBUG&f] &f&l>> ");
     private static final String infoPrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &f[INFO&f] &l>> ");
@@ -51,5 +53,8 @@ public class Log {
                 }
         }
         Bukkit.getServer().getLogger().severe(fatalErrorPrefix + msg);
+    }
+    public static String getNamePrefix() {
+        return namePrefix;
     }
 }

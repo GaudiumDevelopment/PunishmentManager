@@ -123,8 +123,10 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         this.getCommand("punish").setExecutor(new PunishCommand());
         Log.debug("/punish loaded");
         Log.debug("loading /pmanager");
-        this.getCommand("pmanager").setExecutor(new SystemCommand());
-        Log.debug("/pmanager is loaded");
+        SystemCommand systemCommand = new SystemCommand();
+        this.getCommand("pmanager").setExecutor(systemCommand);
+        this.getCommand("pmanager").setTabCompleter(systemCommand);
+        Log.debug("/pmanager is loaded");   
     }
 
 
@@ -133,7 +135,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     //Originally from the video of Kody Simpson and repurposed from playerMenuUtility to PlayerDataUtility
     //Provide a player and return a data system for that player
     //create one if they don't already have one
-    @Deprecated()
+    @Deprecated(forRemoval = true)
     public static PlayerDataUtility getPlayerDataUtility(Player p) {
         PlayerDataUtility playerDataUtility;
         if (!(playerDataUtilityMap.containsKey(p))) { //See if the player has a playerdatautility "saved" for them
