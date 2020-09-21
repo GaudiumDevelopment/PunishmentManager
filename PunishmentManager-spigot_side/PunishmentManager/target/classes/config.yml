@@ -25,6 +25,9 @@ MySQL:
   prepStmtCacheSize: 250
   prepStmtCacheSqlLimit: 2048
 
+messages:
+  noPermissionMessage: "&r&4&lPunishment&b&lManager&4&l>> &4&lYou do not have the permission for that!"
+
 
 cache:
   #the data objects used by the plugin, it doesn't take much memory (32 bytes), but can add up. Therefore it is best to destroy them (players wont be needing them)

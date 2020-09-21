@@ -14,6 +14,7 @@ public class PunishCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player) {
+            if (sender.hasPermission("punishmentmanager.command.punish"))
             if(args.length < 1) {
                 sender.sendMessage("No player provided!");
             }else {
