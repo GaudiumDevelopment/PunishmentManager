@@ -1,6 +1,7 @@
 package me.superbiebel.punishmentmanager.menusystem.menu;
 
 import me.lucko.helper.menu.Gui;
+import me.lucko.helper.menu.Item;
 import me.lucko.helper.menu.paginated.PaginatedGuiBuilder;
 import me.lucko.helper.metadata.Metadata;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
@@ -10,6 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ActionsListGUI extends Gui{
@@ -33,7 +37,10 @@ public class ActionsListGUI extends Gui{
             if (getPlayer().hasPermission("punishmentmanager.offense.offenselist")) {
 
                 PaginatedGuiBuilder model = PaginatedGuiBuilder.create();
-                model.title("Punish " + Metadata.provideForPlayer(p).get(DataUtility.getCriminalKey()).get().getName()).previousPageSlot(48).nextPageSlot(50).build(p,gui-> null).open();
+                model.title("Punish " + Metadata.provideForPlayer(p).get(DataUtility.getCriminalKey()).get().getName()).previousPageSlot(48).nextPageSlot(50).build(p,gui-> {
+                    List<Item> items = new ArrayList<>();
+                    return items;
+                }).open();
 
 
 

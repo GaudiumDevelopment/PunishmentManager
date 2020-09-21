@@ -10,3 +10,22 @@ commands:
     permission: "punishmentmanager.command.punish"
   pmanager:
     description: control the inner workings of PunishmentManager
+permissions:
+  punishmentmanager.*:
+    children:
+      punishmentmanager.command.*: true
+      punishmentmanager.offense.offenselist: true
+      punishmentmanager.history: true
+  punishmentmanager.log.*:
+    children:
+      punishmentmanager.log.debug: true
+      punishmentmanager.log.info: true
+      punishmentmanager.log.warning: true
+      punishmentmanager.log.fatalerror: true
+  punishmentmanager.command.*:
+    children:
+      punishmentmanager.command.punish: true
+      punishmentmanager.command.system: true
+      punishmentmanager.command.system.help: true
+      punishmentmanager.command.system.reloadconfig: true
+      punishmentmanager.command.system.sync: true
