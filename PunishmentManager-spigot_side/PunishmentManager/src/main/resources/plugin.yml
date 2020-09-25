@@ -32,6 +32,6 @@ permissions:
   punishmentmanager.offense.offenselist:
     default: false
     description: show the offenselist gui
-  punishmentmanager.history:
+  punishmentmanager.history.gui:
     default: false
     description: show the history gui

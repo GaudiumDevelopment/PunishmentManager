@@ -99,7 +99,7 @@ public class ActionsListGUI extends Gui{
         history.setItemMeta(historyMeta);
         getSlot(5).setItem(history).bind(e->{
             e.setCancelled(true);
-            if (getPlayer().hasPermission("punishmentmanager.history")) {
+            if (getPlayer().hasPermission("punishmentmanager.history.gui")) {
                 new HistoryGUI(getPlayer(),6, "History of "+ Metadata.provideForPlayer(p).get(DataUtility.getCriminalKey()).get().getName()).open();
             } else {
                 getPlayer().sendMessage(ColorUtils.colorize(PunishmentManager.giveConfig().getString("messages.noPermissionMessage")));
