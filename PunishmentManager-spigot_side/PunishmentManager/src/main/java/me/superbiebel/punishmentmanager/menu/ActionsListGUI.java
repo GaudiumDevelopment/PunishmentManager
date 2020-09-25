@@ -1,4 +1,4 @@
-package me.superbiebel.punishmentmanager.menusystem.menu;
+package me.superbiebel.punishmentmanager.menu;
 
 import me.lucko.helper.menu.Gui;
 import me.lucko.helper.menu.Item;
