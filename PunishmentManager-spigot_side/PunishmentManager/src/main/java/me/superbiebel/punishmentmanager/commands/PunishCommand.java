@@ -21,7 +21,7 @@ public class PunishCommand implements CommandExecutor {
                 Player p = (Player) sender;
                 MetadataMap metadata = Metadata.provideForPlayer(p);
                 metadata.put(DataUtility.getCriminalKey(), Bukkit.getPlayerExact(args[0]));
-                new ActionsListGUI(p,1,"test").open();
+                new ActionsListGUI(p,3,"test").open();
             }
         }
         return true;

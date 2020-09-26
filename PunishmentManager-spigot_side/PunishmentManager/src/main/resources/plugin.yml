@@ -15,7 +15,9 @@ permissions:
     children:
       punishmentmanager.command.*: true
       punishmentmanager.offense.offenselist: true
-      punishmentmanager.history: true
+      punishmentmanager.history.gui: true
+      punishmentmanager.log.*: true
+      punishmentmanager.log.debug: false
   punishmentmanager.log.*:
     children:
       punishmentmanager.log.debug: true

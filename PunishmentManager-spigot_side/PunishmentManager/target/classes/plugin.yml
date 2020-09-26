@@ -15,7 +15,9 @@ permissions:
     children:
       punishmentmanager.command.*: true
       punishmentmanager.offense.offenselist: true
-      punishmentmanager.history: true
+      punishmentmanager.history.gui: true
+      punishmentmanager.log.*: true
+      punishmentmanager.log.debug: false
   punishmentmanager.log.*:
     children:
       punishmentmanager.log.debug: true
@@ -29,3 +31,9 @@ permissions:
       punishmentmanager.command.system.help: true
       punishmentmanager.command.system.reloadconfig: true
       punishmentmanager.command.system.sync: true
+  punishmentmanager.offense.offenselist:
+    default: false
+    description: show the offenselist gui
+  punishmentmanager.history.gui:
+    default: false
+    description: show the history gui
