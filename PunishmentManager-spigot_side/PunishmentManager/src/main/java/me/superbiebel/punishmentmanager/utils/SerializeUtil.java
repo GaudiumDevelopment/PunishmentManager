@@ -1,8 +1,6 @@
 package me.superbiebel.punishmentmanager.utils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.Base64;
 
 public class SerializeUtil {
@@ -26,5 +24,19 @@ public class SerializeUtil {
         byte[] serializedObject = io.toByteArray();
 
         return Base64.getEncoder().encodeToString(serializedObject);
+    }
+
+    public Object deserialize(String deserialize) {
+        byte[] deserializedObject = Base64.getDecoder().decode(deserialize);
+        ByteArrayInputStream in = new ByteArrayInputStream(deserializedObject);
+        ObjectInputStream is = null;
+        try {
+            is = new ObjectInputStream(in);
+            Object result = is.readObject();
+            return result;
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

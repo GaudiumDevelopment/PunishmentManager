@@ -14,6 +14,7 @@
           <node kind="schema" qname="@" />
         </introspection-scope>
       </schema-mapping>
+      <load-sources>user_and_system_sources</load-sources>
     </data-source>
   </component>
 </project>
