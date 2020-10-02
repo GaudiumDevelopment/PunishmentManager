@@ -24,3 +24,6 @@ hs_err_pid*
 *.DS_Store
 # intelij user specific settings exempt
 workspace.xml
+dataSources.local.xml
+dataSources.xml
+df6b057ee7097b6ccecd2b9c7fb7517e0c8e040e.xml
