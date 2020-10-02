@@ -8,6 +8,7 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/me/lucko/helper/5.6.5/helper-5.6.5-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/helper-5.6.5-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
