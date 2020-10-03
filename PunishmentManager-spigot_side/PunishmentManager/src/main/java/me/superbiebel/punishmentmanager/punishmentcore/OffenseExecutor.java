@@ -1,6 +1,5 @@
 package me.superbiebel.punishmentmanager.punishmentcore;
 
-import me.superbiebel.punishmentmanager.mysql.FetchData;
 import org.bukkit.entity.Player;
 
 public class OffenseExecutor {
