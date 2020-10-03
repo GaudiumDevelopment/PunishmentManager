@@ -13,7 +13,7 @@ public class FetchData {
         
     }
 
-   public static ResultSet FetchOffenseListGuiData() throws ExecutionException, InterruptedException {
+   public static ResultSet FetchOffenseListGuiData() {
        Promise<ResultSet> offenseListGuiDataPromise = null;
 
        offenseListGuiDataPromise = Promise.start().thenApplyAsync((e)->{
@@ -26,6 +26,13 @@ public class FetchData {
           }
       return rst;
        });
-       return offenseListGuiDataPromise.get();
+       try {
+           return offenseListGuiDataPromise.get();
+       } catch (InterruptedException e) {
+           e.printStackTrace();
+       } catch (ExecutionException e) {
+           e.printStackTrace();
+       }
+       return null;
    }
 }
