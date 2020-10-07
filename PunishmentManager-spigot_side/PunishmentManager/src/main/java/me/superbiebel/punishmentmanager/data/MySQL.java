@@ -12,21 +12,21 @@ import java.sql.Statement;
 
 public class MySQL {
 
-    private static HikariConfig MySQLConfig;
+    private static HikariConfig mySQLConfig;
     private static HikariDataSource mysqlDataSource;
 
         public static void configureConnection(String host, String username, String password, String port, String db, String useSSL) {
-            HikariConfig hikariConfig = new HikariConfig();
-            hikariConfig.setJdbcUrl( "jdbc:mysql://" + host + ":" + port + "/" + db + "?useSSL=" + useSSL);
+
+            mySQLConfig = new HikariConfig();
+            mySQLConfig.setJdbcUrl( "jdbc:mysql://" + host + ":" + port + "/" + db + "?useSSL=" + useSSL);
 
             Log.debug("jdbc:mysql://" + host + ":" + port + "/" + db + "?useSSL=" + useSSL);
-            hikariConfig.setUsername( username );
-            hikariConfig.setPassword( password );
-            hikariConfig.addDataSourceProperty( "cachePrepStmts" , PunishmentManager.giveConfig().getString("MySQL.cachePrepStmts"));
-            hikariConfig.addDataSourceProperty( "prepStmtCacheSize" , PunishmentManager.giveConfig().getString("MySQL.prepStmtCacheSize") );
-            hikariConfig.addDataSourceProperty( "prepStmtCacheSqlLimit" , PunishmentManager.giveConfig().getString("MySQL.prepStmtCacheSqlLimit") );
-            mysqlDataSource = new HikariDataSource( hikariConfig );
-            MySQLConfig = hikariConfig;
+            mySQLConfig.setUsername( username );
+            mySQLConfig.setPassword( password );
+            mySQLConfig.addDataSourceProperty( "cachePrepStmts" , PunishmentManager.giveConfig().getString("MySQL.cachePrepStmts"));
+            mySQLConfig.addDataSourceProperty( "prepStmtCacheSize" , PunishmentManager.giveConfig().getString("MySQL.prepStmtCacheSize") );
+            mySQLConfig.addDataSourceProperty( "prepStmtCacheSqlLimit" , PunishmentManager.giveConfig().getString("MySQL.prepStmtCacheSqlLimit") );
+            mysqlDataSource = new HikariDataSource( mySQLConfig );
         }
     
     public static HikariDataSource getMysqlDataSource() {return mysqlDataSource;}

@@ -53,8 +53,15 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
 
     @Override
     public void disable() {
-        if (!(MySQL.getMysqlDataSource() == null)) {
-            MySQL.getMysqlDataSource().close();
+        try {
+        MySQL.getMysqlDataSource().close();
+        } catch (NullPointerException throwable) {
+            Log.warning("The MySQL datasource was null, which means it wasn't started (should not happen). Check above console for errors!");
+        }
+        try {
+            Cache.getCacheDataSource().close();
+        } catch (NullPointerException throwable) {
+            Log.warning("The Cache datasource was null, which means it wasn't started (should not happen). Check above console for errors!");
         }
         Log.debug("The plugin has been disabled");
     }
