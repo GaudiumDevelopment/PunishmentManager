@@ -23,7 +23,7 @@ public class Cache {
                     e.printStackTrace();
                 }
                 cacheDataSourceConfig.setDriverClassName(driverClassName);
-                cacheDataSourceConfig.setJdbcUrl("jdbc:hsqldb:file:" + PunishmentManager.getPlugin().getDataFolder().getPath() + "/data/storage;hsqldb.lock_file=false");
+                cacheDataSourceConfig.setJdbcUrl("jdbc:hsqldb:mem:file:" + PunishmentManager.getPlugin().getDataFolder().getPath() + "/data/storage;hsqldb.lock_file=false");
                 cacheDataSourceConfig.setUsername("PunishmentManager");
                 cacheDataSourceConfig.setPassword("");
                 Log.info("Don't worry about the error about a driver not supported, this is alright. Do NOT report this to my github!");

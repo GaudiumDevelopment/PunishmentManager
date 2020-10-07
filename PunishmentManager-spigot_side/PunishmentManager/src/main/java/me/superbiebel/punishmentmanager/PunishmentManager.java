@@ -75,7 +75,6 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         Log.debug("Debug mode has been enabled! There will be extensive logging!");
     }
 
-
     public boolean checkConfigVersion() {
         Log.debug("Checking config version...");
         boolean status;
