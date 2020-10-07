@@ -1,7 +1,7 @@
 package me.superbiebel.punishmentmanager.listeners;
 
 import me.lucko.helper.Schedulers;
-import me.superbiebel.punishmentmanager.mysql.MySQL;
+import me.superbiebel.punishmentmanager.data.MySQL;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
 import java.sql.Connection;
@@ -24,7 +24,7 @@ public class JoinListener {
             Long currentTime = System.currentTimeMillis();
             String ip = e.getAddress().toString().replaceAll("/","");
         try {
-            con = MySQL.getDataSource().getConnection();
+            con = MySQL.getMysqlDataSource().getConnection();
 
             joinStmt = con.prepareStatement("INSERT INTO player_joins (uuid, join_date, result, ip) VALUES (?,?,?,?);");
             joinStmt.setString(1,uuid);

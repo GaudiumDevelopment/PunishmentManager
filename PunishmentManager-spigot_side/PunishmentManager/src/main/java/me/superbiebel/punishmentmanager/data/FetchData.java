@@ -1,4 +1,4 @@
-package me.superbiebel.punishmentmanager.mysql;
+package me.superbiebel.punishmentmanager.data;
 
 import me.lucko.helper.promise.Promise;
 
@@ -9,17 +9,13 @@ import java.util.concurrent.ExecutionException;
 
 public class FetchData {
 
-    public static void setupDataFetching() {
-        
-    }
-
-   public static ResultSet FetchOffenseListGuiData() {
+    public static ResultSet FetchOffenseListGuiData() {
        Promise<ResultSet> offenseListGuiDataPromise = null;
 
        offenseListGuiDataPromise = Promise.start().thenApplyAsync((e)->{
           ResultSet rst = null;
           try {
-             PreparedStatement stmt = MySQL.getDataSource().getConnection().prepareStatement("");
+             PreparedStatement stmt = MySQL.getMysqlDataSource().getConnection().prepareStatement("");
              rst = stmt.executeQuery();
           } catch (SQLException throwables) {
               throwables.printStackTrace();

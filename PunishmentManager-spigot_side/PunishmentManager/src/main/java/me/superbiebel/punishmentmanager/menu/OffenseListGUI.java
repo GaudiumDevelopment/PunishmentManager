@@ -3,7 +3,7 @@ package me.superbiebel.punishmentmanager.menu;
 import me.lucko.helper.menu.Item;
 import me.lucko.helper.menu.paginated.PaginatedGui;
 import me.lucko.helper.menu.paginated.PaginatedGuiBuilder;
-import me.superbiebel.punishmentmanager.mysql.FetchData;
+import me.superbiebel.punishmentmanager.data.FetchData;
 import org.bukkit.entity.Player;
 
 import java.sql.ResultSet;

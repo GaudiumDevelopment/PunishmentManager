@@ -4,19 +4,16 @@ import me.lucko.helper.Events;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
+import me.superbiebel.punishmentmanager.data.Cache;
+import me.superbiebel.punishmentmanager.data.MySQL;
 import me.superbiebel.punishmentmanager.listeners.JoinListener;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
-import me.superbiebel.punishmentmanager.mysql.MySQL;
 import me.superbiebel.punishmentmanager.utils.Log;
-import me.superbiebel.punishmentmanager.utils.PlayerDataUtility;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-
-import java.util.HashMap;
 
 public final class PunishmentManager extends ExtendedJavaPlugin {
 
@@ -25,7 +22,6 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     private static boolean debugMode;
     private static FileConfiguration config;
     private static PunishmentManager plugin;
-    private static final HashMap<Player, PlayerDataUtility> playerDataUtilityMap = new HashMap<>();
 
 
     @Override
@@ -36,6 +32,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
             setDebugMode();
             loadEvents();
             loadCommands();
+            Cache.initCache(config.getString("MySQL.db"));
             initMySQL();
             Log.debug("Everything has been enabled");
         } else if (!config.getBoolean("MySQL.enabled")) {
@@ -51,13 +48,13 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         }
             if (!this.isEnabled()) {
                 Log.fatalError("STARTUP COULD NOT BE COMPLETED, PLEASE CHECK FOR ERRORS IN THE CONSOLE!!!");
-        }
+            }
     }
 
     @Override
     public void disable() {
-        if (!(MySQL.getDataSource() == null)) {
-            MySQL.getDataSource().close();
+        if (!(MySQL.getMysqlDataSource() == null)) {
+            MySQL.getMysqlDataSource().close();
         }
         Log.debug("The plugin has been disabled");
     }
@@ -129,25 +126,6 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         Log.debug("/pmanager is loaded");   
     }
 
-
-
-
-    //Originally from the video of Kody Simpson and repurposed from playerMenuUtility to PlayerDataUtility
-    //Provide a player and return a data system for that player
-    //create one if they don't already have one
-    @Deprecated(forRemoval = true)
-    public static PlayerDataUtility getPlayerDataUtility(Player p) {
-        PlayerDataUtility playerDataUtility;
-        if (!(playerDataUtilityMap.containsKey(p))) { //See if the player has a playerdatautility "saved" for them
-            //This player doesn't. Make one for them add add it to the hashmap
-            playerDataUtility = new PlayerDataUtility(p);
-            playerDataUtilityMap.put(p, playerDataUtility);
-
-            return playerDataUtility;
-        } else {
-            return playerDataUtilityMap.get(p); //Return the object by using the provided player
-        }
-    }
 
     public static boolean getDebugMode() {
         return debugMode;

@@ -1,4 +1,4 @@
-package me.superbiebel.punishmentmanager.mysql;
+package me.superbiebel.punishmentmanager.data;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -13,7 +13,7 @@ import java.sql.Statement;
 public class MySQL {
 
     private static HikariConfig MySQLConfig;
-    private static HikariDataSource dataSource;
+    private static HikariDataSource mysqlDataSource;
 
         public static void configureConnection(String host, String username, String password, String port, String db, String useSSL) {
             HikariConfig hikariConfig = new HikariConfig();
@@ -25,11 +25,11 @@ public class MySQL {
             hikariConfig.addDataSourceProperty( "cachePrepStmts" , PunishmentManager.giveConfig().getString("MySQL.cachePrepStmts"));
             hikariConfig.addDataSourceProperty( "prepStmtCacheSize" , PunishmentManager.giveConfig().getString("MySQL.prepStmtCacheSize") );
             hikariConfig.addDataSourceProperty( "prepStmtCacheSqlLimit" , PunishmentManager.giveConfig().getString("MySQL.prepStmtCacheSqlLimit") );
-            dataSource = new HikariDataSource( hikariConfig );
+            mysqlDataSource = new HikariDataSource( hikariConfig );
             MySQLConfig = hikariConfig;
         }
     
-    public static HikariDataSource getDataSource() {return dataSource;}
+    public static HikariDataSource getMysqlDataSource() {return mysqlDataSource;}
     public static void initializeTables(String db) {
             if (db == null) {
                 Log.fatalError("db is not set!!!");
@@ -55,7 +55,7 @@ public class MySQL {
                      final String createPunishment_templatesTable = "CREATE TABLE IF NOT EXISTS " + db + ".punishment_templates ( `punishment_id` int NOT NULL , threshold int NOT NULL , `category_id` int NOT NULL , `mute_calculation` varchar(200) , `IP_mute_calculation` varchar(200) ,`ban_calculation` varchar(200) ,`IP_ban_calculation` varchar(200) , `jail_calculation` varchar(200) , server varchar(200) );";
                      final String createPunishment_usedTable = "CREATE TABLE IF NOT EXISTS " + db + ".punishment_used ( history_id int , punishment_id int );";
                      final String createOffenseLoreTable = "CREATE TABLE IF NOT EXISTS " + db + ".offense_lore ( offense_id int , lore varchar(200), lore_id int )";
-            con = dataSource.getConnection();
+            con = mysqlDataSource.getConnection();
             Statement stmt = con.createStatement();
             con.setAutoCommit(false);
             stmt.addBatch(createCategoriesTable);
