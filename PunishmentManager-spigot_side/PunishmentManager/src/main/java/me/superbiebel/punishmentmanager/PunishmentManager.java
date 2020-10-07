@@ -69,6 +69,9 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
 
     public void setDebugMode() {
         debugMode = config.getBoolean("debug");
+        if (debugMode){
+
+        }
         Log.debug("Debug mode has been enabled! There will be extensive logging!");
     }
 
