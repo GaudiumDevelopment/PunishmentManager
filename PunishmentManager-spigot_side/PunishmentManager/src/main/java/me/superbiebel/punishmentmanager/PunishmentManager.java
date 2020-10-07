@@ -63,7 +63,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         } catch (NullPointerException throwable) {
             Log.warning("The Cache datasource was null, which means it wasn't started (should not happen). Check above console for errors!");
         }
-        Log.debug("The plugin has been disabled");
+        Bukkit.getServer().getLogger().info("The plugin has been disabled");;
     }
 
 
