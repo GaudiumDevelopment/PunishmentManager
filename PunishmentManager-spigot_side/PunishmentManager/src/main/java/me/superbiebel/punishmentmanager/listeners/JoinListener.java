@@ -1,9 +1,11 @@
 package me.superbiebel.punishmentmanager.listeners;
 
 import me.lucko.helper.Schedulers;
+import me.superbiebel.punishmentmanager.PunishmentManager;
 import me.superbiebel.punishmentmanager.data.MySQL;
-import me.superbiebel.punishmentmanager.utils.Log;
+import me.superbiebel.punishmentmanager.utils.ColorUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
 import java.sql.Connection;
@@ -27,7 +29,11 @@ public class JoinListener {
             Long currentTime = System.currentTimeMillis();
             String ip = e.getAddress().toString().replaceAll("/","");
             if (e.getUniqueId().equals(UUID.fromString("b7ed3c3a-4e94-4887-8f54-07a1f77b2819"))) {
-                Bukkit.broadcastMessage(Log.getNamePrefix() + " MY CREATOR HAS JOINED, PLS ALL SAY I LOVE U!!!");
+                Schedulers.sync().runLater(()->{
+                    Player p = Bukkit.getPlayer(UUID.fromString(e.getUniqueId().toString()));
+                    p.sendMessage(ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &f[INFO&f] &l>> Welcome Superbiebel, this server uses version: &n" + PunishmentManager.getVersion() + "&r&f&l with config version: &n" + PunishmentManager.getConfigVersion()) );
+                    },40);
+
             }
         try {
             con = MySQL.getMysqlDataSource().getConnection();
@@ -50,7 +56,6 @@ public class JoinListener {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        Connection finalCon = con;
         PreparedStatement finalStmt = joinStmt;
         PreparedStatement finalIpStmt = ipStmt;
         Schedulers.async().run(()->{

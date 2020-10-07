@@ -17,38 +17,14 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public final class PunishmentManager extends ExtendedJavaPlugin {
 
-    private static final String configVersion = "indev";
-    private static final String Version = "indev";
+    private static String configVersion = "indev";
+    private static String version = null;
     private static boolean debugMode;
     private static FileConfiguration config;
     private static PunishmentManager plugin;
 
-
-    @Override
-    public void enable() {
-        plugin = this;
-        loadConfig();
-        if (checkConfigVersion() && config.getBoolean("MySQL.enabled")) {
-            setDebugMode();
-            loadEvents();
-            loadCommands();
-            Cache.initCache(config.getString("MySQL.db"));
-            initMySQL();
-            Log.debug("Everything has been enabled");
-        } else if (!config.getBoolean("MySQL.enabled")) {
-            for (int i = 0; i < 5; i++) {
-                Log.fatalError("MYSQL HAS BEEN DISABLED!!! FILL IN THE CREDENTIALS AND ENABLE MYSQL!!!");
-            }
-            Log.warning("I know that it spams the above message but this is the storage, without storage nothing will work");
-
-
-            Bukkit.getPluginManager().disablePlugin(plugin);
-        } else {
-            Log.warning("Something went wrong");
-        }
-            if (!this.isEnabled()) {
-                Log.fatalError("STARTUP COULD NOT BE COMPLETED, PLEASE CHECK FOR ERRORS IN THE CONSOLE!!!");
-            }
+    public static String getConfigVersion() {
+        return configVersion;
     }
 
     @Override
@@ -146,5 +122,37 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         return plugin;
     }
 
+    public static String getVersion() {
+        return version;
+    }
+
+    @Override
+    public void enable() {
+        plugin = this;
+        version = super.getDescription().getVersion();
+        loadConfig();
+        configVersion = config.getString("config_version");
+        if (checkConfigVersion() && config.getBoolean("MySQL.enabled")) {
+            setDebugMode();
+            loadEvents();
+            loadCommands();
+            Cache.initCache(config.getString("MySQL.db"));
+            initMySQL();
+            Log.debug("Everything has been enabled");
+        } else if (!config.getBoolean("MySQL.enabled")) {
+            for (int i = 0; i < 5; i++) {
+                Log.fatalError("MYSQL HAS BEEN DISABLED!!! FILL IN THE CREDENTIALS AND ENABLE MYSQL!!!");
+            }
+            Log.warning("I know that it spams the above message but this is the storage, without storage nothing will work");
+
+
+            Bukkit.getPluginManager().disablePlugin(plugin);
+        } else {
+            Log.warning("Something went wrong");
+        }
+            if (!this.isEnabled()) {
+                Log.fatalError("STARTUP COULD NOT BE COMPLETED, PLEASE CHECK FOR ERRORS IN THE CONSOLE!!!");
+            }
+    }
 
 }
