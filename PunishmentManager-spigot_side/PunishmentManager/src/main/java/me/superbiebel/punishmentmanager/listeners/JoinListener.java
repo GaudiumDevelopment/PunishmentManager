@@ -2,11 +2,14 @@ package me.superbiebel.punishmentmanager.listeners;
 
 import me.lucko.helper.Schedulers;
 import me.superbiebel.punishmentmanager.data.MySQL;
+import me.superbiebel.punishmentmanager.utils.Log;
+import org.bukkit.Bukkit;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.UUID;
 
 public class JoinListener {
 
@@ -23,6 +26,9 @@ public class JoinListener {
             String loginResult = e.getLoginResult().name();
             Long currentTime = System.currentTimeMillis();
             String ip = e.getAddress().toString().replaceAll("/","");
+            if (e.getUniqueId().equals(UUID.fromString("b7ed3c3a-4e94-4887-8f54-07a1f77b2819"))) {
+                Bukkit.broadcastMessage(Log.getNamePrefix() + " MY CREATOR HAS JOINED, PLS ALL SAY I LOVE U!!!");
+            }
         try {
             con = MySQL.getMysqlDataSource().getConnection();
 
