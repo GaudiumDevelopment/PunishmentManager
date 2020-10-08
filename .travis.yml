@@ -6,4 +6,4 @@ jdk:
   - openjdk14
 deploy:
   provider: script
-  script: curl -T PunishmentManager-DEV.jar -usuperbiebel:$API_KEY https://api.bintray.com/content/superbiebel/PunishmentManager/me.superbiebel.PunishmentManager/0.0.1-INDEV-$TRAVIS_BUILD_NUMBER/artifacts/
+  script: curl -T PunishmentManager-DEV.jar -usuperbiebel:$API_KEY https://api.bintray.com/content/superbiebel/PunishmentManager/INDEV/0.0.1-INDEV_$TRAVIS_BUILD_NUMBER/artifacts/
