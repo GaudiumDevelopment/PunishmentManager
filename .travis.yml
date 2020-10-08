@@ -1,6 +1,9 @@
 language: java
 script:
-  - mvn clean install
+- mvn clean install
 os: osx
 jdk:
-  - openjdk14
+- openjdk14
+deploy:
+  key:
+    secure: xN8zax6qjJWBavaIM+KPuS6CQGA2oGn7mtZYia0Pu4y2d+utN/Nk7IlV/UXPN/ZYRG2r0VY06gar8mzYJ0p0Up8Dw8s2s8uXOQ/TB6mgn3rp5secZeIn+fWYX2fudrOzumXbatVKru19QN5XUOet3vpmDYOpndxXMkIVUlOvVWrkSzcZqVTLC2f9fhi7JA77u+984E9cWxRT83KKP8WkD6rMNAgh7Dqqun2lPCrk7VgSSNkQ1P2foBwJZ6EVzV5WxktfsYa1ayed4qowTDRaIwkrZ54rxeEJTQbkg+9QbLoxwxcu4s3r532ldl3tr+RAn0NjmYXEws3Hv8zog3qfeM1uZTsM+ST5Q9fZh1nWBS7q/NCrJsp+QFTbak7OuHrJW+wE1vorF08a6mSGNG5yllFcVeLlxCxG2I5mKedMdAI7RazHbTQfzdZEb2HODUHbjRhhw/LHtZXSKYCQZXOhlQ7B+OwtQ9R/1t+hHTeCSSwR31Qab7MvvvZ3m6ekAQ7pL/znsdjsUtW8HN9zCww6jaROGllqgYrA5bF8RPM3Uh3tf/as2ZpVttaSB5Yl8/sTDZtrA6Wp2e98ZkUJlvqVlEkWhpP0Y8orNdIDCxNXvPadQwM0Ikiflo6LDNJZUnvN6oJkpCNAh1+RxSRGLEeE8eNR90lVbx/rR49pj7Sfsqg=
