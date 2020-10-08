@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PunishmentManager-spigot_side/PunishmentManager/PunishmentManager.iml" filepath="$PROJECT_DIR$/PunishmentManager-spigot_side/PunishmentManager/PunishmentManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PunishmentManager/PunishmentManager.iml" filepath="$PROJECT_DIR$/PunishmentManager/PunishmentManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/punishmentmanager_github.iml" filepath="$PROJECT_DIR$/.idea/punishmentmanager_github.iml" />
     </modules>
   </component>
