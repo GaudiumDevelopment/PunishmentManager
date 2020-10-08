@@ -2,3 +2,5 @@ language: java
 script:
   -mvn clean install
 os: osx
+jdk:
+  - openjdk14
