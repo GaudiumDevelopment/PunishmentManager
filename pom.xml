@@ -6,7 +6,7 @@
 
     <groupId>me.superbiebel</groupId>
     <artifactId>PunishmentManager</artifactId>
-    <version>INDEV</version>
+    <version>NOT-REAL-VERSION</version>
     <packaging>jar</packaging>
 
     <name>PunishmentManager</name>
