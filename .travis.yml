@@ -6,4 +6,4 @@ jdk:
   - openjdk14
 deploy:
   provider: script
-  script: bash scripts/upload.bash $TRAVIS_BUILD_NUMBER $TRAVIS_COMMIT $API_KEY
+  script: bash scripts/upload.bash $TRAVIS_BUILD_NUMBER $API_KEY
