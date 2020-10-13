@@ -16,15 +16,13 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 
 public class ActionsListGUI extends Gui{
 
-    public ActionsListGUI(Player player, int lines, String title) {
-        super(player, lines, title);
+    public ActionsListGUI(Player player) {
+        super(player, 6, "Choose action for " + Metadata.provideForPlayer(player).get(DataUtility.getCriminalKey()).get().getName());
     }
 
 
@@ -44,7 +42,8 @@ public class ActionsListGUI extends Gui{
             if (getPlayer().hasPermission("punishmentmanager.offense.offenselist")) {
                 MenuScheme scheme = new MenuScheme().masks("111111111","111111111","111111111","111111111","111111111","000000000");
                 PaginatedGuiBuilder model = PaginatedGuiBuilder.create().title("test");
-                OffenseListGUI offenseListGUI =  new OffenseListGUI(gui -> (List<Item>) new ArrayList<Item>(),p,model);
+               // OffenseListGUI offenseListGUI =  new OffenseListGUI(gui -> (List<Item>) new ArrayList<Item>(),p);
+                OffenseListGUI offenseListGUI =  new OffenseListGUI(p);
                 offenseListGUI.open();
                 /*OffenseListGUI offenseListGUI = (OffenseListGUI) model.title("Punish " + Metadata.provideForPlayer(p).get(DataUtility.getCriminalKey()).get().getName()).previousPageSlot(48).nextPageSlot(50).build(p, gui-> {
                     List<Item> items = new ArrayList<>();
