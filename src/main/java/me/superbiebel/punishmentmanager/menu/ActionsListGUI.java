@@ -22,7 +22,7 @@ import java.util.Objects;
 public class ActionsListGUI extends Gui{
 
     public ActionsListGUI(Player player) {
-        super(player, 6, "Choose action for " + Metadata.provideForPlayer(player).get(DataUtility.getCriminalKey()).get().getName());
+        super(player, 3, "Choose action for " + Metadata.provideForPlayer(player).get(DataUtility.getCriminalKey()).get().getName());
     }
 
 
