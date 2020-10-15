@@ -56,7 +56,8 @@
                                             <exclude>META-INF/*.DSA</exclude>
                                             <exclude>META-INF/*.RSA</exclude>
                                             <exclude>META-INF/*.MF</exclude>
-                                            <exlude>META-INF/*.versions.11.module-info</exlude>
+                                            <exlude>META-INF.versions.11.module-info</exlude>
+                                            <exclude>module-info.class</exclude>
                                         </excludes>
                                     </filter>
                                 </filters>
@@ -110,8 +111,13 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.graalvm.truffle</groupId>
-            <artifactId>truffle-api</artifactId>
+            <groupId>org.graalvm.js</groupId>
+            <artifactId>js</artifactId>
+            <version>20.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.graalvm.js</groupId>
+            <artifactId>js-scriptengine</artifactId>
             <version>20.2.0</version>
         </dependency>
     </dependencies>
