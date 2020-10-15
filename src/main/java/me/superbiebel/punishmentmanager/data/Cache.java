@@ -15,7 +15,7 @@ public class Cache {
             Schedulers.async().run(()-> {
                 isInitialized = true;
                 cacheDataSourceConfig = new HikariConfig();
-                //stole some code from the AdvancedBan plugin from DevLeoko. this is actually his code but adapted to me.
+                //stole some code from the AdvancedBan plugin from DevLeoko. This is actually his code but adapted to me.
                 String driverClassName = "org.hsqldb.jdbc.JDBCDriver";
                 try {
                     Class.forName(driverClassName);
@@ -28,6 +28,7 @@ public class Cache {
                 cacheDataSourceConfig.setPassword("");
                 Log.info("Don't worry about the error about a driver not supported, this is alright. Do NOT report this to my github!");
                 cacheDataSource = new HikariDataSource(cacheDataSourceConfig);
+
             })
         ;} else {
             Log.warning("Tried to initialize the cache, but it was already initialized, pls report to developer.");

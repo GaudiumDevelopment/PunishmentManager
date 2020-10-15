@@ -27,17 +27,12 @@ public class SerializeUtil {
         return Base64.getEncoder().encodeToString(serializedObject);
     }
 
-    public Object deserialize(String deserialize) {
+    public Object deserialize(String deserialize) throws IOException, ClassNotFoundException {
         byte[] deserializedObject = Base64.getDecoder().decode(deserialize);
         ByteArrayInputStream in = new ByteArrayInputStream(deserializedObject);
         ObjectInputStream is = null;
-        try {
             is = new ObjectInputStream(in);
             Object result = is.readObject();
             return result;
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }

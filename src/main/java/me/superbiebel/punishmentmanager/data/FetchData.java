@@ -6,16 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.ExecutionException;
-
 public class FetchData {
 
-    public static ResultSet FetchOffenseListGuiData() {
+    public static ResultSet FetchOffenseListGuiData(boolean inCache) {
        Promise<ResultSet> offenseListGuiDataPromise = null;
 
        offenseListGuiDataPromise = Promise.start().thenApplyAsync((e)->{
           ResultSet rst = null;
           try {
-             PreparedStatement stmt = MySQL.getMysqlDataSource().getConnection().prepareStatement("");
+             PreparedStatement stmt = inCache ? Cache.getCacheDataSource().getConnection().prepareStatement("")
+                     :MySQL.getMysqlDataSource().getConnection().prepareStatement("");
              rst = stmt.executeQuery();
           } catch (SQLException throwables) {
               throwables.printStackTrace();
