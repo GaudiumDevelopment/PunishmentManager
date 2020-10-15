@@ -61,7 +61,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     public boolean checkConfigVersion() {
         Log.debug("Checking config version...");
         boolean status;
-        if (!config.getString("config_version").equals(configVersion)) {
+        if (!config.getString("config_version").equalsIgnoreCase(configVersion)) {
             Log.fatalError("The config version doesn't correspond with the version that is needed for this plugin version!");
             Log.fatalError("Please back up and then delete your config so we can generate a new one on startup!");
             Bukkit.getPluginManager().disablePlugin(this);

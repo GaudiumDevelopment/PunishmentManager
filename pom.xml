@@ -56,6 +56,7 @@
                                             <exclude>META-INF/*.DSA</exclude>
                                             <exclude>META-INF/*.RSA</exclude>
                                             <exclude>META-INF/*.MF</exclude>
+                                            <exlude>META-INF/*.versions.11.module-info</exlude>
                                         </excludes>
                                     </filter>
                                 </filters>
@@ -107,6 +108,11 @@
             <artifactId>hsqldb</artifactId>
             <version>2.4.0</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.graalvm.truffle</groupId>
+            <artifactId>truffle-api</artifactId>
+            <version>20.2.0</version>
         </dependency>
     </dependencies>
 </project>
