@@ -153,6 +153,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
             if (!this.isEnabled()) {
                 Log.fatalError("STARTUP COULD NOT BE COMPLETED, PLEASE CHECK FOR ERRORS IN THE CONSOLE!!!");
             }
+
     }
 
 }
