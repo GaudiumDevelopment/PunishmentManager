@@ -1,10 +1,12 @@
 package me.superbiebel.punishmentmanager.commands;
 
 import me.superbiebel.punishmentmanager.PunishmentManager;
+import me.superbiebel.punishmentmanager.punishmentcore.OffenseExecutor;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +39,14 @@ public class SystemCommand implements TabExecutor {
                 }
 
             } else if (args[0].equalsIgnoreCase("sync")) {
-                if (sender.hasPermission("punishmentmanager.command.system.sync")){
-                sender.sendMessage("Syncing....");
-                sender.sendMessage("Sync complete");
+                if (sender.hasPermission("punishmentmanager.command.system.sync")) {
+                    sender.sendMessage("Syncing....");
+                    sender.sendMessage("Sync complete");
                 } else {
                     sender.sendMessage(ColorUtils.colorize(PunishmentManager.giveConfig().getString("messages.noPermissionMessage")));
                 }
+            } else if(args[0].equalsIgnoreCase("test")) {
+                new OffenseExecutor((Player) sender,-1).execute();
             } else {
                 sender.sendMessage("Argument not recognised");
             }
@@ -64,6 +68,9 @@ public class SystemCommand implements TabExecutor {
         }
         if (commandSender.hasPermission("punishmentmanager.command.system.sync")){
             tabComplete.add("sync");
+        }
+        if (commandSender.hasPermission("punishmentmanager.command.system.tab")){
+            tabComplete.add("tab");
         }
 
         return tabComplete;

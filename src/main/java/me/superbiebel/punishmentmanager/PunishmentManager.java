@@ -131,6 +131,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         plugin = this;
         version = super.getDescription().getVersion();
         loadConfig();
+
         configVersion = config.getString("config_version");
         if (checkConfigVersion() && config.getBoolean("MySQL.enabled")) {
             setDebugMode();
@@ -153,7 +154,8 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
             if (!this.isEnabled()) {
                 Log.fatalError("STARTUP COULD NOT BE COMPLETED, PLEASE CHECK FOR ERRORS IN THE CONSOLE!!!");
             }
-
     }
+
+
 
 }
