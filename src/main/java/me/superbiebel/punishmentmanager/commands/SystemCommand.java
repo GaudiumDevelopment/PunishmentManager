@@ -69,8 +69,8 @@ public class SystemCommand implements TabExecutor {
         if (commandSender.hasPermission("punishmentmanager.command.system.sync")){
             tabComplete.add("sync");
         }
-        if (commandSender.hasPermission("punishmentmanager.command.system.tab")){
-            tabComplete.add("tab");
+        if (commandSender.hasPermission("punishmentmanager.command.system.test")){
+            tabComplete.add("test");
         }
 
         return tabComplete;

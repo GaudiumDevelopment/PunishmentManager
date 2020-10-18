@@ -10,6 +10,7 @@ commands:
     permission: "punishmentmanager.command.punish"
   pmanager:
     description: control the inner workings of PunishmentManager
+    permission: "punishmentmanager.command.system"
 permissions:
   punishmentmanager.*:
     children:
@@ -31,6 +32,7 @@ permissions:
       punishmentmanager.command.system.help: true
       punishmentmanager.command.system.reloadconfig: true
       punishmentmanager.command.system.sync: true
+      punishmentmanager.command.system.test: true
   punishmentmanager.offense.offenselist:
     default: false
     description: show the offenselist gui
