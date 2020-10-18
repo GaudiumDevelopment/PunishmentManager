@@ -3,8 +3,8 @@ script:
   - mvn clean install
 os: osx
 jdk:
-  - openjdk14
+  - openjdk15
 deploy:
   provider: script
   script: bash scripts/upload.bash $TRAVIS_BUILD_NUMBER $API_KEY
-  skip_cleanup: true
+  cleanup: true
