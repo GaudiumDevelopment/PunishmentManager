@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="15">
-      <module name="PunishmentManager" target="15" />
+      <module name="PunishmentManager" target="9" />
     </bytecodeTargetLevel>
   </component>
 </project>
