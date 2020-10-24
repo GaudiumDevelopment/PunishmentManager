@@ -2,7 +2,7 @@ package me.superbiebel.punishmentmanager.commands;
 
 import me.superbiebel.punishmentmanager.PunishmentManager;
 import me.superbiebel.punishmentmanager.punishmentcore.OffenseExecutor;
-import me.superbiebel.punishmentmanager.utils.ColorUtils;
+import me.superbiebel.punishmentmanager.utils.PermissionUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -14,47 +14,34 @@ import java.util.List;
 public class SystemCommand implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender.hasPermission("punishmentmanager.command.system")) {
+        if (PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system")) {
 
             if (args.length == 0 | args.length > 1) {
                 sender.sendMessage("1 argument is required");
 
-            } else if (args[0].equalsIgnoreCase("help")) {
+            } else if (args[0].equalsIgnoreCase("help") && PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system.help")) {
 
-                if (sender.hasPermission("punishmentmanager.command.system.help")){
                 sender.sendMessage("Check out the wiki if you need help");
-                } else {
-                    sender.sendMessage(ColorUtils.colorize(PunishmentManager.giveConfig().getString("messages.noPermissionMessage")));
-                }
 
+            } else if (args[0].equalsIgnoreCase("reloadconfig") && PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system.reloadconfig")) {
 
-            } else if (args[0].equalsIgnoreCase("reloadconfig")) {
-
-                if (sender.hasPermission("punishmentmanager.command.system.reloadconfig")){
                 sender.sendMessage("Reloading config...");
                 PunishmentManager.getPlugin().reloadConfig();
                 sender.sendMessage("Config reloaded");
-                } else {
-                    sender.sendMessage(ColorUtils.colorize(PunishmentManager.giveConfig().getString("messages.noPermissionMessage")));
-                }
 
-            } else if (args[0].equalsIgnoreCase("sync")) {
-                if (sender.hasPermission("punishmentmanager.command.system.sync")) {
-                    sender.sendMessage("Syncing....");
-                    sender.sendMessage("Sync complete");
-                } else {
-                    sender.sendMessage(ColorUtils.colorize(PunishmentManager.giveConfig().getString("messages.noPermissionMessage")));
-                }
-            } else if(args[0].equalsIgnoreCase("test")) {
-                new OffenseExecutor((Player) sender,-1).execute();
+
+            } else if (args[0].equalsIgnoreCase("sync") && PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system.sync")) {
+                sender.sendMessage("Syncing....");
+                sender.sendMessage("Sync complete");
+
+            } else if (args[0].equalsIgnoreCase("test")) {
+                new OffenseExecutor((Player) sender, -1).execute();
+
             } else {
                 sender.sendMessage("Argument not recognised");
             }
-            return true;
-        } else {
-            sender.sendMessage(ColorUtils.colorize(PunishmentManager.giveConfig().getString("messages.noPermissionMessage")));
         }
-    return true;
+        return true;
     }
 
     @Override
