@@ -1,3 +1,5 @@
+Downloads: [ ![Download](null/packages/moderationmanager/PunishmentManager/INDEV/images/download.svg?version=INDEV_build_30) ](https://bintray.com/moderationmanager/PunishmentManager/INDEV/INDEV_build_30/link)
+
 Legal: [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0) 
 
 Activity: [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/ModerationManager/PunishmentManager/graphs/commit-activity)    
@@ -10,7 +12,7 @@ A punishment plugin for all your punishment needs! Punish those bad players with
 
 PunishmentManager tries its best to provide maximal customisablity. Want to calculate how hard a player should be punished? It's possible! Want to set certain thresholds for certain punishments? It's possible!
 
-Want some indev builds to try out? Click [here](https://bintray.com/superbiebel/PunishmentManager) to get them! (indev ≠ dev builds, I wont take care of backwards compatability, things can change really fast, and bugs will almost be certainly present.)
+Want some indev builds to try out? Click [ ![Download](null/packages/moderationmanager/PunishmentManager/INDEV/images/download.svg?version=INDEV_build_30) ](https://bintray.com/moderationmanager/PunishmentManager/INDEV/INDEV_build_30/link) to get them! (indev ≠ dev builds, I wont take care of backwards compatability, things can change really fast, and bugs will almost be certainly present.)
 
 # WARNING: STILL WORK IN PROGRESS! 
 ## Indev versions are likely to not be backwards compatible with each other.
