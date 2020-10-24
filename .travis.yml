@@ -10,4 +10,4 @@ deploy:
   cleanup: true
 branches:
   only:
-    - Development
+    -Development
