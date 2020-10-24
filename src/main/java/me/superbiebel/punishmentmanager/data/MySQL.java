@@ -54,7 +54,8 @@ public class MySQL {
                      final String createPlayer_historyTable = "CREATE TABLE IF NOT EXISTS " + db + ".player_history ( history_id int NOT NULL , uuid_victim varchar(50) NOT NULL , uuid_executor varchar(50) NOT NULL , formatted_reason varchar(200) , calculated_ban_duration bigint , calculated_jail_duration bigint , calculated_mute_duration bigint , jail_id int , time_done_mute bigint UNSIGNED , time_done_jail bigint , status varchar(200) NOT NULL );";
                      final String createPunishment_templatesTable = "CREATE TABLE IF NOT EXISTS " + db + ".punishment_templates ( `punishment_id` int NOT NULL , threshold int NOT NULL , `category_id` int NOT NULL , `mute_calculation` varchar(200) , `IP_mute_calculation` varchar(200) ,`ban_calculation` varchar(200) ,`IP_ban_calculation` varchar(200) , `jail_calculation` varchar(200) , server varchar(200) );";
                      final String createPunishment_usedTable = "CREATE TABLE IF NOT EXISTS " + db + ".punishment_used ( history_id int , punishment_id int );";
-                     final String createOffenseLoreTable = "CREATE TABLE IF NOT EXISTS " + db + ".offense_lore ( offense_id int , lore varchar(200), lore_id int )";
+                     final String createOffenseLoreTable = "CREATE TABLE IF NOT EXISTS " + db + ".offense_lore ( offense_id int , lore varchar(200), lore_id int );";
+                     final String createScriptTable = "CREATE TABLE IF NOT EXISTS " + db + ".scripts (script_id int, script TEXT);";
             con = mysqlDataSource.getConnection();
             Statement stmt = con.createStatement();
             con.setAutoCommit(false);
@@ -72,6 +73,7 @@ public class MySQL {
             stmt.addBatch(createPunishment_templatesTable);
             stmt.addBatch(createPunishment_usedTable);
             stmt.addBatch(createOffenseLoreTable);
+            stmt.addBatch(createScriptTable);
             int[] res = stmt.executeBatch();
             Log.debug("updates sent: " + res.length,false, true);
             con.commit();
