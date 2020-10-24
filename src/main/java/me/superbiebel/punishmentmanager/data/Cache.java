@@ -26,12 +26,12 @@ public class Cache {
                 cacheDataSourceConfig.setJdbcUrl("jdbc:hsqldb:mem:hsqldb.lock_file=false");
                 cacheDataSourceConfig.setUsername("PunishmentManager");
                 cacheDataSourceConfig.setPassword("");
-                Log.info("Don't worry about the error about a driver not supported, this is alright. Do NOT report this to my github!");
+                Log.info("Don't worry about the error about a driver not supported, this is alright. Do NOT report this to my github!",false,true);
                 cacheDataSource = new HikariDataSource(cacheDataSourceConfig);
 
             })
         ;} else {
-            Log.warning("Tried to initialize the cache, but it was already initialized, pls report to developer.");
+            Log.warning("Tried to initialize the cache, but it was already initialized, pls report to developer.",false,true);
         }
     }
     public static HikariDataSource getCacheDataSource() {

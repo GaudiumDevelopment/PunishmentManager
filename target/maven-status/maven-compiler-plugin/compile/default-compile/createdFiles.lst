@@ -1,6 +1,7 @@
 me/superbiebel/punishmentmanager/data/MySQL.class
 me/superbiebel/punishmentmanager/punishmentcore/OffenseExecutor.class
 me/superbiebel/punishmentmanager/commands/PunishCommand.class
+me/superbiebel/punishmentmanager/utils/PermissionUtils.class
 me/superbiebel/punishmentmanager/menu/HistoryGUI.class
 me/superbiebel/punishmentmanager/commands/SystemCommand.class
 me/superbiebel/punishmentmanager/utils/ColorUtils.class

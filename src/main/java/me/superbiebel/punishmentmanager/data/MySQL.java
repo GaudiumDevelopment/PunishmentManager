@@ -20,7 +20,7 @@ public class MySQL {
             mySQLConfig = new HikariConfig();
             mySQLConfig.setJdbcUrl( "jdbc:mysql://" + host + ":" + port + "/" + db + "?useSSL=" + useSSL);
 
-            Log.debug("jdbc:mysql://" + host + ":" + port + "/" + db + "?useSSL=" + useSSL);
+            Log.debug("jdbc:mysql://" + host + ":" + port + "/" + db + "?useSSL=" + useSSL,false, true);
             mySQLConfig.setUsername( username );
             mySQLConfig.setPassword( password );
             mySQLConfig.addDataSourceProperty( "cachePrepStmts" , PunishmentManager.giveConfig().getString("MySQL.cachePrepStmts"));
@@ -32,13 +32,13 @@ public class MySQL {
     public static HikariDataSource getMysqlDataSource() {return mysqlDataSource;}
     public static void initializeTables(String db) {
             if (db == null) {
-                Log.fatalError("db is not set!!!");
-                Log.fatalError("Please check your config and restart your server!");
+                Log.fatalError("db is not set!!!",false,true);
+                Log.fatalError("Please check your config and restart your server!",false,true);
             } else {
 
         Promise<Void> initPromise = Promise.start()
                 .thenRunAsync(() ->
-            Log.debug("Initializing tables")).thenRunAsync(() -> {
+            Log.debug("Initializing tables",false,true)).thenRunAsync(() -> {
                 Connection con = null;
                try {
                      final String createCategoriesTable = "CREATE TABLE IF NOT EXISTS " + db + ".categories ( `category_id` int NOT NULL , `category_name` varchar(30) NOT NULL );";
@@ -73,7 +73,7 @@ public class MySQL {
             stmt.addBatch(createPunishment_usedTable);
             stmt.addBatch(createOffenseLoreTable);
             int[] res = stmt.executeBatch();
-            Log.debug("updates sent: " + res.length);
+            Log.debug("updates sent: " + res.length,false, true);
             con.commit();
         } catch (SQLException throwables) {
                     throwables.printStackTrace();
@@ -85,7 +85,7 @@ public class MySQL {
                        throwables.printStackTrace();
                    }
                }
-    }).thenRunAsync(() -> Log.debug("Tables initialized"));}
+    }).thenRunAsync(() -> Log.debug("Tables initialized",false, true));}
 
 
     }

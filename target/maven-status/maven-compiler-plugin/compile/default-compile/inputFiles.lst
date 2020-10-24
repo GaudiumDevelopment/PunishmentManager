@@ -5,6 +5,7 @@
 /Users/jorenbielen/IdeaProjects/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/commands/PunishCommand.java
 /Users/jorenbielen/IdeaProjects/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/utils/ColorUtils.java
 /Users/jorenbielen/IdeaProjects/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/listeners/LeaveListener.java
+/Users/jorenbielen/IdeaProjects/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/utils/PermissionUtils.java
 /Users/jorenbielen/IdeaProjects/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/listeners/JoinListener.java
 /Users/jorenbielen/IdeaProjects/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/data/MySQL.java
 /Users/jorenbielen/IdeaProjects/PunishmentManager/src/main/java/me/superbiebel/punishmentmanager/menu/OffenseListGUI.java

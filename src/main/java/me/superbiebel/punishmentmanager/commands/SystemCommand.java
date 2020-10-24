@@ -14,35 +14,41 @@ import java.util.List;
 public class SystemCommand implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system")) {
+        if (sender instanceof Player) {
+            if (PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system")) {
 
-            if (args.length == 0 | args.length > 1) {
-                sender.sendMessage("1 argument is required");
+                if (args.length == 0 | args.length > 1) {
+                    sender.sendMessage("1 argument is required");
 
-            } else if (args[0].equalsIgnoreCase("help") && PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system.help")) {
+                } else if (args[0].equalsIgnoreCase("help") && PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system.help")) {
 
-                sender.sendMessage("Check out the wiki if you need help");
+                    sender.sendMessage("Check out the wiki if you need help");
 
-            } else if (args[0].equalsIgnoreCase("reloadconfig") && PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system.reloadconfig")) {
+                } else if (args[0].equalsIgnoreCase("reloadconfig") && PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system.reloadconfig")) {
 
-                sender.sendMessage("Reloading config...");
-                PunishmentManager.getPlugin().reloadConfig();
-                sender.sendMessage("Config reloaded");
+                    sender.sendMessage("Reloading config...");
+                    PunishmentManager.getPlugin().reloadConfig();
+                    sender.sendMessage("Config reloaded");
 
 
-            } else if (args[0].equalsIgnoreCase("sync") && PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system.sync")) {
-                sender.sendMessage("Syncing....");
-                sender.sendMessage("Sync complete");
+                } else if (args[0].equalsIgnoreCase("sync") && PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system.sync")) {
+                    sender.sendMessage("Syncing...");
+                    sender.sendMessage("Sync complete");
 
-            } else if (args[0].equalsIgnoreCase("test")) {
-                new OffenseExecutor((Player) sender, -1).execute();
+                } else if (args[0].equalsIgnoreCase("test")) {
+                    new OffenseExecutor((Player) sender, -1).execute();
 
-            } else {
-                sender.sendMessage("Argument not recognised");
+                } else {
+                    sender.sendMessage("Argument not recognised");
+                }
             }
+
+        }else {
+            sender.sendMessage("Console cannot execute this!");
         }
         return true;
     }
+
 
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
