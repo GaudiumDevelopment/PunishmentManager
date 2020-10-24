@@ -14,38 +14,34 @@ import java.util.List;
 public class SystemCommand implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender instanceof Player) {
-            if (PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system")) {
-
                 if (args.length == 0 | args.length > 1) {
+
                     sender.sendMessage("1 argument is required");
 
-                } else if (args[0].equalsIgnoreCase("help") && PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system.help")) {
+                } else if (args[0].equalsIgnoreCase("help") && PermissionUtils.checkAndMessage(sender, "punishmentmanager.command.system.help")) {
 
                     sender.sendMessage("Check out the wiki if you need help");
 
-                } else if (args[0].equalsIgnoreCase("reloadconfig") && PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system.reloadconfig")) {
+                } else if (args[0].equalsIgnoreCase("reloadconfig") && PermissionUtils.checkAndMessage(sender, "punishmentmanager.command.system.reloadconfig")) {
 
                     sender.sendMessage("Reloading config...");
                     PunishmentManager.getPlugin().reloadConfig();
                     sender.sendMessage("Config reloaded");
 
+                } else if (args[0].equalsIgnoreCase("sync") && PermissionUtils.checkAndMessage(sender, "punishmentmanager.command.system.sync")) {
 
-                } else if (args[0].equalsIgnoreCase("sync") && PermissionUtils.checkAndMessage((Player) sender, "punishmentmanager.command.system.sync")) {
                     sender.sendMessage("Syncing...");
                     sender.sendMessage("Sync complete");
 
-                } else if (args[0].equalsIgnoreCase("test")) {
+                } else if (args[0].equalsIgnoreCase("test") && sender instanceof Player) {
+
                     new OffenseExecutor((Player) sender, -1).execute();
 
                 } else {
-                    sender.sendMessage("Argument not recognised");
-                }
-            }
 
-        }else {
-            sender.sendMessage("Console cannot execute this!");
-        }
+                    sender.sendMessage("Argument not recognised");
+
+                }
         return true;
     }
 
