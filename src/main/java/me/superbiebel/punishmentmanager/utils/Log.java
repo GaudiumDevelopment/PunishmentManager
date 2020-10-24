@@ -13,7 +13,7 @@ public class Log {
     private static final String fatalErrorPrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &c[&4ERROR&c] &4&l>> ");
 
 
-    public static void debug(String msg, boolean sendInGame, boolean logToFile) {
+    public static void debug(String msg, boolean sendInGame,boolean sendRoConsole, boolean logToFile) {
 
         if (PunishmentManager.getDebugMode()) {
             for (Player player : Bukkit.getOnlinePlayers()) {
@@ -25,7 +25,7 @@ public class Log {
         }
     }
 
-    public static void info(String msg, boolean sendInGame, boolean logToFile) {
+    public static void info(String msg, boolean sendInGame,boolean sendRoConsole, boolean logToFile) {
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("punishmentmanager.log.info")) {
                 player.sendMessage(infoPrefix + msg);
@@ -35,7 +35,7 @@ public class Log {
         Bukkit.getServer().getLogger().info(infoPrefix + msg);
     }
 
-    public static void warning(String msg, boolean sendInGame, boolean logToFile) {
+    public static void warning(String msg, boolean sendInGame,boolean sendRoConsole, boolean logToFile) {
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("punishmentmanager.log.warning")) {
                 player.sendMessage(warningPrefix + msg);
@@ -43,7 +43,7 @@ public class Log {
         }
         Bukkit.getServer().getLogger().warning(warningPrefix + msg);
     }
-    public static void fatalError(String msg, boolean sendInGame, boolean logToFile) {
+    public static void fatalError(String msg, boolean sendInGame,boolean sendRoConsole, boolean logToFile) {
             for (Player player: Bukkit.getOnlinePlayers()){
                 if (player.hasPermission("punishmentmanager.log.fatalerror")) {
                     player.sendMessage(fatalErrorPrefix + msg);
