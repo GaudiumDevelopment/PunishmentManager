@@ -7,7 +7,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class PermissionUtils {
     public static boolean check(@NotNull CommandSender sender, @NotNull String permission) {
-        return sender.hasPermission(permission);
+        if (sender instanceof ConsoleCommandSender) {
+            return true;
+        } else {
+        return sender.hasPermission(permission);}
     }
 
     public static boolean checkAndMessage(@NotNull CommandSender sender, @NotNull String permission) {
