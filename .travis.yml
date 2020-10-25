@@ -5,10 +5,23 @@ os: osx
 jdk:
   - openjdk15
 deploy:
-  provider: script
-  script: bash scripts/upload.bash $TRAVIS_BUILD_NUMBER $API_KEY
-  cleanup: true
+  - provider: script
+    script: bash scripts/upload_STABLE.bash $TRAVIS_BUILD_NUMBER $API_KEY
+    cleanup: false
+    on:
+      branch: master
+  - provider: script
+    script: bash scripts/upload_DEV.bash $TRAVIS_BUILD_NUMBER $API_KEY
+    cleanup: false
+    on:
+      branch: dev
+  - provider: script
+    script: bash scripts/upload_INDEV.bash $TRAVIS_BUILD_NUMBER $API_KEY
+    cleanup: false
+    on:
+      branch: indev
 branches:
   only:
     - master
     - dev
+    - indev
