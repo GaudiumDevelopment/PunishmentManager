@@ -30,11 +30,6 @@ messages:
 
 
 cache:
-  #the data objects used by the plugin, it doesn't take much memory (32 bytes), but can add up. Therefore it is best to destroy them (players wont be needing them)
-  #Only touch this when u know what ur doing
-  KeepDataObjects: false
-  #the lifetime of the object in seconds, do not set this lower then 30 to prevent nullPointerExceptions
-  DataObjectLifeTime: 60
 
 #This is the end of the config, no really! It is!
 #---------------------------------------------------------------------------------------------------------------------------------------------------
