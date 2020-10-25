@@ -31,11 +31,12 @@ public class Log {
 
     public static void info(String msg, boolean sendInGame,boolean sendToConsole, boolean logToFile) {
         if (sendInGame) {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.hasPermission("punishmentmanager.log.info")) {
-                player.sendMessage(infoPrefix + msg);
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (player.hasPermission("punishmentmanager.log.info")) {
+                    player.sendMessage(infoPrefix + msg);
+                }
             }
-        }}
+        }
         if (sendToConsole) {
             Bukkit.getServer().getLogger().info(infoPrefix + msg);
         }
