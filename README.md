@@ -1,4 +1,10 @@
-Downloads: [![Download](null/packages/moderationmanager/PunishmentManager/INDEV/images/download.svg?version=INDEV_build_30) ](https://bintray.com/moderationmanager/PunishmentManager/INDEV/INDEV_build_30/link)
+Downloads: 
+
+-Stable:[ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/STABLE/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/STABLE/_latestVersion) (no builds yet)
+
+-Dev:[ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/DEV/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/DEV/_latestVersion) (no builds yet)
+
+-Indev[ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/INDEV/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/INDEV/_latestVersion)
 
 Legal: [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0) 
 
