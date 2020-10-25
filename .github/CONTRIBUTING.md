@@ -20,4 +20,12 @@
 
 ## How to make a new feature
 
-make a new branch on the indev branch, then fully implement everything u want. Lastly make a PR to the indev branch (we will probably accept that PR) it will be thoroughly tested again and if the whole thing is stable enough everything will go to the dev branch and ultimately to the master branch).
+Make a new branch on the indev branch, then fully implement everything u want. Lastly make a PR to the indev branch (we will probably accept that PR) it will be thoroughly tested again and if the whole thing is stable enough everything will go to the dev branch and ultimately to the master branch).
+
+## What branch serves what purpose?
+
+Master: Everything is as stable as it can be (these will be the releases)
+
+Dev: pretty stable, made for people who want new features fast but don't care if there are any bugs in it.
+
+Indev: This is the coding hellhole, everything here is only for testing. Bugs are everywhere and things are waiting to be transferred to the dev branch. tl;dr: This branch is unstable as hell and only used for developing new features.
