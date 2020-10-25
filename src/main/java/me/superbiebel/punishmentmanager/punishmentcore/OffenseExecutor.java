@@ -11,7 +11,7 @@ public class OffenseExecutor {
     private Player executor;
     private Player criminal;
     private int offenseID;
-    public OffenseExecutor(Player executor, int offenseID) {
+    public OffenseExecutor(final Player executor, final int offenseID) {
         this.executor = executor;
         this.offenseID = offenseID;
     }
@@ -23,7 +23,7 @@ public class OffenseExecutor {
             Scriptable scope = cx.initStandardObjects();
             cx.evaluateString(scope,script,"test",1,null);
             Context.exit();
-            ;},"testThread");
+            },"OffenseExecution_" + offenseID);
         thread.start();
         return false;
     }
