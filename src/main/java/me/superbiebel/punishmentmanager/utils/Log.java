@@ -13,43 +13,57 @@ public class Log {
     private static final String fatalErrorPrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &c[&4ERROR&c] &4&l>> ");
 
 
-    public static void debug(String msg, boolean sendInGame,boolean sendRoConsole, boolean logToFile) {
+    public static void debug(String msg, boolean sendInGame,boolean sendToConsole, boolean logToFile) {
 
         if (PunishmentManager.getDebugMode()) {
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                if (player.hasPermission("punishmentmanager.log.debug")) {
-                    player.sendMessage(debugPrefix + msg);
+            if (sendInGame) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    if (player.hasPermission("punishmentmanager.log.debug")) {
+                        player.sendMessage(debugPrefix + msg);
+                    }
                 }
             }
-            Bukkit.getServer().getLogger().info(debugPrefix + msg);
+            if (sendToConsole) {
+                Bukkit.getServer().getLogger().info(debugPrefix + msg);
+            }
         }
     }
 
-    public static void info(String msg, boolean sendInGame,boolean sendRoConsole, boolean logToFile) {
+    public static void info(String msg, boolean sendInGame,boolean sendToConsole, boolean logToFile) {
+        if (sendInGame) {
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.hasPermission("punishmentmanager.log.info")) {
                 player.sendMessage(infoPrefix + msg);
             }
-
+        }}
+        if (sendToConsole) {
+            Bukkit.getServer().getLogger().info(infoPrefix + msg);
         }
-        Bukkit.getServer().getLogger().info(infoPrefix + msg);
     }
 
-    public static void warning(String msg, boolean sendInGame,boolean sendRoConsole, boolean logToFile) {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.hasPermission("punishmentmanager.log.warning")) {
-                player.sendMessage(warningPrefix + msg);
+    public static void warning(String msg, boolean sendInGame,boolean sendToConsole, boolean logToFile) {
+        if (sendInGame) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (player.hasPermission("punishmentmanager.log.warning")) {
+                    player.sendMessage(warningPrefix + msg);
+                }
             }
         }
-        Bukkit.getServer().getLogger().warning(warningPrefix + msg);
+        if (sendToConsole) {
+            Bukkit.getServer().getLogger().warning(warningPrefix + msg);
+        }
     }
-    public static void fatalError(String msg, boolean sendInGame,boolean sendRoConsole, boolean logToFile) {
-            for (Player player: Bukkit.getOnlinePlayers()){
+    public static void fatalError(String msg, boolean sendInGame,boolean sendToConsole, boolean logToFile) {
+        if (sendToConsole) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.hasPermission("punishmentmanager.log.fatalerror")) {
                     player.sendMessage(fatalErrorPrefix + msg);
                 }
+            }
         }
-        Bukkit.getServer().getLogger().severe(fatalErrorPrefix + msg);
+        if (sendToConsole) {
+            Bukkit.getServer().getLogger().severe(fatalErrorPrefix + msg);
+        }
     }
     public static String getNamePrefix() {
         return namePrefix;
