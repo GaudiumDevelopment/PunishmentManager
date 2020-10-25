@@ -21,7 +21,7 @@ public class OffenseExecutor {
             PlaceholderAPI.setPlaceholders(executor,script);
             Context cx = Context.enter();
             Scriptable scope = cx.initStandardObjects();
-            cx.evaluateString(scope,script,"test",1,null);
+            cx.evaluateString(scope,script,"OffenseExecution_" + offenseID,1,null);
             Context.exit();
             },"OffenseExecution_" + offenseID);
         thread.start();
