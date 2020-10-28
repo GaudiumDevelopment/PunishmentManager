@@ -3,8 +3,11 @@ package me.superbiebel.punishmentmanager.menu;
 import me.lucko.helper.item.ItemStackBuilder;
 import me.lucko.helper.menu.Gui;
 import me.lucko.helper.menu.Item;
+import me.lucko.helper.menu.SimpleSlot;
+import me.lucko.helper.menu.Slot;
 import me.lucko.helper.menu.paginated.PaginatedGuiBuilder;
 import me.lucko.helper.menu.scheme.MenuScheme;
+import me.lucko.helper.messaging.AbstractMessenger;
 import me.lucko.helper.metadata.Metadata;
 import me.superbiebel.punishmentmanager.PunishmentManager;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
@@ -89,13 +92,6 @@ public class ActionsListGUI extends Gui{
                     return items;
                 })
                 pgui.open();*/
-
-
-
-
-
-
-
             } else {
                 getPlayer().sendMessage(ColorUtils.colorize(PunishmentManager.giveConfig().getString("messages.noPermissionMessage")));
             }
