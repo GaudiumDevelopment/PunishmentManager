@@ -1,6 +1,7 @@
 package me.superbiebel.punishmentmanager;
 
 import me.lucko.helper.Events;
+import me.lucko.helper.messaging.Messenger;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
@@ -22,9 +23,36 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     private static boolean debugMode;
     private static FileConfiguration config;
     private static PunishmentManager plugin;
+    private static Messenger messenger;
 
-    public static String getConfigVersion() {
-        return configVersion;
+    @Override
+    public void enable() {
+        plugin = this;
+        version = super.getDescription().getVersion();
+        loadConfig();
+
+        configVersion = config.getString("config_version");
+        if (checkConfigVersion() && config.getBoolean("MySQL.enabled")) {
+            setDebugMode();
+            loadEvents();
+            loadCommands();
+            Cache.initCache(config.getString("MySQL.db"));
+            initMySQL();
+            Log.debug("Everything has been enabled",false,true,true);
+        } else if (!config.getBoolean("MySQL.enabled")) {
+            for (int i = 0; i < 5; i++) {
+                Log.fatalError("MYSQL HAS BEEN DISABLED!!! FILL IN THE CREDENTIALS AND ENABLE MYSQL!!!",false,true,true);
+            }
+            Log.warning("I know that it spams the above message but this is the storage, without storage nothing will work",false,true,true);
+
+
+            Bukkit.getPluginManager().disablePlugin(plugin);
+        } else {
+            Log.warning("Something went wrong, I don't know what went wrong but something went wrong",false,true,true);
+        }
+        if (!this.isEnabled()) {
+            Log.fatalError("STARTUP COULD NOT BE COMPLETED, PLEASE CHECK FOR ERRORS IN THE CONSOLE!!!",false,true,true);
+        }
     }
 
     @Override
@@ -121,40 +149,13 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
     public static PunishmentManager getPlugin() {
         return plugin;
     }
-
     public static String getVersion() {
         return version;
     }
-
-    @Override
-    public void enable() {
-        plugin = this;
-        version = super.getDescription().getVersion();
-        loadConfig();
-
-        configVersion = config.getString("config_version");
-        if (checkConfigVersion() && config.getBoolean("MySQL.enabled")) {
-            setDebugMode();
-            loadEvents();
-            loadCommands();
-            Cache.initCache(config.getString("MySQL.db"));
-            initMySQL();
-            Log.debug("Everything has been enabled",false,true,true);
-        } else if (!config.getBoolean("MySQL.enabled")) {
-            for (int i = 0; i < 5; i++) {
-                Log.fatalError("MYSQL HAS BEEN DISABLED!!! FILL IN THE CREDENTIALS AND ENABLE MYSQL!!!",false,true,true);
-            }
-            Log.warning("I know that it spams the above message but this is the storage, without storage nothing will work",false,true,true);
-
-
-            Bukkit.getPluginManager().disablePlugin(plugin);
-        } else {
-            Log.warning("Something went wrong, I don't know what went wrong but something went wrong",false,true,true);
-        }
-            if (!this.isEnabled()) {
-                Log.fatalError("STARTUP COULD NOT BE COMPLETED, PLEASE CHECK FOR ERRORS IN THE CONSOLE!!!",false,true,true);
-            }
+    public static String getConfigVersion() {
+        return configVersion;
     }
+
 
 
 
