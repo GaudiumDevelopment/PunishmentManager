@@ -30,10 +30,9 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         plugin = this;
         version = super.getDescription().getVersion();
         loadConfig();
-
         configVersion = config.getString("config_version");
         if (checkConfigVersion() && config.getBoolean("MySQL.enabled")) {
-            setDebugMode();
+            checkDebugMode();
             loadEvents();
             loadCommands();
             Cache.initCache(config.getString("MySQL.db"));
@@ -78,12 +77,14 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         config= this.getConfig();
     }
 
-    public void setDebugMode() {
+    public void checkDebugMode() {
         debugMode = config.getBoolean("debug");
         if (debugMode){
-
+            Log.debug("Debug mode has been enabled! There will be extensive logging!",false,true,true);
+        } else {
+            Log.info("Debug mode has been disabled, debug messages will not be sent!",false,true,true);
         }
-        Log.debug("Debug mode has been enabled! There will be extensive logging!",false,true,true);
+
     }
 
     public boolean checkConfigVersion() {
