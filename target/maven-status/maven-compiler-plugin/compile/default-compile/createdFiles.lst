@@ -1,3 +1,4 @@
+me/superbiebel/punishmentmanager/utils/Log$1.class
 me/superbiebel/punishmentmanager/data/MySQL.class
 me/superbiebel/punishmentmanager/punishmentcore/OffenseExecutor.class
 me/superbiebel/punishmentmanager/commands/PunishCommand.class
@@ -16,3 +17,4 @@ me/superbiebel/punishmentmanager/utils/DataUtility.class
 me/superbiebel/punishmentmanager/listeners/JoinListener.class
 me/superbiebel/punishmentmanager/menu/ActionsListGUI.class
 me/superbiebel/punishmentmanager/menu/ExecuteOffenseGUI.class
+me/superbiebel/punishmentmanager/utils/Log$LogLevel.class

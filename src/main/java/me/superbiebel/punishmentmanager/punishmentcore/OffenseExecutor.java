@@ -1,11 +1,6 @@
 package me.superbiebel.punishmentmanager.punishmentcore;
 
-import me.clip.placeholderapi.PlaceholderAPI;
-import me.lucko.helper.metadata.Metadata;
-import me.superbiebel.punishmentmanager.utils.DataUtility;
 import org.bukkit.entity.Player;
-import org.mozilla.javascript.Context;
-import org.mozilla.javascript.Scriptable;
 
 public class OffenseExecutor {
     private Player executor;
@@ -16,7 +11,7 @@ public class OffenseExecutor {
         this.offenseID = offenseID;
     }
     public boolean execute() {
-        this.criminal = Metadata.provideForPlayer(executor).get(DataUtility.CRIMINAL_KEY).get();
+       /* this.criminal = Metadata.provideForPlayer(executor).get(DataUtility.CRIMINAL_KEY).get();
         Thread thread = new Thread(()->{String script = "to be filled in";
             PlaceholderAPI.setPlaceholders(executor,script);
             Context cx = Context.enter();
@@ -25,6 +20,18 @@ public class OffenseExecutor {
             Context.exit();
             },"OffenseExecution_" + offenseID);
         thread.start();
-        return false;
-    }
+        return false;*/
+
+
+
+
+        
+
+
+
+
+
+
+
+        return false; }
 }

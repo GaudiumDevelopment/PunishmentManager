@@ -112,6 +112,7 @@
             <version>2.4.0</version>
             <scope>compile</scope>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.mozilla</groupId>
             <artifactId>rhino-engine</artifactId>
@@ -121,12 +122,22 @@
             <groupId>org.mozilla</groupId>
             <artifactId>rhino</artifactId>
             <version>1.7.13</version>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
             <version>2.10.9</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.graalvm.sdk</groupId>
+            <artifactId>graal-sdk</artifactId>
+            <version>20.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.graalvm.truffle</groupId>
+            <artifactId>truffle-api</artifactId>
+            <version>20.2.0</version>
         </dependency>
     </dependencies>
 </project>
