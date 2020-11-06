@@ -56,8 +56,8 @@ public class MySQL {
                      final String createPunishment_usedTable = "CREATE TABLE IF NOT EXISTS " + db + ".punishment_used ( history_id int , punishment_id int );";
                      final String createScriptTable = "CREATE TABLE IF NOT EXISTS " + db + ".scripts (script_id int, script TEXT);";
             con = mysqlDataSource.getConnection();
-            Statement stmt = con.createStatement();
             con.setAutoCommit(false);
+            Statement stmt = con.createStatement();
             stmt.addBatch(createCategoriesTable);
             stmt.addBatch(createCategory_data_playersTable);
             stmt.addBatch(createcategory_points_addedTable);

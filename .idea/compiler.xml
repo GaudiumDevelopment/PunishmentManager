@@ -15,7 +15,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="PunishmentManager" options="-parameters" />
+      <module name="PunishmentManager" options="" />
     </option>
   </component>
 </project>
