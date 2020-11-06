@@ -3,7 +3,7 @@ package me.superbiebel.punishmentmanager.commands;
 import me.lucko.helper.metadata.Metadata;
 import me.lucko.helper.metadata.MetadataMap;
 import me.superbiebel.punishmentmanager.menu.ActionsListGUI;
-import me.superbiebel.punishmentmanager.utils.DataUtility;
+import me.superbiebel.punishmentmanager.data.DataUtility;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,7 +20,7 @@ public class PunishCommand implements CommandExecutor {
             }else {
                 Player p = (Player) sender;
                 MetadataMap metadata = Metadata.provideForPlayer(p);
-                metadata.put(DataUtility.getCriminalKey(), Bukkit.getPlayerExact(args[0]));
+                metadata.put(DataUtility.CRIMINAL_KEY, Bukkit.getPlayerExact(args[0]));
                 new ActionsListGUI(p).open();
             }
         }

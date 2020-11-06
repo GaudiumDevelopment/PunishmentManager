@@ -20,6 +20,7 @@ public class JoinListener {
     }
 
     public void handleJoin(AsyncPlayerPreLoginEvent e) {
+
             Connection con = null;
             PreparedStatement joinStmt = null;
             PreparedStatement ipStmt = null;
@@ -45,7 +46,7 @@ public class JoinListener {
             joinStmt.setString(4,ip);
 
 
-            ipStmt = con.prepareStatement("INSERT INTO player_IP (ip, uuid, creation_date) SELECT ?,?,? FROM DUAL WHERE NOT EXISTS (SELECT ip FROM player_ip WHERE ip=?AND uuid=?);");
+            ipStmt = con.prepareStatement("INSERT INTO player_IP (ip, uuid, creation_date) SELECT ?,?,? FROM DUAL WHERE NOT EXISTS (SELECT ip FROM player_ip WHERE ip=? AND uuid=?);");
             ipStmt.setString(1,ip);
             ipStmt.setString(2,uuid);
             ipStmt.setLong(3, currentTime);

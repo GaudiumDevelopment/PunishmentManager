@@ -30,6 +30,27 @@ messages:
 
 
 cache:
+  # write here how high the offense id goes,setting it to low can cause offenses to not show up when ur trying to register one
+  offense_id_max: 50
+  # use a list of ids instead of a range (will improve performance on join
+  use_offense_list: false
+  offense_id_list:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    #and so on
+
+
+
+
+
+
 
 #This is the end of the config, no really! It is!
 #---------------------------------------------------------------------------------------------------------------------------------------------------

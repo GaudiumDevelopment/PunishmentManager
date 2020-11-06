@@ -1,7 +1,6 @@
 package me.superbiebel.punishmentmanager;
 
 import me.lucko.helper.Events;
-import me.lucko.helper.messaging.Messenger;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
@@ -17,18 +16,20 @@ import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public final class PunishmentManager extends ExtendedJavaPlugin {
+
+public class PunishmentManager extends ExtendedJavaPlugin {
 
     private static String configVersion = "indev";
     private static String version = null;
     private static boolean debugMode;
     private static FileConfiguration config;
     private static PunishmentManager plugin;
-    private static Messenger messenger;
-
     @Override
     public void enable() {
+        List<String> argslist = new ArrayList<>();
         plugin = this;
         version = super.getDescription().getVersion();
         loadConfig();
@@ -45,7 +46,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
 
             loadEvents();
             loadCommands();
-            Cache.initCache(config.getString("MySQL.db"));
+            Cache.initCache();
             initMySQL();
             Log.debug("Everything has been enabled",false,true,true,"");
         } else if (!config.getBoolean("MySQL.enabled")) {
@@ -76,7 +77,7 @@ public final class PunishmentManager extends ExtendedJavaPlugin {
         } catch (NullPointerException throwable) {
             Log.warning("The Cache datasource was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true,"");
         }
-        Bukkit.getServer().getLogger().info("The plugin has been disabled");;
+        Bukkit.getServer().getLogger().info("The plugin has been disabled");
     }
 
 
