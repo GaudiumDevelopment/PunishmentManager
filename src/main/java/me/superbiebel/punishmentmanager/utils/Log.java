@@ -1,5 +1,6 @@
 package me.superbiebel.punishmentmanager.utils;
 
+import lombok.Getter;
 import me.superbiebel.punishmentmanager.PunishmentManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -14,11 +15,11 @@ import java.util.Date;
 
 public class Log {
 
-    private static final String namePrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c");
-    private static final String debugPrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &f[&8DEBUG&f] &f&l>> ");
-    private static final String infoPrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &f[INFO&f] &l>> ");
-    private static final String warningPrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &e[&6WARNING&e] &l>> ");
-    private static final String fatalErrorPrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &c[&4ERROR&c] &4&l>> ");
+    @Getter private static final String namePrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c");
+    @Getter private static final String debugPrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &f[&8DEBUG&f] &f&l>> ");
+    @Getter private static final String infoPrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &f[INFO&f] &l>> ");
+    @Getter private static final String warningPrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &e[&6WARNING&e] &l>> ");
+    @Getter private static final String fatalErrorPrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &c[&4ERROR&c] &4&l>> ");
 
 
     private static Date date = new Date();
@@ -32,7 +33,6 @@ public class Log {
 
     public static boolean initLog() throws IOException {
 
-
         logsFolder = new File(logsFolderSaveLocation);
         logFile = new File(logFileSaveLocation);
 
@@ -44,8 +44,12 @@ public class Log {
         }
 
         printer = new PrintWriter(logFile);
-        Log.fatalError(logFileSaveLocation,
+        Log.debug(logFileSaveLocation,
                 false,true,false,"");
+        return true;
+    }
+    public static boolean closeLog() {
+        printer.close();
         return true;
     }
 
@@ -118,7 +122,7 @@ public class Log {
             printer.flush();
         }
     }
-    public static boolean log(String msg, LogLevel loglevel, boolean sendInGame, boolean sendToConsole, boolean logToFile, @Nullable String executorName) {
+    public static boolean log(@NotNull String msg, LogLevel loglevel, boolean sendInGame, boolean sendToConsole, boolean logToFile, @Nullable String executorName) {
         switch (loglevel) {
             case DEBUG:
                 Log.debug(msg, sendInGame, sendToConsole, logToFile, executorName);

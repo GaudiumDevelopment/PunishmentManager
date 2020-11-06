@@ -1,5 +1,10 @@
 package me.superbiebel.punishmentmanager;
 
+import de.leonhard.storage.Config;
+import de.leonhard.storage.LightningBuilder;
+import de.leonhard.storage.internal.settings.ConfigSettings;
+import de.leonhard.storage.internal.settings.DataType;
+import lombok.Getter;
 import me.lucko.helper.Events;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
@@ -15,9 +20,12 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class PunishmentManager extends ExtendedJavaPlugin {
@@ -26,11 +34,21 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private static String version = null;
     private static boolean debugMode;
     private static FileConfiguration config;
+    @Getter
+    private static File configFile;
+    @Getter
+    private static Config newconfig;
     private static PunishmentManager plugin;
+    private static Path configPath = Paths.get(plugin.getDataFolder().getAbsolutePath() + System.getProperty("file.separator") + "config.yml");
+
+    private static Date date = new Date();
+    private static SimpleDateFormat formatter = new SimpleDateFormat(" dd_MM_yyyy hh_mm_ss_SSS");
+
     @Override
     public void enable() {
-        List<String> argslist = new ArrayList<>();
         plugin = this;
+        newconfig = LightningBuilder.fromPath(configPath).setConfigSettings(ConfigSettings.PRESERVE_COMMENTS).setDataType(DataType.SORTED).createConfig();
+        newconfig.addDefaultsFromInputStream(getResource("config.yml"));
         version = super.getDescription().getVersion();
         loadConfig();
         try {
@@ -38,12 +56,12 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         } catch (IOException e) {
             Log.fatalError("COULD NOT INIT LOGFILE",false,true,false,"");
             e.printStackTrace();
-            plugin.disable();
+            Bukkit.getPluginManager().disablePlugin(plugin);
         }
+        Log.info("LOGGING STARTS AT " + formatter.format(date),false,false,true,null);
         checkDebugMode();
         configVersion = config.getString("config_version");
         if (checkConfigVersion() && config.getBoolean("MySQL.enabled")) {
-
             loadEvents();
             loadCommands();
             Cache.initCache();
@@ -77,7 +95,8 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         } catch (NullPointerException throwable) {
             Log.warning("The Cache datasource was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true,"");
         }
-        Bukkit.getServer().getLogger().info("The plugin has been disabled");
+        Log.closeLog();
+        Bukkit.getServer().getLogger().info("PunishmentManager has been disabled");
     }
 
 
