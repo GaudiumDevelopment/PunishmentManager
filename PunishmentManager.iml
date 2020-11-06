@@ -60,5 +60,6 @@
     <orderEntry type="library" name="Maven: com.github.simplix-softworks:simplixstorage:3.1.9" level="project" />
     <orderEntry type="library" name="Maven: com.esotericsoftware.yamlbeans:yamlbeans:1.13" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20190722" level="project" />
+    <orderEntry type="library" name="Maven: dev.simplix.core:simplixcore-database-sql:1.0-SNAPSHOT" level="project" />
   </component>
 </module>
