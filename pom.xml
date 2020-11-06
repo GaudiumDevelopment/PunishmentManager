@@ -47,6 +47,10 @@
                                         <pattern>org.hsqldb</pattern>
                                         <shadedPattern>${project.groupId}.shaded.org.hsqldb</shadedPattern>
                                     </relocation>
+                                    <relocation>
+                                        <pattern>de.leonhard.storage</pattern>
+                                        <shadedPattern>${project.groupId}.shaded.de.leonhard.storage</shadedPattern>
+                                    </relocation>
                                 </relocations>
                                 <filters>
                                     <filter>
@@ -86,7 +90,13 @@
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
+
+
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
@@ -138,6 +148,11 @@
             <groupId>org.graalvm.truffle</groupId>
             <artifactId>truffle-api</artifactId>
             <version>20.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.simplix-softworks</groupId>
+            <artifactId>simplixstorage</artifactId>
+            <version>3.1.9</version>
         </dependency>
     </dependencies>
 </project>
