@@ -5,7 +5,6 @@ import me.superbiebel.punishmentmanager.utils.PermissionUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.graalvm.polyglot.Context;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -113,11 +112,6 @@ public class SystemCommand implements TabExecutor {
                     }
                     Log.log(builder.toString(),Log.convertToLogLevel(logLevel),sendInGame,sendInConsole,logToFile,executorname);*/
                 } else if (args[0].equalsIgnoreCase("test")) {
-
-                    try (Context context = Context.create()) {
-                        context.eval("js", "print('Hello python');");
-                    }
-
                 } else {
                     sender.sendMessage("Arguments not recognised:" + args[0]);
                 }
