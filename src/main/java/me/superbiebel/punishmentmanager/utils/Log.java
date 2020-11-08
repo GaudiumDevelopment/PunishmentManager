@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -54,7 +55,7 @@ public class Log {
     }
 
     public static void debug(@NotNull String msg, boolean sendInGame,boolean sendToConsole, boolean logToFile, @Nullable String executorName) {
-        if (PunishmentManager.getDebugMode()) {
+        if (PunishmentManager.isDebugMode()) {
             if (sendInGame) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     if (player.hasPermission("punishmentmanager.log.debug")) {
@@ -140,6 +141,29 @@ public class Log {
                 return false;
         }
         return false;
+    }
+
+    public static void LogException(Throwable e, LogLevel logLevel, boolean sendInGame, boolean sendFullInGame, boolean sendToConsole, boolean sendFullInConsole, boolean logToFile){
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+        String stacktrace = sw.toString();
+        String cause = e.toString();
+        if (sendFullInGame){
+            Log.log(stacktrace,logLevel,true,false,false,"");
+        } else {
+            Log.log(cause,logLevel,sendInGame,false,false,"");
+        }
+        if (sendFullInConsole) {
+            Log.log(stacktrace,logLevel,false,true,true,"");
+        } else {
+            Log.log(cause,logLevel,false,sendToConsole,false,"");
+        }
+        Log.log(stacktrace,logLevel,false,false,true,"");
+
+
+
+
     }
     public static LogLevel convertToLogLevel(String logLevelString) {
         if (logLevelString.equalsIgnoreCase("debug")) {
