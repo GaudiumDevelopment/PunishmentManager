@@ -15,31 +15,32 @@ import me.superbiebel.punishmentmanager.listeners.JoinListener;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 public class PunishmentManager extends ExtendedJavaPlugin {
-
-    private static String configVersion = "indev";
+    @Getter
+    private static final String configVersion = "indev";
+    @Getter
     private static String version = null;
+    @Getter
     private static boolean debugMode;
-    private static FileConfiguration config;
+    //private static FileConfiguration config;
     @Getter
     private static File configFile;
+
+    private static Config config;
     @Getter
-    private static Config newconfig;
     private static PunishmentManager plugin;
-    private static Path configPath = Paths.get(plugin.getDataFolder().getAbsolutePath() + System.getProperty("file.separator") + "config.yml");
+    @Getter
+    private static String separator = System.getProperty("file.separator");
 
     private static Date date = new Date();
     private static SimpleDateFormat formatter = new SimpleDateFormat(" dd_MM_yyyy hh_mm_ss_SSS");
@@ -47,8 +48,6 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     @Override
     public void enable() {
         plugin = this;
-        newconfig = LightningBuilder.fromPath(configPath).setConfigSettings(ConfigSettings.PRESERVE_COMMENTS).setDataType(DataType.SORTED).createConfig();
-        newconfig.addDefaultsFromInputStream(getResource("config.yml"));
         version = super.getDescription().getVersion();
         loadConfig();
         try {
@@ -60,7 +59,6 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         }
         Log.info("LOGGING STARTS AT " + formatter.format(date),false,false,true,null);
         checkDebugMode();
-        configVersion = config.getString("config_version");
         if (checkConfigVersion() && config.getBoolean("MySQL.enabled")) {
             loadEvents();
             loadCommands();
@@ -103,8 +101,9 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
     public void loadConfig() {
         Log.info("loading config...",false,true,false,"");
-        this.saveDefaultConfig();
-        config= this.getConfig();
+        configFile = new File(plugin.getDataFolder().getAbsolutePath() + separator + "configNEW.yml");
+        config = LightningBuilder.fromFile(configFile).setConfigSettings(ConfigSettings.PRESERVE_COMMENTS).setDataType(DataType.SORTED).createConfig();
+        config.addDefaultsFromInputStream(getResource("config.yml"));
     }
 
     public void checkDebugMode() {
@@ -169,22 +168,8 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         this.getCommand("pmanager").setTabCompleter(systemCommand);
         Log.debug("/pmanager is loaded",false,true,true,"");
     }
-
-
-    public static boolean getDebugMode() {
-        return debugMode;
-    }
-    public static FileConfiguration giveConfig() {
+    public static Config giveConfig() {
         return config;
-    }
-    public static PunishmentManager getPlugin() {
-        return plugin;
-    }
-    public static String getVersion() {
-        return version;
-    }
-    public static String getConfigVersion() {
-        return configVersion;
     }
 
 
