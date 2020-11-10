@@ -1,6 +1,8 @@
 package me.superbiebel.punishmentmanager.data;
 
 import me.lucko.helper.promise.Promise;
+import me.superbiebel.punishmentmanager.data.databases.managers.CacheManager;
+import me.superbiebel.punishmentmanager.data.mysql.MySQL;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,8 +16,8 @@ public class FetchData {
        offenseListGuiDataPromise = Promise.start().thenApplyAsync((e)->{
           ResultSet rst = null;
           try {
-             PreparedStatement stmt = inCache ? Cache.getCacheDataSource().getConnection().prepareStatement("")
-                     :MySQL.getMysqlDataSource().getConnection().prepareStatement("");
+             PreparedStatement stmt = inCache ? CacheManager.getCacheDataSource().getConnection().prepareStatement("")
+                     : MySQL.getMysqlDataSource().getConnection().prepareStatement("");
              rst = stmt.executeQuery();
           } catch (SQLException throwables) {
               throwables.printStackTrace();

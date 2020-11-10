@@ -1,9 +1,12 @@
-package me.superbiebel.punishmentmanager.data;
+package me.superbiebel.punishmentmanager.data.mysql;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import me.lucko.helper.promise.Promise;
+import dev.simplix.core.database.sql.SqlDatabaseConnection;
+import dev.simplix.core.database.sql.handlers.HikariConnectionHandler;
+import lombok.Getter;
 import me.superbiebel.punishmentmanager.PunishmentManager;
+import me.superbiebel.punishmentmanager.data.mysql.queries.SQL_QUERIES;
 import me.superbiebel.punishmentmanager.utils.Log;
 
 import java.sql.Connection;
@@ -13,9 +16,19 @@ import java.sql.Statement;
 public class MySQL {
 
     private static HikariConfig mySQLConfig;
+    @Getter
     private static HikariDataSource mysqlDataSource;
+    @Getter
+    private static SqlDatabaseConnection sourceConnection;
 
-        public static void configureConnection(String host, String username, String password, String port, String db, String useSSL) {
+    private MySQL() {
+        //shouldn't be used tbh
+    }
+    public static void start(String host, String username, String password, String port, String db, String useSSL) throws SQLException {
+        initializeTables(instantiate(host, username, password, port, db, useSSL));
+    }
+
+    public static SqlDatabaseConnection instantiate(String host, String username, String password, String port, String db, String useSSL) {
 
             mySQLConfig = new HikariConfig();
             mySQLConfig.setJdbcUrl( "jdbc:mysql://" + host + ":" + port + "/" + db + "?useSSL=" + useSSL);
@@ -27,18 +40,55 @@ public class MySQL {
             mySQLConfig.addDataSourceProperty( "prepStmtCacheSize" , PunishmentManager.giveConfig().getString("MySQL.prepStmtCacheSize") );
             mySQLConfig.addDataSourceProperty( "prepStmtCacheSqlLimit" , PunishmentManager.giveConfig().getString("MySQL.prepStmtCacheSqlLimit") );
             mysqlDataSource = new HikariDataSource( mySQLConfig );
+            SqlDatabaseConnection connection = new SqlDatabaseConnection(
+                    mysqlDataSource,
+                    host,
+                    username,
+                    password,
+                    port,
+                    db,
+                    new HikariConnectionHandler());
+            sourceConnection = connection;
+            return sourceConnection;
         }
-    
-    public static HikariDataSource getMysqlDataSource() {return mysqlDataSource;}
-    public static void initializeTables(String db) {
-            if (db == null) {
+    public static int initializeTables(SqlDatabaseConnection dbconnection) throws SQLException {
+        Connection con = dbconnection.getDataSource().getConnection();
+        Statement stmt = con.createStatement();
+
+            con = mysqlDataSource.getConnection();
+            con.setAutoCommit(false);
+            SQL_QUERIES.init(dbconnection.getData());
+            stmt.addBatch(SQL_QUERIES.getCategoriesTable());
+            stmt.addBatch(SQL_QUERIES.getCategory_data_playersTable());
+            stmt.addBatch(SQL_QUERIES.getCategory_points_addedTable());
+            stmt.addBatch(SQL_QUERIES.getJailsTable());
+            stmt.addBatch(SQL_QUERIES.getOffense_category_id_connectionTable());
+            stmt.addBatch(SQL_QUERIES.getOffense_templateTable());
+            stmt.addBatch(SQL_QUERIES.getPlayer_joinsTable());
+            stmt.addBatch(SQL_QUERIES.getPlayer_leavesTable());
+            stmt.addBatch(SQL_QUERIES.getPlayer_IPTable());
+            stmt.addBatch(SQL_QUERIES.getPlayer_dataTable());
+            stmt.addBatch(SQL_QUERIES.getPlayer_historyTable());
+            stmt.addBatch(SQL_QUERIES.getPunishment_templatesTable());
+            stmt.addBatch(SQL_QUERIES.getPunishment_usedTable());
+            stmt.addBatch(SQL_QUERIES.getScriptTable());
+            int[] res = stmt.executeBatch();
+            Log.debug("updates sent: " + res.length,false, true,true,"");
+            con.commit();
+        return res.length;
+    }
+
+
+
+
+
+    /*public static void initializeTables(String db) {
+        if (db == null) {
                 Log.fatalError("db is not set!!!",false,true,true,"");
                 Log.fatalError("Please check your config and restart your server!",false,true,true,"");
             } else {
 
-        Promise<Void> initPromise = Promise.start()
-                .thenRunAsync(() ->
-            Log.debug("Initializing tables",false,true,true,"")).thenRunAsync(() -> {
+            Log.debug("Initializing tables",false,true,true,"");
                 Connection con = null;
                try {
                      final String createCategoriesTable = "CREATE TABLE IF NOT EXISTS " + db + ".categories ( `category_id` int NOT NULL , `category_name` varchar(30) NOT NULL );";
@@ -85,11 +135,7 @@ public class MySQL {
                        throwables.printStackTrace();
                    }
                }
-    }).thenRunAsync(() -> Log.debug("Tables initialized",false, true,true,""));}
-
-
-    }
-
-    
-    
+    Log.debug("Tables initialized",false, true,true,"");
+            }
+    }*/
 }

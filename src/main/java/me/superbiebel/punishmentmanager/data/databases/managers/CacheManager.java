@@ -1,8 +1,9 @@
-package me.superbiebel.punishmentmanager.data;
+package me.superbiebel.punishmentmanager.data.databases.managers;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import me.lucko.helper.Schedulers;
+import me.superbiebel.punishmentmanager.data.mysql.MySQL;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.entity.Player;
 
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class Cache {
+public class CacheManager {
     private static boolean isInitialized;
     private static HikariConfig cacheDataSourceConfig;
     private static HikariDataSource cacheDataSource;

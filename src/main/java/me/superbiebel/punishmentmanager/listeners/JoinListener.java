@@ -2,7 +2,7 @@ package me.superbiebel.punishmentmanager.listeners;
 
 import me.lucko.helper.Schedulers;
 import me.superbiebel.punishmentmanager.PunishmentManager;
-import me.superbiebel.punishmentmanager.data.MySQL;
+import me.superbiebel.punishmentmanager.data.mysql.MySQL;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

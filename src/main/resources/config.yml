@@ -6,8 +6,16 @@ server: survival
 servergroup:
   - global
 # !!!!!IF THIS OPTION IS NOT ENABLED NOTHING WILL BE SAVED!!!!!
-MySQL:
+database:
   enabled: true
+  #make sure this option is correctly spelled including capitalization
+  #can be:
+  #MySQL
+  #there are more to come don't worry
+  choice: MySQL
+
+
+MySQL:
   db: 'minecraft'
   # (*)
   host: 'localhost'
