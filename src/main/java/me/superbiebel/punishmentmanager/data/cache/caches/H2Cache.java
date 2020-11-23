@@ -6,7 +6,7 @@ import me.superbiebel.punishmentmanager.data.cache.Cache;
 import me.superbiebel.punishmentmanager.utils.Log;
 
 import java.sql.Statement;
-@Deprecated 
+@Deprecated(forRemoval = true)
 public class H2Cache implements Cache {
 
     private static HikariConfig cacheDataSourceConfig;
