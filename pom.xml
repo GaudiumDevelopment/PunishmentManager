@@ -51,6 +51,10 @@
                                         <pattern>de.leonhard.storage</pattern>
                                         <shadedPattern>${project.groupId}.shaded.de.leonhard.storage</shadedPattern>
                                     </relocation>
+                                    <relocation>
+                                        <pattern>com.github.stefvanschie.inventoryframework</pattern>
+                                        <shadedPattern>${project.groupId}.shaded.inventoryframework</shadedPattern>
+                                    </relocation>
                                 </relocations>
                                 <filters>
                                     <filter>
@@ -167,6 +171,16 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.16</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>3.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.stefvanschie.inventoryframework</groupId>
+            <artifactId>IF</artifactId>
+            <version>0.8.0</version>
         </dependency>
     </dependencies>
 </project>

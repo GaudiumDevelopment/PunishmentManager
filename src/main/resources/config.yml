@@ -12,7 +12,7 @@ database:
   #can be:
   #MySQL
   #there are more to come don't worry
-  choice: MySQL
+  choice: "me.superbiebel.punishmentmanager.data.databases.mysql.MySQLDatabase"
 
 
 MySQL:
@@ -38,9 +38,10 @@ messages:
 
 
 cache:
+  type: "me.superbiebel.punishmentmanager.data.cache.caches.EhCache"
   # write here how high the offense id goes,setting it to low can cause offenses to not show up when ur trying to register one
   offense_id_max: 50
-  # use a list of ids instead of a range (will improve performance on join
+  # use a list of ids instead of a range (will improve performance on join)
   use_offense_list: false
   offense_id_list:
     - 1

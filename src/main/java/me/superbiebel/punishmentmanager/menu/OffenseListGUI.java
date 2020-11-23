@@ -1,20 +1,12 @@
 package me.superbiebel.punishmentmanager.menu;
 
-import me.lucko.helper.item.ItemStackBuilder;
 import me.lucko.helper.menu.Item;
 import me.lucko.helper.menu.paginated.PaginatedGui;
 import me.lucko.helper.menu.paginated.PaginatedGuiBuilder;
 import me.lucko.helper.menu.scheme.AbstractSchemeMapping;
 import me.lucko.helper.menu.scheme.MenuScheme;
-import me.lucko.helper.promise.Promise;
-import me.superbiebel.punishmentmanager.data.FetchData;
-import me.superbiebel.punishmentmanager.utils.ColorUtils;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +41,32 @@ public class OffenseListGUI extends PaginatedGui{
 
     @Override
     public void redraw() {
-        if (isFirstDraw()) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*if (isFirstDraw()) {
             Promise<Void> placeItemsInGuiPromise = Promise.start().thenRunSync(()->{
                 List<Item> fetchItems = new ArrayList<>();
                 Item fetchItem = ItemStackBuilder.of(Material.ITEM_FRAME).name(ColorUtils.colorize("&6&lFetching data...")).buildItem().build();
@@ -66,7 +83,7 @@ public class OffenseListGUI extends PaginatedGui{
                 int resultSetSize = 0;
                 ResultSet offenseListGuiItems = null;
 
-                    offenseListGuiItems = FetchData.FetchOffenseListGuiData(false); //TODO change this to true after the cache has been implemented.
+                    offenseListGuiItems = DataHandler.FetchOffenseListGuiData(false); //TODO change this to true after the cache has been implemented.
                     if (!(offenseListGuiItems == null)) {
                         try {
                     offenseListGuiItems.last();
@@ -104,7 +121,7 @@ public class OffenseListGUI extends PaginatedGui{
 
             });
 
-        }
+        }*/
 
 
         super.redraw();

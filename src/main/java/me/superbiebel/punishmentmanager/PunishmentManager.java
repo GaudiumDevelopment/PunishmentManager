@@ -6,12 +6,12 @@ import de.leonhard.storage.internal.settings.ConfigSettings;
 import de.leonhard.storage.internal.settings.DataType;
 import lombok.Getter;
 import me.lucko.helper.Events;
+import me.lucko.helper.Schedulers;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
-import me.superbiebel.punishmentmanager.data.databases.managers.CacheManager;
-import me.superbiebel.punishmentmanager.data.databases.managers.DatabaseManager;
-import me.superbiebel.punishmentmanager.data.mysql.MySQL;
+import me.superbiebel.punishmentmanager.data.managers.CacheManager;
+import me.superbiebel.punishmentmanager.data.managers.DatabaseManager;
 import me.superbiebel.punishmentmanager.listeners.JoinListener;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
 import me.superbiebel.punishmentmanager.utils.Log;
@@ -55,10 +55,10 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     -get and check the version from the config file
     -load the events
     -load the commands
-    -initialize the cache
-    -initialize the database
+    -initialize the cache|async
+    -initialize the database|async
     -----able to interact with database------
-    -start downloading data to cache
+    -start downloading data to cache|async
     -when all of this is done and has completed successfully allow everything to proceed
      */
     @Override
@@ -69,68 +69,55 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         try {
             Log.initLog();
         } catch (IOException e) {
-            Log.fatalError("COULD NOT INIT LOGFILE",false,true,false,"");
+            Log.fatalError("COULD NOT INIT LOGFILE",false,true,false);
             e.printStackTrace();
             Bukkit.getPluginManager().disablePlugin(plugin);
             return;
         }
-        Log.info("LOGGING STARTS AT " + formatter.format(date),false,false,true,null);
+        Log.info("LOGGING STARTS AT " + formatter.format(date),false,false,true);
         checkDebugMode();
         if (!checkConfigVersion()){
-            Log.fatalError("Config version does not correspond with the version that is required by this plugin",false,true,true,"");
-            Log.fatalError("Please back up and then delete your config so we can generate a new one on startup!",false,true,true,"");
-            Log.fatalError("Config version is: " + config.getString("config_version"),false, true,true,"");
-            Log.fatalError("Config version should be: " + configVersion,false, true,true,"");
+            Log.fatalError("Config version does not correspond with the version that is required by this plugin",false,true,true);
+            Log.fatalError("Please back up and then delete your config so we can generate a new one on startup!",false,true,true);
+            Log.fatalError("Config version is: " + config.getString("config_version"),false, true,true);
+            Log.fatalError("Config version should be: " + configVersion,false, true,true);
             Bukkit.getPluginManager().disablePlugin(plugin);
             return;
         }
         if (!config.getBoolean("database.enabled")) {
-            Log.fatalError("Database has not been enabled! please fill in the credentials and set the option to 'true' (without quotes)",false,true,true,"");
+            Log.fatalError("Database has not been enabled! please fill in the credentials and set the option to 'true' (without quotes)",false,true,true);
         }
         try {
             loadEvents();
             loadCommands();
-            CacheManager.initCache();
-            DatabaseManager.Instantiate(DatabaseManager.convertToEnum(config.getString("database.choice")));
+            Schedulers.async().call(()->{
+                CacheManager.initCache(config.getString("cache.type"));
+                return null;
+            });
+            Schedulers.async().call(()->{
+                DatabaseManager.Instantiate(config.getString("database.choice"));
+                return null;
+            });
         } catch (Exception e) {
-            Log.LogException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
+            Log.logException(e, Log.LogLevel.FATALERROR, false, false, true, true, true);
             Bukkit.getPluginManager().disablePlugin(plugin);
             return;
         }
-        /*if (checkConfigVersion() && config.getBoolean("MySQL.enabled")) {
-            loadEvents();
-            loadCommands();
-            Cache.initCache();
-            initMySQL();
-            Log.debug("Everything has been enabled",false,true,true,"");
-        } else if (!config.getBoolean("MySQL.enabled")) {
-            for (int i = 0; i < 5; i++) {
-                Log.fatalError("MYSQL HAS BEEN DISABLED!!! FILL IN THE CREDENTIALS AND ENABLE MYSQL!!!",false,true,true,"");
-            }
-            Log.warning("I know that it spams the above message but this is the storage, without storage nothing will work",false,true,true,"");
-
-
-            Bukkit.getPluginManager().disablePlugin(plugin);
-        } else {
-            Log.warning("Something went wrong, I don't know what went wrong but something went wrong",false,true,true,"");
-        }
-        if (!this.isEnabled()) {
-            Log.fatalError("STARTUP COULD NOT BE COMPLETED, PLEASE CHECK FOR ERRORS IN THE CONSOLE!!!",false,true,true,"");
-        }*/
-
     }
 
     @Override
     public void disable() {
         try {
-        MySQL.getMysqlDataSource().close();
+        CacheManager.getCache().close();
         } catch (NullPointerException throwable) {
-            Log.warning("The MySQL datasource was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true,"");
+            Log.warning("The MySQL datasource was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
+        } catch (Exception e) {
+            Log.logException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
         }
         try {
-            CacheManager.getCacheDataSource().close();
+
         } catch (NullPointerException throwable) {
-            Log.warning("The Cache datasource was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true,"");
+            Log.warning("The Cache datasource was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
         }
         Log.closeLog();
         Bukkit.getServer().getLogger().info("PunishmentManager has been disabled");
@@ -139,7 +126,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
 
     public void loadConfig() {
-        Log.info("loading config...",false,true,false,"");
+        Log.info("loading config...",false,true,false);
         configFile = new File(plugin.getDataFolder().getAbsolutePath() + separator + "configNEW.yml");
         config = LightningBuilder.fromFile(configFile).setConfigSettings(ConfigSettings.PRESERVE_COMMENTS).setDataType(DataType.SORTED).createConfig();
         config.addDefaultsFromInputStream(getResource("config.yml"));
@@ -148,15 +135,15 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     public void checkDebugMode() {
         debugMode = config.getBoolean("debug");
         if (debugMode){
-            Log.debug("Debug mode has been enabled! There will be extensive logging!",false,true,true,"");
+            Log.debug("Debug mode has been enabled! There will be extensive logging!",false,true,true);
         } else {
-            Log.info("Debug mode has been disabled, debug messages will not be sent!",false,true,true,"");
+            Log.info("Debug mode has been disabled, debug messages will not be sent!",false,true,true);
         }
 
     }
 
     public boolean checkConfigVersion() {
-        Log.debug("Checking config version...",false,true,true,"");
+        Log.debug("Checking config version...",false,true,true);
         boolean status;
         if (!config.getString("config_version").equalsIgnoreCase(configVersion)) {
             Bukkit.getPluginManager().disablePlugin(this);
@@ -183,26 +170,26 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
 
     public static void loadEvents() {
-        Log.debug("Loading events...",false, true,true,"");
+        Log.debug("Loading events...",false, true,true);
         Events.subscribe(AsyncPlayerPreLoginEvent.class).handler(JoinListener::new).bindWith(getPlugin());
 
         Events.subscribe(PlayerQuitEvent.class).handler(new LeaveListener()::handleQuit).bindWith(getPlugin());
         Events.subscribe(PlayerKickEvent.class).handler(new LeaveListener()::handleKick).bindWith(getPlugin());
-        Log.debug("Events Loaded!",false,true,true,"");
+        Log.debug("Events Loaded!",false,true,true);
     }
 
 
 
     public void loadCommands() {
-        Log.debug("Loading commands",false,true,true,"");
-        Log.debug("loading the /punish command...",false,true,true,"");
+        Log.debug("Loading commands",false,true,true);
+        Log.debug("loading the /punish command...",false,true,true);
         this.getCommand("punish").setExecutor(new PunishCommand());
-        Log.debug("/punish loaded",false,true,true,"");
-        Log.debug("loading /pmanager",false,true,true,"");
+        Log.debug("/punish loaded",false,true,true);
+        Log.debug("loading /pmanager",false,true,true);
         SystemCommand systemCommand = new SystemCommand();
         this.getCommand("pmanager").setExecutor(systemCommand);
         this.getCommand("pmanager").setTabCompleter(systemCommand);
-        Log.debug("/pmanager is loaded",false,true,true,"");
+        Log.debug("/pmanager is loaded",false,true,true);
     }
     public static Config giveConfig() {
         return config;

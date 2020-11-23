@@ -1,4 +1,4 @@
-package me.superbiebel.punishmentmanager.data.mysql.queries;
+package me.superbiebel.punishmentmanager.data.databases.mysql;
 
 import lombok.Getter;
 import org.intellij.lang.annotations.Language;

@@ -6,7 +6,7 @@ import me.lucko.helper.menu.Item;
 import me.lucko.helper.metadata.Metadata;
 import me.superbiebel.punishmentmanager.PunishmentManager;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
-import me.superbiebel.punishmentmanager.data.DataUtility;
+import me.superbiebel.punishmentmanager.data.DATAKEYS;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -20,7 +20,7 @@ import java.util.Objects;
 public class ActionsListGUI extends Gui{
 
     public ActionsListGUI(Player player) {
-        super(player, 3, "Choose action for " + Metadata.provideForPlayer(player).get(DataUtility.CRIMINAL_KEY).get().getName());
+        super(player, 3, "Choose action for " + Metadata.provideForPlayer(player).get(DATAKEYS.CRIMINAL_KEY).get().getName());
     }
 
 
@@ -91,7 +91,7 @@ public class ActionsListGUI extends Gui{
         setItem(13,newOffense);
         Item history = ItemStackBuilder.of(Material.BOOK).name(ColorUtils.colorize("&4&lHistory")).buildConsumer(ClickType.LEFT,e->{
             if (getPlayer().hasPermission("punishmentmanager.history.gui")) {
-                new HistoryGUI(getPlayer(),6, "History of "+ Metadata.provideForPlayer(p).get(DataUtility.CRIMINAL_KEY).get().getName()).open();
+                new HistoryGUI(getPlayer(),6, "History of "+ Metadata.provideForPlayer(p).get(DATAKEYS.CRIMINAL_KEY).get().getName()).open();
             } else {
                 getPlayer().sendMessage(ColorUtils.colorize(Objects.requireNonNull(PunishmentManager.giveConfig().getString("messages.noPermissionMessage"))));
             }
@@ -101,7 +101,7 @@ public class ActionsListGUI extends Gui{
 
         ItemStack accountInfoSkullItemStack = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta accountInfoSkullItemStackItemMeta = (SkullMeta) accountInfoSkullItemStack.getItemMeta();
-        accountInfoSkullItemStackItemMeta.setOwningPlayer((OfflinePlayer) Metadata.provideForPlayer(p).get(DataUtility.CRIMINAL_KEY).get());
+        accountInfoSkullItemStackItemMeta.setOwningPlayer((OfflinePlayer) Metadata.provideForPlayer(p).get(DATAKEYS.CRIMINAL_KEY).get());
         accountInfoSkullItemStack.setItemMeta(accountInfoSkullItemStackItemMeta);
         Item accountInfoSkull = ItemStackBuilder.of(accountInfoSkullItemStack).buildItem().build();
         Item accountInfo = ItemStackBuilder.of(Material.PLAYER_HEAD).name(ColorUtils.colorize("&4&lAlts")).buildItem().build();

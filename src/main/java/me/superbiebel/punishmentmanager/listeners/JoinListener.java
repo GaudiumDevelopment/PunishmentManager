@@ -1,17 +1,6 @@
 package me.superbiebel.punishmentmanager.listeners;
 
-import me.lucko.helper.Schedulers;
-import me.superbiebel.punishmentmanager.PunishmentManager;
-import me.superbiebel.punishmentmanager.data.mysql.MySQL;
-import me.superbiebel.punishmentmanager.utils.ColorUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.UUID;
 
 public class JoinListener {
 
@@ -20,8 +9,16 @@ public class JoinListener {
     }
 
     public void handleJoin(AsyncPlayerPreLoginEvent e) {
+        //TODO: change this to the protocol from the databse interface
+    }
+}
 
-            Connection con = null;
+
+
+
+
+
+/*Connection con = null;
             PreparedStatement joinStmt = null;
             PreparedStatement ipStmt = null;
 
@@ -37,7 +34,8 @@ public class JoinListener {
 
             }
         try {
-            con = MySQL.getMysqlDataSource().getConnection();
+
+            //con = MySQL.getMysqlDataSource().getConnection();
 
             joinStmt = con.prepareStatement("INSERT INTO player_joins (uuid, join_date, result, ip) VALUES (?,?,?,?);");
             joinStmt.setString(1,uuid);
@@ -66,7 +64,4 @@ public class JoinListener {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-        });
-
-    }
-}
+        });*/

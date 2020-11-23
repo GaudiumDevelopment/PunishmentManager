@@ -1,21 +1,10 @@
-package me.superbiebel.punishmentmanager.data.mysql;
+package me.superbiebel.punishmentmanager.data.databases.mysql;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import dev.simplix.core.database.sql.SqlDatabaseConnection;
-import dev.simplix.core.database.sql.handlers.HikariConnectionHandler;
-import lombok.Getter;
-import me.superbiebel.punishmentmanager.PunishmentManager;
-import me.superbiebel.punishmentmanager.data.mysql.queries.SQL_QUERIES;
-import me.superbiebel.punishmentmanager.utils.Log;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-
+@Deprecated
 public class MySQL {
+}
 
-    private static HikariConfig mySQLConfig;
+    /*private static HikariConfig mySQLConfig;
     @Getter
     private static HikariDataSource mysqlDataSource;
     @Getter
@@ -138,4 +127,4 @@ public class MySQL {
     Log.debug("Tables initialized",false, true,true,"");
             }
     }*/
-}
+//}

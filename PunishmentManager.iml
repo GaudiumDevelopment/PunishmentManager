@@ -43,7 +43,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.md-5:bungeecord-chat:1.16-R0.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.yaml:snakeyaml:1.26" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.zaxxer:HikariCP:3.4.5" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: me.lucko:helper:5.6.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: me.lucko:shadow-bukkit:1.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: me.lucko:shadow:1.3" level="project" />
@@ -62,5 +62,14 @@
     <orderEntry type="library" name="Maven: org.json:json:20190722" level="project" />
     <orderEntry type="library" name="Maven: dev.simplix.core:simplixcore-database-sql:1.0.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.16" level="project" />
+    <orderEntry type="library" name="Maven: org.ehcache:ehcache:3.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.jaxb:jaxb-runtime:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.jaxb:txw2:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.istack:istack-commons-runtime:3.0.7" level="project" />
+    <orderEntry type="library" name="Maven: org.jvnet.staxex:stax-ex:1.8" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.fastinfoset:FastInfoset:1.2.15" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:javax.activation-api:1.2.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.stefvanschie.inventoryframework:IF:0.8.0" level="project" />
   </component>
 </module>

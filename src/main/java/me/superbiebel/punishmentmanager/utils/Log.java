@@ -5,7 +5,6 @@ import me.superbiebel.punishmentmanager.PunishmentManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,9 +22,9 @@ public class Log {
     @Getter private static final String fatalErrorPrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &c[&4ERROR&c] &4&l>> ");
 
 
-    private static Date date = new Date();
-    private static SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
-    private static String separator = System.getProperty("file.separator");
+    private static final Date date = new Date();
+    private static final SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
+    private static final String separator = System.getProperty("file.separator");
     private static String logsFolderSaveLocation = PunishmentManager.getPlugin().getDataFolder().getAbsolutePath() + separator + "logs";
     private static File logsFolder;
     private static File logFile;
@@ -46,7 +45,7 @@ public class Log {
 
         printer = new PrintWriter(logFile);
         Log.debug(logFileSaveLocation,
-                false,true,false,"");
+                false,true,false);
         return true;
     }
     public static boolean closeLog() {
@@ -54,7 +53,7 @@ public class Log {
         return true;
     }
 
-    public static void debug(@NotNull String msg, boolean sendInGame,boolean sendToConsole, boolean logToFile, @Nullable String executorName) {
+    public static synchronized void debug(@NotNull String msg, boolean sendInGame, boolean sendToConsole, boolean logToFile) {
         if (PunishmentManager.isDebugMode()) {
             if (sendInGame) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
@@ -73,7 +72,7 @@ public class Log {
         }
     }
 
-    public static void info(@NotNull String msg, boolean sendInGame,boolean sendToConsole, boolean logToFile, @Nullable String executorName) {
+    public static synchronized void info(@NotNull String msg, boolean sendInGame, boolean sendToConsole, boolean logToFile) {
         if (sendInGame) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.hasPermission("punishmentmanager.log.info")) {
@@ -90,7 +89,7 @@ public class Log {
         }
     }
 
-    public static void warning(@NotNull String msg, boolean sendInGame,boolean sendToConsole, boolean logToFile, @Nullable String executorName) {
+    public static synchronized void warning(@NotNull String msg, boolean sendInGame, boolean sendToConsole, boolean logToFile) {
         if (sendInGame) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.hasPermission("punishmentmanager.log.warning")) {
@@ -107,7 +106,7 @@ public class Log {
         }
     }
 
-    public static void fatalError(@NotNull String msg, boolean sendInGame, boolean sendToConsole, boolean logToFile, @Nullable String executorName) {
+    public static synchronized void fatalError(@NotNull String msg, boolean sendInGame, boolean sendToConsole, boolean logToFile) {
         if (sendInGame) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.hasPermission("punishmentmanager.log.fatalerror")) {
@@ -123,19 +122,19 @@ public class Log {
             printer.flush();
         }
     }
-    public static boolean log(@NotNull String msg, LogLevel loglevel, boolean sendInGame, boolean sendToConsole, boolean logToFile, @Nullable String executorName) {
+    public static synchronized boolean log(@NotNull String msg, LogLevel loglevel, boolean sendInGame, boolean sendToConsole, boolean logToFile) {
         switch (loglevel) {
             case DEBUG:
-                Log.debug(msg, sendInGame, sendToConsole, logToFile, executorName);
+                Log.debug(msg, sendInGame, sendToConsole, logToFile);
                 return true;
             case INFO:
-                Log.info(msg, sendInGame, sendToConsole, logToFile, executorName);
+                Log.info(msg, sendInGame, sendToConsole, logToFile);
                 return true;
             case WARNING:
-                Log.warning(msg, sendInGame, sendToConsole, logToFile, executorName);
+                Log.warning(msg, sendInGame, sendToConsole, logToFile);
                 return true;
             case FATALERROR:
-                Log.fatalError(msg, sendInGame, sendToConsole, logToFile, executorName);
+                Log.fatalError(msg, sendInGame, sendToConsole, logToFile);
                 return true;
             case NOT_FOUND:
                 return false;
@@ -143,29 +142,29 @@ public class Log {
         return false;
     }
 
-    public static void LogException(Throwable e, LogLevel logLevel, boolean sendInGame, boolean sendFullInGame, boolean sendToConsole, boolean sendFullInConsole, boolean logToFile){
+    public static synchronized void logException(Throwable e, LogLevel logLevel, boolean sendInGame, boolean sendFullInGame, boolean sendToConsole, boolean sendFullInConsole, boolean logToFile){
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         e.printStackTrace(pw);
         String stacktrace = sw.toString();
         String cause = e.toString();
         if (sendFullInGame){
-            Log.log(stacktrace,logLevel,true,false,false,"");
+            Log.log(stacktrace,logLevel,true,false,false);
         } else {
-            Log.log(cause,logLevel,sendInGame,false,false,"");
+            Log.log(cause,logLevel,sendInGame,false,false);
         }
         if (sendFullInConsole) {
-            Log.log(stacktrace,logLevel,false,true,true,"");
+            Log.log(stacktrace,logLevel,false,true,true);
         } else {
-            Log.log(cause,logLevel,false,sendToConsole,false,"");
+            Log.log(cause,logLevel,false,sendToConsole,false);
         }
-        Log.log(stacktrace,logLevel,false,false,true,"");
+        Log.log(stacktrace,logLevel,false,false,true);
 
 
 
 
     }
-    public static LogLevel convertToLogLevel(String logLevelString) {
+    public static synchronized LogLevel convertToLogLevel(String logLevelString) {
         if (logLevelString.equalsIgnoreCase("debug")) {
             return LogLevel.DEBUG;
         } else if (logLevelString.equalsIgnoreCase("info")) {
