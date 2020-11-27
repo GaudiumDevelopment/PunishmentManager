@@ -57,7 +57,7 @@ public class SQL_QUERIES {
     private static  String Player_dataTable = "CREATE TABLE IF NOT EXISTS {database_name}.player_data ( uuid varchar(50) NOT NULL , player_name varchar(20) NOT NULL );";
     @Language("SQL")
     @Getter
-    private static  String Player_historyTable = "CREATE TABLE IF NOT EXISTS {database_name}.player_history ( history_id int NOT NULL , uuid_victim varchar(50) NOT NULL , uuid_executor varchar(50) NOT NULL , formatted_reason varchar(200) , calculated_ban_duration bigint , calculated_jail_duration bigint , calculated_mute_duration bigint , jail_id int , time_done_mute bigint UNSIGNED , time_done_jail bigint , status varchar(200) NOT NULL );";
+    private static  String Player_historyTable = "CREATE TABLE IF NOT EXISTS {database_name}.player_history ( history_id int NOT NULL , uuid_criminal varchar(50) NOT NULL , uuid_executor varchar(50) NOT NULL , formatted_reason varchar(200) , calculated_ban_duration bigint , calculated_jail_duration bigint , calculated_mute_duration bigint , jail_id int , time_done_mute bigint UNSIGNED , time_done_jail bigint , status varchar(200) NOT NULL );";
     @Language("SQL")
     @Getter
     private static  String Punishment_templatesTable = "CREATE TABLE IF NOT EXISTS {database_name}.punishment_templates ( `punishment_id` int NOT NULL , threshold int NOT NULL , `category_id` int NOT NULL , `mute_calculation` varchar(200) , `IP_mute_calculation` varchar(200) ,`ban_calculation` varchar(200) ,`IP_ban_calculation` varchar(200) , `jail_calculation` varchar(200) , server varchar(200) );";

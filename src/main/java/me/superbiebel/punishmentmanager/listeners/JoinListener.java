@@ -1,27 +1,49 @@
 package me.superbiebel.punishmentmanager.listeners;
 
+import me.lucko.helper.Schedulers;
+import me.superbiebel.punishmentmanager.data.datahandlers.DataHandlerManager;
+import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+
+import java.net.InetAddress;
+import java.util.UUID;
 
 public class JoinListener {
-
-    public JoinListener(AsyncPlayerPreLoginEvent e) {
-        handleJoin(e);
+    
+    public void handlePreJoin(AsyncPlayerPreLoginEvent e) {
+        String possibleKickMessage = e.getKickMessage();
+        UUID uuid = e.getUniqueId();
+        InetAddress ip = e.getAddress();
+        AsyncPlayerPreLoginEvent asyncPlayerPreLoginEvent;
+        AsyncPlayerPreLoginEvent.Result result = e.getLoginResult();
+        Schedulers.async().run(()->{
+            try {
+                DataHandlerManager.getDataHandler().insertJoin(uuid,"NOT ALLOWED",possibleKickMessage,result, ip);
+            } catch (Exception exception) {
+                Log.logException(exception, Log.LogLevel.FATALERROR,true,false,true,true,true);
+            }
+        });
+        
     }
-
-    public void handleJoin(AsyncPlayerPreLoginEvent e) {
-        //TODO: change this to the protocol from the databse interface
+    public void handleJoin(PlayerJoinEvent e) {
+        String joinMessage = e.getJoinMessage();
+        InetAddress ip = e.getPlayer().getAddress().getAddress();
+        UUID uuid =  e.getPlayer().getUniqueId();
+        Schedulers.async().run(()->{
+            try {
+                DataHandlerManager.getDataHandler().insertJoin(uuid,joinMessage,"", AsyncPlayerPreLoginEvent.Result.ALLOWED, ip);
+            } catch (Exception exception) {
+                Log.logException(exception, Log.LogLevel.FATALERROR,true,false,true,true,true);
+            }
+        });
     }
 }
-
-
-
-
 
 
 /*Connection con = null;
             PreparedStatement joinStmt = null;
             PreparedStatement ipStmt = null;
-
             String uuid = e.getUniqueId().toString();
             String loginResult = e.getLoginResult().name();
             Long currentTime = System.currentTimeMillis();

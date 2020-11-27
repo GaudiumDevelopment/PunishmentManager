@@ -2,13 +2,15 @@ package me.superbiebel.punishmentmanager.data.datahandlers;
 
 import me.superbiebel.punishmentmanager.data.cache.Cache;
 import me.superbiebel.punishmentmanager.data.databases.Database;
+import me.superbiebel.punishmentmanager.data.managers.DatabaseManager;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
+import java.net.InetAddress;
 import java.util.UUID;
 
 public class DefaultDataHandler implements DataHandler{
-    private static Database db;
+    private static Database db = DatabaseManager.getDatabase();
     private static Cache cache;
 
 
@@ -26,18 +28,18 @@ public class DefaultDataHandler implements DataHandler{
     }
 
     @Override
-    public void insertJoin(UUID uuid, String joinMessage, String kickMessage, AsyncPlayerPreLoginEvent.Result loginresult) throws Exception {
-        
+    public void insertJoin(UUID uuid, String joinMessage, String kickMessage, AsyncPlayerPreLoginEvent.Result loginresult, InetAddress IP) throws Exception {
+    
     }
 
     @Override
     public void insertLeave(UUID uuid, String leaveMessage) throws Exception {
 
     }
-
+    
     @Override
-    public void insertKick(UUID uuid, String kickMessage) throws Exception {
-
+    public void insertKick(UUID uuid, String kickreason, String leaveMessage) throws Exception {
+    
     }
 }
 

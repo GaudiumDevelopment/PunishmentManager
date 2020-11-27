@@ -1,8 +1,10 @@
 package me.superbiebel.punishmentmanager.data.databases;
 
-import org.bukkit.entity.Player;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public interface Database {
     void init() throws Exception;
@@ -10,9 +12,9 @@ public interface Database {
     void fetchOffenselistGUIData() throws Exception;
     void fetchHistoryGUIData() throws Exception;
     ArrayList fetchBannedPlayers() throws Exception;
-    void insertJoin(Player p) throws Exception;
+    void insertJoin(UUID uuid, String joinMessage, String kickMessage, AsyncPlayerPreLoginEvent.Result loginresult, InetAddress IP) throws Exception;
     void insertIp(String ip) throws Exception;
-    void insertQuit(Player p) throws Exception;
-    void insertKick(Player p, String reason) throws Exception;
+    void insertLeave(UUID uuid, String leaveMessage) throws Exception;
+    void insertKick(UUID uuid, String kickreason, String leaveMessage) throws Exception;
 
 }

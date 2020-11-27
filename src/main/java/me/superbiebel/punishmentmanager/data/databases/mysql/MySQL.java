@@ -1,18 +1,25 @@
 package me.superbiebel.punishmentmanager.data.databases.mysql;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import dev.simplix.core.database.sql.SqlDatabaseConnection;
+import dev.simplix.core.database.sql.handlers.HikariConnectionHandler;
+import lombok.Getter;
+import me.superbiebel.punishmentmanager.PunishmentManager;
+import me.superbiebel.punishmentmanager.utils.Log;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 @Deprecated
 public class MySQL {
-}
 
-    /*private static HikariConfig mySQLConfig;
+    private static HikariConfig mySQLConfig;
     @Getter
     private static HikariDataSource mysqlDataSource;
     @Getter
     private static SqlDatabaseConnection sourceConnection;
-
-    private MySQL() {
-        //shouldn't be used tbh
-    }
     public static void start(String host, String username, String password, String port, String db, String useSSL) throws SQLException {
         initializeTables(instantiate(host, username, password, port, db, useSSL));
     }
@@ -22,7 +29,7 @@ public class MySQL {
             mySQLConfig = new HikariConfig();
             mySQLConfig.setJdbcUrl( "jdbc:mysql://" + host + ":" + port + "/" + db + "?useSSL=" + useSSL);
 
-            Log.debug("jdbc:mysql://" + host + ":" + port + "/" + db + "?useSSL=" + useSSL,false, true,true,"");
+            Log.debug("jdbc:mysql://" + host + ":" + port + "/" + db + "?useSSL=" + useSSL,false, true,true);
             mySQLConfig.setUsername( username );
             mySQLConfig.setPassword( password );
             mySQLConfig.addDataSourceProperty( "cachePrepStmts" , PunishmentManager.giveConfig().getString("MySQL.cachePrepStmts"));
@@ -62,7 +69,7 @@ public class MySQL {
             stmt.addBatch(SQL_QUERIES.getPunishment_usedTable());
             stmt.addBatch(SQL_QUERIES.getScriptTable());
             int[] res = stmt.executeBatch();
-            Log.debug("updates sent: " + res.length,false, true,true,"");
+            Log.debug("updates sent: " + res.length,false, true,true);
             con.commit();
         return res.length;
     }
@@ -71,13 +78,13 @@ public class MySQL {
 
 
 
-    /*public static void initializeTables(String db) {
+    public static void initializeTables(String db) {
         if (db == null) {
-                Log.fatalError("db is not set!!!",false,true,true,"");
-                Log.fatalError("Please check your config and restart your server!",false,true,true,"");
+                Log.fatalError("db is not set!!!",false,true,true);
+                Log.fatalError("Please check your config and restart your server!",false,true,true);
             } else {
 
-            Log.debug("Initializing tables",false,true,true,"");
+            Log.debug("Initializing tables",false,true,true);
                 Connection con = null;
                try {
                      final String createCategoriesTable = "CREATE TABLE IF NOT EXISTS " + db + ".categories ( `category_id` int NOT NULL , `category_name` varchar(30) NOT NULL );";
@@ -112,7 +119,7 @@ public class MySQL {
             stmt.addBatch(createPunishment_usedTable);
             stmt.addBatch(createScriptTable);
             int[] res = stmt.executeBatch();
-            Log.debug("updates sent: " + res.length,false, true,true,"");
+            Log.debug("updates sent: " + res.length,false, true,true);
             con.commit();
         } catch (SQLException throwables) {
                     throwables.printStackTrace();
@@ -124,7 +131,7 @@ public class MySQL {
                        throwables.printStackTrace();
                    }
                }
-    Log.debug("Tables initialized",false, true,true,"");
+               Log.debug("Tables initialized",false, true,true);
             }
-    }*/
-//}
+    }
+}

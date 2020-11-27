@@ -8,12 +8,14 @@ import lombok.Getter;
 import me.superbiebel.punishmentmanager.PunishmentManager;
 import me.superbiebel.punishmentmanager.data.databases.Database;
 import me.superbiebel.punishmentmanager.utils.Log;
-import org.bukkit.entity.Player;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
+import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class MySQLDatabase implements Database {
     public static boolean isInitialized = false;
@@ -22,12 +24,12 @@ public class MySQLDatabase implements Database {
     private static HikariDataSource mysqlDataSource;
     @Getter
     private static SqlDatabaseConnection sourceConnection;
-    private static String host = PunishmentManager.giveConfig().getString("MySQL.host");
-    private static String username = PunishmentManager.giveConfig().getString("MySQL.username");
-    private static String password = PunishmentManager.giveConfig().getString("MySQL.password");
-    private static String port = PunishmentManager.giveConfig().getString("MySQL.port");
-    private static String db = PunishmentManager.giveConfig().getString("MySQL.db");
-    private static String useSSL = PunishmentManager.giveConfig().getString("MySQL.useSSL");
+    private static final String host = PunishmentManager.giveConfig().getString("MySQL.host");
+    private static final String username = PunishmentManager.giveConfig().getString("MySQL.username");
+    private static final String password = PunishmentManager.giveConfig().getString("MySQL.password");
+    private static final String port = PunishmentManager.giveConfig().getString("MySQL.port");
+    private static final String db = PunishmentManager.giveConfig().getString("MySQL.db");
+    private static final String useSSL = PunishmentManager.giveConfig().getString("MySQL.useSSL");
     public MySQLDatabase() {
         if (isInitialized) {
             throw new IllegalStateException("An instance of this class already exists!");
@@ -47,7 +49,7 @@ public class MySQLDatabase implements Database {
         mySQLConfig.addDataSourceProperty( "prepStmtCacheSize" , PunishmentManager.giveConfig().getOrDefault("MySQL.prepStmtCacheSize","250") );
         mySQLConfig.addDataSourceProperty( "prepStmtCacheSqlLimit" , PunishmentManager.giveConfig().getOrDefault("MySQL.prepStmtCacheSqlLimit","2048") );
         mysqlDataSource = new HikariDataSource( mySQLConfig );
-        SqlDatabaseConnection connection = new SqlDatabaseConnection(
+        sourceConnection = new SqlDatabaseConnection(
                 mysqlDataSource,
                 host,
                 username,
@@ -55,7 +57,6 @@ public class MySQLDatabase implements Database {
                 port,
                 db,
                 new HikariConnectionHandler());
-        sourceConnection = connection;
         return sourceConnection;
     }
     public static int initializeTables(SqlDatabaseConnection dbconnection) throws SQLException {
@@ -87,12 +88,11 @@ public class MySQLDatabase implements Database {
 
     @Override
     public void init() throws Exception {
-        
+        initializeTables(initializeDatabase());
     }
 
     @Override
     public void close() throws Exception {
-
     }
 
     @Override
@@ -109,24 +109,25 @@ public class MySQLDatabase implements Database {
     public ArrayList fetchBannedPlayers() throws Exception {
         return null;
     }
-
+    
     @Override
-    public void insertJoin(Player p) throws Exception {
-
+    public void insertJoin(UUID uuid, String joinMessage, String kickMessage, AsyncPlayerPreLoginEvent.Result loginresult, InetAddress IP) throws Exception {
+    
     }
 
     @Override
     public void insertIp(String ip) throws Exception {
 
     }
-
+    
     @Override
-    public void insertQuit(Player p) throws Exception {
-
+    public void insertLeave(UUID uuid, String leaveMessage) throws Exception {
+    
     }
-
+    
     @Override
-    public void insertKick(Player p, String reason) throws Exception {
-
+    public void insertKick(UUID uuid, String kickreason, String leaveMessage) throws Exception {
+    
     }
+    
 }

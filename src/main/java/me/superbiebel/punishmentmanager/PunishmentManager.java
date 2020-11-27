@@ -16,7 +16,9 @@ import me.superbiebel.punishmentmanager.listeners.JoinListener;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.Bukkit;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -129,7 +131,8 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         Log.info("loading config...",false,true,false);
         configFile = new File(plugin.getDataFolder().getAbsolutePath() + separator + "configNEW.yml");
         config = LightningBuilder.fromFile(configFile).setConfigSettings(ConfigSettings.PRESERVE_COMMENTS).setDataType(DataType.SORTED).createConfig();
-        config.addDefaultsFromInputStream(getResource("config.yml"));
+        config.addDefaultsFromInputStream(super.getResource("config.yml"));
+        
     }
 
     public void checkDebugMode() {
@@ -171,10 +174,20 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
     public static void loadEvents() {
         Log.debug("Loading events...",false, true,true);
-        Events.subscribe(AsyncPlayerPreLoginEvent.class).handler(JoinListener::new).bindWith(getPlugin());
-
-        Events.subscribe(PlayerQuitEvent.class).handler(new LeaveListener()::handleQuit).bindWith(getPlugin());
-        Events.subscribe(PlayerKickEvent.class).handler(new LeaveListener()::handleKick).bindWith(getPlugin());
+        
+        Events.subscribe(AsyncPlayerPreLoginEvent.class, EventPriority.MONITOR).handler((e)->{
+            if (!(e.getLoginResult() == AsyncPlayerPreLoginEvent.Result.ALLOWED)){
+                JoinListener joinListener = new JoinListener();
+                joinListener.handlePreJoin(e);
+            }
+        }).bindWith(getPlugin());
+        Events.subscribe(PlayerJoinEvent.class, EventPriority.MONITOR).handler((e)-> {
+            JoinListener joinListener = new JoinListener();
+            joinListener.handleJoin(e);
+        });
+        
+        Events.subscribe(PlayerQuitEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleQuit).bindWith(getPlugin());
+        Events.subscribe(PlayerKickEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleKick).bindWith(getPlugin());
         Log.debug("Events Loaded!",false,true,true);
     }
 
