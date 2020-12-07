@@ -12,7 +12,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@Deprecated
+@Deprecated(forRemoval = true)
 public class MySQL {
 
     private static HikariConfig mySQLConfig;
