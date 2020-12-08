@@ -1,6 +1,6 @@
 language: java
-script:
-  - mvn clean install
+install: bash scripts/build.bash
+script: echo "hello, this is travis!"
 os: osx
 jdk:
   - openjdk15
