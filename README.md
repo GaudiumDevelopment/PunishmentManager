@@ -1,10 +1,10 @@
 Downloads: 
 
--Stable:[ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/STABLE/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/STABLE/_latestVersion) (no builds yet)
+-Stable:[ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/RELEASE/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/RELEASE/_latestVersion) (no builds yet)
 
--Dev:[ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/DEV/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/DEV/_latestVersion) (no builds yet)
+-Release candidates:[ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/RELEASE_CANDIDATE/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/RELEASE_CANDIDATE/_latestVersion) (no builds yet)
 
--Indev[ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/INDEV/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/INDEV/_latestVersion)
+-Development:[ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/RELEASE/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/DEVELOPMENT/_latestVersion)
 
 Legal: [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0) 
 
@@ -18,8 +18,8 @@ A punishment plugin for all your punishment needs! Punish those bad players with
 
 PunishmentManager tries its best to provide maximal customisablity. Want to calculate how hard a player should be punished? It's possible! Want to set certain thresholds for certain punishments? It's possible!
 
-Want some indev builds to try out? Click [![Download](null/packages/moderationmanager/PunishmentManager/INDEV/images/download.svg?version=INDEV_build_30) ](https://bintray.com/moderationmanager/PunishmentManager/INDEV/INDEV_build_30/link) to get them! (indev ≠ dev builds, I wont take care of backwards compatability, things can change really fast, and bugs will almost be certainly present.)
+Want some indev builds to try out? Click [ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/RELEASE/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/RELEASE/_latestVersion) to get them!
 
 # WARNING: STILL WORK IN PROGRESS! 
-## Indev versions are likely to not be backwards compatible with each other.
-# NEVER USE INDEV VERSION ON A PRODUCTION SERVER, IT IS POSSIBLE YOU WILL HAVE TO RESET YOUR WHOLE DATABASE BECAUSE OF DATABASE CHANGES!!!
+## DEVELOPMENT versions are likely to not be backwards compatible with each other.
+# NEVER USE DEVELOPMENT VERSION ON A PRODUCTION SERVER, IT IS POSSIBLE YOU WILL HAVE TO RESET YOUR WHOLE DATABASE BECAUSE OF DATABASE CHANGES!!!
