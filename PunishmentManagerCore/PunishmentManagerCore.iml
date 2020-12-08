@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="minecraft" name="Minecraft">
+      <configuration>
+        <autoDetectTypes>
+          <platformType>SPIGOT</platformType>
+        </autoDetectTypes>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_9">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: commons-lang:commons-lang:2.6" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.guava:guava:21.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.code.gson:gson:2.8.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.md-5:bungeecord-chat:1.16-R0.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.yaml:snakeyaml:1.26" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.zaxxer:HikariCP:3.4.5" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: me.lucko:helper:5.6.5" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: me.lucko:shadow-bukkit:1.6" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: me.lucko:shadow:1.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.flowpowered:flow-math:1.0.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.jodah:expiringmap:0.5.8" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.kyori:event-api:3.0.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.checkerframework:checker-qual:2.5.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.code.findbugs:jsr305:3.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.hsqldb:hsqldb:2.4.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: me.clip:placeholderapi:2.10.9" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains:annotations:19.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.graalvm.sdk:graal-sdk:20.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.graalvm.truffle:truffle-api:20.2.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.simplix-softworks:simplixstorage:3.1.9" level="project" />
+    <orderEntry type="library" name="Maven: com.esotericsoftware.yamlbeans:yamlbeans:1.13" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20190722" level="project" />
+    <orderEntry type="library" name="Maven: dev.simplix.core:simplixcore-database-sql:1.0.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.16" level="project" />
+    <orderEntry type="library" name="Maven: org.ehcache:ehcache:3.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.jaxb:jaxb-runtime:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish.jaxb:txw2:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.istack:istack-commons-runtime:3.0.7" level="project" />
+    <orderEntry type="library" name="Maven: org.jvnet.staxex:stax-ex:1.8" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.fastinfoset:FastInfoset:1.2.15" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:javax.activation-api:1.2.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.stefvanschie.inventoryframework:IF:0.8.0" level="project" />
+  </component>
+</module>

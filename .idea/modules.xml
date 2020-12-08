@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/DefaultDataHandler/DefaultDataHandler.iml" filepath="$PROJECT_DIR$/DefaultDataHandler/DefaultDataHandler.iml" />
       <module fileurl="file://$PROJECT_DIR$/PunishmentManager.iml" filepath="$PROJECT_DIR$/PunishmentManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PunishmentManagerCore/PunishmentManagerCore.iml" filepath="$PROJECT_DIR$/PunishmentManagerCore/PunishmentManagerCore.iml" />
     </modules>
   </component>
 </project>
