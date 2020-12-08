@@ -19,13 +19,12 @@
 -Things that are changed should be formatted like this: -changed <thing> <from> -> <to> <reason>
 
 ## How to make a new feature
-
-Make a new branch on the indev branch, then fully implement everything u want. Lastly make a PR to the indev branch (we will probably accept that PR) it will be thoroughly tested again and if the whole thing is stable enough everything will go to the dev branch and ultimately to the master branch).
+Make a fork! Do not use your organization to fork it but your personal account, this way we can edit things more easily! If you are completely done, you can make a PR and we will look in to it as soon as possible! make sure you branch of the master branch!
 
 ## What branch serves what purpose?
 
-Master: Everything is as stable as it can be (these will be the releases)
+release: Everything is as stable as it can be.
 
-Dev: pretty stable, made for people who want new features fast but don't care if there are any bugs in it.
+release_candidate: pretty stable, made for people who want new features fast but don't care if there are one or two bugs in it.
 
-Indev: This is the coding hellhole, everything here is only for testing. Bugs are everywhere and things are waiting to be transferred to the dev branch. tl;dr: This branch is unstable as hell and only used for developing new features.
+master: This is the coding hellhole, everything here is only for testing. Bugs are everywhere and things are waiting to be transferred to the dev branch. tl;dr: This branch is unstable as hell and only used for developing new features.
