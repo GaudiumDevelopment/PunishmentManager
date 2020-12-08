@@ -1,0 +1,68 @@
+#Thank you for using PunishmentManager, I hope you enjoy using the plugin.
+#every string where there is a (*) needs to be contained in a single '
+
+debug: true
+server: survival
+servergroup:
+  - global
+# !!!!!IF THIS OPTION IS NOT ENABLED NOTHING WILL BE SAVED!!!!!
+database:
+  enabled: true
+  #make sure this option is correctly spelled including capitalization
+  #can be:
+  #MySQL
+  #there are more to come don't worry
+  choice: "me.superbiebel.punishmentmanager.data.databases.mysql.MySQLDatabase"
+
+
+MySQL:
+  db: 'minecraft'
+  # (*)
+  host: 'localhost'
+  # (*)
+  username: 'plugintest'
+  # (*)
+  password: 'joren'
+  # (*)
+  port: 3306
+  useSSL: false
+  #extra options for hikari for the people who know how to use it!
+  #I am not responsible for any corruptions or issues that might arise when using this the wrong way!
+  #if you use this you acknowledge that issues that have to do with database corruptions or mysql problems will be of a lower priority and that you can receive less support then normal.
+  cachePrepStmts: true
+  prepStmtCacheSize: 250
+  prepStmtCacheSqlLimit: 2048
+
+messages:
+  noPermissionMessage: "&r&4&lPunishment&b&lManager&4&l>> &4&lYou do not have the permission for that!"
+
+
+cache:
+  type: "me.superbiebel.punishmentmanager.data.cache.caches.EhCache"
+  # write here how high the offense id goes,setting it to low can cause offenses to not show up when ur trying to register one
+  offense_id_max: 50
+  # use a list of ids instead of a range (will improve performance on join)
+  use_offense_list: false
+  offense_id_list:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    #and so on
+
+
+
+
+
+
+
+#This is the end of the config, no really! It is!
+#---------------------------------------------------------------------------------------------------------------------------------------------------
+#DO NOT TOUCH!!! TOUCHING = BREAKING THE WHOLE PLUGIN!!!!
+config_version: indev
+
