@@ -6,22 +6,22 @@ jdk:
   - openjdk15
 deploy:
   - provider: script
-    script: bash scripts/upload_STABLE.bash $TRAVIS_BUILD_NUMBER $API_KEY
+    script: bash scripts/upload_RELEASE.bash $TRAVIS_BUILD_NUMBER $API_KEY
+    cleanup: false
+    on:
+      branch: release
+  - provider: script
+    script: bash scripts/upload_RELEASE_CANDIDATE.bash $TRAVIS_BUILD_NUMBER $API_KEY
+    cleanup: false
+    on:
+      branch: release_candidate
+  - provider: script
+    script: bash scripts/upload_DEVELOPMENT.bash $TRAVIS_BUILD_NUMBER $API_KEY
     cleanup: false
     on:
       branch: master
-  - provider: script
-    script: bash scripts/upload_DEV.bash $TRAVIS_BUILD_NUMBER $API_KEY
-    cleanup: false
-    on:
-      branch: dev
-  - provider: script
-    script: bash scripts/upload_INDEV.bash $TRAVIS_BUILD_NUMBER $API_KEY
-    cleanup: false
-    on:
-      branch: indev
 branches:
   only:
     - master
-    - release_candidates
-    - production
+    - release_candidate
+    - release
