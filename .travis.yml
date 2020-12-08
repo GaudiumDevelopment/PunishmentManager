@@ -23,5 +23,5 @@ deploy:
 branches:
   only:
     - master
-    - dev
-    - indev
+    - release_candidates
+    - production
