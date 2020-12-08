@@ -15,7 +15,7 @@
     <version>0.0.1-EXPERIMENTAL</version>
     <packaging>jar</packaging>
 
-    <name>Defaultdatahandler</name>
+    <name>DefaultDataHandler</name>
 
     <properties>
         <java.version>1.8</java.version>
@@ -78,7 +78,7 @@
         </dependency>
         <dependency>
             <groupId>me.superbiebel</groupId>
-            <artifactId>PunishmentManager</artifactId>
+            <artifactId>PunishmentManagerCore</artifactId>
             <version>NOT-REAL-VERSION</version>
             <scope>provided</scope>
         </dependency>
