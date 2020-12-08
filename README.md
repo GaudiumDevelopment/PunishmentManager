@@ -18,7 +18,7 @@ A punishment plugin for all your punishment needs! Punish those bad players with
 
 PunishmentManager tries its best to provide maximal customisablity. Want to calculate how hard a player should be punished? It's possible! Want to set certain thresholds for certain punishments? It's possible!
 
-Want some indev builds to try out? Click [ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/RELEASE/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/RELEASE/_latestVersion) to get them!
+Want some development builds to try out? Click [ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/RELEASE/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/RELEASE/_latestVersion) to get them! (Strictly for testing, database corruption is possible and these builds are unstable as heck)
 
 # WARNING: STILL WORK IN PROGRESS! 
 ## DEVELOPMENT versions are likely to not be backwards compatible with each other.
