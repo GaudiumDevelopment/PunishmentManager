@@ -7,11 +7,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="PunishmentManager" />
+        <module name="DefaultDataHandler" />
+        <module name="PunishmentManagerCore" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="15">
-      <module name="PunishmentManager" target="9" />
+      <module name="DefaultDataHandler" target="1.8" />
+      <module name="PunishmentManager" target="1.5" />
+      <module name="PunishmentManagerCore" target="9" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

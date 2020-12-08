@@ -16,6 +16,8 @@
       <list>
         <option value="$PROJECT_DIR$/PunishmentManager-spigot_side/PunishmentManager/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/DefaultDataHandler/pom.xml" />
+        <option value="$PROJECT_DIR$/PunishmentManagerCore/pom.xml" />
       </list>
     </option>
   </component>
