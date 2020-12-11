@@ -10,5 +10,4 @@ tar -cvzf PunishmentManager-build_$1.tar PunishmentManager-build_$1
 
 
 curl -T /Users/travis/PunishmentManager-build_$1.tar -usuperbiebel:$2 -X PUT https://api.bintray.com/content/moderationmanager/PunishmentManager/DEVELOPMENT/build_$1/PunishmentManager-build_$1.tar\?publish=1
-curl -T /Users/travis/PunishmentManager-build_$1 -usuperbiebel:$2 -X PUT https://api.bintray.com/content/moderationmanager/PunishmentManager/DEVELOPMENT/build_$1/PunishmentManager-build_$1\?publish=1
 curl -T /Users/travis/PunishmentManager-build_$1/PunishmentManagerCore-build_$1.jar -usuperbiebel:$2 -X PUT https://api.bintray.com/content/moderationmanager/PunishmentManager/DEVELOPMENT/build_$1/PunishmentManager-build_$1.jar\?publish=1
