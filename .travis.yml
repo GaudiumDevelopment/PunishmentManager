@@ -2,7 +2,7 @@ language: java
 script: mvn clean install
 os: osx
 jdk:
-  - openjdk15
+  - openjdk14
 deploy:
   - provider: script
     script: bash scripts/upload_RELEASE.bash $TRAVIS_BUILD_NUMBER $API_KEY
