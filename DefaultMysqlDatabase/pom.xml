@@ -97,10 +97,14 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
-            <repository>
-                <id>jitpack.io</id>
-                <url>https://jitpack.io</url>
-            </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
+            <id>simplixsoft-public</id>
+            <url>https://repo.simplix.dev/repository/simplixsoft-public/</url>
+        </repository>
     </repositories>
 
     <dependencies>
