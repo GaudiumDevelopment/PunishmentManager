@@ -12,7 +12,7 @@
 
     <groupId>me.superbiebel</groupId>
     <artifactId>defaultdatahandler</artifactId>
-    <version>0.0.1-EXPERIMENTAL</version>
+    <version>NOT-REAL-VERSION</version>
     <packaging>jar</packaging>
 
     <name>DefaultDataHandler</name>

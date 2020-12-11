@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface Database {
     void init() throws Exception;
-    void close() throws Exception;
+    void shutdown() throws Exception;
     void fetchOffenselistGUIData() throws Exception;
     void fetchHistoryGUIData() throws Exception;
     ArrayList fetchBannedPlayers() throws Exception;
@@ -16,5 +16,4 @@ public interface Database {
     void insertIp(String ip) throws Exception;
     void insertLeave(UUID uuid, String leaveMessage) throws Exception;
     void insertKick(UUID uuid, String kickreason, String leaveMessage) throws Exception;
-
 }

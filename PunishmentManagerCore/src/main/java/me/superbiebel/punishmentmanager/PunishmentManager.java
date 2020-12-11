@@ -10,6 +10,7 @@ import me.lucko.helper.Schedulers;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
+import me.superbiebel.punishmentmanager.data.datahandler.DataHandlerManager;
 import me.superbiebel.punishmentmanager.data.managers.CacheManager;
 import me.superbiebel.punishmentmanager.data.managers.DatabaseManager;
 import me.superbiebel.punishmentmanager.listeners.JoinListener;
@@ -100,6 +101,10 @@ public class PunishmentManager extends ExtendedJavaPlugin {
                 DatabaseManager.Instantiate(config.getString("database.choice"));
                 return null;
             });
+            Schedulers.async().call(()->{
+                DataHandlerManager.Instantiate();
+                return null;
+            });
         } catch (Exception e) {
             Log.logException(e, Log.LogLevel.FATALERROR, false, false, true, true, true);
             Bukkit.getPluginManager().disablePlugin(plugin);
@@ -111,6 +116,8 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     public void disable() {
         try {
         CacheManager.getCache().close();
+        DatabaseManager.getDatabase().shutdown();
+        DataHandlerManager.getDataHandler().shutdown();
         } catch (NullPointerException throwable) {
             Log.warning("The MySQL datasource was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
         } catch (Exception e) {

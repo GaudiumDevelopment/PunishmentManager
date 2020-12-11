@@ -1,7 +1,8 @@
-package me.superbiebel.punishmentmanager.data.datahandlers;
+package me.superbiebel.defaultdatahandler;
 
 import me.superbiebel.punishmentmanager.data.cache.Cache;
 import me.superbiebel.punishmentmanager.data.databases.Database;
+import me.superbiebel.punishmentmanager.data.datahandler.DataHandler;
 import me.superbiebel.punishmentmanager.data.managers.DatabaseManager;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
@@ -9,21 +10,18 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import java.net.InetAddress;
 import java.util.UUID;
 
-public class DefaultDataHandler implements DataHandler{
+public class DefaultDataHandler implements DataHandler {
     private static Database db = DatabaseManager.getDatabase();
     private static Cache cache;
 
-
-
-
-
+    @Override
     public void init() throws Exception{
         Log.debug("init called in DataHandler",false,true,true);
         Log.debug("DataHandler init completed",false,true,true);
     }
 
-
-    public void close() throws Exception {
+    @Override
+    public void shutdown() throws Exception {
 
     }
 

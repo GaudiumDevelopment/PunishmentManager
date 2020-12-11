@@ -1,7 +1,7 @@
 package me.superbiebel.punishmentmanager.listeners;
 
 import me.lucko.helper.Schedulers;
-import me.superbiebel.punishmentmanager.data.datahandlers.DataHandlerManager;
+import me.superbiebel.punishmentmanager.data.datahandler.DataHandlerManager;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;

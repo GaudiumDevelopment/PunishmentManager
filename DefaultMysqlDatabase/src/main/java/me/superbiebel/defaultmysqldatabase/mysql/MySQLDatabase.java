@@ -1,4 +1,4 @@
-package me.superbiebel.punishmentmanager.data.databases.mysql;
+package me.superbiebel.defaultmysqldatabase.mysql;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -37,7 +37,7 @@ public class MySQLDatabase implements Database {
             isInitialized = true;
         }
     }
-
+    
     public static SqlDatabaseConnection initializeDatabase() {
         mySQLConfig = new HikariConfig();
         mySQLConfig.setJdbcUrl( "jdbc:mysql://" + host + ":" + port + "/" + db + "?useSSL=" + useSSL);
@@ -92,7 +92,7 @@ public class MySQLDatabase implements Database {
     }
 
     @Override
-    public void close() throws Exception {
+    public void shutdown() throws Exception {
     }
 
     @Override

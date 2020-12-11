@@ -9,11 +9,11 @@ servergroup:
 database:
   enabled: true
   #make sure this option is correctly spelled including capitalization
-  #can be:
-  #MySQL
   #there are more to come don't worry
-  choice: "me.superbiebel.punishmentmanager.data.databases.mysql.MySQLDatabase"
+  choice: "me.superbiebel.defaultmysqldatabase.mysql.MySQLDatabase"
 
+datahandler:
+  choice: "me.superbiebel.defaultdatahandler.DefaultDataHandler"
 
 MySQL:
   db: 'minecraft'
