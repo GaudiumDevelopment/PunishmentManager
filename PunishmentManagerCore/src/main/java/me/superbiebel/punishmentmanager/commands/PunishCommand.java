@@ -2,8 +2,8 @@ package me.superbiebel.punishmentmanager.commands;
 
 import me.lucko.helper.metadata.Metadata;
 import me.lucko.helper.metadata.MetadataMap;
-import me.superbiebel.punishmentmanager.menu.ActionsListGUI;
 import me.superbiebel.punishmentmanager.data.DATAKEYS;
+import me.superbiebel.punishmentmanager.menu.ActionsListGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -12,7 +12,7 @@
 
     <groupId>me.superbiebel</groupId>
     <artifactId>defaultdatahandler</artifactId>
-    <version>0.0.1-EXPERIMENTAL</version>
+    <version>NOT-REAL-VERSION</version>
     <packaging>jar</packaging>
 
     <name>DefaultDataHandler</name>
@@ -32,22 +32,6 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
         <resources>

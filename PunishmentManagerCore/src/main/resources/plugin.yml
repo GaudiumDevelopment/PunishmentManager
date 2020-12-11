@@ -2,7 +2,7 @@ name: PunishmentManager
 version: 0.0.1-DEV
 main: me.superbiebel.punishmentmanager.PunishmentManager
 api-version: 1.16
-prefix: PunishmentManager
+prefix: PunishmentManagerCore
 authors: [Superbiebel]
 depend: [helper,PlaceholderAPI]
 commands:
