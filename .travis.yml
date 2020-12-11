@@ -18,7 +18,7 @@ deploy:
     script: bash scripts/upload_DEVELOPMENT.bash $TRAVIS_BUILD_NUMBER $API_KEY
     cleanup: false
     on:
-      branch: master
+      all_branches: true
 branches:
   only:
     - master

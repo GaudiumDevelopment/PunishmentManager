@@ -14,7 +14,9 @@ database:
 
 datahandler: "me.superbiebel.defaultdatahandler.DefaultDataHandler"
 
-offenseprocessor: "null"
+offenseprocessor:
+  factory: "me.superbiebel.defaultoffenseexecutor.DefaultOffenseExecutorFactory"
+  processor: "me.superbiebel.defaultoffenseexecutor.DefaultOffenseExecutor"
 
 MySQL:
   db: 'minecraft'
