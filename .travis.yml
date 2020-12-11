@@ -17,9 +17,10 @@ deploy:
   - provider: script
     script: bash scripts/upload_DEVELOPMENT.bash $TRAVIS_BUILD_NUMBER $API_KEY
     cleanup: false
+    on:
+      all_branches: true
 branches:
   only:
     - master
     - release_candidate
     - release
-    - improve_binary_releasing
