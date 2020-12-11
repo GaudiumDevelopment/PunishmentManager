@@ -4,18 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>me.superbiebel</groupId>
-        <artifactId>PunishmentManager</artifactId>
-        <version>NOT-REAL-VERSION</version>
-    </parent>
-
     <groupId>me.superbiebel</groupId>
-    <artifactId>defaultmysqldatabase</artifactId>
+    <artifactId>DefaultOffenseExecutor</artifactId>
     <version>NOT-REAL-VERSION</version>
     <packaging>jar</packaging>
 
-    <name>DefaultMysqlDatabase</name>
+    <name>DefaultOffenseExecutor</name>
 
     <properties>
         <java.version>1.8</java.version>
@@ -29,25 +23,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>9</source>
-                    <target>9</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -62,20 +40,12 @@
                         <configuration>
                             <relocations>
                                 <relocation>
-                                    <pattern>com.zaxxer.hikari</pattern>
-                                    <shadedPattern>${project.groupId}.shaded.com.zaxxer.hikari</shadedPattern>
+                                    <pattern>org.graalvm.sdk.graal-sdk</pattern>
+                                    <shadedPattern>${project.groupId}.shaded.org.graalvm.sdk.graal-sdk</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>dev.simplix.core.database.simplixcore-database-sql</pattern>
-                                    <shadedPattern>${project.groupId}.shaded.dev.simplix.core.database.simplixcore-database-sql</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>org.projectlombok.lombok</pattern>
-                                    <shadedPattern>${project.groupId}.shaded.org.projectlombok.lombok</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>com.github.simplix-softworks.simplixstorage</pattern>
-                                    <shadedPattern>${project.groupId}.shaded.com.github.simplix-softworks.simplixstorage</shadedPattern>
+                                    <pattern>org.graalvm.truffle.truffle-api</pattern>
+                                    <shadedPattern>${project.groupId}.shaded.org.graalvm.truffle.truffle-api</shadedPattern>
                                 </relocation>
                             </relocations>
                             <filters>
@@ -112,19 +82,9 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
-            <repository>
-                <id>jitpack.io</id>
-                <url>https://jitpack.io</url>
-            </repository>
     </repositories>
 
     <dependencies>
-        <dependency>
-            <groupId>me.superbiebel</groupId>
-            <artifactId>PunishmentManagerCore</artifactId>
-            <version>NOT-REAL-VERSION</version>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
@@ -132,30 +92,20 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>dev.simplix.core</groupId>
-            <artifactId>simplixcore-database-sql</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-            <version>3.4.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.16</version>
-        </dependency>
-        <dependency>
-            <groupId>me.lucko</groupId>
-            <artifactId>helper</artifactId>
-            <version>5.6.5</version>
+            <groupId>me.superbiebel</groupId>
+            <artifactId>PunishmentManagerCore</artifactId>
+            <version>NOT-REAL-VERSION</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.simplix-softworks</groupId>
-            <artifactId>simplixstorage</artifactId>
-            <version>3.2.0</version>
+            <groupId>org.graalvm.sdk</groupId>
+            <artifactId>graal-sdk</artifactId>
+            <version>20.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.graalvm.truffle</groupId>
+            <artifactId>truffle-api</artifactId>
+            <version>20.2.0</version>
         </dependency>
     </dependencies>
 </project>

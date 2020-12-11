@@ -1,0 +1,6 @@
+name: DefaultOffenseExecutor
+version: ${project.version}
+main: me.superbiebel.defaultoffenseexecutor.DefaultOffenseExecutorStartup
+api-version: 1.16
+depend:
+  - PunishmentManagerCore

@@ -10,11 +10,12 @@ import me.lucko.helper.Schedulers;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
-import me.superbiebel.punishmentmanager.data.datahandler.DataHandlerManager;
+import me.superbiebel.punishmentmanager.data.managers.DataHandlerManager;
 import me.superbiebel.punishmentmanager.data.managers.CacheManager;
 import me.superbiebel.punishmentmanager.data.managers.DatabaseManager;
 import me.superbiebel.punishmentmanager.listeners.JoinListener;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
+import me.superbiebel.punishmentmanager.offenseprocessing.OffenseExecutorFactoryManager;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventPriority;
@@ -94,15 +95,19 @@ public class PunishmentManager extends ExtendedJavaPlugin {
             loadEvents();
             loadCommands();
             Schedulers.async().call(()->{
+                DataHandlerManager.instantiate();
+                return null;
+            });
+            Schedulers.async().call(()->{
                 CacheManager.initCache(config.getString("cache.type"));
                 return null;
             });
             Schedulers.async().call(()->{
-                DatabaseManager.Instantiate(config.getString("database.choice"));
+                DatabaseManager.instantiate(config.getString("database.choice"));
                 return null;
             });
             Schedulers.async().call(()->{
-                DataHandlerManager.Instantiate();
+                OffenseExecutorFactoryManager.instantiate();
                 return null;
             });
         } catch (Exception e) {

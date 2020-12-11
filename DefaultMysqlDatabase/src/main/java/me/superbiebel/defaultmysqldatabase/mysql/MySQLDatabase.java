@@ -6,7 +6,7 @@ import dev.simplix.core.database.sql.SqlDatabaseConnection;
 import dev.simplix.core.database.sql.handlers.HikariConnectionHandler;
 import lombok.Getter;
 import me.superbiebel.punishmentmanager.PunishmentManager;
-import me.superbiebel.punishmentmanager.data.databases.Database;
+import me.superbiebel.punishmentmanager.data.layers.Database;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 

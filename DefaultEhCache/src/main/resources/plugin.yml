@@ -1,0 +1,6 @@
+name: DefaultEhCache
+version: ${project.version}
+main: me.superbiebel.defaultehcache.DefaultEhCacheStartup
+api-version: 1.16
+depend:
+  - PunishmentManagerCore

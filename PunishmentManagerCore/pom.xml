@@ -122,7 +122,6 @@
             <version>1.16.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>me.lucko</groupId>
             <artifactId>helper</artifactId>
@@ -130,37 +129,10 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>2.4.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <!--
-        <dependency>
-            <groupId>org.mozilla</groupId>
-            <artifactId>rhino-engine</artifactId>
-            <version>1.7.13</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mozilla</groupId>
-            <artifactId>rhino</artifactId>
-            <version>1.7.13</version>
-        </dependency> -->
-        <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
             <version>2.10.9</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.graalvm.sdk</groupId>
-            <artifactId>graal-sdk</artifactId>
-            <version>20.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.graalvm.truffle</groupId>
-            <artifactId>truffle-api</artifactId>
-            <version>20.2.0</version>
         </dependency>
         <dependency>
             <groupId>com.github.simplix-softworks</groupId>
@@ -171,11 +143,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.16</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>3.9.0</version>
         </dependency>
         <dependency>
             <groupId>com.github.stefvanschie.inventoryframework</groupId>

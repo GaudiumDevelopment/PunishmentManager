@@ -12,5 +12,6 @@
         <module>PunishmentManagerCore</module>
         <module>DefaultDataHandler</module>
         <module>DefaultMysqlDatabase</module>
+        <module>DefaultEhCache</module>
     </modules>
 </project>

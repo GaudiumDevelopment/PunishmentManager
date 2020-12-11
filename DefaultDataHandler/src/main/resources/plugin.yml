@@ -3,4 +3,4 @@ version: 0.0.1-EXPERIMENTAL
 main: me.superbiebel.defaultdatahandler.DefaultdatahandlerStartup
 api-version: 1.16
 depend:
-  - PunishmentManager
+  - PunishmentManagerCore

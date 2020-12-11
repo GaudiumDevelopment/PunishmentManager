@@ -1,8 +1,8 @@
-package me.superbiebel.punishmentmanager.data.cache.caches;
+package me.superbiebel.defaultehcache;
 
-import me.superbiebel.punishmentmanager.data.cache.Cache;
+import me.superbiebel.punishmentmanager.data.layers.Cache;
 
-public class EhCache implements Cache {
+public class DefaultEhCache implements Cache {
     /**
      * @throws Exception concludes all the exception that might be thrown by different databases.
      */
