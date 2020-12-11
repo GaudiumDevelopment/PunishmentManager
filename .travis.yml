@@ -26,3 +26,4 @@ branches:
     - master
     - release_candidate
     - release
+    - improve_binary_releasing
