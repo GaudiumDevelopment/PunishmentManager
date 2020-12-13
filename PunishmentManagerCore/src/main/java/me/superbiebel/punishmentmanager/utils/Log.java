@@ -149,16 +149,16 @@ public class Log {
         String stacktrace = sw.toString();
         String cause = e.toString();
         if (sendFullInGame){
-            Log.log(stacktrace,logLevel,true,false,false);
+            Log.log(stacktrace,logLevel,true,false,logToFile);
         } else {
-            Log.log(cause,logLevel,sendInGame,false,false);
+            Log.log(cause,logLevel,sendInGame,false,logToFile);
         }
         if (sendFullInConsole) {
-            Log.log(stacktrace,logLevel,false,true,true);
+            Log.log(stacktrace,logLevel,false,true,logToFile);
         } else {
-            Log.log(cause,logLevel,false,sendToConsole,false);
+            Log.log(cause,logLevel,false,sendToConsole,logToFile);
         }
-        Log.log(stacktrace,logLevel,false,false,true);
+        Log.log(stacktrace,logLevel,false,false,logToFile);
 
 
 
