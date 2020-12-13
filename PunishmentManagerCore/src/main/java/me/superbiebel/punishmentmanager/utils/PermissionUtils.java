@@ -20,8 +20,7 @@ public class PermissionUtils {
             sender.sendMessage(ColorUtils.colorize(PunishmentManager.giveConfig().getString("messages.noPermissionMessage")));
             return false;
         } else {
-            //safety so IntelliJ doesn't complain
-            return false;
+            return sender.hasPermission(permission);
         }
 
     }
