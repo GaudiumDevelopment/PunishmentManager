@@ -25,7 +25,7 @@ public class Log {
     private static final Date date = new Date();
     private static final SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
     private static final String separator = System.getProperty("file.separator");
-    private static String logsFolderSaveLocation = PunishmentManager.getPlugin().getDataFolder().getAbsolutePath() + separator + "logs";
+    private static final String logsFolderSaveLocation = PunishmentManager.getPlugin().getDataFolder().getAbsolutePath() + separator + "logs";
     private static File logsFolder;
     private static File logFile;
     private static final String logFileSaveLocation = logsFolderSaveLocation + separator + "log_" + formatter.format(date) + ".log";
@@ -53,7 +53,7 @@ public class Log {
         return true;
     }
 
-    public static synchronized void debug(@NotNull String msg, boolean sendInGame, boolean sendToConsole, boolean logToFile) {
+    public static synchronized void debug(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
         if (PunishmentManager.isDebugMode()) {
             if (sendInGame) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
@@ -72,7 +72,7 @@ public class Log {
         }
     }
 
-    public static synchronized void info(@NotNull String msg, boolean sendInGame, boolean sendToConsole, boolean logToFile) {
+    public static synchronized void info(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
         if (sendInGame) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.hasPermission("punishmentmanager.log.info")) {
@@ -89,7 +89,7 @@ public class Log {
         }
     }
 
-    public static synchronized void warning(@NotNull String msg, boolean sendInGame, boolean sendToConsole, boolean logToFile) {
+    public static synchronized void warning(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
         if (sendInGame) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.hasPermission("punishmentmanager.log.warning")) {
@@ -106,7 +106,7 @@ public class Log {
         }
     }
 
-    public static synchronized void fatalError(@NotNull String msg, boolean sendInGame, boolean sendToConsole, boolean logToFile) {
+    public static synchronized void fatalError(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
         if (sendInGame) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.hasPermission("punishmentmanager.log.fatalerror")) {
@@ -122,7 +122,7 @@ public class Log {
             printer.flush();
         }
     }
-    public static synchronized boolean log(@NotNull String msg, LogLevel loglevel, boolean sendInGame, boolean sendToConsole, boolean logToFile) {
+    public static synchronized boolean log(@NotNull final String msg, final LogLevel loglevel, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
         switch (loglevel) {
             case DEBUG:
                 Log.debug(msg, sendInGame, sendToConsole, logToFile);
@@ -142,7 +142,7 @@ public class Log {
         return false;
     }
 
-    public static synchronized void logException(Throwable e, LogLevel logLevel, boolean sendInGame, boolean sendFullInGame, boolean sendToConsole, boolean sendFullInConsole, boolean logToFile){
+    public static synchronized void logException(final Throwable e, final LogLevel logLevel, final boolean sendInGame, final boolean sendFullInGame, final boolean sendToConsole, final boolean sendFullInConsole, final boolean logToFile){
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         e.printStackTrace(pw);
@@ -164,7 +164,7 @@ public class Log {
 
 
     }
-    public static synchronized LogLevel convertToLogLevel(String logLevelString) {
+    public static synchronized LogLevel convertToLogLevel(final String logLevelString) {
         if (logLevelString.equalsIgnoreCase("debug")) {
             return LogLevel.DEBUG;
         } else if (logLevelString.equalsIgnoreCase("info")) {
