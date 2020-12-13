@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.Base64;
 
 public class SerializeUtil {
-    public String Serialize(Object object) {
+    public <T> String Serialize(T object) {
         ByteArrayOutputStream io = new ByteArrayOutputStream();
         ObjectOutputStream os = null;
         try {
@@ -27,12 +27,11 @@ public class SerializeUtil {
         return Base64.getEncoder().encodeToString(serializedObject);
     }
 
-    public Object deserialize(String deserialize) throws IOException, ClassNotFoundException {
+    public <T> T deserialize(String deserialize) throws IOException, ClassNotFoundException {
         byte[] deserializedObject = Base64.getDecoder().decode(deserialize);
         ByteArrayInputStream in = new ByteArrayInputStream(deserializedObject);
         ObjectInputStream is = null;
             is = new ObjectInputStream(in);
-            Object result = is.readObject();
-            return result;
+        return (T) is.readObject();
     }
 }
