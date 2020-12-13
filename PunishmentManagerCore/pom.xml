@@ -65,6 +65,18 @@
                                         <pattern>com.github.simplix-softworks.simplixstorage</pattern>
                                         <shadedPattern>${project.groupId}.shaded.simplixstorage</shadedPattern>
                                     </relocation>
+                                    <relocation>
+                                        <pattern>cloud.commandframework</pattern>
+                                        <shadedPattern>${project.groupId}.shaded.cloud</shadedPattern>
+                                    </relocation>
+                                    <relocation>
+                                        <pattern>io.leangen.geantyref</pattern>
+                                        <shadedPattern>${project.groupId}.shaded.typetoken</shadedPattern>
+                                    </relocation>
+                                    <relocation>
+                                        <pattern>me.lucko.commodore</pattern>
+                                        <shadedPattern>${project.groupId}.shaded.me.lucko.commodore</shadedPattern>
+                                    </relocation>
                                 </relocations>
                                 <filters>
                                     <filter>
@@ -148,6 +160,21 @@
             <groupId>com.github.stefvanschie.inventoryframework</groupId>
             <artifactId>IF</artifactId>
             <version>0.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cloud.commandframework</groupId>
+            <artifactId>cloud-paper</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>me.lucko</groupId>
+            <artifactId>commodore</artifactId>
+            <version>1.9</version>
+        </dependency>
+        <dependency>
+            <groupId>cloud.commandframework</groupId>
+            <artifactId>cloud-annotations</artifactId>
+            <version>1.2.0</version>
         </dependency>
     </dependencies>
 </project>

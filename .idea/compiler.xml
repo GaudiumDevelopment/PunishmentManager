@@ -11,14 +11,14 @@
         <module name="DefaultMysqlDatabase" />
         <module name="DefaultDataHandler" />
         <module name="PunishmentManagerCore" />
-        <module name="DefaultOffenseExecutor" />
+        <module name="DefaultOffenseProcessor" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="15">
       <module name="DefaultDataHandler" target="1.8" />
       <module name="DefaultEhCache" target="1.8" />
       <module name="DefaultMysqlDatabase" target="9" />
-      <module name="DefaultOffenseExecutor" target="1.8" />
+      <module name="DefaultOffenseProcessor" target="1.8" />
       <module name="PunishmentManager" target="1.5" />
       <module name="PunishmentManagerCore" target="9" />
     </bytecodeTargetLevel>

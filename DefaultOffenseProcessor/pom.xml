@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.superbiebel</groupId>
-    <artifactId>DefaultOffenseExecutor</artifactId>
+    <artifactId>defaultoffenseprocessor</artifactId>
     <version>NOT-REAL-VERSION</version>
     <packaging>jar</packaging>
 

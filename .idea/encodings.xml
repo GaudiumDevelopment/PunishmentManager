@@ -7,8 +7,8 @@
     <file url="file://$PROJECT_DIR$/DefaultEhCache/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/DefaultMysqlDatabase/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/DefaultMysqlDatabase/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/DefaultOffenseExecutor/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/DefaultOffenseExecutor/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DefaultOffenseProcessor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/DefaultOffenseProcessor/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/PunishmentManagerCore/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/PunishmentManagerCore/src/main/resources" charset="UTF-8" />
   </component>

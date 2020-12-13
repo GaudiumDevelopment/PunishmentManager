@@ -10,7 +10,8 @@ public class DataHandlerManager {
     private static DataHandler dataHandler;
     public static DataHandler instantiate() throws Exception {
         //uses reflection to instantiate the data handler
-        String className = PunishmentManager.giveConfig().getString("datahandler.choice");
+        String className = PunishmentManager.giveConfig().getString("datahandler.type");
+        Log.debug(className,false,true,true);
         Log.debug("Instantiating datahandler!",false,true,true);
         Class clazz = Class.forName(className);
         dataHandler = (DataHandler) clazz.getDeclaredConstructor().newInstance();

@@ -1,6 +1,7 @@
 package me.superbiebel.punishmentmanager.data.managers;
 
 import lombok.Getter;
+import me.superbiebel.punishmentmanager.PunishmentManager;
 import me.superbiebel.punishmentmanager.data.layers.Cache;
 
 /**
@@ -13,10 +14,11 @@ public class CacheManager {
     @Getter
     private static Cache cache;
 
-    public static void initCache(String cacheType) throws Exception{
+    public static void initCache() throws Exception{
         //uses reflection to instantiate the database layer
+        String className = PunishmentManager.giveConfig().getString("cache.type");
         if (!isInitialized) {
-            Class clazz = Class.forName(cacheType);
+            Class clazz = Class.forName(className);
             Cache cache = (Cache) clazz.getDeclaredConstructor().newInstance();
             cache.init();
             isInitialized = true;

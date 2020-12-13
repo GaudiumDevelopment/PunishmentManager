@@ -13,5 +13,6 @@
         <module>DefaultDataHandler</module>
         <module>DefaultMysqlDatabase</module>
         <module>DefaultEhCache</module>
+        <module>DefaultOffenseProcessor</module>
     </modules>
 </project>

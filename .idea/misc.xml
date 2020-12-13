@@ -20,6 +20,7 @@
         <option value="$PROJECT_DIR$/PunishmentManagerCore/pom.xml" />
         <option value="$PROJECT_DIR$/DefaultEhCache/pom.xml" />
         <option value="$PROJECT_DIR$/DefaultOffenseExecutor/pom.xml" />
+        <option value="$PROJECT_DIR$/DefaultOffenseProcessor/pom.xml" />
       </list>
     </option>
   </component>

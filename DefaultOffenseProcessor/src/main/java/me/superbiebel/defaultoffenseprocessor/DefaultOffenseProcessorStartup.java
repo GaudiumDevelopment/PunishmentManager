@@ -1,8 +1,8 @@
-package me.superbiebel.defaultoffenseexecutor;
+package me.superbiebel.defaultoffenseprocessor;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class DefaultOffenseExecutorStartup extends JavaPlugin {
+public final class DefaultOffenseProcessorStartup extends JavaPlugin {
     
     @Override
     public void onEnable() {

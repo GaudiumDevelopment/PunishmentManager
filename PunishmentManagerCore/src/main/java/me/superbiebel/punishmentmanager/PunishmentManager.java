@@ -1,5 +1,13 @@
 package me.superbiebel.punishmentmanager;
 
+import cloud.commandframework.CommandTree;
+import cloud.commandframework.annotations.AnnotationParser;
+import cloud.commandframework.arguments.parser.ParserParameters;
+import cloud.commandframework.arguments.parser.StandardParameters;
+import cloud.commandframework.bukkit.BukkitCommandMetaBuilder;
+import cloud.commandframework.execution.CommandExecutionCoordinator;
+import cloud.commandframework.meta.CommandMeta;
+import cloud.commandframework.paper.PaperCommandManager;
 import de.leonhard.storage.Config;
 import de.leonhard.storage.LightningBuilder;
 import de.leonhard.storage.internal.settings.ConfigSettings;
@@ -8,16 +16,16 @@ import lombok.Getter;
 import me.lucko.helper.Events;
 import me.lucko.helper.Schedulers;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
-import me.superbiebel.punishmentmanager.commands.PunishCommand;
-import me.superbiebel.punishmentmanager.commands.SystemCommand;
-import me.superbiebel.punishmentmanager.data.managers.DataHandlerManager;
+import me.superbiebel.punishmentmanager.commands.PunishCommandHandler;
 import me.superbiebel.punishmentmanager.data.managers.CacheManager;
+import me.superbiebel.punishmentmanager.data.managers.DataHandlerManager;
 import me.superbiebel.punishmentmanager.data.managers.DatabaseManager;
 import me.superbiebel.punishmentmanager.listeners.JoinListener;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
-import me.superbiebel.punishmentmanager.offenseprocessing.OffenseExecutorFactoryManager;
+import me.superbiebel.punishmentmanager.offenseprocessing.OffenseProcessorFactoryManager;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -28,9 +36,22 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.function.Function;
 
 
 public class PunishmentManager extends ExtendedJavaPlugin {
+    @Getter
+    private static PunishmentManager plugin;
+    final Function<CommandSender, CommandSender> mapperFunction = Function.identity();
+    
+    PaperCommandManager<CommandSender> commandManager;
+    final Function<CommandTree<CommandSender>, CommandExecutionCoordinator<CommandSender>> executionCoordinatorFunction = CommandExecutionCoordinator.simpleCoordinator();
+    final Function<ParserParameters, CommandMeta> commandMetaFunction = p -> BukkitCommandMetaBuilder.builder()
+                                                                                        .withDescription(p.get(StandardParameters.DESCRIPTION, "No description"))
+                                                                                        .build();
+    
+    private AnnotationParser<CommandSender> annotationParser;
+    
     @Getter
     private static final String configVersion = "indev";
     @Getter
@@ -42,8 +63,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private static File configFile;
 
     private static Config config;
-    @Getter
-    private static PunishmentManager plugin;
+    
     @Getter
     private static final String separator = System.getProperty("file.separator");
 
@@ -94,22 +114,23 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         try {
             loadEvents();
             loadCommands();
-            Schedulers.async().call(()->{
+            Schedulers.async()
+                    .callLater(()->{
                 DataHandlerManager.instantiate();
                 return null;
-            });
-            Schedulers.async().call(()->{
-                CacheManager.initCache(config.getString("cache.type"));
+            },60);
+            Schedulers.async().callLater(()->{
+                CacheManager.initCache();
                 return null;
-            });
-            Schedulers.async().call(()->{
-                DatabaseManager.instantiate(config.getString("database.choice"));
+            },60);
+            Schedulers.async().callLater(()->{
+                DatabaseManager.instantiate();
                 return null;
-            });
-            Schedulers.async().call(()->{
-                OffenseExecutorFactoryManager.instantiate();
+            },60);
+            Schedulers.async().callLater(()->{
+                OffenseProcessorFactoryManager.instantiate();
                 return null;
-            });
+            },60);
         } catch (Exception e) {
             Log.logException(e, Log.LogLevel.FATALERROR, false, false, true, true, true);
             Bukkit.getPluginManager().disablePlugin(plugin);
@@ -192,11 +213,11 @@ public class PunishmentManager extends ExtendedJavaPlugin {
                 JoinListener joinListener = new JoinListener();
                 joinListener.handlePreJoin(e);
             }
-        }).bindWith(getPlugin());
+        }).bindWith(plugin);
         Events.subscribe(PlayerJoinEvent.class, EventPriority.MONITOR).handler((e)-> {
             JoinListener joinListener = new JoinListener();
             joinListener.handleJoin(e);
-        });
+        }).bindWith(plugin);
         
         Events.subscribe(PlayerQuitEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleQuit).bindWith(getPlugin());
         Events.subscribe(PlayerKickEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleKick).bindWith(getPlugin());
@@ -205,22 +226,18 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
 
 
-    public void loadCommands() {
-        Log.debug("Loading commands",false,true,true);
-        Log.debug("loading the /punish command...",false,true,true);
-        this.getCommand("punish").setExecutor(new PunishCommand());
-        Log.debug("/punish loaded",false,true,true);
-        Log.debug("loading /pmanager",false,true,true);
-        SystemCommand systemCommand = new SystemCommand();
-        this.getCommand("pmanager").setExecutor(systemCommand);
-        this.getCommand("pmanager").setTabCompleter(systemCommand);
+    public void loadCommands() throws Exception {
         Log.debug("/pmanager is loaded",false,true,true);
+        
+        
+        
+        
+        this.commandManager = new PaperCommandManager<>(plugin,executionCoordinatorFunction,mapperFunction,mapperFunction);
+        this.annotationParser = new AnnotationParser<>( this.commandManager, CommandSender.class, commandMetaFunction);
+        this.annotationParser.parse(new PunishCommandHandler());
+        
     }
     public static Config giveConfig() {
         return config;
     }
-
-
-
-
 }

@@ -1,4 +1,4 @@
 package me.superbiebel.punishmentmanager.offenseprocessing;
 
-public interface OffenseExecutor {
+public interface OffenseProcessor {
 }

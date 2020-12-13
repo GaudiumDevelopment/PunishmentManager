@@ -10,11 +10,13 @@ database:
   enabled: true
   #make sure this option is correctly spelled including capitalization
   #there are more to come don't worry
-  choice: "me.superbiebel.defaultmysqldatabase.mysql.MySQLDatabase"
+  type: "me.superbiebel.defaultmysqldatabase.mysql.MySQLDatabase"
 
-datahandler: "me.superbiebel.defaultdatahandler.DefaultDataHandler"
+datahandler:
+  type: "me.superbiebel.defaultdatahandler.DefaultDataHandler"
 
-offenseprocessor: "null"
+offenseprocessor:
+  type: "me.superbiebel.defaultoffenseprocessor.DefaultOffenseProcessorFactory"
 
 MySQL:
   db: 'minecraft'
@@ -39,7 +41,7 @@ messages:
 
 
 cache:
-  type: "me.superbiebel.defaultehcache.EhCache"
+  type: "me.superbiebel.defaultehcache.DefaultEhCache"
   # write here how high the offense id goes,setting it to low can cause offenses to not show up when ur trying to register one
   offense_id_max: 50
   # use a list of ids instead of a range (will improve performance on join)

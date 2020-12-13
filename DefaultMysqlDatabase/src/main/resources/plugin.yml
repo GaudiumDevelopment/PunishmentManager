@@ -2,4 +2,5 @@ name: Defaultmysqldatabase
 version: ${project.version}
 main: me.superbiebel.defaultmysqldatabase.DefaultMysqlDatabaseStartup
 api-version: 1.16
-depend: [ PunishmentManagerCore ]
+depend:
+  - PunishmentManagerCore
