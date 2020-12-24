@@ -22,7 +22,7 @@ public class ImprovedHistoryChestGui extends AbstractChestGui{
     }
     
     public void open(Player p){
-        Log.defaultDebug("open got called");
+        Log.debug("open got called");
         Schedulers.sync().runLater(()->{
             gui.show(p);
         },3);

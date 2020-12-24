@@ -174,7 +174,7 @@ public class Log {
         }
     }
     
-    public static void defaultDebug(@NotNull String msg) {
+    public static void debug(@NotNull String msg) {
         Log.debug(msg,false,true,true);
     }
     

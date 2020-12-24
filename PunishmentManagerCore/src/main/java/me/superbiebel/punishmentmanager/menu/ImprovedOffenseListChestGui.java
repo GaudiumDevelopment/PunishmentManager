@@ -36,6 +36,6 @@ public class ImprovedOffenseListChestGui extends AbstractChestGui {
         pagedpane.populateWithGuiItems(guiItemList);
         super.gui.addPane(pagedpane);
         long secondtime = firstTime - System.currentTimeMillis();
-        Log.defaultDebug(String.valueOf(secondtime));
+        Log.debug(String.valueOf(secondtime));
     }
 }

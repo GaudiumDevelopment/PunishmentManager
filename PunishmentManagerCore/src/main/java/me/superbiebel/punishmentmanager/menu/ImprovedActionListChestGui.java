@@ -22,7 +22,7 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
     @Override
     public void construct(boolean force, boolean allowlazy){
         /*if (hasBeenConstructed || !force){
-            Log.defaultDebug("already constructed");
+            Log.debug("already constructed");
             return this;
         }*/
         super.gui = new ChestGui(3, "Choose action");
