@@ -129,6 +129,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
                 OffenseProcessorFactoryManager.instantiate();
                 return null;
             },60);
+            
         } catch (Exception e) {
             Log.logException(e, Log.LogLevel.FATALERROR, false, false, true, true, true);
             Bukkit.getPluginManager().disablePlugin(plugin);
@@ -139,21 +140,28 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     @Override
     public void disable() {
         try {
-        CacheManager.getCache().close();
-        DatabaseManager.getDatabase().shutdown();
-        DataHandlerManager.getDataHandler().shutdown();
+            DataHandlerManager.getDataHandler().shutdown();
         } catch (NullPointerException throwable) {
-            Log.warning("The MySQL datasource was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
+            Log.warning("The Database was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
         } catch (Exception e) {
             Log.logException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
         }
         try {
-
+            CacheManager.getCache().close();
         } catch (NullPointerException throwable) {
-            Log.warning("The Cache datasource was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
+            Log.warning("The Cache was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
+        } catch (Exception e) {
+            Log.logException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
+        }
+        try {
+            DatabaseManager.getDatabase().shutdown();
+        } catch (NullPointerException throwable) {
+            Log.warning("The Cache was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
+        } catch (Exception e) {
+            Log.logException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
         }
         Log.closeLog();
-        Bukkit.getServer().getLogger().info("PunishmentManager has been disabled");
+        Bukkit.getServer().getLogger().info("PunishmentManagerCore has been disabled");
     }
 
 
