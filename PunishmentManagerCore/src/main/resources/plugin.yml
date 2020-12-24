@@ -6,12 +6,12 @@ prefix: PunishmentManagerCore
 authors: [Superbiebel]
 depend: [helper,PlaceholderAPI]
 commands:
-  punish:
-    description: open a gui to punish players
-    permission: "punishmentmanager.command.punish"
-  pmanager:
-    description: control the inner workings of PunishmentManager
-    permission: "punishmentmanager.command.system"
+  #punish:
+    #description: open a gui to punish players
+    #permission: "punishmentmanager.command.punish"
+  #pmanager:
+    #description: control the inner workings of PunishmentManager
+    #permission: "punishmentmanager.command.system"
 permissions:
   punishmentmanager.*:
     children:

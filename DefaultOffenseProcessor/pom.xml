@@ -38,16 +38,6 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <relocations>
-                                <relocation>
-                                    <pattern>org.graalvm.sdk.graal-sdk</pattern>
-                                    <shadedPattern>${project.groupId}.shaded.org.graalvm.sdk.graal-sdk</shadedPattern>
-                                </relocation>
-                                <relocation>
-                                    <pattern>org.graalvm.truffle.truffle-api</pattern>
-                                    <shadedPattern>${project.groupId}.shaded.org.graalvm.truffle.truffle-api</shadedPattern>
-                                </relocation>
-                            </relocations>
                             <filters>
                                 <filter>
                                     <artifact>*:*</artifact>
@@ -96,16 +86,6 @@
             <artifactId>PunishmentManagerCore</artifactId>
             <version>NOT-REAL-VERSION</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.graalvm.sdk</groupId>
-            <artifactId>graal-sdk</artifactId>
-            <version>20.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.graalvm.truffle</groupId>
-            <artifactId>truffle-api</artifactId>
-            <version>20.2.0</version>
         </dependency>
     </dependencies>
 </project>

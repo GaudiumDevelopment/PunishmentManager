@@ -1,5 +1,6 @@
 package me.superbiebel.defaultdatahandler;
 
+import me.superbiebel.punishmentmanager.data.AVAILABILITY;
 import me.superbiebel.punishmentmanager.data.layers.Cache;
 import me.superbiebel.punishmentmanager.data.layers.Database;
 import me.superbiebel.punishmentmanager.data.layers.DataHandler;
@@ -38,6 +39,11 @@ public class DefaultDataHandler implements DataHandler {
     @Override
     public void insertKick(UUID uuid, String kickreason, String leaveMessage) throws Exception {
     
+    }
+    
+    @Override
+    public <T> T getCachedInventory(String key, AVAILABILITY availability) {
+        return null;
     }
 }
 

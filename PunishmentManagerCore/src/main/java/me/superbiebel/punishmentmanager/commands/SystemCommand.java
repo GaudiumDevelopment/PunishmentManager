@@ -1,39 +1,108 @@
 package me.superbiebel.punishmentmanager.commands;
 
+import cloud.commandframework.annotations.Argument;
+import cloud.commandframework.annotations.CommandMethod;
+import cloud.commandframework.annotations.CommandPermission;
+import cloud.commandframework.annotations.suggestions.Suggestions;
+import cloud.commandframework.context.CommandContext;
 import me.superbiebel.punishmentmanager.PunishmentManager;
+import me.superbiebel.punishmentmanager.menu.ImprovedOffenseListChestGui;
 import me.superbiebel.punishmentmanager.utils.PermissionUtils;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SystemCommand implements TabExecutor {
-    @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-                if (args.length == 0) {
-
-                    sender.sendMessage("1 argument is required");
-
-                } else if (args[0].equalsIgnoreCase("help")) {
+public class SystemCommand{
+    @CommandMethod("pmanager <subcommand>")
+    @CommandPermission("punishmentmanager.command.system")
+    public void systemCommand(@NotNull CommandSender sender, @Argument(value = "subcommand") String subcommand) {
+                if (subcommand.equalsIgnoreCase("help")) {
 
                     sender.sendMessage("Check out the wiki if you need help");
 
-                } else if (args[0].equalsIgnoreCase("reloadconfig")) {
+                } else if (subcommand.equalsIgnoreCase("reloadconfig")) {
                     if (PermissionUtils.checkAndMessage(sender, "punishmentmanager.command.system.reloadconfig")) {
                         sender.sendMessage("Reloading config...");
                         PunishmentManager.getPlugin().reloadConfig();
                         sender.sendMessage("Config reloaded");
                     }
 
-                } else if (args[0].equalsIgnoreCase("sync")) {
+                } else if (subcommand.equalsIgnoreCase("sync")) {
                     if (PermissionUtils.checkAndMessage(sender, "punishmentmanager.command.system.sync")) {
                         sender.sendMessage("Syncing...");
                         sender.sendMessage("Sync complete (fake)");
                     }
-                    //FIXME doesnt work i dunno why (low priority)
+
+                } else if (subcommand.equalsIgnoreCase("test")) {
+                    sender.sendMessage("pong!");
+                    ImprovedOffenseListChestGui chestGui = new ImprovedOffenseListChestGui();
+                    chestGui.construct(false,false);
+                    chestGui.open((Player) sender);
+                } else {
+                    sender.sendMessage("Arguments not recognised:" + subcommand);
+                }
+    }
+    
+    
+    @Suggestions("systemCommandSubCommandArgSuggestion")
+    public List<String> subcommandArgSuggestion(CommandContext<CommandSender> context, String input) {
+        List<String> tabComplete = new ArrayList<>();
+        if (context.getSender().hasPermission("punishmentmanager.command.system.help")&&("help".contains(input) || input == "")){
+            tabComplete.add("help");
+        }
+        if (context.getSender().hasPermission("punishmentmanager.command.system.reloadconfig")&&("reloadconfig".contains(input) || input == "")){
+            tabComplete.add("reloadconfig");
+        }
+        if (context.getSender().hasPermission("punishmentmanager.command.system.sync")&&("sync".contains(input) || input == "")){
+            tabComplete.add("sync");
+        }
+        if (context.getSender().hasPermission("punishmentmanager.command.system.test")&&("test".contains(input) || input == "")){
+            tabComplete.add("test");
+        }
+        return tabComplete;
+    }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /*if (args.length == 1) {
+            if (commandSender.hasPermission("punishmentmanager.command.system.help") && (args[0].equalsIgnoreCase("")|"help".contains(args[0]))){
+                tabComplete.add("help");
+            }
+            if (commandSender.hasPermission("punishmentmanager.command.system.reloadconfig") && (args[0].equalsIgnoreCase("")|"reloadconfig".contains(args[0]))){
+               tabComplete.add("reloadconfig");
+            }
+            if (commandSender.hasPermission("punishmentmanager.command.system.sync") && (args[0].equalsIgnoreCase("")|"sync".contains(args[0]))){
+                tabComplete.add("sync");
+            }
+            if (commandSender.hasPermission("punishmentmanager.command.system.log") && (args[0].equalsIgnoreCase("")|"log".contains(args[0]))){
+                tabComplete.add("log");
+            }
+
+        } /*else if (args.length == 2 && args[1].equals("log")){
+            if (commandSender.hasPermission("punishmentmanager.command.system.log.debug")) {
+                tabComplete.add("debug");
+            }
+            if (commandSender.hasPermission("punishmentmanager.command.system.log.info")) {
+                tabComplete.add("info");
+            }
+            if (commandSender.hasPermission("punishmentmanager.command.system.log.warning")) {
+                tabComplete.add("warning");
+            }
+            if (commandSender.hasPermission("punishmentmanager.command.system.log.fatalerror")) {
+                tabComplete.add("fatalerror");
+            }
+        }*/
+}
+//FIXME doesnt work i dunno why (low priority)
                 /*} else if (args[0].equalsIgnoreCase("log")) {
                     String logLevel = "info";
                     boolean skipNextCheck = false;
@@ -111,45 +180,3 @@ public class SystemCommand implements TabExecutor {
 
                     }
                     Log.log(builder.toString(),Log.convertToLogLevel(logLevel),sendInGame,sendInConsole,logToFile,executorname);*/
-                } else if (args[0].equalsIgnoreCase("test")) {
-                } else {
-                    sender.sendMessage("Arguments not recognised:" + args[0]);
-                }
-        return true;
-    }
-
-
-    @Override
-    public List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, String[] args) {
-        List<String> tabComplete = new ArrayList<>();
-        if (args.length == 1) {
-            if (commandSender.hasPermission("punishmentmanager.command.system.help") && (args[0].equalsIgnoreCase("")|"help".contains(args[0]))){
-                tabComplete.add("help");
-            }
-            if (commandSender.hasPermission("punishmentmanager.command.system.reloadconfig") && (args[0].equalsIgnoreCase("")|"reloadconfig".contains(args[0]))){
-               tabComplete.add("reloadconfig");
-            }
-            if (commandSender.hasPermission("punishmentmanager.command.system.sync") && (args[0].equalsIgnoreCase("")|"sync".contains(args[0]))){
-                tabComplete.add("sync");
-            }
-            if (commandSender.hasPermission("punishmentmanager.command.system.log") && (args[0].equalsIgnoreCase("")|"log".contains(args[0]))){
-                tabComplete.add("log");
-            }
-
-        } /*else if (args.length == 2 && args[1].equals("log")){
-            if (commandSender.hasPermission("punishmentmanager.command.system.log.debug")) {
-                tabComplete.add("debug");
-            }
-            if (commandSender.hasPermission("punishmentmanager.command.system.log.info")) {
-                tabComplete.add("info");
-            }
-            if (commandSender.hasPermission("punishmentmanager.command.system.log.warning")) {
-                tabComplete.add("warning");
-            }
-            if (commandSender.hasPermission("punishmentmanager.command.system.log.fatalerror")) {
-                tabComplete.add("fatalerror");
-            }
-        }*/
-        return tabComplete;
-    }
-}

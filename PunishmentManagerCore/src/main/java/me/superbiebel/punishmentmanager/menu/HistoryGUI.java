@@ -3,7 +3,7 @@ package me.superbiebel.punishmentmanager.menu;
 import me.lucko.helper.menu.Gui;
 import org.bukkit.entity.Player;
 
-
+@Deprecated(forRemoval = true)
 public class HistoryGUI extends Gui {
 
 

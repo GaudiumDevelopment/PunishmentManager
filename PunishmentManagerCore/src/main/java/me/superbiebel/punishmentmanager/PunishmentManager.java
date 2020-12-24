@@ -16,7 +16,8 @@ import lombok.Getter;
 import me.lucko.helper.Events;
 import me.lucko.helper.Schedulers;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
-import me.superbiebel.punishmentmanager.commands.PunishCommandHandler;
+import me.superbiebel.punishmentmanager.commands.PunishCommand;
+import me.superbiebel.punishmentmanager.commands.SystemCommand;
 import me.superbiebel.punishmentmanager.data.managers.CacheManager;
 import me.superbiebel.punishmentmanager.data.managers.DataHandlerManager;
 import me.superbiebel.punishmentmanager.data.managers.DatabaseManager;
@@ -27,10 +28,7 @@ import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerKickEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -222,19 +220,23 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         Events.subscribe(PlayerQuitEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleQuit).bindWith(getPlugin());
         Events.subscribe(PlayerKickEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleKick).bindWith(getPlugin());
         Log.debug("Events Loaded!",false,true,true);
+        
+        Events.subscribe(PlayerSwapHandItemsEvent.class).handler(e->{
+            e.getPlayer().sendMessage("u swapped items!");
+        }).bindWith(plugin);
     }
 
 
 
     public void loadCommands() throws Exception {
-        Log.debug("/pmanager is loaded",false,true,true);
-        
-        
-        
-        
+        Log.debug("Instantiating commandmanager",false,true,true);
         this.commandManager = new PaperCommandManager<>(plugin,executionCoordinatorFunction,mapperFunction,mapperFunction);
+        Log.debug("Commandmanager instatiated",false,true,true);
+        this.commandManager.getParserRegistry().registerSuggestionProvider("punishcommand",PunishCommand.getSuggestionsProvider());
+        this.commandManager.registerBrigadier();
         this.annotationParser = new AnnotationParser<>( this.commandManager, CommandSender.class, commandMetaFunction);
-        this.annotationParser.parse(new PunishCommandHandler());
+        this.annotationParser.parse(new PunishCommand());
+        this.annotationParser.parse(new SystemCommand());
         
     }
     public static Config giveConfig() {

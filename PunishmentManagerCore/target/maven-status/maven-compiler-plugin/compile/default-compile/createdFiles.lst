@@ -1,3 +1,4 @@
+me/superbiebel/punishmentmanager/menu/ImprovedActionListChestGui.class
 me/superbiebel/punishmentmanager/offenseprocessing/OffenseProcessorFactory.class
 me/superbiebel/punishmentmanager/data/layers/Cache.class
 me/superbiebel/punishmentmanager/commands/PunishCommand.class
@@ -12,11 +13,14 @@ me/superbiebel/punishmentmanager/data/managers/DatabaseManager.class
 me/superbiebel/punishmentmanager/utils/SerializeUtil.class
 me/superbiebel/punishmentmanager/offenseprocessing/OffenseProcessor.class
 me/superbiebel/punishmentmanager/PunishmentManager.class
-me/superbiebel/punishmentmanager/commands/PunishCommandHandler.class
+me/superbiebel/punishmentmanager/data/AVAILABILITY.class
 me/superbiebel/punishmentmanager/utils/Log.class
 me/superbiebel/punishmentmanager/data/layers/Database.class
+me/superbiebel/punishmentmanager/menu/AbstractChestGui.class
 me/superbiebel/punishmentmanager/utils/Log$1.class
+me/superbiebel/punishmentmanager/menu/ImprovedOffenseListChestGui.class
 me/superbiebel/punishmentmanager/menu/OffenseListGUI.class
+me/superbiebel/punishmentmanager/menu/ImprovedHistoryChestGui.class
 me/superbiebel/punishmentmanager/data/DATAKEYS.class
 me/superbiebel/punishmentmanager/listeners/LeaveListener.class
 me/superbiebel/punishmentmanager/data/layers/DataHandler.class
