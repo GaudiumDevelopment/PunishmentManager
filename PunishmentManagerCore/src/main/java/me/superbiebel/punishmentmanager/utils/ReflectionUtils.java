@@ -22,4 +22,18 @@ public class ReflectionUtils {
             return newInstance(clazz);
         } else throw new IllegalArgumentException("The class does not inherit from the parent class");
     }
+    public static Object stringToInstance(String pathToClass, Log.LogLevel logLevel) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        long firstTime = System.currentTimeMillis();
+        Object obj = stringToInstance(pathToClass);
+        long measurement = System.currentTimeMillis() - firstTime;
+        Log.log("Took" + measurement + "to make an instance of " + pathToClass, logLevel, false,true,true);
+        return obj;
+    }
+    public static Object stringToInstance(String pathToClass, Class<?> parentclazz, Log.LogLevel logLevel) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        long firstTime = System.currentTimeMillis();
+        Object obj = stringToInstance(pathToClass,parentclazz);
+        long measurement = System.currentTimeMillis() - firstTime;
+        Log.log("Took" + measurement + "to make an instance of " + pathToClass, logLevel, false,true,true);
+        return obj;
+    }
 }
