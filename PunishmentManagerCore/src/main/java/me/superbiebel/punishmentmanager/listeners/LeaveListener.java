@@ -1,7 +1,7 @@
 package me.superbiebel.punishmentmanager.listeners;
 
 import me.lucko.helper.Schedulers;
-import me.superbiebel.punishmentmanager.data.managers.DataHandlerManager;
+import me.superbiebel.punishmentmanager.data.providers.DataHandlerProvider;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -14,7 +14,7 @@ public class LeaveListener {
         String leaveMessage = e.getQuitMessage();
         Schedulers.async().run(()->{
         try {
-            DataHandlerManager.getDataHandler().insertLeave(uuid,leaveMessage);
+            DataHandlerProvider.getDataHandler().insertLeave(uuid,leaveMessage);
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -26,7 +26,7 @@ public class LeaveListener {
         String leaveMessage = e.getLeaveMessage();
         Schedulers.async().run(()->{
             try {
-                DataHandlerManager.getDataHandler().insertKick(uuid,kickMessage,leaveMessage);
+                DataHandlerProvider.getDataHandler().insertKick(uuid,kickMessage,leaveMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

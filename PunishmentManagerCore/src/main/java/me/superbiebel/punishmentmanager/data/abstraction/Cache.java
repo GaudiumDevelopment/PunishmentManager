@@ -1,4 +1,4 @@
-package me.superbiebel.punishmentmanager.data.layers;
+package me.superbiebel.punishmentmanager.data.abstraction;
 
 public interface Cache {
     /**

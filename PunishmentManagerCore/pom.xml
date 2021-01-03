@@ -77,6 +77,10 @@
                                         <pattern>me.lucko.commodore</pattern>
                                         <shadedPattern>${project.groupId}.shaded.me.lucko.commodore</shadedPattern>
                                     </relocation>
+                                    <relocation>
+                                        <pattern>me.superbiebel.offenseprocessingdataabstraction</pattern>
+                                        <shadedPattern>${project.groupId}.shaded.me.superbiebel.offenseprocessingdataabstraction</shadedPattern>
+                                    </relocation>
                                 </relocations>
                                 <filters>
                                     <filter>
@@ -126,7 +130,6 @@
         </repository>
     </repositories>
 
-
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
@@ -175,6 +178,11 @@
             <groupId>cloud.commandframework</groupId>
             <artifactId>cloud-annotations</artifactId>
             <version>1.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>me.superbiebel</groupId>
+            <artifactId>offenseprocessingdataabstraction</artifactId>
+            <version>NOT-REAL-VERSION</version>
         </dependency>
     </dependencies>
 </project>

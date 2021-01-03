@@ -6,8 +6,7 @@ public class ReflectionUtils {
     public static Class<?> stringToclazz(String pathToClass) throws ClassNotFoundException {
         return Class.forName(pathToClass);
     }
-    public static boolean checkIfInherits(Class<?> clazz, Class<?> parentClass) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        Object object = clazz.getDeclaredConstructor().newInstance();
+    public static boolean checkIfInherits(Class<?> clazz, Class<?> parentClass) {
         return clazz.isAssignableFrom(parentClass);
     }
     public static Object newInstance(Class<?> clazz) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -26,14 +25,14 @@ public class ReflectionUtils {
         long firstTime = System.currentTimeMillis();
         Object obj = stringToInstance(pathToClass);
         long measurement = System.currentTimeMillis() - firstTime;
-        Log.log("Took" + measurement + "to make an instance of " + pathToClass, logLevel, false,true,true);
+        Log.log("Took " + measurement + "ms to make an instance of " + pathToClass, logLevel, false,true,true);
         return obj;
     }
     public static Object stringToInstance(String pathToClass, Class<?> parentclazz, Log.LogLevel logLevel) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         long firstTime = System.currentTimeMillis();
         Object obj = stringToInstance(pathToClass,parentclazz);
         long measurement = System.currentTimeMillis() - firstTime;
-        Log.log("Took" + measurement + "to make an instance of " + pathToClass, logLevel, false,true,true);
+        Log.log("Took " + measurement + "ms to make an instance of " + pathToClass, logLevel, false,true,true);
         return obj;
     }
 }

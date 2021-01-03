@@ -43,6 +43,10 @@
                                     <pattern>org.ehcache.ehcache</pattern>
                                     <shadedPattern>${project.groupId}.shaded.org.ehcache.ehcache</shadedPattern>
                                 </relocation>
+                                <relocation>
+                                    <pattern>me.superbiebel.offenseprocessingdataabstraction</pattern>
+                                    <shadedPattern>${project.groupId}.shaded.me.superbiebel.offenseprocessingdataabstraction</shadedPattern>
+                                </relocation>
                             </relocations>
                             <filters>
                                 <filter>
@@ -97,6 +101,11 @@
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
             <version>3.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>me.superbiebel</groupId>
+            <artifactId>offenseprocessingdataabstraction</artifactId>
+            <version>NOT-REAL-VERSION</version>
         </dependency>
     </dependencies>
 </project>

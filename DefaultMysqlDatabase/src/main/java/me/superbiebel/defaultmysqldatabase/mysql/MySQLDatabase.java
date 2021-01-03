@@ -5,8 +5,9 @@ import com.zaxxer.hikari.HikariDataSource;
 import dev.simplix.core.database.sql.SqlDatabaseConnection;
 import dev.simplix.core.database.sql.handlers.HikariConnectionHandler;
 import lombok.Getter;
+import me.superbiebel.offenseprocessingdataabstraction.abstraction.OffenseProcessingDatabase;
 import me.superbiebel.punishmentmanager.PunishmentManager;
-import me.superbiebel.punishmentmanager.data.layers.Database;
+import me.superbiebel.punishmentmanager.data.abstraction.Database;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
@@ -17,7 +18,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class MySQLDatabase implements Database {
+public class MySQLDatabase implements Database, OffenseProcessingDatabase {
     public static boolean isInitialized = false;
     private static HikariConfig mySQLConfig;
     @Getter
@@ -30,13 +31,6 @@ public class MySQLDatabase implements Database {
     private static final String port = PunishmentManager.giveConfig().getString("MySQL.port");
     private static final String db = PunishmentManager.giveConfig().getString("MySQL.db");
     private static final String useSSL = PunishmentManager.giveConfig().getString("MySQL.useSSL");
-    public MySQLDatabase() {
-        if (isInitialized) {
-            throw new IllegalStateException("An instance of this class already exists!");
-        } else {
-            isInitialized = true;
-        }
-    }
     
     public static SqlDatabaseConnection initializeDatabase() {
         mySQLConfig = new HikariConfig();
@@ -130,4 +124,13 @@ public class MySQLDatabase implements Database {
     
     }
     
+    @Override
+    public void offenseProcessingDatabaseInit() throws Exception {
+    
+    }
+    
+    @Override
+    public void offenseProcessingDatabaseShutdown() throws Exception {
+    
+    }
 }

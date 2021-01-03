@@ -14,5 +14,6 @@
         <module>DefaultMysqlDatabase</module>
         <module>DefaultEhCache</module>
         <module>DefaultOffenseProcessor</module>
+        <module>OffenseProcessingDataAbstraction</module>
     </modules>
 </project>

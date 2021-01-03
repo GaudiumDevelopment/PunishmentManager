@@ -61,6 +61,10 @@
                                     <pattern>com.github.simplix-softworks.simplixstorage</pattern>
                                     <shadedPattern>${project.groupId}.shaded.com.github.simplix-softworks.simplixstorage</shadedPattern>
                                 </relocation>
+                                <relocation>
+                                    <pattern>me.superbiebel.offenseprocessingdataabstraction</pattern>
+                                    <shadedPattern>${project.groupId}.shaded.me.superbiebel.offenseprocessingdataabstraction</shadedPattern>
+                                </relocation>
                             </relocations>
                             <filters>
                                 <filter>
@@ -146,6 +150,11 @@
             <groupId>com.github.simplix-softworks</groupId>
             <artifactId>simplixstorage</artifactId>
             <version>3.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>me.superbiebel</groupId>
+            <artifactId>offenseprocessingdataabstraction</artifactId>
+            <version>NOT-REAL-VERSION</version>
         </dependency>
     </dependencies>
 </project>

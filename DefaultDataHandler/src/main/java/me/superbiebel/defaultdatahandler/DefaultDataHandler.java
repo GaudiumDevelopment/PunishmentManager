@@ -1,18 +1,21 @@
 package me.superbiebel.defaultdatahandler;
 
+import me.superbiebel.offenseprocessingdataabstraction.abstraction.OffenseProcessingDataHandler;
 import me.superbiebel.punishmentmanager.data.AVAILABILITY;
-import me.superbiebel.punishmentmanager.data.layers.Cache;
-import me.superbiebel.punishmentmanager.data.layers.Database;
-import me.superbiebel.punishmentmanager.data.layers.DataHandler;
-import me.superbiebel.punishmentmanager.data.managers.DatabaseManager;
+import me.superbiebel.punishmentmanager.data.dataObjects.HistoryRecord;
+import me.superbiebel.punishmentmanager.data.abstraction.Cache;
+import me.superbiebel.punishmentmanager.data.abstraction.Database;
+import me.superbiebel.punishmentmanager.data.abstraction.DataHandler;
+import me.superbiebel.punishmentmanager.data.providers.DatabaseProvider;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
 import java.net.InetAddress;
+import java.util.List;
 import java.util.UUID;
 
-public class DefaultDataHandler implements DataHandler {
-    private static Database db = DatabaseManager.getDatabase();
+public class DefaultDataHandler implements DataHandler, OffenseProcessingDataHandler {
+    private static Database db = DatabaseProvider.getDatabase();
     private static Cache cache;
 
     @Override
@@ -42,8 +45,28 @@ public class DefaultDataHandler implements DataHandler {
     }
     
     @Override
-    public <T> T getCachedInventory(String key, AVAILABILITY availability) {
+    public <T> T getCachedInventory(String key) {
         return null;
+    }
+    
+    @Override
+    public <T> void putCachedInventory(String key, AVAILABILITY availability, T inventory) {
+    
+    }
+    
+    @Override
+    public List<HistoryRecord> getHistory(UUID uuid) {
+        return null;
+    }
+    
+    @Override
+    public void offenseProcessingDataHandlerInit() throws Exception {
+    
+    }
+    
+    @Override
+    public void offenseProcessingDataHandlerShutdown() throws Exception {
+    
     }
 }
 

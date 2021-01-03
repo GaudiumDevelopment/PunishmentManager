@@ -12,6 +12,17 @@ database:
   #there are more to come don't worry
   type: "me.superbiebel.defaultmysqldatabase.mysql.MySQLDatabase"
 
+reflectionpath:
+  datahandlerdriver: "me.superbiebel.defaultdatahandler.DefaultDataHandler"
+  databasedriver: "me.superbiebel.defaultmysqldatabase.mysql.MySQLDatabase"
+  cachedriver: "me.superbiebel.defaultehcache.DefaultEhCache"
+  standalonedatahandlerdriver: "me.superbiebel.defaultdatahandler.DefaultDataHandler"
+  standalonedatabasedriver: "me.superbiebel.defaultmysqldatabase.mysql.MySQLDatabase"
+  standalonecachedriver: "me.superbiebel.defaultehcache.DefaultEhCache"
+
+
+
+
 datahandler:
   type: "me.superbiebel.defaultdatahandler.DefaultDataHandler"
 
@@ -19,13 +30,13 @@ offenseprocessor:
   type: "me.superbiebel.defaultoffenseprocessor.DefaultOffenseProcessorFactory"
 
 MySQL:
-  db: 'minecraft'
+  db: 'punishmentsystem'
   # (*)
-  host: 'localhost'
+  host: '127.0.0.1'
   # (*)
   username: 'plugintest'
   # (*)
-  password: 'joren'
+  password: 'plugintest'
   # (*)
   port: 3306
   useSSL: false
@@ -39,24 +50,35 @@ MySQL:
 messages:
   noPermissionMessage: "&r&4&lPunishment&b&lManager&4&l>> &4&lYou do not have the permission for that!"
 
-
 cache:
   type: "me.superbiebel.defaultehcache.DefaultEhCache"
-  # write here how high the offense id goes,setting it to low can cause offenses to not show up when ur trying to register one
-  offense_id_max: 50
-  # use a list of ids instead of a range (will improve performance on join)
-  use_offense_list: false
-  offense_id_list:
-    - 1
-    - 2
-    - 3
-    - 4
-    - 5
-    - 6
-    - 7
-    - 8
-    - 9
-    #and so on
+  # write here how high the offense id goes,setting it too low can cause offenses to not show up when ur trying to register one
+  offense_id_max: 50 #currently not used
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

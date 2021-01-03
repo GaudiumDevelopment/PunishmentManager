@@ -1,9 +1,9 @@
 package me.superbiebel.defaultehcache;
 
-import com.github.stefvanschie.inventoryframework.gui.type.util.NamedGui;
-import me.superbiebel.punishmentmanager.data.layers.Cache;
+import me.superbiebel.offenseprocessingdataabstraction.abstraction.OffenseProcessingCache;
+import me.superbiebel.punishmentmanager.data.abstraction.Cache;
 
-public class DefaultEhCache implements Cache {
+public class DefaultEhCache implements Cache, OffenseProcessingCache {
     
     @Override
     public void init() throws Exception {
@@ -28,5 +28,15 @@ public class DefaultEhCache implements Cache {
     @Override
     public <T> T getCachedInventory(String key) throws Exception {
         return null;
+    }
+    
+    @Override
+    public void offenseProcessingCacheInit() throws Exception {
+    
+    }
+    
+    @Override
+    public void offenseProcessingCacheshutdown() throws Exception {
+    
     }
 }

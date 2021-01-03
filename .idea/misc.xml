@@ -21,10 +21,16 @@
         <option value="$PROJECT_DIR$/DefaultEhCache/pom.xml" />
         <option value="$PROJECT_DIR$/DefaultOffenseExecutor/pom.xml" />
         <option value="$PROJECT_DIR$/DefaultOffenseProcessor/pom.xml" />
+        <option value="$PROJECT_DIR$/OffenseProcessingDataAbstraction/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/Abstraction/pom.xml" />
+      </set>
+    </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_14_PREVIEW" default="false" project-jdk-name="11 (2)" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_14_PREVIEW" project-jdk-name="11 (2)" project-jdk-type="JavaSDK" />
   <component name="SuppressionsComponent">
     <option name="suppComments" value="[]" />
   </component>

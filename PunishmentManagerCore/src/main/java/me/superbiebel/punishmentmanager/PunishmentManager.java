@@ -4,7 +4,6 @@ import cloud.commandframework.CommandTree;
 import cloud.commandframework.annotations.AnnotationParser;
 import cloud.commandframework.arguments.parser.ParserParameters;
 import cloud.commandframework.arguments.parser.StandardParameters;
-import cloud.commandframework.bukkit.BukkitCommandMetaBuilder;
 import cloud.commandframework.execution.CommandExecutionCoordinator;
 import cloud.commandframework.meta.CommandMeta;
 import cloud.commandframework.paper.PaperCommandManager;
@@ -18,9 +17,10 @@ import me.lucko.helper.Schedulers;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
-import me.superbiebel.punishmentmanager.data.managers.CacheManager;
-import me.superbiebel.punishmentmanager.data.managers.DataHandlerManager;
-import me.superbiebel.punishmentmanager.data.managers.DatabaseManager;
+import me.superbiebel.punishmentmanager.data.DataManager;
+import me.superbiebel.punishmentmanager.data.providers.CacheProvider;
+import me.superbiebel.punishmentmanager.data.providers.DataHandlerProvider;
+import me.superbiebel.punishmentmanager.data.providers.DatabaseProvider;
 import me.superbiebel.punishmentmanager.listeners.JoinListener;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
 import me.superbiebel.punishmentmanager.offenseprocessing.OffenseProcessorFactoryManager;
@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 
@@ -44,8 +45,8 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     
     PaperCommandManager<CommandSender> commandManager;
     final Function<CommandTree<CommandSender>, CommandExecutionCoordinator<CommandSender>> executionCoordinatorFunction = CommandExecutionCoordinator.simpleCoordinator();
-    final Function<ParserParameters, CommandMeta> commandMetaFunction = p -> BukkitCommandMetaBuilder.builder()
-                                                                                        .withDescription(p.get(StandardParameters.DESCRIPTION, "No description"))
+    final Function<ParserParameters, CommandMeta> commandMetaFunction = p -> CommandMeta.simple()
+                                                                                        .with(CommandMeta.DESCRIPTION, p.get(StandardParameters.DESCRIPTION, "No description"))
                                                                                         .build();
     
     private AnnotationParser<CommandSender> annotationParser;
@@ -112,19 +113,8 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         try {
             loadEvents();
             loadCommands();
-            Schedulers.async()
-                    .callLater(()->{
-                DataHandlerManager.instantiate();
-                return null;
-            },60);
-            Schedulers.async().callLater(()->{
-                CacheManager.initCache();
-                return null;
-            },60);
-            Schedulers.async().callLater(()->{
-                DatabaseManager.instantiate();
-                return null;
-            },60);
+            DataManager dataManager = new DataManager();
+            dataManager.init(false);
             Schedulers.async().callLater(()->{
                 OffenseProcessorFactoryManager.instantiate();
                 return null;
@@ -140,21 +130,21 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     @Override
     public void disable() {
         try {
-            DataHandlerManager.getDataHandler().shutdown();
+            DataHandlerProvider.getDataHandler().shutdown();
         } catch (NullPointerException throwable) {
             Log.warning("The Database was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
         } catch (Exception e) {
             Log.logException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
         }
         try {
-            CacheManager.getCache().close();
+            CacheProvider.getCache().close();
         } catch (NullPointerException throwable) {
             Log.warning("The Cache was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
         } catch (Exception e) {
             Log.logException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
         }
         try {
-            DatabaseManager.getDatabase().shutdown();
+            DatabaseProvider.getDatabase().shutdown();
         } catch (NullPointerException throwable) {
             Log.warning("The Cache was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
         } catch (Exception e) {
@@ -168,7 +158,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
     public void loadConfig() {
         Log.info("loading config...",false,true,false);
-        configFile = new File(plugin.getDataFolder().getAbsolutePath() + separator + "configNEW.yml");
+        configFile = new File(plugin.getDataFolder().getAbsolutePath() + separator + "config.yml");
         config = LightningBuilder.fromFile(configFile).setConfigSettings(ConfigSettings.PRESERVE_COMMENTS).setDataType(DataType.SORTED).createConfig();
         config.addDefaultsFromInputStream(super.getResource("config.yml"));
         
@@ -213,6 +203,9 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
     public static void loadEvents() {
         Log.debug("Loading events...",false, true,true);
+        Events.subscribe(AsyncPlayerPreLoginEvent.class)
+                .expireAfter(5, TimeUnit.SECONDS)
+                .handler(e->e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, Log.getFatalErrorPrefix() + "Still initializing database!, please wait 3 seconds and log back in!"));
         
         Events.subscribe(AsyncPlayerPreLoginEvent.class, EventPriority.MONITOR).handler((e)->{
             if (!(e.getLoginResult() == AsyncPlayerPreLoginEvent.Result.ALLOWED)){
