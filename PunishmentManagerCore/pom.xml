@@ -90,6 +90,11 @@
                                             <exclude>META-INF/*.DSA</exclude>
                                             <exclude>META-INF/*.RSA</exclude>
                                             <exclude>META-INF/*.MF</exclude>
+                                            <exclude>META-INF/maven/com.esotericsoftware.yamlbeans/yamlbeans/pom.properties</exclude>
+                                            <exclude>META-INF/maven/com.esotericsoftware.yamlbeans/yamlbeans/pom.xml</exclude>
+                                            <exclude>META-INF/maven/org.json/json/pom.properties</exclude>
+                                            <exclude>META-INF/maven/org.json/json/pom.xml</exclude>
+                                            <exclude>META-INF/maven/org.json/json/pom.properties</exclude>
                                         </excludes>
                                     </filter>
                                 </filters>

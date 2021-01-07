@@ -75,6 +75,13 @@
                                         <exclude>META-INF/*.RSA</exclude>
                                         <exclude>META-INF/*.MF</exclude>
                                         <exclude>META-INF/*</exclude>
+                                        <exclude>META-INF/maven/org.json/json/pom.properties</exclude>
+                                        <exclude>META-INF/maven/org.json/json/pom.xml</exclude>
+                                        <exclude>META-INF/maven/org.json/json/pom.properties</exclude>
+                                        <exclude>org.jetbrains.annotations.NonNls</exclude>
+                                        <exclude>org.jetbrains.annotations.Nullable</exclude>
+                                        <exclude>META-INF/maven/com.esotericsoftware.yamlbeans/yamlbeans/pom.properties</exclude>
+                                        <exclude>META-INF/maven/com.esotericsoftware.yamlbeans/yamlbeans/pom.xml</exclude>
                                     </excludes>
                                 </filter>
                             </filters>

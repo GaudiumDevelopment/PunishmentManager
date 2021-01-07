@@ -2,6 +2,7 @@ package me.superbiebel.punishmentmanager.data.abstraction;
 
 import me.superbiebel.punishmentmanager.data.AVAILABILITY;
 import me.superbiebel.punishmentmanager.data.dataObjects.HistoryRecord;
+import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
 import java.net.InetAddress;
@@ -20,5 +21,6 @@ public interface DataHandler {
     <T> T getCachedInventory(String key);
     <T> void putCachedInventory(String key, AVAILABILITY availability, T inventory);
     List<HistoryRecord> getHistory(UUID uuid);
+    List<OffenseKey> getAllOffenseKeys();
     
 }

@@ -7,6 +7,7 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.net.InetAddress;
+import java.util.Objects;
 import java.util.UUID;
 
 public class JoinListener {
@@ -28,7 +29,7 @@ public class JoinListener {
     }
     public void handleJoin(PlayerJoinEvent e) {
         String joinMessage = e.getJoinMessage();
-        InetAddress ip = e.getPlayer().getAddress().getAddress();
+        InetAddress ip = Objects.requireNonNull(e.getPlayer().getAddress()).getAddress();
         UUID uuid =  e.getPlayer().getUniqueId();
         Schedulers.async().run(()->{
             try {

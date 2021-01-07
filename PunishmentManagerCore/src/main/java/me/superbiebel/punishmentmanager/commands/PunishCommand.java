@@ -10,6 +10,7 @@ import me.superbiebel.punishmentmanager.utils.ColorUtils;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -21,12 +22,21 @@ public class PunishCommand {
     
     @CommandMethod("punish <player>")
     @CommandPermission("punishmentmanager.command.punish")
-    public void onCommand(CommandSender sender, @Argument(value = "player", suggestions = "punishcommand") String player) {
-        if (player == "" | player == null) {
+    public void onCommand(CommandSender sender, @Argument(value = "player", suggestions = "punishcommand") String playername) {
+        if (playername == "" | playername == null) {
             sender.sendMessage(ColorUtils.colorize(Log.getWarningPrefix() + " No player specified"));
             return;
         }
+        if (sender instanceof ConsoleCommandSender){
+            sender.sendMessage(ColorUtils.colorize(Log.getWarningPrefix() + " Only ingame players can do this command!"));
+            return;
+        }
+        Player player = Bukkit.getPlayer(playername);
+        /*if (player == null) {
+        
+        });*/
     
+       // Metadata.provideForPlayer((Player) sender).put(DATAKEYS.CRIMINAL_KEY, )
         ImprovedActionListChestGui actionListGui = new ImprovedActionListChestGui();
         actionListGui.construct(false,false);
         actionListGui.open((Player) sender);

@@ -6,6 +6,7 @@ me/superbiebel/punishmentmanager/data/providers/Provider.class
 me/superbiebel/punishmentmanager/utils/PermissionUtils.class
 me/superbiebel/punishmentmanager/menu/HistoryGUI.class
 me/superbiebel/punishmentmanager/commands/SystemCommand.class
+me/superbiebel/punishmentmanager/menu/AltCheckGui.class
 me/superbiebel/punishmentmanager/offenseprocessing/OffenseProcessorFactoryManager.class
 me/superbiebel/punishmentmanager/data/abstraction/Database.class
 me/superbiebel/punishmentmanager/data/providers/DatabaseProvider.class
@@ -29,6 +30,7 @@ me/superbiebel/punishmentmanager/data/DATAKEYS.class
 me/superbiebel/punishmentmanager/utils/ReflectionUtils.class
 me/superbiebel/punishmentmanager/listeners/LeaveListener.class
 me/superbiebel/punishmentmanager/listeners/JoinListener.class
+me/superbiebel/punishmentmanager/CONSTANTS.class
 me/superbiebel/punishmentmanager/menu/ActionsListGUI.class
 me/superbiebel/punishmentmanager/menu/ExecuteOffenseGUI.class
 me/superbiebel/punishmentmanager/utils/Log$LogLevel.class

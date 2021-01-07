@@ -7,7 +7,7 @@ import me.superbiebel.punishmentmanager.utils.Log;
 import me.superbiebel.punishmentmanager.utils.ReflectionUtils;
 
 
-public class CacheProvider implements Provider{
+public class CacheProvider implements Provider {
     @Getter
     private static Cache cache;
     

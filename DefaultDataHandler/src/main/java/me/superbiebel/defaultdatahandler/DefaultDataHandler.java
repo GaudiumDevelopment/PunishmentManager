@@ -6,6 +6,7 @@ import me.superbiebel.punishmentmanager.data.dataObjects.HistoryRecord;
 import me.superbiebel.punishmentmanager.data.abstraction.Cache;
 import me.superbiebel.punishmentmanager.data.abstraction.Database;
 import me.superbiebel.punishmentmanager.data.abstraction.DataHandler;
+import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
 import me.superbiebel.punishmentmanager.data.providers.DatabaseProvider;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
@@ -56,6 +57,11 @@ public class DefaultDataHandler implements DataHandler, OffenseProcessingDataHan
     
     @Override
     public List<HistoryRecord> getHistory(UUID uuid) {
+        return null;
+    }
+    
+    @Override
+    public List<OffenseKey> getAllOffenseKeys() {
         return null;
     }
     

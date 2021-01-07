@@ -1,9 +1,11 @@
 package me.superbiebel.punishmentmanager.data.abstraction;
 
+import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public interface Database {
@@ -16,4 +18,5 @@ public interface Database {
     void insertIp(String ip) throws Exception;
     void insertLeave(UUID uuid, String leaveMessage) throws Exception;
     void insertKick(UUID uuid, String kickreason, String leaveMessage) throws Exception;
+    List<OffenseKey> getAllOffenseKeys();
 }
