@@ -16,9 +16,9 @@ reflectionpath:
   datahandlerdriver: "me.superbiebel.defaultdatahandler.DefaultDataHandler"
   databasedriver: "me.superbiebel.defaultmysqldatabase.mysql.MySQLDatabase"
   cachedriver: "me.superbiebel.defaultehcache.DefaultEhCache"
-  standalonedatahandlerdriver: "me.superbiebel.defaultdatahandler.DefaultDataHandler"
-  standalonedatabasedriver: "me.superbiebel.defaultmysqldatabase.mysql.MySQLDatabase"
-  standalonecachedriver: "me.superbiebel.defaultehcache.DefaultEhCache"
+  standalonedatahandlerdriver: "me.superbiebel.defaultdatahandler.OffenseProcessingDefaultDataHandler"
+  standalonedatabasedriver: "me.superbiebel.defaultmysqldatabase.mysql.OffenseProcessingMySQLDatabase"
+  standalonecachedriver: "me.superbiebel.defaultehcache.OffenseProcessingEhCache"
 
 
 
@@ -30,7 +30,7 @@ offenseprocessor:
   type: "me.superbiebel.defaultoffenseprocessor.DefaultOffenseProcessorFactory"
 
 MySQL:
-  db: 'punishmentsystem'
+  db: 'punishplugin'
   # (*)
   host: '127.0.0.1'
   # (*)

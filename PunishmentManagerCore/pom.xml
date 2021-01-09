@@ -184,10 +184,5 @@
             <artifactId>cloud-annotations</artifactId>
             <version>1.3.0</version>
         </dependency>
-        <dependency>
-            <groupId>me.superbiebel</groupId>
-            <artifactId>offenseprocessingdataabstraction</artifactId>
-            <version>NOT-REAL-VERSION</version>
-        </dependency>
     </dependencies>
 </project>

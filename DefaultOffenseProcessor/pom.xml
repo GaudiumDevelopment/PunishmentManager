@@ -38,6 +38,12 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                        <relocations>
+                            <relocation>
+                                <pattern>me.superbiebel.offenseprocessingdataabstraction</pattern>
+                                <shadedPattern>${project.groupId}.shaded.me.superbiebel.offenseprocessingdataabstraction</shadedPattern>
+                            </relocation>
+                        </relocations>
                             <filters>
                                 <filter>
                                     <artifact>*:*</artifact>
@@ -85,6 +91,17 @@
             <groupId>me.superbiebel</groupId>
             <artifactId>PunishmentManagerCore</artifactId>
             <version>NOT-REAL-VERSION</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.superbiebel</groupId>
+            <artifactId>offenseprocessingdataabstraction</artifactId>
+            <version>NOT-REAL-VERSION</version>
+        </dependency>
+        <dependency>
+            <groupId>me.lucko</groupId>
+            <artifactId>helper</artifactId>
+            <version>5.6.5</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

@@ -57,7 +57,7 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
     }
     
     @Override
-    protected void construct(boolean force, boolean allowlazy, Player player) {
+    public void construct(boolean force, boolean allowlazy, Player player) {
         construct(force, allowlazy);
         cachedPlayer = player;
         personalisedStuff();
@@ -85,7 +85,7 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
         offenseItem.setAction(e -> {
             e.setCancelled(true);
             AbstractChestGui gui = new ImprovedOffenseListChestGui();
-            gui.construct(false,false);
+            gui.construct(false,true);
             gui.open(cachedPlayer);
         });
         historyItem.setAction((e->{

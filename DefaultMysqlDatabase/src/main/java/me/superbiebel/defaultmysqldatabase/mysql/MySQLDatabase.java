@@ -5,9 +5,9 @@ import com.zaxxer.hikari.HikariDataSource;
 import dev.simplix.core.database.sql.SqlDatabaseConnection;
 import dev.simplix.core.database.sql.handlers.HikariConnectionHandler;
 import lombok.Getter;
-import me.superbiebel.offenseprocessingdataabstraction.abstraction.OffenseProcessingDatabase;
 import me.superbiebel.punishmentmanager.PunishmentManager;
 import me.superbiebel.punishmentmanager.data.abstraction.Database;
+import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
@@ -15,10 +15,10 @@ import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-public class MySQLDatabase implements Database, OffenseProcessingDatabase {
+public class MySQLDatabase implements Database {
     public static boolean isInitialized = false;
     private static HikariConfig mySQLConfig;
     @Getter
@@ -82,7 +82,7 @@ public class MySQLDatabase implements Database, OffenseProcessingDatabase {
 
     @Override
     public void init() throws Exception {
-        initializeTables(initializeDatabase());
+       // initializeTables(initializeDatabase());
     }
 
     @Override
@@ -100,7 +100,7 @@ public class MySQLDatabase implements Database, OffenseProcessingDatabase {
     }
 
     @Override
-    public ArrayList fetchBannedPlayers() throws Exception {
+    public List<UUID> fetchBannedPlayers() throws Exception {
         return null;
     }
     
@@ -123,14 +123,9 @@ public class MySQLDatabase implements Database, OffenseProcessingDatabase {
     public void insertKick(UUID uuid, String kickreason, String leaveMessage) throws Exception {
     
     }
-    
+
     @Override
-    public void offenseProcessingDatabaseInit() throws Exception {
-    
-    }
-    
-    @Override
-    public void offenseProcessingDatabaseShutdown() throws Exception {
-    
+    public List<OffenseKey> getAllOffenseKeys() {
+        return null;
     }
 }

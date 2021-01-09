@@ -88,7 +88,7 @@ public class ActionsListGUI extends Gui{
         setItem(13,newOffense);
         Item history = ItemStackBuilder.of(Material.BOOK).name(ColorUtils.colorize("&4&lHistory")).buildConsumer(ClickType.LEFT,e->{
             if (getPlayer().hasPermission("punishmentmanager.history.gui")) {
-                new HistoryGUI(getPlayer(),6, "History of ");
+              //  new HistoryGUI(getPlayer(),6, "History of ");
             } else {
                 getPlayer().sendMessage(ColorUtils.colorize(Objects.requireNonNull(PunishmentManager.giveConfig().getString("messages.noPermissionMessage"))));
             }

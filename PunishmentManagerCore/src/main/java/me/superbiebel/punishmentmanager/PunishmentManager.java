@@ -117,8 +117,9 @@ public class PunishmentManager extends ExtendedJavaPlugin {
             dataManager.init(false);
             Schedulers.async().callLater(()->{
                 OffenseProcessorFactoryManager.instantiate();
+                OffenseProcessorFactoryManager.getOffenseProcessorFactory().init();
                 return null;
-            },60);
+            },120);
             
         } catch (Exception e) {
             Log.logException(e, Log.LogLevel.FATALERROR, false, false, true, true, true);
@@ -233,7 +234,6 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         Log.debug("Instantiating commandmanager",false,true,true);
         this.commandManager = new PaperCommandManager<>(plugin,executionCoordinatorFunction,mapperFunction,mapperFunction);
         Log.debug("Commandmanager instatiated",false,true,true);
-        this.commandManager.getParserRegistry().registerSuggestionProvider("punishcommand",PunishCommand.getSuggestionsProvider());
         this.commandManager.registerBrigadier();
         this.annotationParser = new AnnotationParser<>( this.commandManager, CommandSender.class, commandMetaFunction);
         this.annotationParser.parse(new PunishCommand());
