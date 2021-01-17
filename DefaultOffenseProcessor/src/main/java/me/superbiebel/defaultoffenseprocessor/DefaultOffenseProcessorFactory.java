@@ -7,8 +7,8 @@ import me.superbiebel.offenseprocessingdataabstraction.providers.OffenseProcessi
 import me.superbiebel.offenseprocessingdataabstraction.providers.OffenseProcessingDatabaseProvider;
 import me.superbiebel.offenseprocessingdataabstraction.providers.OffenseProcessingProvider;
 import me.superbiebel.punishmentmanager.PunishmentManager;
-import me.superbiebel.punishmentmanager.offenseprocessing.OffenseProcessor;
-import me.superbiebel.punishmentmanager.offenseprocessing.OffenseProcessorFactory;
+import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessor;
+import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessorFactory;
 
 public class DefaultOffenseProcessorFactory implements OffenseProcessorFactory {
     @Override
