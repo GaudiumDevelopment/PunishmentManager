@@ -11,6 +11,7 @@ import me.superbiebel.punishmentmanager.menu.AbstractChestGui;
 import me.superbiebel.punishmentmanager.menu.ImprovedActionListChestGui;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
 import me.superbiebel.punishmentmanager.utils.Log;
+import me.superbiebel.punishmentmanager.utils.PERMISSIONS;
 import me.superbiebel.punishmentmanager.utils.PermissionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -74,8 +75,10 @@ public class PunishCommand {
     @Suggestions("punishcommand")
     public List<String> subcommandArgSuggestion(CommandContext<CommandSender> context, String input) {
         List<String> suggestions = new ArrayList<>();
+        if (!context.getSender().hasPermission(PERMISSIONS.PUNISHCOMMAND)) return suggestions;
+        input = input.toLowerCase();
         for (Player p : Bukkit.getOnlinePlayers()){
-            if (p.getName().contains(input)) {
+            if (p.getName().toLowerCase().contains(input)) {
                 suggestions.add(p.getName());
             }
         }
