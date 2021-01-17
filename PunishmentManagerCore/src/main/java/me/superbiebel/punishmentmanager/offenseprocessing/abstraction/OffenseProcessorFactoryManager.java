@@ -1,4 +1,4 @@
-package me.superbiebel.punishmentmanager.offenseprocessing;
+package me.superbiebel.punishmentmanager.offenseprocessing.abstraction;
 
 import lombok.Getter;
 import me.superbiebel.punishmentmanager.PunishmentManager;
@@ -12,13 +12,5 @@ public class OffenseProcessorFactoryManager {
     public static void instantiate() throws Exception {
         String className = PunishmentManager.giveConfig().getString("offenseprocessor.type");
         offenseProcessorFactory = (OffenseProcessorFactory) ReflectionUtils.stringToInstance(className, Log.LogLevel.DEBUG);
-        /*Log.debug("Instantiating OffenseProcessorFactoryManager!",false,true,true);
-        try {
-            Class clazz = Class.forName(className);
-            offenseProcessorFactory = (OffenseProcessorFactory) clazz.getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-            Log.fatalError("exception occured in instantiation of offenseprocessorfactory",false,true,true);
-        }
-        return offenseProcessorFactory;*/
     }
 }

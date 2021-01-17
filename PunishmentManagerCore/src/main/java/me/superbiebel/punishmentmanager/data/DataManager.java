@@ -7,8 +7,8 @@ import me.superbiebel.punishmentmanager.data.providers.CacheProvider;
 import me.superbiebel.punishmentmanager.data.providers.DataHandlerProvider;
 import me.superbiebel.punishmentmanager.data.providers.DatabaseProvider;
 import me.superbiebel.punishmentmanager.data.providers.Provider;
-import me.superbiebel.punishmentmanager.offenseprocessing.OffenseProcessorFactory;
-import me.superbiebel.punishmentmanager.offenseprocessing.OffenseProcessorFactoryManager;
+import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessorFactory;
+import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessorFactoryManager;
 import me.superbiebel.punishmentmanager.utils.Log;
 
 public class DataManager {
