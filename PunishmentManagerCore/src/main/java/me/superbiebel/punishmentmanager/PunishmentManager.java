@@ -206,7 +206,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         Log.debug("Loading events...",false, true,true);
         Events.subscribe(AsyncPlayerPreLoginEvent.class)
                 .expireAfter(5, TimeUnit.SECONDS)
-                .handler(e->e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, Log.getFatalErrorPrefix() + "Still initializing database!, please wait 3 seconds and log back in!"));
+                .handler(e->e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, Log.getFatalErrorPrefix() + "Still initializing database!, please wait 10 seconds and log back in!"));
         
         Events.subscribe(AsyncPlayerPreLoginEvent.class, EventPriority.MONITOR).handler((e)->{
             if (!(e.getLoginResult() == AsyncPlayerPreLoginEvent.Result.ALLOWED)){
@@ -222,10 +222,6 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         Events.subscribe(PlayerQuitEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleQuit).bindWith(getPlugin());
         Events.subscribe(PlayerKickEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleKick).bindWith(getPlugin());
         Log.debug("Events Loaded!",false,true,true);
-        
-        Events.subscribe(PlayerSwapHandItemsEvent.class).handler(e->{
-            e.getPlayer().sendMessage("u swapped items!");
-        }).bindWith(plugin);
     }
 
 
