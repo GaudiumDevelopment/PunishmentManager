@@ -25,6 +25,7 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
     private ItemStack altCheckItemStack;
     private GuiItem altCheckItem;
     private SkullMeta altCheckItemMeta;
+
     
     @Override
     public void construct(boolean force, boolean allowlazy){
@@ -47,12 +48,9 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
         altCheckItemMeta = (SkullMeta) altCheckItemStack.getItemMeta();
         
         
-        
-        
         staticPane.addItem(offenseItem,2,1);
         staticPane.addItem(historyItem,4,1);
-        
-        
+
         super.hasBeenConstructed = true;
     }
     
@@ -60,13 +58,13 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
     public void construct(boolean force, boolean allowlazy, Player player) {
         construct(force, allowlazy);
         cachedPlayer = player;
-        personalisedStuff();
+        setPersonalisedStuff();
     }
     
     @Override
     public void open(final Player p){
         cachedPlayer = p;
-        personalisedStuff();
+        setPersonalisedStuff();
         super.gui.addPane(staticPane);
         super.gui.show(p);
     }
@@ -76,7 +74,11 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
         super.gui.show(cachedPlayer);
     }
     
-    private void personalisedStuff() {
+    public void setPersonalisedStuff() {
+        if (!super.hasBeenConstructed) {
+            throw new IllegalStateException("Cannot set personalised stuff when the gui hasn't been constructed yet");
+        }
+
         altCheckItemMeta.setOwningPlayer(cachedPlayer);
         altCheckItemStack.setItemMeta(altCheckItemMeta);
         altCheckItem = new GuiItem(altCheckItemStack);
@@ -106,6 +108,6 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
     @Override
     public void setCachedPlayer(Player p) {
         cachedPlayer = p;
-        personalisedStuff();
+        setPersonalisedStuff();
     }
 }
