@@ -10,7 +10,7 @@
         <version>NOT-REAL-VERSION</version>
     </parent>
 
-    <artifactId>DefaultRedisMessaging</artifactId>
+    <artifactId>defaultredismessaging</artifactId>
     <version>NOT-REAL-VERSION</version>
     <packaging>jar</packaging>
 
