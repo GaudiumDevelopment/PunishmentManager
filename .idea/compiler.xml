@@ -13,6 +13,7 @@
         <module name="DefaultDataHandler" />
         <module name="PunishmentManagerCore" />
         <module name="DefaultOffenseProcessor" />
+        <module name="DefaultRedisMessaging" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="15">
@@ -21,6 +22,7 @@
       <module name="DefaultEhCache" target="1.8" />
       <module name="DefaultMysqlDatabase" target="9" />
       <module name="DefaultOffenseProcessor" target="1.8" />
+      <module name="DefaultRedisMessaging" target="1.8" />
       <module name="OffenseProcessingDataAbstraction" target="11" />
       <module name="PunishmentManager" target="1.5" />
       <module name="PunishmentManagerCore" target="9" />

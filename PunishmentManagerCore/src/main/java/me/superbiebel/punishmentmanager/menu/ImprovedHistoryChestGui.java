@@ -3,7 +3,7 @@ package me.superbiebel.punishmentmanager.menu;
 import com.github.stefvanschie.inventoryframework.gui.GuiItem;
 import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
 import com.github.stefvanschie.inventoryframework.pane.PaginatedPane;
-import com.github.stefvanschie.inventoryframework.pane.Pane;
+import com.github.stefvanschie.inventoryframework.pane.StaticPane;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -15,7 +15,6 @@ import me.superbiebel.punishmentmanager.data.DATAKEYS;
 import me.superbiebel.punishmentmanager.data.dataObjects.HistoryRecord;
 import me.superbiebel.punishmentmanager.data.providers.DataHandlerProvider;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
-import me.superbiebel.punishmentmanager.utils.Log;
 import me.superbiebel.punishmentmanager.utils.TimeDuration;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -24,10 +23,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 public class ImprovedHistoryChestGui extends AbstractChestGui{
-    private PaginatedPane pane;
-    private ItemStack testItemStack;
-    private GuiItem testItem;
-    private ItemMeta testItemMeta;
+    private StaticPane buttonPane;
+    private PaginatedPane paginatedPane;
+
+
+    private ItemStack backToActionListGuiItemStack;
+    private ItemMeta backToActionListGuiItemMeta;
+    private GuiItem backToActionListGuiItem;
     private Player criminal;
     private String finaltitle;
     private List<GuiItem> historyItemList;
@@ -38,7 +40,7 @@ public class ImprovedHistoryChestGui extends AbstractChestGui{
     }
     @Override
     public void open(Player p){
-        Log.debug("open got called 2");
+        super.cachedPlayer = p;
         super.gui.show(p);
     }
     
@@ -66,12 +68,10 @@ public class ImprovedHistoryChestGui extends AbstractChestGui{
 
                 //purely for testing purposes ---------------------------------
                 List<HistoryRecord> historyRecordList = new LinkedList<>();
-                historyRecordList.add(new HistoryRecord(UUID.randomUUID(), Material.ACACIA_BOAT,1,1,"&cTESTING OFFENSE1", "THIS IS A REASON",-1, 20, 20000,3000)  );
-                historyRecordList.add(new HistoryRecord(UUID.randomUUID(), Material.IRON_AXE,1,1,"&cTESTING OFFENSE2", "THIS IS A REASON",-1, 50,20000,3000));
-                historyRecordList.add(new HistoryRecord(UUID.randomUUID(), Material.IRON_BARS,1,1,"&cTESTING OFFENSE3", "THIS IS A REASON",-1, 60,20000,3000));
-                historyRecordList.add(new HistoryRecord(UUID.randomUUID(), Material.OAK_BOAT,1,1,"&cTESTING OFFENSE4", "THIS IS A REASON",-1, 70,20000,3000));
-                historyRecordList.add(new HistoryRecord(UUID.randomUUID(), Material.OAK_BUTTON,1,1,"&cTESTING OFFENSE5", "THIS IS A REASON",-1, 10,20000,3000));
-                historyRecordList.add(new HistoryRecord(UUID.randomUUID(), Material.CHAIN,1,1,"&cTESTING OFFENSE6", "THIS IS A REASON",-1, 80,20000,3000));
+                for (int i = 0; i < 50;i++){
+                    historyRecordList.add(new HistoryRecord(UUID.randomUUID(), Material.ACACIA_BOAT,1,1,"&cTESTING OFFENSE1", "THIS IS A REASON",-1, 20, 20000,3000)  );
+
+                }
                 //------------------------------------------------------------------
 
                 Collections.sort(historyRecordList);
@@ -158,12 +158,42 @@ public class ImprovedHistoryChestGui extends AbstractChestGui{
                     });
                     historyItemList.add(historyItem);
                 }
+
             }
+
+
+
         }).thenRunSync(()->{
-            pane = new PaginatedPane(0,0,9,5, Pane.Priority.HIGHEST);
-            pane.populateWithGuiItems(historyItemList);
-            super.gui.addPane(pane);
+
+
+            backToActionListGuiItemStack = new ItemStack(Material.BARRIER);
+            backToActionListGuiItemMeta = backToActionListGuiItemStack.getItemMeta();
+            backToActionListGuiItemMeta.setDisplayName(ColorUtils.colorize("&c&lBack"));
+            backToActionListGuiItemStack.setItemMeta(backToActionListGuiItemMeta);
+            backToActionListGuiItem = new GuiItem(backToActionListGuiItemStack);
+
+            buttonPane = new StaticPane(0,0,9, 0);
+            buttonPane.addItem(backToActionListGuiItem,2,0);
+            super.gui.addPane(buttonPane);
+
+            //StaticPane pane = new StaticPane(5, 4, 9, 3);
+            //pane.addItem(new GuiItem(new ItemStack(Material.STONE)), 1, 0);
+            //super.gui.addPane(pane);
+
+
+
+
+            //paginatedPane = new PaginatedPane(0,0,9,5, Pane.Priority.HIGH);
+            //paginatedPane.populateWithGuiItems(historyItemList);
+
+
+
+
+
+            //super.gui.addPane(paginatedPane);
+
             super.gui.setTitle(finaltitle);
+            super.gui.update();
         });
 
 
