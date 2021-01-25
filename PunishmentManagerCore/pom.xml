@@ -14,7 +14,7 @@
     <version>NOT-REAL-VERSION</version>
     <packaging>jar</packaging>
 
-    <name>PunishmentManager</name>
+    <name>PunishmentManagerCore</name>
 
     <properties>
         <maven.compiler.source>14</maven.compiler.source>
