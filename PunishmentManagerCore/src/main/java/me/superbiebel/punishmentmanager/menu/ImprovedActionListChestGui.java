@@ -3,6 +3,8 @@ package me.superbiebel.punishmentmanager.menu;
 import com.github.stefvanschie.inventoryframework.gui.GuiItem;
 import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
 import com.github.stefvanschie.inventoryframework.pane.StaticPane;
+import me.lucko.helper.metadata.Metadata;
+import me.superbiebel.punishmentmanager.data.DATAKEYS;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -25,6 +27,8 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
     private ItemStack altCheckItemStack;
     private GuiItem altCheckItem;
     private SkullMeta altCheckItemMeta;
+
+    private Player criminal;
 
     
     @Override
@@ -78,8 +82,9 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
         if (!super.hasBeenConstructed) {
             throw new IllegalStateException("Cannot set personalised stuff when the gui hasn't been constructed yet");
         }
-
-        altCheckItemMeta.setOwningPlayer(cachedPlayer);
+        criminal = Metadata.provideForPlayer(cachedPlayer).get(DATAKEYS.CRIMINAL_KEY).get();
+        altCheckItemMeta.setOwningPlayer(criminal);
+        altCheckItemMeta.setDisplayName(ColorUtils.colorize("&cAlts of " + criminal.getName()));
         altCheckItemStack.setItemMeta(altCheckItemMeta);
         altCheckItem = new GuiItem(altCheckItemStack);
         staticPane.addItem(altCheckItem,6,1);
