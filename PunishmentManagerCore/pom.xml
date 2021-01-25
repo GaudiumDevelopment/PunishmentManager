@@ -10,7 +10,6 @@
         <version>NOT-REAL-VERSION</version>
     </parent>
 
-    <groupId>me.superbiebel</groupId>
     <artifactId>PunishmentManagerCore</artifactId>
     <version>NOT-REAL-VERSION</version>
     <packaging>jar</packaging>
