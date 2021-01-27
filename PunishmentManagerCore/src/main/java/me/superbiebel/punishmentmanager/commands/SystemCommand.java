@@ -5,20 +5,18 @@ import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.CommandPermission;
 import cloud.commandframework.annotations.suggestions.Suggestions;
 import cloud.commandframework.context.CommandContext;
-import me.superbiebel.punishmentmanager.PunishmentManager;
-import me.superbiebel.punishmentmanager.menu.ImprovedOffenseListChestGui;
-import me.superbiebel.punishmentmanager.utils.PermissionUtils;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
+import javax.script.ScriptException;
+import me.superbiebel.punishmentmanager.PunishmentManager;
+import me.superbiebel.punishmentmanager.utils.PermissionUtils;
+import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 
 public class SystemCommand{
     @CommandMethod("pmanager <subcommand>")
     @CommandPermission("punishmentmanager.command.system")
-    public void systemCommand(@NotNull CommandSender sender, @Argument(value = "subcommand") String subcommand) {
+    public void systemCommand(@NotNull CommandSender sender, @Argument(value = "subcommand") String subcommand) throws ScriptException {
                 if (subcommand.equalsIgnoreCase("help")) {
 
                     sender.sendMessage("Check out the wiki if you need help");
@@ -38,9 +36,6 @@ public class SystemCommand{
 
                 } else if (subcommand.equalsIgnoreCase("test")) {
                     sender.sendMessage("pong!");
-                    ImprovedOffenseListChestGui chestGui = new ImprovedOffenseListChestGui();
-                    chestGui.construct(false,false);
-                    chestGui.open((Player) sender);
                 } else {
                     sender.sendMessage("Arguments not recognised:" + subcommand);
                 }

@@ -9,7 +9,6 @@ public class OffenseProcessingCacheProvider implements OffenseProcessingProvider
     
     @Override
     public void init(String pathToClass) throws Exception {
-        System.out.println(pathToClass);
         Class clazz = Class.forName(pathToClass);
         cache = (OffenseProcessingCache) clazz.getDeclaredConstructor().newInstance();
         cache.offenseProcessingCacheInit();

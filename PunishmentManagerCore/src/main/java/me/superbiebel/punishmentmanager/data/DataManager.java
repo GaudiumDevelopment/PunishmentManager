@@ -3,15 +3,12 @@ package me.superbiebel.punishmentmanager.data;
 import me.lucko.helper.Schedulers;
 import me.lucko.helper.promise.ThreadContext;
 import me.lucko.helper.scheduler.Scheduler;
-import me.superbiebel.offenseprocessingdataabstraction.providers.OffenseProcessingCacheProvider;
-import me.superbiebel.offenseprocessingdataabstraction.providers.OffenseProcessingDataHandlerProvider;
-import me.superbiebel.offenseprocessingdataabstraction.providers.OffenseProcessingDatabaseProvider;
-import me.superbiebel.offenseprocessingdataabstraction.providers.OffenseProcessingProvider;
-import me.superbiebel.punishmentmanager.PunishmentManager;
 import me.superbiebel.punishmentmanager.data.providers.CacheProvider;
 import me.superbiebel.punishmentmanager.data.providers.DataHandlerProvider;
 import me.superbiebel.punishmentmanager.data.providers.DatabaseProvider;
 import me.superbiebel.punishmentmanager.data.providers.Provider;
+import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessorFactory;
+import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessorFactoryManager;
 import me.superbiebel.punishmentmanager.utils.Log;
 
 public class DataManager {
@@ -24,11 +21,7 @@ public class DataManager {
         Provider dataHandlerProvider = new DataHandlerProvider();
         Provider cacheProvider = new CacheProvider();
         Provider databaseProvider = new DatabaseProvider();
-        
-        
-        OffenseProcessingProvider offenseProcessingCacheProvider = new OffenseProcessingCacheProvider();
-        OffenseProcessingProvider offenseProcessingDatabaseProvider = new OffenseProcessingDatabaseProvider();
-        OffenseProcessingProvider offenseProcessingDatahandlerProvider = new OffenseProcessingDataHandlerProvider();
+        OffenseProcessorFactory offenseProcessorFactory = OffenseProcessorFactoryManager.getOffenseProcessorFactory();
         
         
         scheduler.callLater(()->{
@@ -41,18 +34,6 @@ public class DataManager {
         },60);
         scheduler.callLater(()->{
             dataHandlerProvider.init();
-            return null;
-        },60);
-        scheduler.callLater(()->{
-            offenseProcessingCacheProvider.init(PunishmentManager.giveConfig().getString("reflectionpath.standalonecachedriver")); //TODO: fill in class path
-            return null;
-        },60);
-        scheduler.callLater(()->{
-            offenseProcessingDatabaseProvider.init(PunishmentManager.giveConfig().getString("reflectionpath.standalonedatabasedriver")); //TODO: fill in class path
-            return null;
-        },60);
-        scheduler.callLater(()->{
-            offenseProcessingDatahandlerProvider.init(PunishmentManager.giveConfig().getString("reflectionpath.standalonedatahandlerdriver")); //TODO: fill in class path
             return null;
         },60);
     }

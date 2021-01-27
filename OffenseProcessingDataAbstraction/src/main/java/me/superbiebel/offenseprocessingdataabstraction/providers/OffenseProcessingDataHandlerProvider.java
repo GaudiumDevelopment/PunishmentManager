@@ -9,8 +9,6 @@ public class OffenseProcessingDataHandlerProvider implements OffenseProcessingPr
     
     @Override
     public void init(String pathToClass) throws Exception {
-        System.out.println(pathToClass);
-        System.out.println("initiating standalone");
         Class clazz = Class.forName(pathToClass);
         dataHandler = (OffenseProcessingDataHandler) clazz.getDeclaredConstructor().newInstance();
         dataHandler.offenseProcessingDataHandlerInit();

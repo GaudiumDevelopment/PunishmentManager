@@ -11,6 +11,12 @@ import de.leonhard.storage.Config;
 import de.leonhard.storage.LightningBuilder;
 import de.leonhard.storage.internal.settings.ConfigSettings;
 import de.leonhard.storage.internal.settings.DataType;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 import lombok.Getter;
 import me.lucko.helper.Events;
 import me.lucko.helper.Schedulers;
@@ -23,19 +29,15 @@ import me.superbiebel.punishmentmanager.data.providers.DataHandlerProvider;
 import me.superbiebel.punishmentmanager.data.providers.DatabaseProvider;
 import me.superbiebel.punishmentmanager.listeners.JoinListener;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
-import me.superbiebel.punishmentmanager.offenseprocessing.OffenseProcessorFactoryManager;
+import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessorFactoryManager;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.player.*;
-
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 
 public class PunishmentManager extends ExtendedJavaPlugin {
@@ -92,39 +94,41 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         try {
             Log.initLog();
         } catch (IOException e) {
-            Log.fatalError("COULD NOT INIT LOGFILE",false,true,false);
+            Log.fatalError("COULD NOT INIT LOGFILE", false, true, false);
             e.printStackTrace();
             Bukkit.getPluginManager().disablePlugin(plugin);
             return;
         }
-        Log.info("LOGGING STARTS AT " + formatter.format(date),false,false,true);
+        Log.info("LOGGING STARTS AT " + formatter.format(date), false, false, true);
         checkDebugMode();
-        if (!checkConfigVersion()){
-            Log.fatalError("Config version does not correspond with the version that is required by this plugin",false,true,true);
-            Log.fatalError("Please back up and then delete your config so we can generate a new one on startup!",false,true,true);
-            Log.fatalError("Config version is: " + config.getString("config_version"),false, true,true);
-            Log.fatalError("Config version should be: " + configVersion,false, true,true);
+        if (!checkConfigVersion()) {
+            Log.fatalError("Config version does not correspond with the version that is required by this plugin", false, true, true);
+            Log.fatalError("Please back up and then delete your config so we can generate a new one on startup!", false, true, true);
+            Log.fatalError("Config version is: " + config.getString("config_version"), false, true, true);
+            Log.fatalError("Config version should be: " + configVersion, false, true, true);
             Bukkit.getPluginManager().disablePlugin(plugin);
             return;
         }
         if (!config.getBoolean("database.enabled")) {
-            Log.fatalError("Database has not been enabled! please fill in the credentials and set the option to 'true' (without quotes)",false,true,true);
+            Log.fatalError("Database has not been enabled! please fill in the credentials and set the option to 'true' (without quotes)", false, true, true);
         }
         try {
             loadEvents();
             loadCommands();
             DataManager dataManager = new DataManager();
             dataManager.init(false);
-            Schedulers.async().callLater(()->{
+            Schedulers.async().callLater(() -> {
                 OffenseProcessorFactoryManager.instantiate();
+                OffenseProcessorFactoryManager.getOffenseProcessorFactory().init();
                 return null;
-            },60);
-            
+            }, 120);
+
         } catch (Exception e) {
             Log.logException(e, Log.LogLevel.FATALERROR, false, false, true, true, true);
             Bukkit.getPluginManager().disablePlugin(plugin);
             return;
         }
+
     }
 
     @Override
@@ -205,7 +209,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         Log.debug("Loading events...",false, true,true);
         Events.subscribe(AsyncPlayerPreLoginEvent.class)
                 .expireAfter(5, TimeUnit.SECONDS)
-                .handler(e->e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, Log.getFatalErrorPrefix() + "Still initializing database!, please wait 3 seconds and log back in!"));
+                .handler(e->e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, Log.getFatalErrorPrefix() + "Still initializing database!, please wait 10 seconds and log back in!"));
         
         Events.subscribe(AsyncPlayerPreLoginEvent.class, EventPriority.MONITOR).handler((e)->{
             if (!(e.getLoginResult() == AsyncPlayerPreLoginEvent.Result.ALLOWED)){
@@ -221,10 +225,6 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         Events.subscribe(PlayerQuitEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleQuit).bindWith(getPlugin());
         Events.subscribe(PlayerKickEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleKick).bindWith(getPlugin());
         Log.debug("Events Loaded!",false,true,true);
-        
-        Events.subscribe(PlayerSwapHandItemsEvent.class).handler(e->{
-            e.getPlayer().sendMessage("u swapped items!");
-        }).bindWith(plugin);
     }
 
 
@@ -233,7 +233,6 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         Log.debug("Instantiating commandmanager",false,true,true);
         this.commandManager = new PaperCommandManager<>(plugin,executionCoordinatorFunction,mapperFunction,mapperFunction);
         Log.debug("Commandmanager instatiated",false,true,true);
-        this.commandManager.getParserRegistry().registerSuggestionProvider("punishcommand",PunishCommand.getSuggestionsProvider());
         this.commandManager.registerBrigadier();
         this.annotationParser = new AnnotationParser<>( this.commandManager, CommandSender.class, commandMetaFunction);
         this.annotationParser.parse(new PunishCommand());

@@ -1,11 +1,10 @@
 package me.superbiebel.defaultdatahandler;
 
-import me.superbiebel.offenseprocessingdataabstraction.abstraction.OffenseProcessingDataHandler;
 import me.superbiebel.punishmentmanager.data.AVAILABILITY;
-import me.superbiebel.punishmentmanager.data.dataObjects.HistoryRecord;
 import me.superbiebel.punishmentmanager.data.abstraction.Cache;
-import me.superbiebel.punishmentmanager.data.abstraction.Database;
 import me.superbiebel.punishmentmanager.data.abstraction.DataHandler;
+import me.superbiebel.punishmentmanager.data.abstraction.Database;
+import me.superbiebel.punishmentmanager.data.dataObjects.HistoryRecord;
 import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
 import me.superbiebel.punishmentmanager.data.providers.DatabaseProvider;
 import me.superbiebel.punishmentmanager.utils.Log;
@@ -15,7 +14,7 @@ import java.net.InetAddress;
 import java.util.List;
 import java.util.UUID;
 
-public class DefaultDataHandler implements DataHandler, OffenseProcessingDataHandler {
+public class DefaultDataHandler implements DataHandler {
     private static Database db = DatabaseProvider.getDatabase();
     private static Cache cache;
 
@@ -63,16 +62,6 @@ public class DefaultDataHandler implements DataHandler, OffenseProcessingDataHan
     @Override
     public List<OffenseKey> getAllOffenseKeys() {
         return null;
-    }
-    
-    @Override
-    public void offenseProcessingDataHandlerInit() throws Exception {
-    
-    }
-    
-    @Override
-    public void offenseProcessingDataHandlerShutdown() throws Exception {
-    
     }
 }
 

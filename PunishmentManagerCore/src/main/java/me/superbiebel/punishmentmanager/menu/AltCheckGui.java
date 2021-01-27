@@ -1,15 +1,28 @@
 package me.superbiebel.punishmentmanager.menu;
 
+import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
+import me.lucko.helper.metadata.Metadata;
+import me.superbiebel.punishmentmanager.data.DATAKEYS;
 import org.bukkit.entity.Player;
 
 public class AltCheckGui extends AbstractChestGui{
     @Override
-    protected void open(Player p) {
-    
+    public void open(Player p) {
+        cachedPlayer = p;
+        super.gui.show(cachedPlayer);
     }
     
     @Override
-    protected void construct(boolean force, boolean allowlazy) {
-    
+    public void construct(boolean force, boolean allowlazy) {
+        throw new UnsupportedOperationException("Altcheckgui needs a player to construct, used the wrong method!");
+    }
+
+    @Override
+    public void construct(boolean force, boolean allowlazy, Player player) {
+        super.gui = new ChestGui(6,"Alts of " + Metadata.provideForPlayer(player).get(DATAKEYS.CRIMINAL_KEY).get().getName());
+    }
+
+    private void personalisedStuff() {
+
     }
 }

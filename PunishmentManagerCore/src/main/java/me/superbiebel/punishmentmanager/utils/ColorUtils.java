@@ -3,6 +3,7 @@ package me.superbiebel.punishmentmanager.utils;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.jetbrains.annotations.NotNull;
 
 
 public class ColorUtils {
@@ -13,7 +14,7 @@ public class ColorUtils {
      * @param text The string of text to apply color/effects to
      * @return Returns a string of text with color/effects applied
      */
-    public static String colorize(String text){
+    public static String colorize(@NotNull String text){
 
         String[] texts = text.split(String.format(WITH_DELIMITER, "&"));
 

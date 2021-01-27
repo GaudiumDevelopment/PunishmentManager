@@ -9,8 +9,7 @@ public class OffenseProcessingDatabaseProvider implements OffenseProcessingProvi
     
     @Override
     public void init(String pathToClass) throws Exception {
-        System.out.println(pathToClass);
-        Class clazz = Class.forName(pathToClass);
+        Class<?> clazz = Class.forName(pathToClass);
         database = (OffenseProcessingDatabase) clazz.getDeclaredConstructor().newInstance();
         database.offenseProcessingDatabaseInit();
     }

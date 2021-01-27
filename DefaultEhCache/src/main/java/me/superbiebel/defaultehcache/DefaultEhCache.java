@@ -1,9 +1,11 @@
 package me.superbiebel.defaultehcache;
 
-import me.superbiebel.offenseprocessingdataabstraction.abstraction.OffenseProcessingCache;
 import me.superbiebel.punishmentmanager.data.abstraction.Cache;
+import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
 
-public class DefaultEhCache implements Cache, OffenseProcessingCache {
+import java.util.List;
+
+public class DefaultEhCache implements Cache {
     
     @Override
     public void init() throws Exception {
@@ -29,14 +31,9 @@ public class DefaultEhCache implements Cache, OffenseProcessingCache {
     public <T> T getCachedInventory(String key) throws Exception {
         return null;
     }
-    
+
     @Override
-    public void offenseProcessingCacheInit() throws Exception {
-    
-    }
-    
-    @Override
-    public void offenseProcessingCacheshutdown() throws Exception {
-    
+    public List<OffenseKey> getAllOffenseKeys() {
+        return null;
     }
 }

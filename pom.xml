@@ -15,5 +15,6 @@
         <module>DefaultEhCache</module>
         <module>DefaultOffenseProcessor</module>
         <module>OffenseProcessingDataAbstraction</module>
+        <module>DefaultRedisMessaging</module>
     </modules>
 </project>

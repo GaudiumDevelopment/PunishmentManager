@@ -3,6 +3,8 @@ package me.superbiebel.punishmentmanager.menu;
 import com.github.stefvanschie.inventoryframework.gui.GuiItem;
 import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
 import com.github.stefvanschie.inventoryframework.pane.StaticPane;
+import me.lucko.helper.metadata.Metadata;
+import me.superbiebel.punishmentmanager.data.DATAKEYS;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -25,6 +27,9 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
     private ItemStack altCheckItemStack;
     private GuiItem altCheckItem;
     private SkullMeta altCheckItemMeta;
+
+    private Player criminal;
+
     
     @Override
     public void construct(boolean force, boolean allowlazy){
@@ -47,26 +52,23 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
         altCheckItemMeta = (SkullMeta) altCheckItemStack.getItemMeta();
         
         
-        
-        
         staticPane.addItem(offenseItem,2,1);
         staticPane.addItem(historyItem,4,1);
-        
-        
+
         super.hasBeenConstructed = true;
     }
     
     @Override
-    protected void construct(boolean force, boolean allowlazy, Player player) {
+    public void construct(boolean force, boolean allowlazy, Player player) {
         construct(force, allowlazy);
         cachedPlayer = player;
-        personalisedStuff();
+        setPersonalisedStuff();
     }
     
     @Override
     public void open(final Player p){
         cachedPlayer = p;
-        personalisedStuff();
+        setPersonalisedStuff();
         super.gui.addPane(staticPane);
         super.gui.show(p);
     }
@@ -76,8 +78,13 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
         super.gui.show(cachedPlayer);
     }
     
-    private void personalisedStuff() {
-        altCheckItemMeta.setOwningPlayer(cachedPlayer);
+    public void setPersonalisedStuff() {
+        if (!super.hasBeenConstructed) {
+            throw new IllegalStateException("Cannot set personalised stuff when the gui hasn't been constructed yet");
+        }
+        criminal = Metadata.provideForPlayer(cachedPlayer).get(DATAKEYS.CRIMINAL_KEY).get();
+        altCheckItemMeta.setOwningPlayer(criminal);
+        altCheckItemMeta.setDisplayName(ColorUtils.colorize("&cAlts of " + criminal.getName()));
         altCheckItemStack.setItemMeta(altCheckItemMeta);
         altCheckItem = new GuiItem(altCheckItemStack);
         staticPane.addItem(altCheckItem,6,1);
@@ -85,7 +92,7 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
         offenseItem.setAction(e -> {
             e.setCancelled(true);
             AbstractChestGui gui = new ImprovedOffenseListChestGui();
-            gui.construct(false,false);
+            gui.construct(false,true);
             gui.open(cachedPlayer);
         });
         historyItem.setAction((e->{
@@ -106,6 +113,6 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
     @Override
     public void setCachedPlayer(Player p) {
         cachedPlayer = p;
-        personalisedStuff();
+        setPersonalisedStuff();
     }
 }

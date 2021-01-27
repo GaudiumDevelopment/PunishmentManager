@@ -18,7 +18,7 @@ public class ImprovedOffenseListChestGui extends AbstractChestGui {
     @Override
     public void construct(boolean force, boolean allowlazy) {
         ThreadContext threadContext = allowlazy ? ThreadContext.ASYNC : ThreadContext.SYNC;
-        Promise<Void> constructpanePromise = Promise.empty().thenRunSync(()->{
+        Promise<Void> constructpanePromise = Promise.start().thenRunSync(()->{
             super.gui = new ChestGui(6,"Choose an offense");
         }).thenRun(threadContext,()->{
         
