@@ -13,9 +13,10 @@ mv "//Users/travis/.m2/repository/me/superbiebel/defaultmysqldatabase/NOT-REAL-V
 mv "/Users/travis/.m2/repository/me/superbiebel/defaultoffenseprocessor/NOT-REAL-VERSION/defaultoffenseprocessor-NOT-REAL-VERSION.jar" "/Users/travis/PunishmentManager-build_$1/defaultoffenseprocessor-build_$1.jar"
 mv "/Users/travis/.m2/repository/me/superbiebel/offenseprocessingdataabstraction/NOT-REAL-VERSION/offenseprocessingdataabstraction-NOT-REAL-VERSION.jar" "/Users/travis/PunishmentManager-build_$1/offenseprocessingdataabstraction-build_$1.jar"
 mv "/Users/travis/.m2/repository/me/superbiebel/defaultredismessaging/NOT-REAL-VERSION/defaultredismessaging-NOT-REAL-VERSION.jar" "/Users/travis/PunishmentManager-build_$1/defaultredismessaging-build_$1.jar"
-echo "All jars successfully moved and renamed"
+
+echo "File moving completed!"
 
 echo "Archiving files..."
-cd /Users/travis/
+cd /Users/travis/ || exit
 tar -cvzf PunishmentManager+default_modules-build_$1.tar PunishmentManager-build_$1
 echo "Files archived!"
