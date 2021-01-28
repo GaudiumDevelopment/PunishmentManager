@@ -172,35 +172,20 @@ public class ImprovedHistoryChestGui extends AbstractChestGui{
             backToActionListGuiItemStack.setItemMeta(backToActionListGuiItemMeta);
             backToActionListGuiItem = new GuiItem(backToActionListGuiItemStack);
 
-            buttonPane = new StaticPane(0,0,9, 0);
-            buttonPane.addItem(backToActionListGuiItem,2,0);
+
+            backToActionListGuiItem.setAction(e->{
+                e.setCancelled(true);
+                ImprovedActionListChestGui actionListChestGui = new ImprovedActionListChestGui();
+                actionListChestGui.construct(false,true);
+                actionListChestGui.open((Player) e.getWhoClicked());
+            });
+            buttonPane = new StaticPane(4,5,9, 1);
+            buttonPane.addItem(backToActionListGuiItem,0,0);
             super.gui.addPane(buttonPane);
-
-            //StaticPane pane = new StaticPane(5, 4, 9, 3);
-            //pane.addItem(new GuiItem(new ItemStack(Material.STONE)), 1, 0);
-            //super.gui.addPane(pane);
-
-
-
-
-            //paginatedPane = new PaginatedPane(0,0,9,5, Pane.Priority.HIGH);
-            //paginatedPane.populateWithGuiItems(historyItemList);
-
-
-
-
-
-            //super.gui.addPane(paginatedPane);
 
             super.gui.setTitle(finaltitle);
             super.gui.update();
         });
-
-
-
-
-
-
 
     }
 }

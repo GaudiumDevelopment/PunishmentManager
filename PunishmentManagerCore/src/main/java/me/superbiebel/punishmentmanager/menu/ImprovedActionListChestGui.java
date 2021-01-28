@@ -6,6 +6,7 @@ import com.github.stefvanschie.inventoryframework.pane.StaticPane;
 import me.lucko.helper.metadata.Metadata;
 import me.superbiebel.punishmentmanager.data.DATAKEYS;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
+import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -33,6 +34,7 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
     
     @Override
     public void construct(boolean force, boolean allowlazy){
+        Log.debug("constructing gui...");
         super.gui = new ChestGui(3, "Choose action");
         staticPane = new StaticPane(0,0,9,3);
         
@@ -54,7 +56,6 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
         
         staticPane.addItem(offenseItem,2,1);
         staticPane.addItem(historyItem,4,1);
-
         super.hasBeenConstructed = true;
     }
     
@@ -82,6 +83,7 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
         if (!super.hasBeenConstructed) {
             throw new IllegalStateException("Cannot set personalised stuff when the gui hasn't been constructed yet");
         }
+        Log.debug("setting personalised stuff for " + cachedPlayer.getName());
         criminal = Metadata.provideForPlayer(cachedPlayer).get(DATAKEYS.CRIMINAL_KEY).get();
         altCheckItemMeta.setOwningPlayer(criminal);
         altCheckItemMeta.setDisplayName(ColorUtils.colorize("&cAlts of " + criminal.getName()));
