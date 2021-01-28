@@ -19,10 +19,9 @@ public class AltCheckGui extends AbstractChestGui{
 
     @Override
     public void construct(boolean force, boolean allowlazy, Player player) {
-        super.gui = new ChestGui(6,"Alts of " + Metadata.provideForPlayer(player).get(DATAKEYS.CRIMINAL_KEY).get().getName());
-    }
-
-    private void personalisedStuff() {
+        super.gui = new ChestGui(6,"Alts of " + Metadata.provideForPlayer(player).get(DATAKEYS.CRIMINAL_KEY)
+                .orElseThrow(()-> new NullPointerException("Could not find the player in the map to alt check for!"))
+                .getName());
 
     }
 }
