@@ -55,7 +55,7 @@ public class DefaultDataHandler implements DataHandler {
     }
     
     @Override
-    public List<HistoryRecord> getHistory(UUID uuid) {
+    public List<HistoryRecord> getHistory(UUID uuid, boolean nocache) {
         return null;
     }
     
