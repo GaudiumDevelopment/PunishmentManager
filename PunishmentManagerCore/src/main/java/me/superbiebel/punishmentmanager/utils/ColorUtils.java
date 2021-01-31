@@ -14,6 +14,7 @@ public class ColorUtils {
      * @param text The string of text to apply color/effects to
      * @return Returns a string of text with color/effects applied
      */
+    @NotNull
     public static String colorize(@NotNull String text){
 
         String[] texts = text.split(String.format(WITH_DELIMITER, "&"));

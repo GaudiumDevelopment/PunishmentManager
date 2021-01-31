@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: dev.simplix.core:simplixcore-database-sql:1.0.0-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/dev/simplix/core/simplixcore-database-sql/1.0.0-SNAPSHOT/simplixcore-database-sql-1.0.0-20210127.230557-147.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/dev/simplix/core/simplixcore-database-sql/1.0.0-SNAPSHOT/simplixcore-database-sql-1.0.0-20210128.230628-149.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/dev/simplix/core/simplixcore-database-sql/1.0.0-SNAPSHOT/simplixcore-database-sql-1.0.0-20210127.230557-147-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/dev/simplix/core/simplixcore-database-sql/1.0.0-SNAPSHOT/simplixcore-database-sql-1.0.0-20210128.230628-149-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/dev/simplix/core/simplixcore-database-sql/1.0.0-SNAPSHOT/simplixcore-database-sql-1.0.0-20210127.230557-147-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/dev/simplix/core/simplixcore-database-sql/1.0.0-SNAPSHOT/simplixcore-database-sql-1.0.0-20210128.230628-149-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
