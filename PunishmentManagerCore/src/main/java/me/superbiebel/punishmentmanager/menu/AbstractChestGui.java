@@ -9,15 +9,15 @@ public abstract class AbstractChestGui {
     protected boolean hasBeenConstructed = false;
     public abstract void open(Player p);
     public void open() {
-        throw new IllegalStateException("Cannot call method from Abstract class");
+        throw new UnsupportedOperationException("Cannot call method from Abstract class");
     }
     public abstract void construct(boolean force, boolean allowlazy);
     
     public void construct(boolean force, boolean allowlazy, Player player) {
-        throw new IllegalStateException("Cannot call method from Abstract class");
+        throw new UnsupportedOperationException("Cannot call method from Abstract class");
     }
     public void setCachedPlayer(Player p) {
-        throw new IllegalStateException("Cannot call method from Abstract class");
+        throw new UnsupportedOperationException("Cannot call method from Abstract class");
     }
     
 }
