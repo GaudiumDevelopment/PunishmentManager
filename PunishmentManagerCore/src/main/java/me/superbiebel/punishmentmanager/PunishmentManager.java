@@ -156,6 +156,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         }
         Log.closeLog();
         Bukkit.getServer().getLogger().info("PunishmentManagerCore has been disabled");
+        plugin = null;
     }
 
 
