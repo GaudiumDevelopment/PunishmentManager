@@ -17,21 +17,6 @@
       <option name="url" value="https://oss.sonatype.org/content/groups/public/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="simplixsoft-public" />
-      <option name="name" value="simplixsoft-public" />
-      <option name="url" value="https://repo.simplix.dev/repository/simplixsoft-public/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="spigotmc-repo" />
-      <option name="name" value="spigotmc-repo" />
-      <option name="url" value="https://hub.spigotmc.org/nexus/content/repositories/snapshots/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven-repository" />
-      <option name="name" value="maven-repository" />
-      <option name="url" value="file:////Users/jorenbielen/IdeaProjects/PunishmentManager/PunishmentManager/local_libs" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Maven Central repository" />
       <option name="url" value="https://repo1.maven.org/maven2" />
@@ -47,16 +32,6 @@
       <option name="url" value="file:////Users/jorenbielen/IdeaProjects/PunishmentManager/PunishmentManager" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="jboss.community" />
-      <option name="name" value="JBoss Community repository" />
-      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven-repository" />
-      <option name="name" value="maven-repository" />
-      <option name="url" value="file:////Users/jorenbielen/IdeaProjects/PunishmentManager/maven-repository" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="maven" />
       <option name="name" value="maven" />
       <option name="url" value="https://repo.maven.apache.org/maven2/" />
@@ -65,6 +40,31 @@
       <option name="id" value="MavenLocal" />
       <option name="name" value="MavenLocal" />
       <option name="url" value="file:$MAVEN_REPOSITORY$/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="simplixsoft-public" />
+      <option name="name" value="simplixsoft-public" />
+      <option name="url" value="https://repo.simplix.dev/repository/simplixsoft-public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="spigotmc-repo" />
+      <option name="name" value="spigotmc-repo" />
+      <option name="url" value="https://hub.spigotmc.org/nexus/content/repositories/snapshots/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven-repository" />
+      <option name="name" value="maven-repository" />
+      <option name="url" value="file:////Users/jorenbielen/IdeaProjects/PunishmentManager/PunishmentManager/local_libs" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven-repository" />
+      <option name="name" value="maven-repository" />
+      <option name="url" value="file:////Users/jorenbielen/IdeaProjects/PunishmentManager/maven-repository" />
     </remote-repository>
   </component>
 </project>

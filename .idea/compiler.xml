@@ -12,6 +12,18 @@
         <module name="PunishmentManager.offenseprocessingdataabstraction.main" />
         <module name="PunishmentManager.PunishmentManagerCore.main" />
       </profile>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="defaultdatahandler" />
+        <module name="defaultredismessaging" />
+        <module name="defaultmysqldatabase" />
+        <module name="offenseprocessingdataabstraction" />
+        <module name="defaultehcache" />
+        <module name="defaultoffenseprocessor" />
+        <module name="PunishmentManagerCore" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="Abstraction" target="11" />
@@ -21,10 +33,6 @@
       <module name="DefaultOffenseProcessor" target="14" />
       <module name="DefaultRedisMessaging" target="14" />
       <module name="OffenseProcessingDataAbstraction" target="14" />
-      <module name="PunishmentManager.buildSrc" target="14" />
-      <module name="PunishmentManager.buildSrc.main" target="14" />
-      <module name="PunishmentManager.buildSrc.test" target="14" />
-      <module name="PunishmentManagerCore" target="14" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

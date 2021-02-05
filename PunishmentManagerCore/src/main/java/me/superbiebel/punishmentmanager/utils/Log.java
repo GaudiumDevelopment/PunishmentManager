@@ -177,11 +177,7 @@ public class Log {
     public static void debug(@NotNull String msg) {
         Log.debug(msg,false,true,true);
     }
-    
-    
-    public static String getNamePrefix() {
-        return namePrefix;
-    }
+
     public enum LogLevel {
         DEBUG,INFO,WARNING,FATALERROR,NOT_FOUND
     }
