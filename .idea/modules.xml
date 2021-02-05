@@ -2,14 +2,31 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DefaultDataHandler/DefaultDataHandler.iml" filepath="$PROJECT_DIR$/DefaultDataHandler/DefaultDataHandler.iml" />
-      <module fileurl="file://$PROJECT_DIR$/DefaultEhCache/DefaultEhCache.iml" filepath="$PROJECT_DIR$/DefaultEhCache/DefaultEhCache.iml" />
-      <module fileurl="file://$PROJECT_DIR$/DefaultMysqlDatabase/DefaultMysqlDatabase.iml" filepath="$PROJECT_DIR$/DefaultMysqlDatabase/DefaultMysqlDatabase.iml" />
-      <module fileurl="file://$PROJECT_DIR$/DefaultOffenseProcessor/DefaultOffenseProcessor.iml" filepath="$PROJECT_DIR$/DefaultOffenseProcessor/DefaultOffenseProcessor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/DefaultRedisMessaging/DefaultRedisMessaging.iml" filepath="$PROJECT_DIR$/DefaultRedisMessaging/DefaultRedisMessaging.iml" />
-      <module fileurl="file://$PROJECT_DIR$/OffenseProcessingDataAbstraction/OffenseProcessingDataAbstraction.iml" filepath="$PROJECT_DIR$/OffenseProcessingDataAbstraction/OffenseProcessingDataAbstraction.iml" />
-      <module fileurl="file://$PROJECT_DIR$/PunishmentManager.iml" filepath="$PROJECT_DIR$/PunishmentManager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/PunishmentManagerCore/PunishmentManagerCore.iml" filepath="$PROJECT_DIR$/PunishmentManagerCore/PunishmentManagerCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PunishmentManager.iml" filepath="$PROJECT_DIR$/.idea/modules/PunishmentManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PunishmentManagerCore/PunishmentManager.PunishmentManagerCore.iml" filepath="$PROJECT_DIR$/.idea/modules/PunishmentManagerCore/PunishmentManager.PunishmentManagerCore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PunishmentManagerCore/PunishmentManager.PunishmentManagerCore.main.iml" filepath="$PROJECT_DIR$/.idea/modules/PunishmentManagerCore/PunishmentManager.PunishmentManagerCore.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PunishmentManagerCore/PunishmentManager.PunishmentManagerCore.test.iml" filepath="$PROJECT_DIR$/.idea/modules/PunishmentManagerCore/PunishmentManager.PunishmentManagerCore.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PunishmentManager.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/PunishmentManager.buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PunishmentManager.buildSrc.main.iml" filepath="$PROJECT_DIR$/.idea/modules/PunishmentManager.buildSrc.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PunishmentManager.buildSrc.test.iml" filepath="$PROJECT_DIR$/.idea/modules/PunishmentManager.buildSrc.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DefaultDataHandler/PunishmentManager.defaultdatahandler.iml" filepath="$PROJECT_DIR$/.idea/modules/DefaultDataHandler/PunishmentManager.defaultdatahandler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DefaultDataHandler/PunishmentManager.defaultdatahandler.main.iml" filepath="$PROJECT_DIR$/.idea/modules/DefaultDataHandler/PunishmentManager.defaultdatahandler.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DefaultDataHandler/PunishmentManager.defaultdatahandler.test.iml" filepath="$PROJECT_DIR$/.idea/modules/DefaultDataHandler/PunishmentManager.defaultdatahandler.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DefaultEhCache/PunishmentManager.defaultehcache.iml" filepath="$PROJECT_DIR$/.idea/modules/DefaultEhCache/PunishmentManager.defaultehcache.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DefaultEhCache/PunishmentManager.defaultehcache.main.iml" filepath="$PROJECT_DIR$/.idea/modules/DefaultEhCache/PunishmentManager.defaultehcache.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DefaultEhCache/PunishmentManager.defaultehcache.test.iml" filepath="$PROJECT_DIR$/.idea/modules/DefaultEhCache/PunishmentManager.defaultehcache.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DefaultMysqlDatabase/PunishmentManager.defaultmysqldatabase.iml" filepath="$PROJECT_DIR$/.idea/modules/DefaultMysqlDatabase/PunishmentManager.defaultmysqldatabase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DefaultMysqlDatabase/PunishmentManager.defaultmysqldatabase.main.iml" filepath="$PROJECT_DIR$/.idea/modules/DefaultMysqlDatabase/PunishmentManager.defaultmysqldatabase.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DefaultMysqlDatabase/PunishmentManager.defaultmysqldatabase.test.iml" filepath="$PROJECT_DIR$/.idea/modules/DefaultMysqlDatabase/PunishmentManager.defaultmysqldatabase.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DefaultOffenseProcessor/PunishmentManager.defaultoffenseprocessor.iml" filepath="$PROJECT_DIR$/.idea/modules/DefaultOffenseProcessor/PunishmentManager.defaultoffenseprocessor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DefaultOffenseProcessor/PunishmentManager.defaultoffenseprocessor.main.iml" filepath="$PROJECT_DIR$/.idea/modules/DefaultOffenseProcessor/PunishmentManager.defaultoffenseprocessor.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DefaultOffenseProcessor/PunishmentManager.defaultoffenseprocessor.test.iml" filepath="$PROJECT_DIR$/.idea/modules/DefaultOffenseProcessor/PunishmentManager.defaultoffenseprocessor.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DefaultRedisMessaging/PunishmentManager.defaultredismessaging.iml" filepath="$PROJECT_DIR$/.idea/modules/DefaultRedisMessaging/PunishmentManager.defaultredismessaging.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DefaultRedisMessaging/PunishmentManager.defaultredismessaging.main.iml" filepath="$PROJECT_DIR$/.idea/modules/DefaultRedisMessaging/PunishmentManager.defaultredismessaging.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DefaultRedisMessaging/PunishmentManager.defaultredismessaging.test.iml" filepath="$PROJECT_DIR$/.idea/modules/DefaultRedisMessaging/PunishmentManager.defaultredismessaging.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OffenseProcessingDataAbstraction/PunishmentManager.offenseprocessingdataabstraction.iml" filepath="$PROJECT_DIR$/.idea/modules/OffenseProcessingDataAbstraction/PunishmentManager.offenseprocessingdataabstraction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OffenseProcessingDataAbstraction/PunishmentManager.offenseprocessingdataabstraction.main.iml" filepath="$PROJECT_DIR$/.idea/modules/OffenseProcessingDataAbstraction/PunishmentManager.offenseprocessingdataabstraction.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OffenseProcessingDataAbstraction/PunishmentManager.offenseprocessingdataabstraction.test.iml" filepath="$PROJECT_DIR$/.idea/modules/OffenseProcessingDataAbstraction/PunishmentManager.offenseprocessingdataabstraction.test.iml" />
     </modules>
   </component>
 </project>

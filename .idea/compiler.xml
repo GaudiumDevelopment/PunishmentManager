@@ -3,20 +3,17 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+      <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
-        <module name="DefaultEhCache" />
-        <module name="DefaultMysqlDatabase" />
-        <module name="OffenseProcessingDataAbstraction" />
-        <module name="DefaultDataHandler" />
-        <module name="PunishmentManagerCore" />
-        <module name="DefaultOffenseProcessor" />
-        <module name="DefaultRedisMessaging" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.16/lombok-1.18.16.jar" />
+        </processorPath>
+        <module name="PunishmentManager.defaultmysqldatabase.main" />
+        <module name="PunishmentManager.offenseprocessingdataabstraction.main" />
+        <module name="PunishmentManager.PunishmentManagerCore.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="15">
+    <bytecodeTargetLevel target="1.8">
       <module name="Abstraction" target="11" />
       <module name="DefaultDataHandler" target="14" />
       <module name="DefaultEhCache" target="14" />
@@ -24,7 +21,9 @@
       <module name="DefaultOffenseProcessor" target="14" />
       <module name="DefaultRedisMessaging" target="14" />
       <module name="OffenseProcessingDataAbstraction" target="14" />
-      <module name="PunishmentManager" target="1.5" />
+      <module name="PunishmentManager.buildSrc" target="14" />
+      <module name="PunishmentManager.buildSrc.main" target="14" />
+      <module name="PunishmentManager.buildSrc.test" target="14" />
       <module name="PunishmentManagerCore" target="14" />
     </bytecodeTargetLevel>
   </component>

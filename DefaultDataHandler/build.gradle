@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+    id 'me.superbiebel.java-conventions'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+
+dependencies {
+    implementation project(':offenseprocessingdataabstraction')
+    compileOnly 'org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT'
+    compileOnly project(':PunishmentManagerCore')
+}
+
+shadowJar {
+    relocate 'me.superbiebel.offenseprocessingdataabstraction', 'me.superbiebel.defaultdatahandler.shaded.offenseprocessingdataabstraction'
+}
+
+build.dependsOn shadowJar
+
+
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+
+description = 'DefaultDataHandler'

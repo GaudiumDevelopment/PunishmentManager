@@ -35,3 +35,12 @@ df6b057ee7097b6ccecd2b9c7fb7517e0c8e040e.xml
 /compiled_stuff/
 /PunishmentManagerCore/target/
 /OffenseProcessingDataAbstraction/target/
+/PunishmentManagerCore/build/
+/.gradle/
+/buildSrc/.gradle/
+/buildSrc/build/
+/DefaultDataHandler/build/
+/DefaultOffenseProcessor/build/
+/DefaultRedisMessaging/build/
+/DefaultMysqlDatabase/build/
+/DefaultEhCache/build/

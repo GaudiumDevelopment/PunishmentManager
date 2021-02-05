@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+    id 'me.superbiebel.java-conventions'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT'
+    implementation 'redis.clients:jedis:3.5.1'
+    compileOnly project(':PunishmentManagerCore')
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+
+description = 'DefaultRedisMessaging'

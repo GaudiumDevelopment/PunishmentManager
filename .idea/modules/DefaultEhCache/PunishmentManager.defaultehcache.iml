@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":defaultehcache" external.linked.project.path="$MODULE_DIR$/../../../DefaultEhCache" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="me.superbiebel" external.system.module.version="NOT-REAL-VERSION" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../DefaultEhCache">
+      <excludeFolder url="file://$MODULE_DIR$/../../../DefaultEhCache/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../DefaultEhCache/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../DefaultEhCache/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

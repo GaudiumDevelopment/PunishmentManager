@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'me.superbiebel.java-conventions'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+
+dependencies {
+    implementation project(':offenseprocessingdataabstraction')
+    compileOnly 'org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT'
+    compileOnly 'me.lucko:helper:5.6.5'
+    compileOnly project(':PunishmentManagerCore')
+    implementation 'com.github.simplix-softworks:simplixstorage:3.1.9'
+}
+
+build.dependsOn shadowJar
+
+shadowJar {
+    relocate 'dev.simplix.core.simplixcore-database-sql', 'me.superbiebel.defaultmysqldatabase.shaded.simplixcore-database-sql'
+    relocate 'com.github.simplix-softworks.simplixstorage', 'me.superbiebel.defaultmysqldatabase.shaded.simplixstorage'
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+
+description = 'DefaultOffenseExecutor'

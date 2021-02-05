@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: dev.simplix.core:simplixcore-database-sql:1.0.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/dev/simplix/core/simplixcore-database-sql/1.0.0-SNAPSHOT/simplixcore-database-sql-1.0.0-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/dev/simplix/core/simplixcore-database-sql/1.0.0-SNAPSHOT/simplixcore-database-sql-1.0.0-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
