@@ -1,5 +1,5 @@
 language: java
-script: mvn clean install
+script: gradle clean build
 os: osx
 jdk:
   - openjdk14
