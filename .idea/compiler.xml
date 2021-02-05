@@ -6,30 +6,11 @@
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.16/lombok-1.18.16.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.16/6dc192c7f93ec1853f70d59d8a6dcf94eb42866/lombok-1.18.16.jar" />
         </processorPath>
         <module name="PunishmentManager.defaultmysqldatabase.main" />
         <module name="PunishmentManager.offenseprocessingdataabstraction.main" />
         <module name="PunishmentManager.PunishmentManagerCore.main" />
-      </profile>
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="defaultdatahandler" />
-        <module name="defaultredismessaging" />
-        <module name="defaultmysqldatabase" />
-        <module name="offenseprocessingdataabstraction" />
-        <module name="defaultehcache" />
-        <module name="defaultoffenseprocessor" />
-        <module name="PunishmentManagerCore" />
-      </profile>
-      <profile name="Gradle Imported" enabled="true">
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.16/6dc192c7f93ec1853f70d59d8a6dcf94eb42866/lombok-1.18.16.jar" />
-        </processorPath>
-        <module name="PunishmentManager.defaultmysqldatabase.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
