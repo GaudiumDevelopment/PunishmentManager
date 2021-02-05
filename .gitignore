@@ -48,3 +48,5 @@ df6b057ee7097b6ccecd2b9c7fb7517e0c8e040e.xml
 /buildSrc/build/generated-sources/kotlin-dsl-external-plugin-spec-builders/
 /buildSrc/build/groovy-dsl-plugins/
 /buildSrc/.gradle/6.8.1/executionHistory/
+/OffenseProcessingDataAbstraction/build/
+/OffenseProcessingDataAbstraction/build/libs/
