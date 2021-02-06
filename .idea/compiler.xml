@@ -16,11 +16,18 @@
     <bytecodeTargetLevel target="1.8">
       <module name="Abstraction" target="11" />
       <module name="DefaultDataHandler" target="14" />
+      <module name="defaultdatahandler" target="14" />
+      <module name="defaultehcache" target="14" />
       <module name="DefaultEhCache" target="14" />
+      <module name="defaultmysqldatabase" target="14" />
       <module name="DefaultMysqlDatabase" target="14" />
+      <module name="defaultoffenseprocessor" target="14" />
       <module name="DefaultOffenseProcessor" target="14" />
+      <module name="defaultredismessaging" target="14" />
       <module name="DefaultRedisMessaging" target="14" />
       <module name="OffenseProcessingDataAbstraction" target="14" />
+      <module name="offenseprocessingdataabstraction" target="14" />
+      <module name="PunishmentManagerCore" target="14" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
