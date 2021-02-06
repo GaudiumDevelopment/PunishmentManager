@@ -3,25 +3,25 @@ script: ./gradlew clean build
 os: osx
 jdk:
   - openjdk14
-deploy:
+#deploy:
 
-  - provider: script
-    script: bash scripts/upload_RELEASE.bash $TRAVIS_BUILD_NUMBER $API_KEY
-    skip_cleanup: true
-    on:
-      branch: release
-  - provider: script
-    script: bash scripts/upload_RELEASE_CANDIDATE.bash $TRAVIS_BUILD_NUMBER $API_KEY
-    skip_cleanup: true
-    on:
-      branch: release_candidate
-  - provider: script
-    script: bash scripts/upload_DEVELOPMENT.bash $TRAVIS_BUILD_NUMBER $API_KEY
-    skip_cleanup: true
-    on:
-      all_branches: true
-branches:
-  only:
-    - master
-    - release_candidate
-    - release
+#  - provider: script
+#    script: bash scripts/upload_RELEASE.bash $TRAVIS_BUILD_NUMBER $API_KEY
+#    skip_cleanup: true
+#    on:
+#      branch: release
+#  - provider: script
+#    script: bash scripts/upload_RELEASE_CANDIDATE.bash $TRAVIS_BUILD_NUMBER $API_KEY
+#    skip_cleanup: true
+#    on:
+#      branch: release_candidate
+#  - provider: script
+#    script: bash scripts/upload_DEVELOPMENT.bash $TRAVIS_BUILD_NUMBER $API_KEY
+#    skip_cleanup: true
+#    on:
+#      all_branches: true
+#branches:
+#  only:
+#    - master
+#    - release_candidate
+#    - release
