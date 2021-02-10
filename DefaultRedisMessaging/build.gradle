@@ -10,6 +10,13 @@ dependencies {
     compileOnly project(':PunishmentManagerCore')
 }
 
+shadowJar {
+    relocate 'redis.clients.jedis' , 'me.superbiebel.defaultredismessaging.shaded.jedis'
+}
+
+
+build.dependsOn shadowJar
+
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 

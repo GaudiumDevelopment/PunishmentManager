@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
     implementation 'org.ehcache:ehcache:3.9.0'
-    implementation project(':offenseprocessingdataabstraction')
+    compileOnly project(':offenseprocessingdataabstraction')
     compileOnly 'org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT'
     compileOnly project(':PunishmentManagerCore')
 }
@@ -15,6 +15,7 @@ build.dependsOn shadowJar
 
 shadowJar {
     relocate 'org.ehcache.ehcache', 'me.superbiebel.defaultehcache.shaded.ehcache'
+    //relocate 'me.superbiebel.offenseprocessingdataabstraction', 'me.superbiebel.defaultehcache.shaded.offenseprocessingdataabstraction'
 }
 
 apply plugin: 'com.github.johnrengelman.shadow'

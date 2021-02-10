@@ -15,8 +15,8 @@ dependencies {
 build.dependsOn shadowJar
 
 shadowJar {
-    relocate 'dev.simplix.core.simplixcore-database-sql', 'me.superbiebel.defaultmysqldatabase.shaded.simplixcore-database-sql'
-    relocate 'com.github.simplix-softworks.simplixstorage', 'me.superbiebel.defaultmysqldatabase.shaded.simplixstorage'
+    relocate 'dev.simplix.core.simplixcore-database-sql', 'me.superbiebel.defaultoffenseexecutor.shaded.simplixcore-database-sql'
+    relocate 'com.github.simplix-softworks.simplixstorage', 'me.superbiebel.defaultoffenseexecutor.shaded.simplixstorage'
 }
 
 apply plugin: 'com.github.johnrengelman.shadow'

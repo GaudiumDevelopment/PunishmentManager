@@ -7,7 +7,7 @@ plugins {
 dependencies {
     implementation 'dev.simplix.core:simplixcore-database-sql:1.0.0-20210204.230543-165' //doesnt work without it
     implementation 'com.github.simplix-softworks:simplixstorage:3.2.0'
-    implementation project(':offenseprocessingdataabstraction')
+    compileOnly project(':offenseprocessingdataabstraction')
     compileOnly project(':PunishmentManagerCore')
     compileOnly 'org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT'
     compileOnly 'com.zaxxer:HikariCP:3.4.5'
@@ -21,6 +21,7 @@ build.dependsOn shadowJar
 shadowJar {
     relocate 'dev.simplix.core.simplixcore-database-sql', 'me.superbiebel.defaultmysqldatabase.shaded.simplixcore-database-sql'
     relocate 'com.github.simplix-softworks.simplixstorage', 'me.superbiebel.defaultmysqldatabase.shaded.simplixstorage'
+    //relocate 'me.superbiebel.offenseprocessingdataabstraction', 'me.superbiebel.defaultmysqldatabase.shaded.offenseprocessingdataabstraction'
 }
 
 apply plugin: 'com.github.johnrengelman.shadow'

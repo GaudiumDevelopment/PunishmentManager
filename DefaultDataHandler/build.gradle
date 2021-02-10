@@ -5,13 +5,13 @@ plugins {
 }
 
 dependencies {
-    implementation project(':offenseprocessingdataabstraction')
+    compileOnly project(':offenseprocessingdataabstraction')
     compileOnly 'org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT'
     compileOnly project(':PunishmentManagerCore')
 }
 
 shadowJar {
-    relocate 'me.superbiebel.offenseprocessingdataabstraction', 'me.superbiebel.defaultdatahandler.shaded.offenseprocessingdataabstraction'
+
 }
 
 build.dependsOn shadowJar
