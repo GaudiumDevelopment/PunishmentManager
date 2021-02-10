@@ -107,7 +107,7 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
         altCheckItem.setAction(e->{
             e.setCancelled(true);
             AbstractChestGui altcheckGui = new AltCheckGui();
-            altcheckGui.construct(false,true);
+            altcheckGui.construct(false,true,cachedPlayer);
             altcheckGui.open(cachedPlayer);
         });
     }
