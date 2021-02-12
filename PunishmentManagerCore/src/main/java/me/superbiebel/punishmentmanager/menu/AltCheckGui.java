@@ -22,6 +22,5 @@ public class AltCheckGui extends AbstractChestGui{
         super.gui = new ChestGui(6,"Alts of " + Metadata.provideForPlayer(player).get(DATAKEYS.CRIMINAL_KEY)
                 .orElseThrow(()-> new NullPointerException("Could not find the player in the map to alt check for!"))
                 .getName());
-
     }
 }
