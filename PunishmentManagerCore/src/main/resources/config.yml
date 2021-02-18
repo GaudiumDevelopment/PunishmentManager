@@ -2,6 +2,8 @@
 #every string where there is a (*) needs to be contained in a single '
 
 debug: true
+dev: true
+
 server: survival
 servergroup:
   - global
