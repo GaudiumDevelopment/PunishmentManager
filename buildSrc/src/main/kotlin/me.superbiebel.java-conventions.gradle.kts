@@ -36,10 +36,9 @@ repositories {
 
 group = "me.superbiebel"
 version = "NOT-REAL-VERSION"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
 
-publishing {
+/*publishing {
     publications.create<MavenPublication>("maven") {
         from(components["java"])
     }
-}
+}*/
