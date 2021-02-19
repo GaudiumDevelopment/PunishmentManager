@@ -16,16 +16,21 @@ import org.jetbrains.annotations.NotNull;
 public class SystemCommand{
     @CommandMethod("pmanager <subcommand>")
     @CommandPermission("punishmentmanager.command.system")
-    public void systemCommand(@NotNull CommandSender sender, @Argument(value = "subcommand") String subcommand) throws ScriptException {
+    public void systemCommand(@NotNull CommandSender sender, @Argument(value = "subcommand", suggestions = "systemCommandSubCommandArgSuggestion") String subcommand) throws ScriptException {
                 if (subcommand.equalsIgnoreCase("help")) {
 
                     sender.sendMessage("Check out the wiki if you need help");
 
                 } else if (subcommand.equalsIgnoreCase("reloadconfig")) {
                     if (PermissionUtils.checkAndMessage(sender, "punishmentmanager.command.system.reloadconfig")) {
-                        sender.sendMessage("Reloading config...");
-                        PunishmentManager.getPlugin().reloadConfig();
-                        sender.sendMessage("Config reloaded");
+                        if (PunishmentManager.giveConfig().getBoolean("dev")) {
+                            sender.sendMessage("Reloading config...");
+                            PunishmentManager.getPlugin().reloadConfig();
+                            sender.sendMessage("Config reloaded");
+                        } else {
+                            sender.sendMessage("");
+                        }
+
                     }
 
                 } else if (subcommand.equalsIgnoreCase("sync")) {
