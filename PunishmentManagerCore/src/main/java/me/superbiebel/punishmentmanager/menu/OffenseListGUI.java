@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Deprecated(forRemoval = true)
 public class OffenseListGUI extends PaginatedGui{
     private List<Item> content = new ArrayList<>();
     private Player player;
@@ -83,7 +84,7 @@ public class OffenseListGUI extends PaginatedGui{
                 int resultSetSize = 0;
                 ResultSet offenseListGuiItems = null;
 
-                    offenseListGuiItems = DataHandler.FetchOffenseListGuiData(false); //TODO change this to true after the cache has been implemented.
+                    offenseListGuiItems = DataHandler.FetchOffenseListGuiData(false);
                     if (!(offenseListGuiItems == null)) {
                         try {
                     offenseListGuiItems.last();
