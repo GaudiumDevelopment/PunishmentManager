@@ -33,6 +33,8 @@ shadowJar {
 
 build.dependsOn shadowJar
 
+sourceCompatibility = 11
+
 
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'

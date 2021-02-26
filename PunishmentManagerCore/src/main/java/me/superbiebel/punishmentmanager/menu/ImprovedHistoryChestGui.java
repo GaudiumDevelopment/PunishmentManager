@@ -68,6 +68,18 @@ public class ImprovedHistoryChestGui extends AbstractChestGui {
 
     @Override
     public void construct(boolean force, boolean allowlazy, @NotNull Player player) {
+        /*
+        - init gui object or get it from the cache
+        if not in cache: continue
+        - look up the data for the gui
+        - construct items one by one with fetched data
+        - format the paginated pane
+        - format the buttons
+        - show the gui
+         */
+
+
+
         criminal = Metadata.provideForPlayer(player).get(DATAKEYS.CRIMINAL_KEY).get();
         UUID playeruuid = player.getUniqueId();
         super.gui = new ChestGui(6, "(fetching...)");
@@ -136,10 +148,10 @@ public class ImprovedHistoryChestGui extends AbstractChestGui {
             this.nextPageItemMeta.setDisplayName(ColorUtils.colorize("&cNext Page"));
             List<String> nextPageItemLore = this.nextPageItemMeta.getLore();
             if (nextPageItemLore != null) {
-                nextPageItemLore.add(0,"&cCurrently on page " + paginatedPane.getPage());
+                nextPageItemLore.add(0,ColorUtils.colorize("&cCurrently on page " + paginatedPane.getPage()));
             } else {
                 nextPageItemLore = new ArrayList<>();
-                nextPageItemLore.add(0,"&cCurrently on page " + paginatedPane.getPage());
+                nextPageItemLore.add(0,ColorUtils.colorize("&cCurrently on page " + paginatedPane.getPage()));
             }
             nextPageItemMeta.setLore(nextPageItemLore);
 
@@ -151,7 +163,7 @@ public class ImprovedHistoryChestGui extends AbstractChestGui {
                 checkNextPageItem(true);
                 List<String> lore = this.nextPageItemMeta.getLore();
                 lore.remove(0);
-                lore.add(0,"&cCurrently on page " + paginatedPane.getPage());
+                lore.add(0,ColorUtils.colorize("&cCurrently on page " + paginatedPane.getPage()));
             });
 
             this.buttonPane.addItem(this.nextPageItem,5, 0);
@@ -173,9 +185,8 @@ public class ImprovedHistoryChestGui extends AbstractChestGui {
 
             checkPreviousPageItem(false);
             checkNextPageItem(false);
-            
-            super.gui.update();
 
+            super.gui.update();
         });
     }
 

@@ -14,6 +14,7 @@ shadowJar {
     relocate 'redis.clients.jedis' , 'me.superbiebel.defaultredismessaging.shaded.jedis'
 }
 
+sourceCompatibility = 11
 
 build.dependsOn shadowJar
 

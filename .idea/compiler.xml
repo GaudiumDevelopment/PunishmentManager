@@ -13,7 +13,7 @@
         <module name="PunishmentManager.PunishmentManagerCore.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
+    <bytecodeTargetLevel target="11">
       <module name="Abstraction" target="11" />
       <module name="DefaultDataHandler" target="14" />
       <module name="defaultdatahandler" target="14" />
