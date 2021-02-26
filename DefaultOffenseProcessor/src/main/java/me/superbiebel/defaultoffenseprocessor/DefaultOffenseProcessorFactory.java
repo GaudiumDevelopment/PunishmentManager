@@ -25,15 +25,15 @@ public class DefaultOffenseProcessorFactory implements OffenseProcessorFactory {
         Scheduler scheduler = Schedulers.async();
 
         scheduler.callLater(()->{
-            offenseProcessingCacheProvider.init(PunishmentManager.giveConfig().getString("reflectionpath.standalonecachedriver")); //TODO: fill in class path
+            offenseProcessingCacheProvider.init(PunishmentManager.giveConfig().getString("reflectionpath.standalonecachedriver"));
             return null;
         },60);
         scheduler.callLater(()->{
-            offenseProcessingDatabaseProvider.init(PunishmentManager.giveConfig().getString("reflectionpath.standalonedatabasedriver")); //TODO: fill in class path
+            offenseProcessingDatabaseProvider.init(PunishmentManager.giveConfig().getString("reflectionpath.standalonedatabasedriver"));
             return null;
         },60);
         scheduler.callLater(()->{
-            offenseProcessingDatahandlerProvider.init(PunishmentManager.giveConfig().getString("reflectionpath.standalonedatahandlerdriver")); //TODO: fill in class path
+            offenseProcessingDatahandlerProvider.init(PunishmentManager.giveConfig().getString("reflectionpath.standalonedatahandlerdriver"));
             return null;
         },60);
     }

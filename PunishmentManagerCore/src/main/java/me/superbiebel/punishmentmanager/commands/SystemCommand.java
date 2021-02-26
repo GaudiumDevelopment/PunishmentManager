@@ -102,7 +102,7 @@ public class SystemCommand{
             }
         }*/
 }
-//FIXME doesnt work i dunno why (low priority)
+//TODO Implement this system but with the Cloud command framework
                 /*} else if (args[0].equalsIgnoreCase("log")) {
                     String logLevel = "info";
                     boolean skipNextCheck = false;
