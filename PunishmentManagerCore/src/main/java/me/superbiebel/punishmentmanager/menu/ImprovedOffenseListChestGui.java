@@ -3,6 +3,7 @@ package me.superbiebel.punishmentmanager.menu;
 import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
 import me.lucko.helper.promise.Promise;
 import me.lucko.helper.promise.ThreadContext;
+import me.superbiebel.punishmentmanager.menu.abstraction.AbstractChestGui;
 import org.bukkit.entity.Player;
 
 public class ImprovedOffenseListChestGui extends AbstractChestGui {

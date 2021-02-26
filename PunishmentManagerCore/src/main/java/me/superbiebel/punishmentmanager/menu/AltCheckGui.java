@@ -3,9 +3,10 @@ package me.superbiebel.punishmentmanager.menu;
 import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
 import me.lucko.helper.metadata.Metadata;
 import me.superbiebel.punishmentmanager.data.DATAKEYS;
+import me.superbiebel.punishmentmanager.menu.abstraction.AbstractChestGui;
 import org.bukkit.entity.Player;
 
-public class AltCheckGui extends AbstractChestGui{
+public class AltCheckGui extends AbstractChestGui {
     @Override
     public void open(Player p) {
         cachedPlayer = p;

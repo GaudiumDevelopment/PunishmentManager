@@ -5,6 +5,7 @@ import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
 import com.github.stefvanschie.inventoryframework.pane.StaticPane;
 import me.lucko.helper.metadata.Metadata;
 import me.superbiebel.punishmentmanager.data.DATAKEYS;
+import me.superbiebel.punishmentmanager.menu.abstraction.AbstractChestGui;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.Material;

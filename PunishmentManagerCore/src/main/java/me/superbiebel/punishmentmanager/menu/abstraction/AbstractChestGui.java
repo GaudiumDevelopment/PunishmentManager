@@ -1,4 +1,4 @@
-package me.superbiebel.punishmentmanager.menu;
+package me.superbiebel.punishmentmanager.menu.abstraction;
 
 import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
 import org.bukkit.entity.Player;

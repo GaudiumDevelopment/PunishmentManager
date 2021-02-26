@@ -1,5 +1,6 @@
 package me.superbiebel.punishmentmanager.menu;
 
+import java.util.Objects;
 import me.lucko.helper.item.ItemStackBuilder;
 import me.lucko.helper.menu.Gui;
 import me.lucko.helper.menu.Item;
@@ -10,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
-import java.util.Objects;
 
 @Deprecated(forRemoval = true)
 public class ActionsListGUI extends Gui{
