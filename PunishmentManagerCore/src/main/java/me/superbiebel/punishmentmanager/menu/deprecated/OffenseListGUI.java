@@ -1,4 +1,4 @@
-package me.superbiebel.punishmentmanager.menu;
+package me.superbiebel.punishmentmanager.menu.deprecated;
 
 import me.lucko.helper.menu.Item;
 import me.lucko.helper.menu.paginated.PaginatedGui;

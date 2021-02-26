@@ -1,4 +1,4 @@
-package me.superbiebel.punishmentmanager.menu;
+package me.superbiebel.punishmentmanager.menu.deprecated;
 
 import java.util.Objects;
 import me.lucko.helper.item.ItemStackBuilder;
