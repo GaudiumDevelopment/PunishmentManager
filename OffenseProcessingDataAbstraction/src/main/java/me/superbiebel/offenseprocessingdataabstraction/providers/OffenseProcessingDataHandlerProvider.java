@@ -9,7 +9,7 @@ public class OffenseProcessingDataHandlerProvider implements OffenseProcessingPr
     
     @Override
     public void init(String pathToClass) throws Exception {
-        Class clazz = Class.forName(pathToClass);
+        Class<?> clazz = Class.forName(pathToClass);
         dataHandler = (OffenseProcessingDataHandler) clazz.getDeclaredConstructor().newInstance();
         dataHandler.offenseProcessingDataHandlerInit();
     }
