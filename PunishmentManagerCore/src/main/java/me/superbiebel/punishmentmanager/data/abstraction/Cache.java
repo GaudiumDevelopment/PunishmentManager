@@ -4,6 +4,7 @@ import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
 
 import java.util.List;
 
+@Deprecated(forRemoval = true)
 public interface Cache {
     /**
      * @throws Exception concludes all the exception that might be thrown by different caches.

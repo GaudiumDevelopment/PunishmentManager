@@ -7,6 +7,7 @@ import java.net.InetAddress;
 import java.util.List;
 import java.util.UUID;
 
+@Deprecated(forRemoval = true)
 public interface Database {
     void init() throws Exception;
     void shutdown() throws Exception;
