@@ -53,7 +53,7 @@ public class Log {
         return true;
     }
 
-    public static void debug(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
+    public synchronized static void debug(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
         if (PunishmentManager.isDebugMode()) {
             if (sendInGame) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
@@ -72,7 +72,7 @@ public class Log {
         }
     }
 
-    public static void info(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
+    public synchronized static void info(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
         if (sendInGame) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.hasPermission("punishmentmanager.log.info")) {
@@ -89,7 +89,7 @@ public class Log {
         }
     }
 
-    public static void warning(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
+    public synchronized static void warning(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
         if (sendInGame) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.hasPermission("punishmentmanager.log.warning")) {
@@ -106,7 +106,7 @@ public class Log {
         }
     }
 
-    public static void fatalError(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
+    public synchronized static void fatalError(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
         if (sendInGame) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.hasPermission("punishmentmanager.log.fatalerror")) {
@@ -122,7 +122,7 @@ public class Log {
             printer.flush();
         }
     }
-    public static boolean log(@NotNull final String msg, final LogLevel loglevel, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
+    public synchronized static boolean log(@NotNull final String msg, final LogLevel loglevel, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
         switch (loglevel) {
             case DEBUG:
                 Log.debug(msg, sendInGame, sendToConsole, logToFile);
@@ -142,7 +142,7 @@ public class Log {
         return false;
     }
 
-    public static void logException(final Throwable e, final LogLevel logLevel, final boolean sendInGame, final boolean sendFullInGame, final boolean sendToConsole, final boolean sendFullInConsole, final boolean logToFile){
+    public synchronized static void logException(final Throwable e, final LogLevel logLevel, final boolean sendInGame, final boolean sendFullInGame, final boolean sendToConsole, final boolean sendFullInConsole, final boolean logToFile){
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         e.printStackTrace(pw);
@@ -160,7 +160,12 @@ public class Log {
         }
         Log.log(stacktrace,logLevel,false,false,logToFile);
     }
-    public static LogLevel convertToLogLevel(final String logLevelString) {
+    public synchronized static void logException(final Throwable throwable, final LogLevel logLevel) {
+        logException(throwable, logLevel,false,false,true,true,true);
+    }
+
+
+    public synchronized static LogLevel convertToLogLevel(final String logLevelString) {
         if (logLevelString.equalsIgnoreCase("debug")) {
             return LogLevel.DEBUG;
         } else if (logLevelString.equalsIgnoreCase("info")) {
@@ -174,7 +179,7 @@ public class Log {
         }
     }
     
-    public static void debug(@NotNull String msg) {
+    public synchronized static void debug(@NotNull String msg) {
         Log.debug(msg,false,true,true);
     }
 
