@@ -50,4 +50,8 @@ public class DataManager {
             return null;
         },60);
     }
+
+    public void shutdown(boolean sync) throws Exception{
+
+    }
 }
