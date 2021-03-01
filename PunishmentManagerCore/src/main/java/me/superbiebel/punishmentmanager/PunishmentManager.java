@@ -24,9 +24,6 @@ import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
 import me.superbiebel.punishmentmanager.data.DataManager;
-import me.superbiebel.punishmentmanager.data.providers.CacheProvider;
-import me.superbiebel.punishmentmanager.data.providers.DataHandlerProvider;
-import me.superbiebel.punishmentmanager.data.providers.DatabaseProvider;
 import me.superbiebel.punishmentmanager.listeners.JoinListener;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
 import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessorFactoryManager;
@@ -133,7 +130,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
     @Override
     public void disable() {
-        try {
+        /*try {
             DataHandlerProvider.getDataHandler().shutdown();
         } catch (NullPointerException throwable) {
             Log.warning("The Database was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
@@ -153,7 +150,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
             Log.warning("The Cache was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
         } catch (Exception e) {
             Log.logException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
-        }
+        }*/
         Log.closeLog();
         Bukkit.getServer().getLogger().info("PunishmentManagerCore has been disabled");
         plugin = null;
