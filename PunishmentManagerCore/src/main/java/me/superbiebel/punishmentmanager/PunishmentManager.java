@@ -23,7 +23,7 @@ import me.lucko.helper.Schedulers;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
-import me.superbiebel.punishmentmanager.data.DataManager;
+import me.superbiebel.punishmentmanager.data.abstraction.managers.ServiceManager;
 import me.superbiebel.punishmentmanager.listeners.JoinListener;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
 import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessorFactoryManager;
@@ -61,6 +61,9 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private static File configFile;
 
     private static Config config;
+
+    @Getter
+    ServiceManager serviceManager;
     
     @Getter
     private static final String separator = System.getProperty("file.separator");
@@ -112,8 +115,8 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         try {
             loadEvents();
             loadCommands();
-            DataManager dataManager = new DataManager();
-            dataManager.init(false);
+            serviceManager = new ServiceManager();
+            serviceManager.initServices();
             Schedulers.async().callLater(() -> {
                 OffenseProcessorFactoryManager.instantiate();
                 OffenseProcessorFactoryManager.getOffenseProcessorFactory().init();
