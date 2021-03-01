@@ -6,7 +6,7 @@ import me.superbiebel.punishmentmanager.data.abstraction.Cache;
 import me.superbiebel.punishmentmanager.utils.Log;
 import me.superbiebel.punishmentmanager.utils.ReflectionUtils;
 
-
+@Deprecated(forRemoval = true)
 public class CacheProvider implements Provider {
     @Getter
     private static Cache cache;
