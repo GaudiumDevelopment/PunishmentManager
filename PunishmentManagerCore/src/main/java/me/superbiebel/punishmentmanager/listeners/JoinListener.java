@@ -1,26 +1,24 @@
 package me.superbiebel.punishmentmanager.listeners;
 
+import java.net.InetAddress;
+import java.util.Objects;
+import java.util.UUID;
 import me.lucko.helper.Schedulers;
-import me.superbiebel.punishmentmanager.data.providers.DataHandlerProvider;
+import me.superbiebel.punishmentmanager.PunishmentManager;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.net.InetAddress;
-import java.util.Objects;
-import java.util.UUID;
-
 public class JoinListener {
-    
+
     public void handlePreJoin(AsyncPlayerPreLoginEvent e) {
         String possibleKickMessage = e.getKickMessage();
         UUID uuid = e.getUniqueId();
         InetAddress ip = e.getAddress();
-        AsyncPlayerPreLoginEvent asyncPlayerPreLoginEvent;
         AsyncPlayerPreLoginEvent.Result result = e.getLoginResult();
         Schedulers.async().run(()->{
             try {
-                DataHandlerProvider.getDataHandler().insertJoin(uuid,"NOT ALLOWED",possibleKickMessage,result, ip);
+                PunishmentManager.getServiceManager().getLoginInfoLoggerService().logLoginInfo(uuid,"NOT ALLOWED",possibleKickMessage,result, ip);
             } catch (Exception exception) {
                 Log.logException(exception, Log.LogLevel.FATALERROR,true,false,true,true,true);
             }
@@ -33,7 +31,7 @@ public class JoinListener {
         UUID uuid =  e.getPlayer().getUniqueId();
         Schedulers.async().run(()->{
             try {
-                DataHandlerProvider.getDataHandler().insertJoin(uuid,joinMessage,"", AsyncPlayerPreLoginEvent.Result.ALLOWED, ip);
+                PunishmentManager.getServiceManager().getLoginInfoLoggerService().logLoginInfo(uuid,joinMessage,"", AsyncPlayerPreLoginEvent.Result.ALLOWED, ip);
             } catch (Exception exception) {
                 Log.logException(exception, Log.LogLevel.FATALERROR,true,false,true,true,true);
             }

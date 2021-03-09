@@ -48,9 +48,8 @@ public class Log {
                 false,true,false);
         return true;
     }
-    public static boolean closeLog() {
+    public static void closeLog() {
         printer.close();
-        return true;
     }
 
     public synchronized static void debug(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {

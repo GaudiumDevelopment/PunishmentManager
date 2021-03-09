@@ -1,10 +1,10 @@
-package me.superbiebel.punishmentmanager.data.abstraction;
+package me.superbiebel.punishmentmanager.data.abstraction.service;
 
 public interface Service {
 
     void startup(boolean forceStart) throws Exception;
     void shutdown() throws Exception;
     void kill() throws Exception;
-    String getName();
+    ServiceType getType();
     boolean isInit();
 }

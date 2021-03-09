@@ -23,7 +23,8 @@ import me.lucko.helper.Schedulers;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
-import me.superbiebel.punishmentmanager.data.abstraction.managers.ServiceManager;
+import me.superbiebel.punishmentmanager.data.abstraction.DataController;
+import me.superbiebel.punishmentmanager.data.abstraction.service.managers.ServiceManager;
 import me.superbiebel.punishmentmanager.listeners.JoinListener;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
 import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessorFactoryManager;
@@ -42,13 +43,13 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private static PunishmentManager plugin;
     final Function<CommandSender, CommandSender> mapperFunction = Function.identity();
     
-    PaperCommandManager<CommandSender> commandManager;
+    private static PaperCommandManager<CommandSender> commandManager;
     final Function<CommandTree<CommandSender>, CommandExecutionCoordinator<CommandSender>> executionCoordinatorFunction = CommandExecutionCoordinator.simpleCoordinator();
     final Function<ParserParameters, CommandMeta> commandMetaFunction = p -> CommandMeta.simple()
                                                                                         .with(CommandMeta.DESCRIPTION, p.get(StandardParameters.DESCRIPTION, "No description"))
                                                                                         .build();
     
-    private AnnotationParser<CommandSender> annotationParser;
+    private static AnnotationParser<CommandSender> annotationParser;
     
     @Getter
     private static final String configVersion = "indev";
@@ -63,7 +64,10 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private static Config config;
 
     @Getter
-    ServiceManager serviceManager;
+    private static ServiceManager serviceManager;
+
+    @Getter
+    private static DataController dataController;
     
     @Getter
     private static final String separator = System.getProperty("file.separator");
@@ -80,8 +84,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     -get and check the version from the config file
     -load the events
     -load the commands
-    -initialize the cache|async
-    -initialize the database|async
+    -initialize all data services
     -----able to interact with database------
     -start downloading data to cache|async
     -when all of this is done and has completed successfully allow everything to proceed
@@ -115,8 +118,12 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         try {
             loadEvents();
             loadCommands();
-            serviceManager = new ServiceManager();
-            serviceManager.initServices();
+            Schedulers.async().call(()->{
+                serviceManager = new ServiceManager();
+                serviceManager.initServices();
+                dataController = new DataController();
+                return null;
+            });
             Schedulers.async().callLater(() -> {
                 OffenseProcessorFactoryManager.instantiate();
                 OffenseProcessorFactoryManager.getOffenseProcessorFactory().init();
@@ -232,12 +239,12 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
     public void loadCommands() throws Exception {
         Log.debug("Instantiating commandmanager",false,true,true);
-        this.commandManager = new PaperCommandManager<>(plugin,executionCoordinatorFunction,mapperFunction,mapperFunction);
+        commandManager = new PaperCommandManager<>(plugin,executionCoordinatorFunction,mapperFunction,mapperFunction);
         Log.debug("Commandmanager instatiated",false,true,true);
-        this.commandManager.registerBrigadier();
-        this.annotationParser = new AnnotationParser<>( this.commandManager, CommandSender.class, commandMetaFunction);
-        this.annotationParser.parse(new PunishCommand());
-        this.annotationParser.parse(new SystemCommand());
+        commandManager.registerBrigadier();
+        annotationParser = new AnnotationParser<>( commandManager, CommandSender.class, commandMetaFunction);
+        annotationParser.parse(new PunishCommand());
+        annotationParser.parse(new SystemCommand());
         
     }
     public static Config giveConfig() {
