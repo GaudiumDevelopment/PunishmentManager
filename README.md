@@ -1,10 +1,6 @@
 Downloads: 
 
--Stable:[ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/RELEASE/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/RELEASE/_latestVersion) (no builds yet)
-
--Release candidates:[ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/RELEASE_CANDIDATE/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/RELEASE_CANDIDATE/_latestVersion) (no builds yet)
-
--Development:[ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/RELEASE/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/DEVELOPMENT/_latestVersion)
+-Development:[ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/RELEASE/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/DEVELOPMENT/_latestVersion) (Won't be updated anymore as bintray is shutting down, please build the project from source.)
 
 Legal: [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0) 
 
