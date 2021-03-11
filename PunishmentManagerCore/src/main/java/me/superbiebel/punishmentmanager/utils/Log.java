@@ -31,7 +31,7 @@ public class Log {
     private static final String logFileSaveLocation = logsFolderSaveLocation + separator + "log_" + formatter.format(date) + ".log";
     private static PrintWriter printer;
 
-    public static boolean initLog() throws IOException {
+    public static void initLog() throws IOException {
 
         logsFolder = new File(logsFolderSaveLocation);
         logFile = new File(logFileSaveLocation);
@@ -46,13 +46,12 @@ public class Log {
         printer = new PrintWriter(logFile);
         Log.debug(logFileSaveLocation,
                 false,true,false);
-        return true;
     }
     public static void closeLog() {
         printer.close();
     }
 
-    public synchronized static void debug(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
+    public static synchronized void debug(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
         if (PunishmentManager.isDebugMode()) {
             if (sendInGame) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
@@ -71,7 +70,7 @@ public class Log {
         }
     }
 
-    public synchronized static void info(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
+    public static synchronized void info(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
         if (sendInGame) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.hasPermission("punishmentmanager.log.info")) {
