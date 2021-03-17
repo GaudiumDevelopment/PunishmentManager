@@ -25,7 +25,6 @@ import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
 import me.superbiebel.punishmentmanager.data.abstraction.DataController;
 import me.superbiebel.punishmentmanager.data.abstraction.service.managers.ServiceManager;
-import me.superbiebel.punishmentmanager.listeners.LoginInfoJoinListener;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
 import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessorFactoryManager;
 import me.superbiebel.punishmentmanager.utils.Log;
@@ -33,7 +32,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -43,13 +41,13 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private static PunishmentManager plugin;
     final Function<CommandSender, CommandSender> mapperFunction = Function.identity();
     
-    private static PaperCommandManager<CommandSender> commandManager;
+    private PaperCommandManager<CommandSender> commandManager;
     final Function<CommandTree<CommandSender>, CommandExecutionCoordinator<CommandSender>> executionCoordinatorFunction = CommandExecutionCoordinator.simpleCoordinator();
     final Function<ParserParameters, CommandMeta> commandMetaFunction = p -> CommandMeta.simple()
                                                                                         .with(CommandMeta.DESCRIPTION, p.get(StandardParameters.DESCRIPTION, "No description"))
                                                                                         .build();
     
-    private static AnnotationParser<CommandSender> annotationParser;
+    private AnnotationParser<CommandSender> annotationParser;
     
     @Getter
     private static final String configVersion = "indev";
@@ -177,38 +175,11 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         return status;
     }
 
-
-    /*public void initMySQL() {
-        Log.debug("Checking Mysql config version...",false,true,true,"");
-            MySQL.instantiate(
-                config.getString("MySQL.host"),
-                config.getString("MySQL.username"),
-                config.getString("MySQL.password"),
-                config.getString("MySQL.port"),
-                config.getString("MySQL.db"),
-                config.getString("MySQL.useSSL"));
-            MySQL.initializeTables();
-        }*/
-
-
-
     private void loadEvents() {
         Log.debug("Loading events...",false, true,true);
         Events.subscribe(AsyncPlayerPreLoginEvent.class)
                 .expireAfter(5, TimeUnit.SECONDS)
                 .handler(e->e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, Log.getFatalErrorPrefix() + "Still initializing database!, please wait 10 seconds and log back in!"));
-        
-        Events.subscribe(AsyncPlayerPreLoginEvent.class, EventPriority.MONITOR).handler((e)->{
-            if (e.getLoginResult() != AsyncPlayerPreLoginEvent.Result.ALLOWED){
-                LoginInfoJoinListener loginInfoJoinListener = new LoginInfoJoinListener();
-                loginInfoJoinListener.handlePreJoin(e);
-            }
-        }).bindWith(plugin);
-        Events.subscribe(PlayerJoinEvent.class, EventPriority.MONITOR).handler((e)-> {
-            LoginInfoJoinListener loginInfoJoinListener = new LoginInfoJoinListener();
-            loginInfoJoinListener.handleJoin(e);
-        }).bindWith(plugin);
-        
         Events.subscribe(PlayerQuitEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleQuit).bindWith(getPlugin());
         Events.subscribe(PlayerKickEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleKick).bindWith(getPlugin());
         Log.debug("Events Loaded!",false,true,true);
