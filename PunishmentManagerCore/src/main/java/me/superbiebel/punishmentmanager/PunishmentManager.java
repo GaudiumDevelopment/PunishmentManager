@@ -86,7 +86,6 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     -load the commands
     -initialize all data services
     -----able to interact with database------
-    -start downloading data to cache|async
     -when all of this is done and has completed successfully allow everything to proceed
      */
     @Override
@@ -120,6 +119,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
             loadCommands();
             Schedulers.async().call(()->{
                 serviceManager = new ServiceManager();
+                serviceManager.getServiceRegisterCountDown().await();
                 serviceManager.initServices();
                 dataController = new DataController();
                 return null;
@@ -135,32 +135,11 @@ public class PunishmentManager extends ExtendedJavaPlugin {
             Bukkit.getPluginManager().disablePlugin(plugin);
             return;
         }
-
     }
 
     @Override
     public void disable() {
-        /*try {
-            DataHandlerProvider.getDataHandler().shutdown();
-        } catch (NullPointerException throwable) {
-            Log.warning("The Database was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
-        } catch (Exception e) {
-            Log.logException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
-        }
-        try {
-            CacheProvider.getCache().close();
-        } catch (NullPointerException throwable) {
-            Log.warning("The Cache was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
-        } catch (Exception e) {
-            Log.logException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
-        }
-        try {
-            DatabaseProvider.getDatabase().shutdown();
-        } catch (NullPointerException throwable) {
-            Log.warning("The Cache was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
-        } catch (Exception e) {
-            Log.logException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
-        }*/
+        serviceManager.shutdown();
         Log.closeLog();
         Bukkit.getServer().getLogger().info("PunishmentManagerCore has been disabled");
         plugin = null;
@@ -168,7 +147,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
 
 
-    public void loadConfig() {
+    private void loadConfig() {
         Log.info("loading config...",false,true,false);
         configFile = new File(plugin.getDataFolder().getAbsolutePath() + separator + "config.yml");
         config = LightningBuilder.fromFile(configFile).setConfigSettings(ConfigSettings.PRESERVE_COMMENTS).setDataType(DataType.SORTED).createConfig();
@@ -176,7 +155,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         
     }
 
-    public void checkDebugMode() {
+    private void checkDebugMode() {
         debugMode = config.getBoolean("debug");
         if (debugMode){
             Log.debug("Debug mode has been enabled! There will be extensive logging!",false,true,true);
@@ -186,7 +165,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
     }
 
-    public boolean checkConfigVersion() {
+    private boolean checkConfigVersion() {
         Log.debug("Checking config version...",false,true,true);
         boolean status;
         if (!config.getString("config_version").equalsIgnoreCase(configVersion)) {
@@ -213,14 +192,14 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
 
 
-    public static void loadEvents() {
+    private void loadEvents() {
         Log.debug("Loading events...",false, true,true);
         Events.subscribe(AsyncPlayerPreLoginEvent.class)
                 .expireAfter(5, TimeUnit.SECONDS)
                 .handler(e->e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, Log.getFatalErrorPrefix() + "Still initializing database!, please wait 10 seconds and log back in!"));
         
         Events.subscribe(AsyncPlayerPreLoginEvent.class, EventPriority.MONITOR).handler((e)->{
-            if (!(e.getLoginResult() == AsyncPlayerPreLoginEvent.Result.ALLOWED)){
+            if (e.getLoginResult() != AsyncPlayerPreLoginEvent.Result.ALLOWED){
                 JoinListener joinListener = new JoinListener();
                 joinListener.handlePreJoin(e);
             }
@@ -237,7 +216,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
 
 
-    public void loadCommands() throws Exception {
+    private void loadCommands() throws Exception {
         Log.debug("Instantiating commandmanager",false,true,true);
         commandManager = new PaperCommandManager<>(plugin,executionCoordinatorFunction,mapperFunction,mapperFunction);
         Log.debug("Commandmanager instatiated",false,true,true);

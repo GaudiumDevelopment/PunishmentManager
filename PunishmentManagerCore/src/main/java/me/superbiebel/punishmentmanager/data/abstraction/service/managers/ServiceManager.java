@@ -1,9 +1,9 @@
 package me.superbiebel.punishmentmanager.data.abstraction.service.managers;
 
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import lombok.Getter;
 import me.superbiebel.punishmentmanager.data.abstraction.service.Service;
@@ -12,15 +12,21 @@ import me.superbiebel.punishmentmanager.data.abstraction.service.services.LoginI
 import me.superbiebel.punishmentmanager.utils.Log;
 
 public class ServiceManager {
-    private final List<Service> serviceRegistryList = new CopyOnWriteArrayList<>();
-    private final ConcurrentMap<ServiceType,Service> serviceRegistry = new ConcurrentHashMap<>();
-    private final int MAX_SERVICE_SIZE = 1; //TODO: this should be increased whenever a new service is added.
+    private static final ConcurrentMap<ServiceType,Service> serviceRegistry = new ConcurrentHashMap<>();
+    private static final int MAX_SERVICE_SIZE = 1;
     private final AtomicInteger serviceCount = new AtomicInteger(0);
+    private final AtomicBoolean servicesRegisterComplete = new AtomicBoolean(false);
+    private final AtomicBoolean serviceStartupComplete = new AtomicBoolean(false);
+    @Getter
+    private final CountDownLatch serviceRegisterCountDown = new CountDownLatch(MAX_SERVICE_SIZE);
+
 
     @Getter
-    LoginInfoLoggerService loginInfoLoggerService;
+    private LoginInfoLoggerService loginInfoLoggerService;
 
-    public void initServices(boolean forceInit) throws Exception {
+    public void initServices(boolean forceInit) {
+        if (!(servicesRegisterComplete.get()) || forceInit) {
+        servicesRegisterComplete.getAndSet(true);
         serviceRegistry
                 .values()
                 .parallelStream()
@@ -31,16 +37,34 @@ public class ServiceManager {
                 Log.logException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
             }
         });
+        serviceStartupComplete.set(true);
+        } else {
+            throw new IllegalStateException("Could not init services because not all services are registered");
+        }
     }
-    public void initServices() throws Exception {
+    public void initServices() {
         initServices(false);
     }
 
-    public void registerService(Service service){
+    public void registerService(Service service) {
         if (MAX_SERVICE_SIZE <= serviceCount.get()) {
             throw new IndexOutOfBoundsException("Too many services have been trying to be registered!");
         }
         serviceRegistry.put(service.getType(), service);
+        addToServiceCount();
+    }
+
+    public void shutdown(){
+        serviceRegistry.values().parallelStream().forEach(service -> {
+            try {
+                service.shutdown();
+            } catch (Exception e) {
+                Log.logException(e, Log.LogLevel.FATALERROR);
+            }
+        });
+    }
+    private void addToServiceCount() {
         serviceCount.incrementAndGet();
+        serviceRegisterCountDown.countDown();
     }
 }
