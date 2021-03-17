@@ -9,7 +9,7 @@ import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-public class JoinListener {
+public class LoginInfoJoinListener {
 
     public void handlePreJoin(AsyncPlayerPreLoginEvent e) {
         String possibleKickMessage = e.getKickMessage();

@@ -25,7 +25,7 @@ import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
 import me.superbiebel.punishmentmanager.data.abstraction.DataController;
 import me.superbiebel.punishmentmanager.data.abstraction.service.managers.ServiceManager;
-import me.superbiebel.punishmentmanager.listeners.JoinListener;
+import me.superbiebel.punishmentmanager.listeners.LoginInfoJoinListener;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
 import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessorFactoryManager;
 import me.superbiebel.punishmentmanager.utils.Log;
@@ -200,13 +200,13 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         
         Events.subscribe(AsyncPlayerPreLoginEvent.class, EventPriority.MONITOR).handler((e)->{
             if (e.getLoginResult() != AsyncPlayerPreLoginEvent.Result.ALLOWED){
-                JoinListener joinListener = new JoinListener();
-                joinListener.handlePreJoin(e);
+                LoginInfoJoinListener loginInfoJoinListener = new LoginInfoJoinListener();
+                loginInfoJoinListener.handlePreJoin(e);
             }
         }).bindWith(plugin);
         Events.subscribe(PlayerJoinEvent.class, EventPriority.MONITOR).handler((e)-> {
-            JoinListener joinListener = new JoinListener();
-            joinListener.handleJoin(e);
+            LoginInfoJoinListener loginInfoJoinListener = new LoginInfoJoinListener();
+            loginInfoJoinListener.handleJoin(e);
         }).bindWith(plugin);
         
         Events.subscribe(PlayerQuitEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleQuit).bindWith(getPlugin());
