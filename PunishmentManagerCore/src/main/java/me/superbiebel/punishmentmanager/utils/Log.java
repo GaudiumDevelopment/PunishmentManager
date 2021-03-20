@@ -1,17 +1,16 @@
 package me.superbiebel.punishmentmanager.utils;
 
-import lombok.Getter;
-import me.superbiebel.punishmentmanager.PunishmentManager;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import lombok.Getter;
+import me.superbiebel.punishmentmanager.PunishmentManager;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class Log {
 
@@ -37,7 +36,7 @@ public class Log {
         logFile = new File(logFileSaveLocation);
 
         if (!logsFolder.exists()) {
-            logsFolder.mkdirs();
+            if (!logsFolder.mkdirs()) throw new IOException("Could not create full directory structure! Check if the prgram can read and write in the plugins data folder");
         }
         if (!logFile.exists()) {
             logFile.createNewFile();
