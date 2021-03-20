@@ -15,8 +15,11 @@ database:
   type: "me.superbiebel.defaultmysqldatabase.mysql.MySQLDatabase"
 
 reflectionpath:
+  #deprecated
   datahandlerdriver: "me.superbiebel.defaultdatahandler.DefaultDataHandler"
+  #deprecated
   databasedriver: "me.superbiebel.defaultmysqldatabase.mysql.MySQLDatabase"
+  #deprecated
   cachedriver: "me.superbiebel.defaultehcache.DefaultEhCache"
   standalonedatahandlerdriver: "me.superbiebel.defaultdatahandler.OffenseProcessingDefaultDataHandler"
   standalonedatabasedriver: "me.superbiebel.defaultmysqldatabase.mysql.OffenseProcessingMySQLDatabase"
@@ -24,7 +27,7 @@ reflectionpath:
 
 
 
-
+#deprecated
 datahandler:
   type: "me.superbiebel.defaultdatahandler.DefaultDataHandler"
 
