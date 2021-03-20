@@ -51,6 +51,7 @@ df6b057ee7097b6ccecd2b9c7fb7517e0c8e040e.xml
 /OffenseProcessingDataAbstraction/build/
 /OffenseProcessingDataAbstraction/build/libs/
 /.idea/sonarlint/
+/.idea/sonarlint/issuestore
 
 #jetbrain IDE standard ignores
 .idea/**/workspace.xml
