@@ -50,7 +50,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private AnnotationParser<CommandSender> annotationParser;
     
     @Getter
-    private static final String configVersion = "indev";
+    private static final String CONFIG_VERSION = "indev";
     @Getter
     private static String version = null;
     @Getter
@@ -105,7 +105,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
             Log.fatalError("Config version does not correspond with the version that is required by this plugin", false, true, true);
             Log.fatalError("Please back up and then delete your config so we can generate a new one on startup!", false, true, true);
             Log.fatalError("Config version is: " + config.getString("config_version"), false, true, true);
-            Log.fatalError("Config version should be: " + configVersion, false, true, true);
+            Log.fatalError("Config version should be: " + CONFIG_VERSION, false, true, true);
             Bukkit.getPluginManager().disablePlugin(plugin);
             return;
         }
@@ -166,7 +166,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private boolean checkConfigVersion() {
         Log.debug("Checking config version...",false,true,true);
         boolean status;
-        if (!config.getString("config_version").equalsIgnoreCase(configVersion)) {
+        if (!config.getString("config_version").equalsIgnoreCase(CONFIG_VERSION)) {
             Bukkit.getPluginManager().disablePlugin(this);
             status = false;
         } else {
