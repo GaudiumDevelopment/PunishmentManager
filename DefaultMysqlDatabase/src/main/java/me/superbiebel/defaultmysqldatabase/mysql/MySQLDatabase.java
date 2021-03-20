@@ -25,7 +25,7 @@ public class MySQLDatabase implements Database {
     private static HikariDataSource mysqlDataSource;
     @Getter
     private static SqlDatabaseConnection sourceConnection;
-    private static final String host = PunishmentManager .giveConfig().getString("MySQL.host");
+    private static final String host = PunishmentManager.giveConfig().getString("MySQL.host");
     private static final String username = PunishmentManager.giveConfig().getString("MySQL.username");
     private static final String password = PunishmentManager.giveConfig().getString("MySQL.password");
     private static final String port = PunishmentManager.giveConfig().getString("MySQL.port");

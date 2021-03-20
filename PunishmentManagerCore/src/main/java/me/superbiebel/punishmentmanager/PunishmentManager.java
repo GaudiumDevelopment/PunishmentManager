@@ -23,11 +23,8 @@ import me.lucko.helper.Schedulers;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
-import me.superbiebel.punishmentmanager.data.DataManager;
-import me.superbiebel.punishmentmanager.data.providers.CacheProvider;
-import me.superbiebel.punishmentmanager.data.providers.DataHandlerProvider;
-import me.superbiebel.punishmentmanager.data.providers.DatabaseProvider;
-import me.superbiebel.punishmentmanager.listeners.JoinListener;
+import me.superbiebel.punishmentmanager.data.abstraction.DataController;
+import me.superbiebel.punishmentmanager.data.abstraction.service.managers.ServiceManager;
 import me.superbiebel.punishmentmanager.listeners.LeaveListener;
 import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessorFactoryManager;
 import me.superbiebel.punishmentmanager.utils.Log;
@@ -35,7 +32,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -45,7 +41,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private static PunishmentManager plugin;
     final Function<CommandSender, CommandSender> mapperFunction = Function.identity();
     
-    PaperCommandManager<CommandSender> commandManager;
+    private PaperCommandManager<CommandSender> commandManager;
     final Function<CommandTree<CommandSender>, CommandExecutionCoordinator<CommandSender>> executionCoordinatorFunction = CommandExecutionCoordinator.simpleCoordinator();
     final Function<ParserParameters, CommandMeta> commandMetaFunction = p -> CommandMeta.simple()
                                                                                         .with(CommandMeta.DESCRIPTION, p.get(StandardParameters.DESCRIPTION, "No description"))
@@ -64,6 +60,12 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private static File configFile;
 
     private static Config config;
+
+    @Getter
+    private static ServiceManager serviceManager;
+
+    @Getter
+    private static DataController dataController;
     
     @Getter
     private static final String separator = System.getProperty("file.separator");
@@ -80,10 +82,8 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     -get and check the version from the config file
     -load the events
     -load the commands
-    -initialize the cache|async
-    -initialize the database|async
+    -initialize all data services
     -----able to interact with database------
-    -start downloading data to cache|async
     -when all of this is done and has completed successfully allow everything to proceed
      */
     @Override
@@ -115,8 +115,13 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         try {
             loadEvents();
             loadCommands();
-            DataManager dataManager = new DataManager();
-            dataManager.init(false);
+            Schedulers.async().call(()->{
+                serviceManager = new ServiceManager();
+                serviceManager.getServiceRegisterCountDown().await();
+                serviceManager.initServices();
+                dataController = new DataController();
+                return null;
+            });
             Schedulers.async().callLater(() -> {
                 OffenseProcessorFactoryManager.instantiate();
                 OffenseProcessorFactoryManager.getOffenseProcessorFactory().init();
@@ -128,32 +133,11 @@ public class PunishmentManager extends ExtendedJavaPlugin {
             Bukkit.getPluginManager().disablePlugin(plugin);
             return;
         }
-
     }
 
     @Override
     public void disable() {
-        try {
-            DataHandlerProvider.getDataHandler().shutdown();
-        } catch (NullPointerException throwable) {
-            Log.warning("The Database was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
-        } catch (Exception e) {
-            Log.logException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
-        }
-        try {
-            CacheProvider.getCache().close();
-        } catch (NullPointerException throwable) {
-            Log.warning("The Cache was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
-        } catch (Exception e) {
-            Log.logException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
-        }
-        try {
-            DatabaseProvider.getDatabase().shutdown();
-        } catch (NullPointerException throwable) {
-            Log.warning("The Cache was null, which means it wasn't started (should not happen). Check above console for errors!",false,true,true);
-        } catch (Exception e) {
-            Log.logException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
-        }
+        serviceManager.shutdown();
         Log.closeLog();
         Bukkit.getServer().getLogger().info("PunishmentManagerCore has been disabled");
         plugin = null;
@@ -161,7 +145,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
 
 
-    public void loadConfig() {
+    private void loadConfig() {
         Log.info("loading config...",false,true,false);
         configFile = new File(plugin.getDataFolder().getAbsolutePath() + separator + "config.yml");
         config = LightningBuilder.fromFile(configFile).setConfigSettings(ConfigSettings.PRESERVE_COMMENTS).setDataType(DataType.SORTED).createConfig();
@@ -169,7 +153,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         
     }
 
-    public void checkDebugMode() {
+    private void checkDebugMode() {
         debugMode = config.getBoolean("debug");
         if (debugMode){
             Log.debug("Debug mode has been enabled! There will be extensive logging!",false,true,true);
@@ -179,7 +163,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
     }
 
-    public boolean checkConfigVersion() {
+    private boolean checkConfigVersion() {
         Log.debug("Checking config version...",false,true,true);
         boolean status;
         if (!config.getString("config_version").equalsIgnoreCase(configVersion)) {
@@ -191,38 +175,11 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         return status;
     }
 
-
-    /*public void initMySQL() {
-        Log.debug("Checking Mysql config version...",false,true,true,"");
-            MySQL.instantiate(
-                config.getString("MySQL.host"),
-                config.getString("MySQL.username"),
-                config.getString("MySQL.password"),
-                config.getString("MySQL.port"),
-                config.getString("MySQL.db"),
-                config.getString("MySQL.useSSL"));
-            MySQL.initializeTables();
-        }*/
-
-
-
-    public static void loadEvents() {
+    private void loadEvents() {
         Log.debug("Loading events...",false, true,true);
         Events.subscribe(AsyncPlayerPreLoginEvent.class)
                 .expireAfter(5, TimeUnit.SECONDS)
                 .handler(e->e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, Log.getFatalErrorPrefix() + "Still initializing database!, please wait 10 seconds and log back in!"));
-        
-        Events.subscribe(AsyncPlayerPreLoginEvent.class, EventPriority.MONITOR).handler((e)->{
-            if (!(e.getLoginResult() == AsyncPlayerPreLoginEvent.Result.ALLOWED)){
-                JoinListener joinListener = new JoinListener();
-                joinListener.handlePreJoin(e);
-            }
-        }).bindWith(plugin);
-        Events.subscribe(PlayerJoinEvent.class, EventPriority.MONITOR).handler((e)-> {
-            JoinListener joinListener = new JoinListener();
-            joinListener.handleJoin(e);
-        }).bindWith(plugin);
-        
         Events.subscribe(PlayerQuitEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleQuit).bindWith(getPlugin());
         Events.subscribe(PlayerKickEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleKick).bindWith(getPlugin());
         Log.debug("Events Loaded!",false,true,true);
@@ -230,14 +187,14 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
 
 
-    public void loadCommands() throws Exception {
+    private void loadCommands() throws Exception {
         Log.debug("Instantiating commandmanager",false,true,true);
-        this.commandManager = new PaperCommandManager<>(plugin,executionCoordinatorFunction,mapperFunction,mapperFunction);
+        commandManager = new PaperCommandManager<>(plugin,executionCoordinatorFunction,mapperFunction,mapperFunction);
         Log.debug("Commandmanager instatiated",false,true,true);
-        this.commandManager.registerBrigadier();
-        this.annotationParser = new AnnotationParser<>( this.commandManager, CommandSender.class, commandMetaFunction);
-        this.annotationParser.parse(new PunishCommand());
-        this.annotationParser.parse(new SystemCommand());
+        commandManager.registerBrigadier();
+        annotationParser = new AnnotationParser<>( commandManager, CommandSender.class, commandMetaFunction);
+        annotationParser.parse(new PunishCommand());
+        annotationParser.parse(new SystemCommand());
         
     }
     public static Config giveConfig() {
