@@ -20,7 +20,6 @@ public class Log {
     @Getter private static final String warningPrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &e[&6WARNING&e] &l>> ");
     @Getter private static final String fatalErrorPrefix = ColorUtils.colorize("&r&4&lPunishment&b&lManager&6&c &c[&4ERROR&c] &4&l>> ");
 
-
     private static final Date date = new Date();
     private static final SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyyy");
     private static final String separator = System.getProperty("file.separator");
@@ -86,7 +85,7 @@ public class Log {
         }
     }
 
-    public synchronized static void warning(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
+    public static synchronized void warning(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
         if (sendInGame) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.hasPermission("punishmentmanager.log.warning")) {
@@ -103,7 +102,7 @@ public class Log {
         }
     }
 
-    public synchronized static void fatalError(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
+    public static synchronized void fatalError(@NotNull final String msg, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
         if (sendInGame) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (player.hasPermission("punishmentmanager.log.fatalerror")) {
@@ -119,7 +118,7 @@ public class Log {
             printer.flush();
         }
     }
-    public synchronized static boolean log(@NotNull final String msg, final LogLevel loglevel, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
+    public static synchronized boolean log(@NotNull final String msg, final LogLevel loglevel, final boolean sendInGame, final boolean sendToConsole, final boolean logToFile) {
         switch (loglevel) {
             case DEBUG:
                 Log.debug(msg, sendInGame, sendToConsole, logToFile);
@@ -139,7 +138,7 @@ public class Log {
         return false;
     }
 
-    public synchronized static void logException(final Throwable e, final LogLevel logLevel, final boolean sendInGame, final boolean sendFullInGame, final boolean sendToConsole, final boolean sendFullInConsole, final boolean logToFile){
+    public static synchronized void logException(final Throwable e, final LogLevel logLevel, final boolean sendInGame, final boolean sendFullInGame, final boolean sendToConsole, final boolean sendFullInConsole, final boolean logToFile){
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         e.printStackTrace(pw);
@@ -157,12 +156,12 @@ public class Log {
         }
         Log.log(stacktrace,logLevel,false,false,logToFile);
     }
-    public synchronized static void logException(final Throwable throwable, final LogLevel logLevel) {
+    public static synchronized void logException(final Throwable throwable, final LogLevel logLevel) {
         logException(throwable, logLevel,false,false,true,true,true);
     }
 
 
-    public synchronized static LogLevel convertToLogLevel(final String logLevelString) {
+    public static synchronized LogLevel convertToLogLevel(final String logLevelString) {
         if (logLevelString.equalsIgnoreCase("debug")) {
             return LogLevel.DEBUG;
         } else if (logLevelString.equalsIgnoreCase("info")) {
@@ -176,7 +175,7 @@ public class Log {
         }
     }
     
-    public synchronized static void debug(@NotNull String msg) {
+    public static synchronized void debug(@NotNull String msg) {
         Log.debug(msg,false,true,true);
     }
 
