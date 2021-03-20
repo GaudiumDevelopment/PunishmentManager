@@ -55,7 +55,6 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private static String version = null;
     @Getter
     private static boolean debugMode;
-    //private static FileConfiguration config;
     @Getter
     private static File configFile;
 
@@ -68,7 +67,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private static DataController dataController;
     
     @Getter
-    private static final String separator = System.getProperty("file.separator");
+    private static final String FILE_SEPARATOR = System.getProperty("file.separator");
 
     private static final Date date = new Date();
     private static final SimpleDateFormat formatter = new SimpleDateFormat(" dd_MM_yyyy hh_mm_ss_SSS");
@@ -147,7 +146,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
     private void loadConfig() {
         Log.info("loading config...",false,true,false);
-        configFile = new File(plugin.getDataFolder().getAbsolutePath() + separator + "config.yml");
+        configFile = new File(plugin.getDataFolder().getAbsolutePath() + FILE_SEPARATOR + "config.yml");
         config = LightningBuilder.fromFile(configFile).setConfigSettings(ConfigSettings.PRESERVE_COMMENTS).setDataType(DataType.SORTED).createConfig();
         config.addDefaultsFromInputStream(super.getResource("config.yml"));
         
