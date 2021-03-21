@@ -1,35 +1,33 @@
 package me.superbiebel.punishmentmanager.listeners;
 
-import me.lucko.helper.Schedulers;
-import me.superbiebel.punishmentmanager.data.providers.DataHandlerProvider;
+import me.lucko.helper.Events;
+import me.lucko.helper.event.SingleSubscription;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.util.UUID;
+public class LeaveListener implements AbstractListener {
 
-public class LeaveListener {
+    SingleSubscription<PlayerQuitEvent> quitEvent;
+    SingleSubscription<PlayerKickEvent> kickevent;
+
+    @Override
+    public void init() {
+        quitEvent = Events.subscribe(PlayerQuitEvent.class).handler(this::handleQuit);
+        kickevent = Events.subscribe(PlayerKickEvent.class).handler(this::handleKick);
+    }
+
+    @Override
+    public void shutdown() {
+        quitEvent.close();
+        kickevent.close();
+    }
 
     public void handleQuit(PlayerQuitEvent e) {
-        UUID uuid = e.getPlayer().getUniqueId();
-        String leaveMessage = e.getQuitMessage();
-        Schedulers.async().run(()->{
-        try {
-            DataHandlerProvider.getDataHandler().insertLeave(uuid,leaveMessage);
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-        });
+        throw new UnsupportedOperationException("Operation not implemented yet");
     }
     public void handleKick(PlayerKickEvent e) {
-        UUID uuid = e.getPlayer().getUniqueId();
-        String kickMessage = e.getReason();
-        String leaveMessage = e.getLeaveMessage();
-        Schedulers.async().run(()->{
-            try {
-                DataHandlerProvider.getDataHandler().insertKick(uuid,kickMessage,leaveMessage);
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        });
+        throw new UnsupportedOperationException("Operation not implemented yet");
     }
+
+
 }
