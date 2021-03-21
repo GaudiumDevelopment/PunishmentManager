@@ -45,6 +45,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
     final Function<CommandSender, CommandSender> mapperFunction = Function.identity();
     
+    @SuppressWarnings("FieldCanBeLocal")
     private PaperCommandManager<CommandSender> commandManager;
     final Function<CommandTree<CommandSender>, CommandExecutionCoordinator<CommandSender>> executionCoordinatorFunction = CommandExecutionCoordinator.simpleCoordinator();
     final Function<ParserParameters, CommandMeta> commandMetaFunction = p -> CommandMeta.simple()
@@ -197,7 +198,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private void loadCommands() throws Exception {
         Log.debug("Instantiating commandmanager",false,true,true);
         commandManager = new PaperCommandManager<>(plugin,executionCoordinatorFunction,mapperFunction,mapperFunction);
-        Log.debug("Commandmanager instatiated",false,true,true);
+        Log.debug("Commandmanager instantiated",false,true,true);
         commandManager.registerBrigadier();
         annotationParser = new AnnotationParser<>( commandManager, CommandSender.class, commandMetaFunction);
         annotationParser.parse(new PunishCommand());
