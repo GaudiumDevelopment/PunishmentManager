@@ -21,6 +21,7 @@ import lombok.Getter;
 import me.lucko.helper.Events;
 import me.lucko.helper.Schedulers;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
+import me.superbiebel.punishmentmanager.api.ServicesAPI;
 import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
 import me.superbiebel.punishmentmanager.data.abstraction.DataController;
@@ -39,6 +40,9 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class PunishmentManager extends ExtendedJavaPlugin {
     @Getter
     private static PunishmentManager plugin;
+    @Getter
+    private static ServicesAPI servicesAPI;
+
     final Function<CommandSender, CommandSender> mapperFunction = Function.identity();
     
     private PaperCommandManager<CommandSender> commandManager;
@@ -115,9 +119,12 @@ public class PunishmentManager extends ExtendedJavaPlugin {
             loadEvents();
             loadCommands();
             Schedulers.async().call(()->{
+                Log.debug("Starting up ServiceManager and waiting for all services to be registered.");
                 serviceManager = new ServiceManager();
                 serviceManager.getServiceRegisterCountDown().await();
+                Log.debug("Starting up all services...");
                 serviceManager.initServices();
+                Log.debug("All services started up.");
                 dataController = new DataController();
                 return null;
             });
@@ -132,6 +139,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
             Bukkit.getPluginManager().disablePlugin(plugin);
             return;
         }
+        servicesAPI = new ServicesAPI();
     }
 
     @Override

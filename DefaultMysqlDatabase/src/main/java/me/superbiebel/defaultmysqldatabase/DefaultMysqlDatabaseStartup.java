@@ -7,8 +7,7 @@ public final class DefaultMysqlDatabaseStartup extends JavaPlugin {
     
     @Override
     public void onEnable() {
-        PunishmentManager.getServiceManager().registerService(new LoginInfoLoggerMysql());
-        
+        PunishmentManager.getServicesAPI().register(new LoginInfoLoggerMysql());
     }
     
     @Override
