@@ -51,7 +51,7 @@ public class ServiceManager {
         if (MAX_SERVICE_SIZE <= serviceCount.get()) {
             throw new IndexOutOfBoundsException("Too many services have been trying to be registered!");
         }
-
+        if (service.getType() == null) throw new NullPointerException("Servicetype cannot be null");
         serviceRegistry.put(service.getType(), service);
         addToServiceCount();
     }
