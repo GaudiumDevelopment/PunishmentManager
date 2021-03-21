@@ -17,6 +17,9 @@ public class ServiceManager {
     private static final int MAX_SERVICE_SIZE = 1;
     private final AtomicInteger serviceCount = new AtomicInteger(0);
     private final AtomicBoolean servicesRegisterComplete = new AtomicBoolean(false);
+
+
+
     private final AtomicBoolean serviceStartupComplete = new AtomicBoolean(false);
     @Getter
     private final CountDownLatch serviceRegisterCountDown = new CountDownLatch(MAX_SERVICE_SIZE);
@@ -68,5 +71,9 @@ public class ServiceManager {
     private void addToServiceCount() {
         serviceCount.incrementAndGet();
         serviceRegisterCountDown.countDown();
+    }
+
+    public boolean getServiceStartupComplete() {
+        return serviceStartupComplete.get();
     }
 }
