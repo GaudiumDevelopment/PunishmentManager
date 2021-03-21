@@ -15,10 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import lombok.Getter;
-import me.lucko.helper.Events;
 import me.lucko.helper.Schedulers;
 import me.lucko.helper.plugin.ExtendedJavaPlugin;
 import me.superbiebel.punishmentmanager.api.ServicesAPI;
@@ -26,15 +24,13 @@ import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
 import me.superbiebel.punishmentmanager.data.abstraction.DataController;
 import me.superbiebel.punishmentmanager.data.abstraction.service.managers.ServiceManager;
-import me.superbiebel.punishmentmanager.listeners.LeaveListener;
+import me.superbiebel.punishmentmanager.listeners.DataServicesStartupCheckerOnJoin;
+import me.superbiebel.punishmentmanager.listeners.LeaveInfoLogger;
+import me.superbiebel.punishmentmanager.listeners.LoginInfoLogger;
 import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessorFactoryManager;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
-import org.bukkit.event.player.PlayerKickEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 
 
 public class PunishmentManager extends ExtendedJavaPlugin {
@@ -185,11 +181,12 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
     private void loadEvents() {
         Log.debug("Loading events...",false, true,true);
-        Events.subscribe(AsyncPlayerPreLoginEvent.class)
-                .expireAfter(5, TimeUnit.SECONDS)
-                .handler(e->e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, Log.getFatalErrorPrefix() + "Still initializing database!, please wait 10 seconds and log back in!"));
-        Events.subscribe(PlayerQuitEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleQuit).bindWith(getPlugin());
-        Events.subscribe(PlayerKickEvent.class,EventPriority.MONITOR).handler(new LeaveListener()::handleKick).bindWith(getPlugin());
+        DataServicesStartupCheckerOnJoin dataServicesChecker = new DataServicesStartupCheckerOnJoin();
+        dataServicesChecker.init();
+        LoginInfoLogger loginInfoLogger = new LoginInfoLogger();
+        loginInfoLogger.init();
+        LeaveInfoLogger leaveInfoLogger = new LeaveInfoLogger();
+        leaveInfoLogger.init();
         Log.debug("Events Loaded!",false,true,true);
     }
 

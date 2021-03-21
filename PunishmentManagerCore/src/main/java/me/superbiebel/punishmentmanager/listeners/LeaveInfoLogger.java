@@ -5,7 +5,7 @@ import me.lucko.helper.event.SingleSubscription;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-public class LeaveListener implements AbstractListener {
+public class LeaveInfoLogger implements AbstractListener {
 
     SingleSubscription<PlayerQuitEvent> quitEvent;
     SingleSubscription<PlayerKickEvent> kickevent;

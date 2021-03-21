@@ -14,20 +14,18 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-public class LoginInfoJoinListener implements AbstractListener{
+public class LoginInfoLogger implements AbstractListener{
     /*
     If a player join this is what will happen:
     - AsyncPlayerPreLoginEvent will be called and every loginattempt that doesn't result in a successful join will be logged here.
     - PlayerJoinEvent will be called when a loginattempt is successful and will log all the data for that loginattempt.
      */
     @Getter
-    public static final LoginInfoJoinListener INSTANCE = new LoginInfoJoinListener();
+    public static final LoginInfoLogger INSTANCE = new LoginInfoLogger();
 
-    public SingleSubscription preJoinListener;
-    public SingleSubscription successfulJoinListener;
+    public SingleSubscription<AsyncPlayerPreLoginEvent> preJoinListener;
+    public SingleSubscription<PlayerJoinEvent> successfulJoinListener;
 
-    private LoginInfoJoinListener() {
-    }
 
     @Override
     public void init() {
