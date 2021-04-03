@@ -1,5 +1,6 @@
 package me.superbiebel.punishmentmanager.punishsystem;
 
+import java.util.Map;
 import java.util.UUID;
 import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessor;
 import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessorFactoryManager;
@@ -15,7 +16,7 @@ public class PunishSystem {
     }
 
 
-    public void triggerOffense(int offenseId, UUID playeruuid, Object[] args) throws Exception {
+    public void triggerOffense(int offenseId, UUID playeruuid, Map<String,Object> args) throws Exception {
         if (!initialized) {
             throw new IllegalStateException("Tried to trigger an offense but PunishSystem was not yet initialized");
         }
