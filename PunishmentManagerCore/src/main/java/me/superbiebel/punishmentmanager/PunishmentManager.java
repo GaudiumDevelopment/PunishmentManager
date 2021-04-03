@@ -27,7 +27,7 @@ import me.superbiebel.punishmentmanager.data.abstraction.service.managers.Servic
 import me.superbiebel.punishmentmanager.listeners.DataServicesStartupCheckerOnJoin;
 import me.superbiebel.punishmentmanager.listeners.LeaveInfoLogger;
 import me.superbiebel.punishmentmanager.listeners.LoginInfoLogger;
-import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffenseProcessorFactoryManager;
+import me.superbiebel.punishmentmanager.punishsystem.PunishSystem;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -38,6 +38,8 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private static PunishmentManager plugin;
     @Getter
     private static ServicesAPI servicesAPI;
+
+    private static PunishSystem punishSystem;
 
     final Function<CommandSender, CommandSender> mapperFunction = Function.identity();
     
@@ -126,8 +128,8 @@ public class PunishmentManager extends ExtendedJavaPlugin {
                 return null;
             });
             Schedulers.async().callLater(() -> {
-                OffenseProcessorFactoryManager.instantiate();
-                OffenseProcessorFactoryManager.getOffenseProcessorFactory().init();
+                punishSystem = new PunishSystem();
+                punishSystem.init();
                 return null;
             }, 120);
 
@@ -137,6 +139,8 @@ public class PunishmentManager extends ExtendedJavaPlugin {
             return;
         }
         servicesAPI = new ServicesAPI();
+
+
     }
 
     @Override
