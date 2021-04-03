@@ -12,7 +12,7 @@ import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffensePro
 
 public class DefaultOffenseProcessorFactory implements OffenseProcessorFactory {
     @Override
-    public OffenseProcessor giveOffenseExecutor() throws Exception {
+    public OffenseProcessor giveOffenseProcessor() throws Exception {
         return new DefaultOffenseProcessor();
     }
 
