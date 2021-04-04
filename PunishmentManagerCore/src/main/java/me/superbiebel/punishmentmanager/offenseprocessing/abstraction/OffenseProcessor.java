@@ -4,5 +4,5 @@ import java.util.Map;
 import java.util.UUID;
 
 public interface OffenseProcessor {
-    void execute(UUID uuid, Map<String,Object> args);
+    void execute(int offenseID, UUID uuid, Map<String,Object> args);
 }

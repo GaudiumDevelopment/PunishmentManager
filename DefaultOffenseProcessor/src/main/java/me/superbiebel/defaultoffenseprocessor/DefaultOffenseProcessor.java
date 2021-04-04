@@ -7,7 +7,7 @@ import me.superbiebel.punishmentmanager.offenseprocessing.abstraction.OffensePro
 public class DefaultOffenseProcessor implements OffenseProcessor {
 
     @Override
-    public void execute(UUID uuid, Map<String,Object> args) {
+    public void execute(int offenseID, UUID uuid, Map<String, Object> args) {
 
     }
 }

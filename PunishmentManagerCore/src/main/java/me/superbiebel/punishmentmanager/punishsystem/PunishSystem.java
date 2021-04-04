@@ -21,6 +21,6 @@ public class PunishSystem {
             throw new IllegalStateException("Tried to trigger an offense but PunishSystem was not yet initialized");
         }
         OffenseProcessor offenseProcessor = OffenseProcessorFactoryManager.getOffenseProcessorFactory().giveOffenseProcessor();
-        offenseProcessor.execute(playeruuid, args);
+        offenseProcessor.execute(offenseId, playeruuid, args);
     }
 }
