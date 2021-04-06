@@ -87,9 +87,7 @@ public class ImprovedHistoryChestGui extends AbstractChestGui {
 
         Promise.start().thenRunAsync(() -> {
             finaltitle = criminal.getName() == criminal.getDisplayName() ? criminal.getName() : criminal.getDisplayName() + " aka " + criminal.getName();
-            ChestGui cachedGui = DataHandlerProvider.getDataHandler().getCachedInventory("history;" + playeruuid.toString());
-
-
+            ChestGui cachedGui = DataHandlerProvider.getDataHandler().getCachedInventory("history;" + playeruuid.toString()); //FIXME: nullpointerexception cuz this data system isn't supported anymore and thus null.
             if (!(cachedGui == null)) {
                 super.gui = cachedGui;
             } else {
