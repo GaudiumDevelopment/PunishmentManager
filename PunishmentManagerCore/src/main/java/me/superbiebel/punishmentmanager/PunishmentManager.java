@@ -74,6 +74,8 @@ public class PunishmentManager extends ExtendedJavaPlugin {
 
     private static final Date date = new Date();
     private static final SimpleDateFormat formatter = new SimpleDateFormat(" dd_MM_yyyy hh_mm_ss_SSS");
+
+    DataServicesStartupCheckerOnJoin dataServicesChecker;
     /*
     STARTUP PROCESS:
     -set the plugin instance
@@ -92,6 +94,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     public void enable() {
         plugin = this;
         version = super.getDescription().getVersion();
+        //load the config file
         loadConfig();
         try {
             Log.initLog();
@@ -103,6 +106,8 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         }
         Log.info("LOGGING STARTS AT " + formatter.format(date), false, false, true);
         checkDebugMode();
+        // -----able to log something------
+        initDataServiceSafety();
         if (!checkConfigVersion()) {
             Log.fatalError("Config version does not correspond with the version that is required by this plugin", false, true, true);
             Log.fatalError("Please back up and then delete your config so we can generate a new one on startup!", false, true, true);
@@ -115,23 +120,26 @@ public class PunishmentManager extends ExtendedJavaPlugin {
             Log.fatalError("Database has not been enabled! please fill in the credentials and set the option to 'true' (without quotes)", false, true, true);
         }
         try {
-            loadEvents();
             loadCommands();
             Schedulers.async().call(()->{
                 Log.debug("Starting up ServiceManager and waiting for all services to be registered.");
                 serviceManager = new ServiceManager();
-                serviceManager.getServiceRegisterCountDown().await();
+                serviceManager.getServiceStartupCountDown().await();
                 Log.debug("Starting up all services...");
                 serviceManager.initServices();
                 Log.debug("All services started up.");
                 dataController = new DataController();
+                Schedulers.sync().run(()->{
+                    loadDataNeedingEvents();
+                    shutdownDataServiceSafety();
+                });
                 return null;
             });
-            Schedulers.async().callLater(() -> {
+            Schedulers.async().call(() -> {
                 punishSystem = new PunishSystem();
                 punishSystem.init();
                 return null;
-            }, 120);
+            });
 
         } catch (Exception e) {
             Log.logException(e, Log.LogLevel.FATALERROR, false, false, true, true, true);
@@ -139,8 +147,6 @@ public class PunishmentManager extends ExtendedJavaPlugin {
             return;
         }
         servicesAPI = new ServicesAPI();
-
-
     }
 
     @Override
@@ -183,16 +189,29 @@ public class PunishmentManager extends ExtendedJavaPlugin {
         return status;
     }
 
-    private void loadEvents() {
-        Log.debug("Loading events...",false, true,true);
-        DataServicesStartupCheckerOnJoin dataServicesChecker = new DataServicesStartupCheckerOnJoin();
+    private void initDataServiceSafety() {
+        //load data service safety
+        Log.debug("Loading data service safety");
+        dataServicesChecker = new DataServicesStartupCheckerOnJoin();
         dataServicesChecker.init();
+        Log.debug("Loaded data service safety!");
+    }
+
+    private void shutdownDataServiceSafety() {
+        Log.debug("Shutting down data service safety...");
+        dataServicesChecker.shutdown();
+        Log.debug("Data service safety shut down");
+    }
+
+    private void loadDataNeedingEvents() {
+        Log.debug("Loading data needing events...",false, true,true);
         LoginInfoLogger loginInfoLogger = new LoginInfoLogger();
         loginInfoLogger.init();
         LeaveInfoLogger leaveInfoLogger = new LeaveInfoLogger();
         leaveInfoLogger.init();
-        Log.debug("Events Loaded!",false,true,true);
+        Log.debug("Events data needing loaded!",false,true,true);
     }
+
 
 
 

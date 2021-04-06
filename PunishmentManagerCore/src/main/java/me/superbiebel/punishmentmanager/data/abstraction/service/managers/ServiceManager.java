@@ -23,23 +23,23 @@ public class ServiceManager {
     private final AtomicBoolean serviceStartupComplete = new AtomicBoolean(false);
     @Getter
     private final CountDownLatch serviceRegisterCountDown = new CountDownLatch(MAX_SERVICE_SIZE);
-
-
     @Getter
-    private LoginInfoLoggerService loginInfoLoggerService;
+    private final CountDownLatch serviceStartupCountDown = new CountDownLatch(MAX_SERVICE_SIZE);
 
     public void initServices(boolean forceInit) {
         if (!(servicesRegisterComplete.get()) || forceInit) {
-        servicesRegisterComplete.getAndSet(true);
+
         serviceRegistry
                 .values()
                 .parallelStream()
                 .forEach(service->{
             try {
                 service.startup(forceInit);
+                serviceStartupCountDown.countDown();
             } catch (Exception e) {
                 Log.logException(e, Log.LogLevel.FATALERROR,false,false,true,true,true);
             }
+            servicesRegisterComplete.getAndSet(true);
         });
         serviceStartupComplete.set(true);
         } else {
@@ -75,5 +75,12 @@ public class ServiceManager {
 
     public boolean getServiceStartupComplete() {
         return serviceStartupComplete.get();
+    }
+
+    public LoginInfoLoggerService getLoginInfoLoggerService() {
+        return (LoginInfoLoggerService) serviceRegistry.get(ServiceType.LoginInfoLoggerService);
+    }
+    public Service getService(ServiceType serviceType) {
+        return serviceRegistry.get(serviceType);
     }
 }
