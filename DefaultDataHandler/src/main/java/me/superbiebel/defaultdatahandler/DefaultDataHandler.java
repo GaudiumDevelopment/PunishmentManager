@@ -1,18 +1,17 @@
 package me.superbiebel.defaultdatahandler;
 
+import java.net.InetAddress;
+import java.util.List;
+import java.util.UUID;
 import me.superbiebel.punishmentmanager.data.AVAILABILITY;
-import me.superbiebel.punishmentmanager.data.abstraction.Cache;
-import me.superbiebel.punishmentmanager.data.abstraction.DataHandler;
-import me.superbiebel.punishmentmanager.data.abstraction.Database;
+import me.superbiebel.punishmentmanager.data.abstraction.depracated.Cache;
+import me.superbiebel.punishmentmanager.data.abstraction.depracated.DataHandler;
+import me.superbiebel.punishmentmanager.data.abstraction.depracated.Database;
 import me.superbiebel.punishmentmanager.data.dataObjects.HistoryRecord;
 import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
 import me.superbiebel.punishmentmanager.data.providers.DatabaseProvider;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
-
-import java.net.InetAddress;
-import java.util.List;
-import java.util.UUID;
 
 public class DefaultDataHandler implements DataHandler {
     private static Database db = DatabaseProvider.getDatabase();

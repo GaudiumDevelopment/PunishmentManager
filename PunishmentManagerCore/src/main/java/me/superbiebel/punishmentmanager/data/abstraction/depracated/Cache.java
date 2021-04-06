@@ -1,8 +1,7 @@
-package me.superbiebel.punishmentmanager.data.abstraction;
-
-import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
+package me.superbiebel.punishmentmanager.data.abstraction.depracated;
 
 import java.util.List;
+import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
 
 @Deprecated(forRemoval = true)
 public interface Cache {

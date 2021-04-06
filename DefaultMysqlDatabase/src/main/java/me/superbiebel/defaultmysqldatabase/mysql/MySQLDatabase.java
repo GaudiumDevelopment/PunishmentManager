@@ -4,19 +4,18 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import dev.simplix.core.database.sql.SqlDatabaseConnection;
 import dev.simplix.core.database.sql.handlers.HikariConnectionHandler;
-import lombok.Getter;
-import me.superbiebel.punishmentmanager.PunishmentManager;
-import me.superbiebel.punishmentmanager.data.abstraction.Database;
-import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
-import me.superbiebel.punishmentmanager.utils.Log;
-import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
-
 import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.UUID;
+import lombok.Getter;
+import me.superbiebel.punishmentmanager.PunishmentManager;
+import me.superbiebel.punishmentmanager.data.abstraction.depracated.Database;
+import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
+import me.superbiebel.punishmentmanager.utils.Log;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
 public class MySQLDatabase implements Database {
     public static boolean isInitialized = false;

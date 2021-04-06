@@ -2,7 +2,7 @@ package me.superbiebel.punishmentmanager.data.providers;
 
 import lombok.Getter;
 import me.superbiebel.punishmentmanager.PunishmentManager;
-import me.superbiebel.punishmentmanager.data.abstraction.Database;
+import me.superbiebel.punishmentmanager.data.abstraction.depracated.Database;
 import me.superbiebel.punishmentmanager.utils.Log;
 import me.superbiebel.punishmentmanager.utils.ReflectionUtils;
 @Deprecated(forRemoval = true)

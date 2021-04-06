@@ -2,7 +2,7 @@ package me.superbiebel.punishmentmanager.data.providers;
 
 import lombok.Getter;
 import me.superbiebel.punishmentmanager.PunishmentManager;
-import me.superbiebel.punishmentmanager.data.abstraction.DataHandler;
+import me.superbiebel.punishmentmanager.data.abstraction.depracated.DataHandler;
 import me.superbiebel.punishmentmanager.utils.Log;
 import me.superbiebel.punishmentmanager.utils.ReflectionUtils;
 

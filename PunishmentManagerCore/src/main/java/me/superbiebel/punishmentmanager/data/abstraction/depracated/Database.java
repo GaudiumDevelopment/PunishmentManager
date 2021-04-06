@@ -1,11 +1,10 @@
-package me.superbiebel.punishmentmanager.data.abstraction;
-
-import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
-import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
+package me.superbiebel.punishmentmanager.data.abstraction.depracated;
 
 import java.net.InetAddress;
 import java.util.List;
 import java.util.UUID;
+import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
 @Deprecated(forRemoval = true)
 public interface Database {
