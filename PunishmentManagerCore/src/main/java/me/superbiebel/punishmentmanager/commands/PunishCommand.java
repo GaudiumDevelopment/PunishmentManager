@@ -5,10 +5,13 @@ import cloud.commandframework.annotations.CommandMethod;
 import cloud.commandframework.annotations.CommandPermission;
 import cloud.commandframework.annotations.suggestions.Suggestions;
 import cloud.commandframework.context.CommandContext;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import me.lucko.helper.metadata.Metadata;
 import me.superbiebel.punishmentmanager.data.DATAKEYS;
+import me.superbiebel.punishmentmanager.menu.ActionListGui;
 import me.superbiebel.punishmentmanager.menu.abstraction.AbstractChestGui;
-import me.superbiebel.punishmentmanager.menu.ImprovedActionListChestGui;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
 import me.superbiebel.punishmentmanager.utils.Log;
 import me.superbiebel.punishmentmanager.utils.PERMISSIONS;
@@ -17,10 +20,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public class PunishCommand {
     
@@ -49,7 +48,7 @@ public class PunishCommand {
         }
 
         Metadata.provideForPlayer((Player) sender).put(DATAKEYS.CRIMINAL_KEY, criminal);
-        AbstractChestGui actionListGui = new ImprovedActionListChestGui();
+        AbstractChestGui actionListGui = new ActionListGui();
         actionListGui.construct(false,false);
         actionListGui.open((Player) sender);
         

@@ -6,8 +6,8 @@ import me.lucko.helper.promise.ThreadContext;
 import me.superbiebel.punishmentmanager.menu.abstraction.AbstractChestGui;
 import org.bukkit.entity.Player;
 
-public class ImprovedOffenseListChestGui extends AbstractChestGui {
-    public ImprovedOffenseListChestGui() {
+public class OffenseListGui extends AbstractChestGui {
+    public OffenseListGui() {
         super();
     }
     

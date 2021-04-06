@@ -25,7 +25,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-public class ImprovedHistoryChestGui extends AbstractChestGui {
+public class HistoryGui extends AbstractChestGui {
     private StaticPane buttonPane;
     private PaginatedPane paginatedPane;
 
@@ -52,7 +52,7 @@ public class ImprovedHistoryChestGui extends AbstractChestGui {
 
 
 
-    public ImprovedHistoryChestGui() {
+    public HistoryGui() {
         super();
     }
 
@@ -110,7 +110,7 @@ public class ImprovedHistoryChestGui extends AbstractChestGui {
 
             this.backToActionListGuiItem.setAction(e -> {
                 e.setCancelled(true);
-                ImprovedActionListChestGui actionListChestGui = new ImprovedActionListChestGui();
+                ActionListGui actionListChestGui = new ActionListGui();
                 actionListChestGui.construct(false,false);
                 actionListChestGui.open(cachedPlayer);
             });

@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
-public class ImprovedActionListChestGui extends AbstractChestGui {
+public class ActionListGui extends AbstractChestGui {
     
     private StaticPane staticPane;
     
@@ -94,13 +94,13 @@ public class ImprovedActionListChestGui extends AbstractChestGui {
         
         offenseItem.setAction(e -> {
             e.setCancelled(true);
-            AbstractChestGui gui = new ImprovedOffenseListChestGui();
+            AbstractChestGui gui = new OffenseListGui();
             gui.construct(false,true);
             gui.open(cachedPlayer);
         });
         historyItem.setAction((e->{
             e.setCancelled(true);
-            AbstractChestGui historyGui = new ImprovedHistoryChestGui();
+            AbstractChestGui historyGui = new HistoryGui();
             historyGui.construct(false,true, cachedPlayer);
             historyGui.open(cachedPlayer);
         }));
