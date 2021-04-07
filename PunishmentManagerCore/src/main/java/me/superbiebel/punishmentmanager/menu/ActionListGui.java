@@ -65,6 +65,7 @@ public class ActionListGui extends AbstractChestGui {
         construct(force, allowlazy);
         cachedPlayer = player;
         setPersonalisedStuff();
+        super.gui.addPane(staticPane);
     }
     
     @Override
