@@ -1,13 +1,13 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: ''
+title: "[FEATURE]"
 labels: 'state: in queue, type: feature'
 assignees: superbiebel
 
 ---
 
-**MORE INFORMATION = A BETTER IMPLEMENTATION OF THE FEATURE YOU WANT!
+**MORE INFORMATION = A BETTER IMPLEMENTATION OF THE FEATURE YOU WANT!**
 
 **Is your feature request related to a problem? Please describe.**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
