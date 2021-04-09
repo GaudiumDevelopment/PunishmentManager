@@ -19,9 +19,7 @@ public class DataController {
     }
 
     public void logLoginInfo(UUID uuid, String joinMessage, String kickMessage, AsyncPlayerPreLoginEvent.Result loginresult, InetAddress ip){
-
         serviceManager.getLoginInfoLoggerService().logLoginInfo(uuid, joinMessage, kickMessage, loginresult, ip);
     }
-
 
 }
