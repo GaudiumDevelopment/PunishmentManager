@@ -14,7 +14,6 @@ import me.lucko.helper.metadata.Metadata;
 import me.lucko.helper.promise.Promise;
 import me.superbiebel.punishmentmanager.data.DATAKEYS;
 import me.superbiebel.punishmentmanager.data.dataObjects.HistoryRecord;
-import me.superbiebel.punishmentmanager.data.providers.DataHandlerProvider;
 import me.superbiebel.punishmentmanager.menu.abstraction.AbstractChestGui;
 import me.superbiebel.punishmentmanager.utils.ColorUtils;
 import me.superbiebel.punishmentmanager.utils.Log;
@@ -87,16 +86,9 @@ public class HistoryGui extends AbstractChestGui {
 
         Promise.start().thenRunAsync(() -> {
             finaltitle = criminal.getName() == criminal.getDisplayName() ? criminal.getName() : criminal.getDisplayName() + " aka " + criminal.getName();
-            ChestGui cachedGui = DataHandlerProvider.getDataHandler().getCachedInventory("history;" + playeruuid.toString()); //FIXME: nullpointerexception cuz this data system isn't supported anymore and thus null.
-            if (!(cachedGui == null)) {
-                super.gui = cachedGui;
-            } else {
                 constructHistoryPaneList();
                 paginatedPane = new PaginatedPane(0, 0, 9, 5, Pane.Priority.HIGH);
                 paginatedPane.populateWithGuiItems(constructHistoryPaneList());
-            }
-
-
         }).thenRunSync(() -> {
 
             this.buttonPane = new StaticPane(0, 5, 9, 1);
