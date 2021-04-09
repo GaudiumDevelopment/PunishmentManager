@@ -24,7 +24,7 @@ public class LoginInfoLoggerMysql implements LoginInfoLoggerService {
 
     @Override
     public ServiceType getType() {
-        return ServiceType.LoginInfoLoggerService;
+        return ServiceType.loginInfoLoggerService;
     }
 
     @Override

@@ -78,7 +78,7 @@ public class ServiceManager {
     }
 
     public LoginInfoLoggerService getLoginInfoLoggerService() {
-        return (LoginInfoLoggerService) serviceRegistry.get(ServiceType.LoginInfoLoggerService);
+        return (LoginInfoLoggerService) serviceRegistry.get(ServiceType.loginInfoLoggerService);
     }
     public Service getService(ServiceType serviceType) {
         return serviceRegistry.get(serviceType);
