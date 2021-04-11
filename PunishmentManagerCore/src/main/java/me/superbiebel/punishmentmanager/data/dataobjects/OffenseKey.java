@@ -1,4 +1,4 @@
-package me.superbiebel.punishmentmanager.data.dataObjects;
+package me.superbiebel.punishmentmanager.data.dataobjects;
 
 import lombok.Getter;
 

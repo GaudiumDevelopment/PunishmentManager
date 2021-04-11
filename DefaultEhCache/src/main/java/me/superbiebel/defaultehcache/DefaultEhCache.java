@@ -2,7 +2,7 @@ package me.superbiebel.defaultehcache;
 
 import java.util.List;
 import me.superbiebel.punishmentmanager.data.abstraction.depracated.Cache;
-import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
+import me.superbiebel.punishmentmanager.data.dataobjects.OffenseKey;
 
 public class DefaultEhCache implements Cache {
     

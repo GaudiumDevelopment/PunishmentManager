@@ -1,11 +1,10 @@
-package me.superbiebel.punishmentmanager.data.dataObjects;
+package me.superbiebel.punishmentmanager.data.dataobjects;
 
+import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.UUID;
 @Setter
 @Getter
 public class HistoryRecord implements Comparable<HistoryRecord>{

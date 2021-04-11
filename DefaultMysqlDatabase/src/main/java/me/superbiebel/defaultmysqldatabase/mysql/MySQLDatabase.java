@@ -13,7 +13,7 @@ import java.util.UUID;
 import lombok.Getter;
 import me.superbiebel.punishmentmanager.PunishmentManager;
 import me.superbiebel.punishmentmanager.data.abstraction.depracated.Database;
-import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
+import me.superbiebel.punishmentmanager.data.dataobjects.OffenseKey;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 

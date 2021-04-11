@@ -3,7 +3,7 @@ package me.superbiebel.punishmentmanager.data.abstraction.depracated;
 import java.net.InetAddress;
 import java.util.List;
 import java.util.UUID;
-import me.superbiebel.punishmentmanager.data.dataObjects.OffenseKey;
+import me.superbiebel.punishmentmanager.data.dataobjects.OffenseKey;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
 @Deprecated(forRemoval = true)
