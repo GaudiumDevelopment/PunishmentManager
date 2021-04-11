@@ -43,7 +43,7 @@ public class Log {
 
         printer = new PrintWriter(logFile);
         Log.debug(logFileSaveLocation,
-                false,true,false);
+                false, true, false);
     }
     public static void closeLog() {
         printer.close();
