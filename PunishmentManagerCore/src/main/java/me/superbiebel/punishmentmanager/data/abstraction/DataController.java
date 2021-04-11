@@ -3,6 +3,7 @@ package me.superbiebel.punishmentmanager.data.abstraction;
 
 import java.net.InetAddress;
 import java.util.UUID;
+import me.lucko.helper.Schedulers;
 import me.superbiebel.punishmentmanager.data.abstraction.service.managers.ServiceManager;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
@@ -18,8 +19,11 @@ public class DataController {
         this.serviceManager = serviceManager;
     }
 
-    public void logLoginInfo(UUID uuid, String joinMessage, String kickMessage, AsyncPlayerPreLoginEvent.Result loginresult, InetAddress ip){
-        serviceManager.getLoginInfoLoggerService().logLoginInfo(uuid, joinMessage, kickMessage, loginresult, ip);
+    public void logLoginInfo(UUID uuid, String joinMessage, String kickMessage, AsyncPlayerPreLoginEvent.Result loginresult, InetAddress ip) throws Exception{
+        Schedulers.async().call(()->{
+            serviceManager.getLoginInfoLoggerService().logLoginInfo(uuid, joinMessage, kickMessage, loginresult, ip);
+            return null;
+        });
     }
 
 }
