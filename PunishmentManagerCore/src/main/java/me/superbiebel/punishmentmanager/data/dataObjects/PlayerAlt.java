@@ -9,4 +9,5 @@ import lombok.Setter;
 public class PlayerAlt {
 
     private UUID playerUUID;
+    private UUID altUUID;
 }
