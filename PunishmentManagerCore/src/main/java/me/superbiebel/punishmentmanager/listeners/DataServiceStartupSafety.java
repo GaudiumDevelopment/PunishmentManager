@@ -6,7 +6,7 @@ import me.superbiebel.punishmentmanager.PunishmentManager;
 import me.superbiebel.punishmentmanager.utils.Log;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
-public class DataServicesStartupCheckerOnJoin implements AbstractListener{
+public class DataServiceStartupSafety implements AbstractListener{
 
     SingleSubscription<AsyncPlayerPreLoginEvent> event;
 

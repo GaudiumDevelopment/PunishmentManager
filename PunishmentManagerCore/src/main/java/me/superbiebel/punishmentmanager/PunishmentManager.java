@@ -24,7 +24,7 @@ import me.superbiebel.punishmentmanager.commands.PunishCommand;
 import me.superbiebel.punishmentmanager.commands.SystemCommand;
 import me.superbiebel.punishmentmanager.data.abstraction.DataController;
 import me.superbiebel.punishmentmanager.data.abstraction.service.managers.ServiceManager;
-import me.superbiebel.punishmentmanager.listeners.DataServicesStartupCheckerOnJoin;
+import me.superbiebel.punishmentmanager.listeners.DataServiceStartupSafety;
 import me.superbiebel.punishmentmanager.listeners.LeaveInfoLogger;
 import me.superbiebel.punishmentmanager.listeners.LoginInfoLogger;
 import me.superbiebel.punishmentmanager.punishsystem.PunishSystem;
@@ -75,7 +75,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private static final Date date = new Date();
     private static final SimpleDateFormat formatter = new SimpleDateFormat(" dd_MM_yyyy hh_mm_ss_SSS");
 
-    DataServicesStartupCheckerOnJoin dataServicesChecker;
+    DataServiceStartupSafety dataServicesChecker;
     /*
     STARTUP PROCESS:
     -set the plugin instance
@@ -192,7 +192,7 @@ public class PunishmentManager extends ExtendedJavaPlugin {
     private void initDataServiceSafety() {
         //load data service safety
         Log.debug("Loading data service safety");
-        dataServicesChecker = new DataServicesStartupCheckerOnJoin();
+        dataServicesChecker = new DataServiceStartupSafety();
         dataServicesChecker.init();
         Log.debug("Loaded data service safety!");
     }
