@@ -1,3 +1,5 @@
+## WARNING: THIS HAS BEEN ABANDONED IN FAVOUR FOR A MORE GENERAL AND MORE EASILY TESTABLE API INSTEAD OF A DIRECT PLUGIN. CHECK OUT PUNISHAPI
+
 Downloads: 
 
 -Development:[ ![Download](https://api.bintray.com/packages/moderationmanager/PunishmentManager/RELEASE/images/download.svg) ](https://bintray.com/moderationmanager/PunishmentManager/DEVELOPMENT/_latestVersion) (Won't be updated anymore as bintray is shutting down, please build the project from source.)
